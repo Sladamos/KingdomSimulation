@@ -1,16 +1,16 @@
 package military;
 
+import strategy.kingdom.military.infantry.Warrior;
+import strategy.kingdom.military.infantry.InfantryUnit;
+import strategy.kingdom.organism.mechanisms.fight.exceptions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import strategy.kingdom.organism.human.HumanImpl;
-import strategy.kingdom.organism.mechanisms.starve.exceptions.IncorrectHungerException;
-
 import static org.assertj.core.api.Assertions.*;
 
-public class WarriorFightTest {
+public class InfantryUnitFightTest {
 
-    private Warrior attacker;
-    private Warrior defender;
+    private InfantryUnit attacker;
+    private InfantryUnit defender;
 
     @BeforeEach
     public void initializeUnits() {
@@ -22,7 +22,7 @@ public class WarriorFightTest {
     public void Should_DecreaseEnemyHealth_When_NormalAttack() {
         int hitPoints = defender.getHitPoints();
         attacker.attack(defender);
-        assertThat(defender.getHitPoints()).isLowerThan(hitPoints);
+        assertThat(defender.getHitPoints()).isLessThan(hitPoints);
     }
 
     @Test
@@ -43,19 +43,31 @@ public class WarriorFightTest {
 
     @Test
     public void Should_ThrowException_When_AttacksItself() {
-        assertThatThrownBy(attacker.attack(attacker))
+        assertThatThrownBy(() -> attacker.attack(attacker))
                 .isInstanceOf(FightActionException.class).hasMessageContaining("Can't attack itself");
     }
 
     @Test
     public void Should_ThrowException_When_AttacksIfDead() {
-        assertThatThrownBy(attacker.attack(defender))
+        assertThatThrownBy(() -> attacker.attack(defender))
                 .isInstanceOf(FightActionException.class).hasMessageContaining("Can't attack when is dead");
     }
 
     @Test
     public void Should_ThrowException_When_HitWhenDead() {
-        assertThatThrownBy(attacker.attack(defender))
+        assertThatThrownBy(() -> attacker.attack(defender))
                 .isInstanceOf(FightActionException.class).hasMessageContaining("Can't attack dead defender");
+    }
+
+    @Test
+    public void Should_ThrowException_When_NegativeDefense() {
+        assertThatThrownBy(() -> new Warrior(5, -1))
+                .isInstanceOf(IncorrectDefenseException.class).hasMessageContaining("Can't attack dead defender");
+    }
+
+    @Test
+    public void Should_ThrowException_When_NegativeAttack() {
+        assertThatThrownBy(() -> new Warrior(-5, 1))
+                .isInstanceOf(IncorrectAttackException.class).hasMessageContaining("Can't attack dead defender");
     }
 }

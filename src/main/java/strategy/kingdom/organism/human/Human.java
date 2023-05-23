@@ -8,6 +8,10 @@ import strategy.kingdom.organism.mechanisms.starve.exceptions.StarveActionExcept
 
 public abstract class Human implements Starvable {
 
+    private final static int HUNGER_LIMIT = 100;
+
+    private final static int INITIAL_HUNGER = 50;
+
     @Getter
     private int hunger;
 
@@ -15,12 +19,15 @@ public abstract class Human implements Starvable {
 
     private boolean isAlive;
 
-
     public Human(int initialHunger, int hungerLimit) {
         this.hungerLimit = hungerLimit;
         this.hunger = initialHunger;
         validateHunger();
         this.isAlive = true;
+    }
+
+    public Human() {
+        this(INITIAL_HUNGER, HUNGER_LIMIT);
     }
 
     private void validateHunger() {
