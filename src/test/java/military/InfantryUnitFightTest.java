@@ -62,12 +62,12 @@ public class InfantryUnitFightTest {
     @Test
     public void Should_ThrowException_When_NegativeDefense() {
         assertThatThrownBy(() -> new Warrior(5, -1))
-                .isInstanceOf(IncorrectDefenseException.class).hasMessageContaining("Can't attack dead defender");
+                .isInstanceOf(IncorrectDefenseException.class).hasMessageContaining("Defense must be a not negative number");
     }
 
     @Test
     public void Should_ThrowException_When_NegativeAttack() {
         assertThatThrownBy(() -> new Warrior(-5, 1))
-                .isInstanceOf(IncorrectAttackException.class).hasMessageContaining("Can't attack dead defender");
+                .isInstanceOf(IncorrectAttackException.class).hasMessageContaining("Attack must be a not negative number");
     }
 }

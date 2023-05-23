@@ -3,6 +3,9 @@ package strategy.kingdom.military.infantry;
 import lombok.Getter;
 import strategy.kingdom.organism.human.Human;
 import strategy.kingdom.organism.mechanisms.fight.Fightable;
+import strategy.kingdom.organism.mechanisms.fight.exceptions.FightActionException;
+import strategy.kingdom.organism.mechanisms.fight.exceptions.IncorrectAttackException;
+import strategy.kingdom.organism.mechanisms.fight.exceptions.IncorrectDefenseException;
 
 public abstract class HumanInfantryUnit extends Human implements InfantryUnit  {
 
@@ -17,18 +20,30 @@ public abstract class HumanInfantryUnit extends Human implements InfantryUnit  {
 
     private boolean isAlive;
 
-    private final int maxHitPoints;
-
     public HumanInfantryUnit(int damage, int defense) {
         this.damage = damage;
         this.defense = defense;
-        this.maxHitPoints = HUMAN_MAX_HITPOINTS;
-        this.hitPoints = this.maxHitPoints;
+        validateStatistics();
+        this.hitPoints = HUMAN_MAX_HITPOINTS;
         isAlive = true;
+    }
+
+    private void validateStatistics() {
+        if(damage < 0) {
+            throw new IncorrectAttackException("Attack must be a not negative number");
+        }
+
+        if(defense < 0) {
+            throw new IncorrectDefenseException("Defense must be a not negative number");
+        }
     }
 
     @Override
     public void attack(Fightable target) {
+        if(target == this) {
+            throw new FightActionException("Can't attack itself");
+        }
+        
         target.getHit(damage);
     }
 
