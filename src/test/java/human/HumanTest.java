@@ -2,14 +2,17 @@ package human;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import strategy.kingdom.organism.human.Human;
 import static org.assertj.core.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.withSettings;
 
 public class HumanTest {
 
-    private int hungerLimit;
+    private static int hungerLimit;
 
     @BeforeAll
-    public void setHungerLimit() {
+    public static void setHungerLimit() {
         hungerLimit = 100;
     }
 
@@ -17,7 +20,7 @@ public class HumanTest {
     public void Should_DecreseHunger_When_Eat() {
         int initialHunger = 50;
         int eatValue = 10;
-        Human human = new Human(initialHunger, hungerLimit);
+        Human human = mock(Human.class, withSettings().useConstructor(initialHunger, hungerLimit));
         human.eat(eatValue);
         assertThat(human.getHunger()).isEqualTo(40);
     }
@@ -26,7 +29,7 @@ public class HumanTest {
     public void Should_IncreaseHunger_When_Starve() {
         int initialHunger = 50;
         int starveValue = 10;
-        Human human = new Human(initialHunger, hungerLimit);
+        Human human = mock(Human.class, withSettings().useConstructor(initialHunger, hungerLimit));
         human.starve(starveValue);
         assertThat(human.getHunger()).isEqualTo(60);
     }
@@ -35,7 +38,7 @@ public class HumanTest {
     public void Should_GetNoHunger_When_EatTooMuch() {
         int initialHunger = 50;
         int eatValue = 70;
-        Human human = new Human(initialHunger, hungerLimit);
+        Human human = mock(Human.class, withSettings().useConstructor(initialHunger, hungerLimit));
         human.eat(eatValue);
         assertThat(human.getHunger()).isEqualTo(0);
     }
@@ -44,7 +47,7 @@ public class HumanTest {
     public void Should_ReachHungerLimit_When_Overstarve() {
         int initialHunger = 50;
         int starveValue = 70;
-        Human human = new Human(initialHunger, hungerLimit);
+        Human human = mock(Human.class, withSettings().useConstructor(initialHunger, hungerLimit));
         human.starve(starveValue);
         assertThat(human.getHunger()).isEqualTo(hungerLimit);
     }
@@ -52,21 +55,21 @@ public class HumanTest {
     @Test
     public void Should_ThrowException_When_OvereatOnCreate() {
         int initialHunger = -10;
-        assertThatThrownBy(() -> new Human(initialHunger, hungerLimit))
+        assertThatThrownBy(() -> mock(Human.class, withSettings().useConstructor(initialHunger, hungerLimit)))
                 .isInstanceOf(IncorrectHungerException.class).hasMessageContaining("Initial hunger less than 0");
     }
 
     @Test
     public void Should_ThrowException_When_DeadOnCreate() {
         int initialHunger = hungerLimit;
-        assertThatThrownBy(() -> new Human(initialHunger, hungerLimit))
+        assertThatThrownBy(() -> mock(Human.class, withSettings().useConstructor(initialHunger, hungerLimit)))
                 .isInstanceOf(IncorrectHungerException.class).hasMessageContaining("Human dead at creation");
     }
 
     @Test
     public void Should_ThrowException_When_StarvedOnCreate() {
         int initialHunger = 120;
-        assertThatThrownBy(() -> new Human(initialHunger, hungerLimit))
+        assertThatThrownBy(() -> mock(Human.class, withSettings().useConstructor(initialHunger, hungerLimit)))
                 .isInstanceOf(IncorrectHungerException.class).hasMessageContaining("Human starved at creation");
     }
 
@@ -74,7 +77,7 @@ public class HumanTest {
     public void Should_ThrowException_When_StarveByEating() {
         int initialHunger = 50;
         int eatValue = -10;
-        Human human = new Human(initialHunger, hungerLimit);
+        Human human = mock(Human.class, withSettings().useConstructor(initialHunger, hungerLimit));
 
         assertThatThrownBy(human.eat(eatValue)).isInstanceOf(IncorrectEatException.class)
                 .hasMessageContaining("Hunger can't increase by eating");
@@ -84,7 +87,7 @@ public class HumanTest {
     public void Should_ThrowException_When_EatByStarving() {
         int initialHunger = 50;
         int starveValue = -10;
-        Human human = new Human(initialHunger, hungerLimit);
+        Human human = mock(Human.class, withSettings().useConstructor(initialHunger, hungerLimit));
 
         assertThatThrownBy(human.starve(starveValue)).isInstanceOf(IncorrectStarveException.class)
                 .hasMessageContaining("Hunger can't decrease by starving");
@@ -93,7 +96,7 @@ public class HumanTest {
     @Test
     public void Should_ReturnFalse_When_IsNotHumanDeadOnCreate() {
         int initialHunger = 50;
-        Human human = new Human(initialHunger, hungerLimit);
+        Human human = mock(Human.class, withSettings().useConstructor(initialHunger, hungerLimit));
         assertThat(human.isDead()).isEqualTo(false);
     }
 
@@ -101,7 +104,7 @@ public class HumanTest {
     public void Should_ReturnFalse_When_IsNotHumanDeadWhenHungerNotReachedLimit() {
         int initialHunger = 50;
         int hungerValue = 5;
-        Human human = new Human(initialHunger, hungerLimit);
+        Human human = mock(Human.class, withSettings().useConstructor(initialHunger, hungerLimit));
         human.starve(hungerValue);
         assertThat(human.isDead()).isEqualTo(false);
     }
@@ -110,7 +113,7 @@ public class HumanTest {
     public void Should_ReturnFalse_When_IsNotHumanDeadWhenEat() {
         int initialHunger = 50;
         int eatValue = 5;
-        Human human = new Human(initialHunger, hungerLimit);
+        Human human = mock(Human.class, withSettings().useConstructor(initialHunger, hungerLimit));
         human.eat(eatValue);
         assertThat(human.isDead()).isEqualTo(false);
     }
@@ -119,7 +122,7 @@ public class HumanTest {
     public void Should_ReturnTrue_When_IsHumanDeadWhenHungerReachedLimit() {
         int initialHunger = 50;
         int hungerValue = 50;
-        Human human = new Human(initialHunger, hungerLimit);
+        Human human = mock(Human.class, withSettings().useConstructor(initialHunger, hungerLimit));
         human.starve(hungerValue);
         assertThat(human.isDead()).isEqualTo(true);
     }
@@ -128,7 +131,7 @@ public class HumanTest {
     public void Should_ThrowException_When_EatWhileDead() {
         int initialHunger = 50;
         int hungerValue = 50;
-        Human human = new Human(initialHunger, hungerLimit);
+        Human human = mock(Human.class, withSettings().useConstructor(initialHunger, hungerLimit));
         human.starve(hungerValue);
         int eatValue = 20;
         assertThatThrownBy(human.eat(eatValue)).isInstanceOf(IncorrectActionException.class)
@@ -139,7 +142,7 @@ public class HumanTest {
     public void Should_ThrowException_When_StarveWhileDead() {
         int initialHunger = 50;
         int hungerValue = 50;
-        Human human = new Human(initialHunger, hungerLimit);
+        Human human = mock(Human.class, withSettings().useConstructor(initialHunger, hungerLimit));
         human.starve(hungerValue);
         int starveValue = 20;
         assertThatThrownBy(human.starve(starveValue)).isInstanceOf(IncorrectActionException.class)
