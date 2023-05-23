@@ -43,12 +43,20 @@ public abstract class HumanInfantryUnit extends Human implements InfantryUnit  {
         if(target == this) {
             throw new FightActionException("Can't attack itself");
         }
-        
+
+        if(isDead()) {
+            throw new FightActionException("Can't attack when attacker is dead");
+        }
+
         target.getHit(damage);
     }
 
     @Override
     public void getHit(int damage) {
+        if(isDead()) {
+            throw new FightActionException("Can't receive damage when is dead");
+        }
+
         int efficientDamage = Math.max(damage - defense, 0);
         hitPoints -= efficientDamage;
         hitPoints = Math.max(0, hitPoints);
