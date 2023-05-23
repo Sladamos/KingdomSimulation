@@ -1,4 +1,6 @@
 package strategy.kingdom.military;
 
-public interface MilitaryUnit {
+import strategy.kingdom.organism.mechanisms.fight.Fightable;
+
+public interface MilitaryUnit extends Fightable {
 }
