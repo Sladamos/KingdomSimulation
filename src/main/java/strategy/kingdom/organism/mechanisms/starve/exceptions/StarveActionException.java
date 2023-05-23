@@ -1,4 +1,4 @@
-package strategy.kingdom.organism.starve.exceptions;
+package strategy.kingdom.organism.mechanisms.starve.exceptions;
 
 public class StarveActionException extends RuntimeException {
 

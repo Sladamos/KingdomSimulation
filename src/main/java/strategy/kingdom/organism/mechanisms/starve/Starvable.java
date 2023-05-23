@@ -1,4 +1,4 @@
-package strategy.kingdom.organism.starve;
+package strategy.kingdom.organism.mechanisms.starve;
 
 public interface Starvable {
     void eat(int foodValue);
