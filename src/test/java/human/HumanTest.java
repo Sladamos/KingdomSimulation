@@ -14,7 +14,7 @@ public class HumanTest {
     }
 
     @Test
-    public void eat() {
+    public void Should_DecreseHunger_When_Eat() {
         int initialHunger = 50;
         int eatValue = 10;
         Human human = new Human(initialHunger, hungerLimit);
@@ -23,7 +23,7 @@ public class HumanTest {
     }
 
     @Test
-    public void starve() {
+    public void Should_IncreaseHunger_When_Starve() {
         int initialHunger = 50;
         int starveValue = 10;
         Human human = new Human(initialHunger, hungerLimit);
@@ -32,7 +32,7 @@ public class HumanTest {
     }
 
     @Test
-    public void overeat() {
+    public void Should_GetNoHunger_When_EatTooMuch() {
         int initialHunger = 50;
         int eatValue = 70;
         Human human = new Human(initialHunger, hungerLimit);
@@ -41,7 +41,7 @@ public class HumanTest {
     }
 
     @Test
-    public void overstarve() {
+    public void Should_ReachHungerLimit_When_Overstarve() {
         int initialHunger = 50;
         int starveValue = 70;
         Human human = new Human(initialHunger, hungerLimit);
@@ -50,28 +50,28 @@ public class HumanTest {
     }
 
     @Test
-    public void overeatOnCreate() {
+    public void Should_ThrowException_When_OvereatOnCreate() {
         int initialHunger = -10;
         assertThatThrownBy(() -> new Human(initialHunger, hungerLimit))
                 .isInstanceOf(IncorrectHungerException.class).hasMessageContaining("Initial hunger less than 0");
     }
 
     @Test
-    public void deadOnCreate() {
+    public void Should_ThrowException_When_DeadOnCreate() {
         int initialHunger = hungerLimit;
         assertThatThrownBy(() -> new Human(initialHunger, hungerLimit))
                 .isInstanceOf(IncorrectHungerException.class).hasMessageContaining("Human dead at creation");
     }
 
     @Test
-    public void starvedOnCreate() {
+    public void Should_ThrowException_When_StarvedOnCreate() {
         int initialHunger = 120;
         assertThatThrownBy(() -> new Human(initialHunger, hungerLimit))
                 .isInstanceOf(IncorrectHungerException.class).hasMessageContaining("Human starved at creation");
     }
 
     @Test
-    public void starveByEating() {
+    public void Should_ThrowException_When_StarveByEating() {
         int initialHunger = 50;
         int eatValue = -10;
         Human human = new Human(initialHunger, hungerLimit);
@@ -81,7 +81,7 @@ public class HumanTest {
     }
 
     @Test
-    public void eatByStarving() {
+    public void Should_ThrowException_When_EatByStarving() {
         int initialHunger = 50;
         int starveValue = -10;
         Human human = new Human(initialHunger, hungerLimit);
@@ -91,14 +91,14 @@ public class HumanTest {
     }
 
     @Test
-    public void isNotHumanDeadOnCreate() {
+    public void Should_ReturnFalse_When_IsNotHumanDeadOnCreate() {
         int initialHunger = 50;
         Human human = new Human(initialHunger, hungerLimit);
         assertThat(human.isDead()).isEqualTo(false);
     }
 
     @Test
-    public void isNotHumanDeadWhenHungerNotReachedLimit() {
+    public void Should_ReturnFalse_When_IsNotHumanDeadWhenHungerNotReachedLimit() {
         int initialHunger = 50;
         int hungerValue = 5;
         Human human = new Human(initialHunger, hungerLimit);
@@ -107,7 +107,7 @@ public class HumanTest {
     }
 
     @Test
-    public void isNotHumanDeadWhenEat() {
+    public void Should_ReturnFalse_When_IsNotHumanDeadWhenEat() {
         int initialHunger = 50;
         int eatValue = 5;
         Human human = new Human(initialHunger, hungerLimit);
@@ -116,7 +116,7 @@ public class HumanTest {
     }
 
     @Test
-    public void isHumanDeadWhenHungerReachedLimit() {
+    public void Should_ReturnTrue_When_IsHumanDeadWhenHungerReachedLimit() {
         int initialHunger = 50;
         int hungerValue = 50;
         Human human = new Human(initialHunger, hungerLimit);
@@ -125,7 +125,7 @@ public class HumanTest {
     }
 
     @Test
-    public void eatWhileDead() {
+    public void Should_ThrowException_When_EatWhileDead() {
         int initialHunger = 50;
         int hungerValue = 50;
         Human human = new Human(initialHunger, hungerLimit);
@@ -136,7 +136,7 @@ public class HumanTest {
     }
 
     @Test
-    public void starveWhileDead() {
+    public void Should_ThrowException_When_StarveWhileDead() {
         int initialHunger = 50;
         int hungerValue = 50;
         Human human = new Human(initialHunger, hungerLimit);
