@@ -1,7 +1,10 @@
 package strategy.kingdom.organism.human;
 
 import lombok.Getter;
-import strategy.kingdom.organism.Starvable;
+import strategy.kingdom.organism.starve.Starvable;
+import strategy.kingdom.organism.starve.exceptions.IncorrectFoodException;
+import strategy.kingdom.organism.starve.exceptions.IncorrectHungerException;
+import strategy.kingdom.organism.starve.exceptions.StarveActionException;
 
 public abstract class Human implements Starvable {
 
@@ -20,6 +23,7 @@ public abstract class Human implements Starvable {
     public Human(int initialHunger, int hungerLimit) {
         this.hungerLimit = hungerLimit;
         this.hunger = initialHunger;
+        validateHunger();
         this.isAlive = true;
     }
 
@@ -27,19 +31,42 @@ public abstract class Human implements Starvable {
         this(INITIAL_HUNGER, HUNGER_LIMIT);
     }
 
+    private void validateHunger() {
+        if(hungerLimit <= 0)
+            throw new IncorrectHungerException("Initial hunger limit not higher than 0");
+
+        if(hunger < 0)
+            throw new IncorrectHungerException("Initial hunger less than 0");
+
+        if(hunger >= hungerLimit)
+            throw new IncorrectHungerException("Human dead at creation");
+    }
+
     @Override
     public void eat(int foodValue) {
+        if(isDead())
+            throw new StarveActionException("Can't eat when is dead.");
+
         if(foodValue >= 0) {
             hunger -= foodValue;
             hunger = Math.max(hunger, 0);
+        }
+        else {
+            throw new IncorrectFoodException("Hunger can't increase by eating");
         }
     }
 
     @Override
     public void starve(int hungerValue) {
+        if(isDead())
+            throw new StarveActionException("Can't starve when is dead.");
+
         if(hungerValue >= 0) {
             hunger += hungerValue;
-            hunger = Math.max(hunger, hungerLimit);
+            hunger = Math.min(hunger, hungerLimit);
+        }
+        else {
+            throw new IncorrectHungerException("Hunger can't decrease by starving");
         }
 
         if(hunger == hungerLimit) {
