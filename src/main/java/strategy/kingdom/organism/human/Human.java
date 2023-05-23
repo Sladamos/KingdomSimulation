@@ -32,43 +32,49 @@ public abstract class Human implements Starvable {
     }
 
     private void validateHunger() {
-        if(hungerLimit <= 0)
+        if(hungerLimit <= 0) {
             throw new IncorrectHungerException("Initial hunger limit not higher than 0");
+        }
 
-        if(hunger < 0)
+        if(hunger < 0) {
             throw new IncorrectHungerException("Initial hunger less than 0");
+        }
 
-        if(hunger >= hungerLimit)
+        if(hunger >= hungerLimit) {
             throw new IncorrectHungerException("Human dead at creation");
+        }
     }
 
     @Override
     public void eat(int foodValue) {
-        if(isDead())
+        if(isDead()) {
             throw new StarveActionException("Can't eat when is dead.");
-
-        if(foodValue >= 0) {
-            hunger -= foodValue;
-            hunger = Math.max(hunger, 0);
         }
-        else {
+
+        if(foodValue < 0) {
             throw new IncorrectFoodException("Hunger can't increase by eating");
         }
+
+        hunger -= foodValue;
+        hunger = Math.max(hunger, 0);
     }
 
     @Override
     public void starve(int hungerValue) {
-        if(isDead())
+        if(isDead()) {
             throw new StarveActionException("Can't starve when is dead.");
-
-        if(hungerValue >= 0) {
-            hunger += hungerValue;
-            hunger = Math.min(hunger, hungerLimit);
         }
-        else {
+
+        if(hungerValue < 0) {
             throw new IncorrectHungerException("Hunger can't decrease by starving");
         }
 
+        hunger += hungerValue;
+        hunger = Math.min(hunger, hungerLimit);
+        checkIsStillAlive();
+    }
+
+    private void checkIsStillAlive() {
         if(hunger == hungerLimit) {
             isAlive = false;
         }

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 
-public class HumanTest {
+public class HumanStarveTest {
 
     private static int hungerLimit;
 
