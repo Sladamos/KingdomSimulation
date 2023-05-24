@@ -22,7 +22,7 @@ public class MahoganyLumberjackTest {
     @Test
     public void Should_PutWoodToStorage_When_MineWood() {
         int initWoods = lumberjack.getNumberOfWoodsInStorage();
-        lumberjack.putWoodToStorage(new Mahogany());
+        lumberjack.store(new Mahogany());
         assertThat(lumberjack.getNumberOfWoodsInStorage()).isGreaterThan(initWoods);
 
     }

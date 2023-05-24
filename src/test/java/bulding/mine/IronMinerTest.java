@@ -22,7 +22,7 @@ public class IronMinerTest {
     @Test
     public void Should_PutOreToStorage_When_MineOre() {
         int initOres = miner.getNumberOfOresInStorage();
-        miner.putOreToStorage(new IronOre());
+        miner.store(new IronOre());
         assertThat(miner.getNumberOfOresInStorage()).isGreaterThan(initOres);
 
     }
