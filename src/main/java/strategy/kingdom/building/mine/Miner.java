@@ -2,6 +2,9 @@ package strategy.kingdom.building.mine;
 
 import lombok.Getter;
 import strategy.kingdom.building.Building;
+import strategy.kingdom.building.exceptions.BuildingDestroyedException;
+import strategy.kingdom.building.exceptions.IncorrectDamageException;
+import strategy.kingdom.building.exceptions.IncorrectStorageException;
 import strategy.kingdom.material.ore.Ore;
 
 import java.util.ArrayDeque;
@@ -23,6 +26,7 @@ public abstract class Miner <T extends Ore> implements Runnable, Building {
         this.durability = durability;
         this.miningSpeed = miningSpeed;
         storage = new ArrayDeque<>();
+        checkInitParameters(defaultStorageSize);
         initiallyFillStorageWithOres(defaultStorageSize);
     }
 
@@ -40,8 +44,17 @@ public abstract class Miner <T extends Ore> implements Runnable, Building {
 
     @Override
     public synchronized void dealDamage(int damage) {
+        if(damage < 0) {
+            throw new IncorrectDamageException("Damage must be a non negative number");
+        }
+
         durability -= damage;
         durability = Math.max(0, durability);
+
+        if(durability == 0) {
+            isDestroyed = true;
+            notifyAll();
+        }
     }
 
     @Override
@@ -51,6 +64,7 @@ public abstract class Miner <T extends Ore> implements Runnable, Building {
 
     public synchronized void putOreToStorage(T ore) {
         storage.push(ore);
+        notifyAll();
     }
 
     public synchronized int getNumberOfOresInStorage() {
@@ -59,10 +73,19 @@ public abstract class Miner <T extends Ore> implements Runnable, Building {
 
     public synchronized T getOre() {
         waitForOreInStorage();
+        if(isDestroyed()) {
+            throw new BuildingDestroyedException();
+        }
         return storage.pop();
     }
 
     protected abstract T createNewOre();
+
+    private void checkInitParameters(int storageSize) {
+        if (storageSize < 0) {
+            throw new IncorrectStorageException("Storage size must be a non negative number");
+        }
+    }
 
     private void initiallyFillStorageWithOres(int numberOfOres) {
         for(int i = 0; i < numberOfOres; i++) {
@@ -72,7 +95,7 @@ public abstract class Miner <T extends Ore> implements Runnable, Building {
     }
 
     private synchronized void waitForOreInStorage() {
-        while(storage.size() == 0) {
+        while(storage.size() == 0 && !isDestroyed()) {
             try {
                 wait();
             }

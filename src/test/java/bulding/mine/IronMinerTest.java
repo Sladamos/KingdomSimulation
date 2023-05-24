@@ -2,6 +2,7 @@ package bulding.mine;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import strategy.kingdom.building.exceptions.BuildingDestroyedException;
 import strategy.kingdom.building.exceptions.IncorrectDamageException;
 import strategy.kingdom.building.exceptions.IncorrectStorageException;
 import strategy.kingdom.building.mine.IronMiner;
@@ -52,11 +53,11 @@ public class IronMinerTest {
     @Test
     public void Should_ThrowException_When_NegativeDamage() {
         assertThatThrownBy(() -> miner.dealDamage(-5))
-                .isInstanceOf(IncorrectDamageException.class).hasMessageContaining("It's not possible to repair building by dealing damage");
+                .isInstanceOf(IncorrectDamageException.class).hasMessageContaining("Damage must be a non negative number");
     }
 
     @Test
-    public void Should_ThrowException_When_NegativeInitialValue() {
+    public void Should_ThrowException_When_NegativeInitialStorageValue() {
         assertThatThrownBy(() -> new IronMiner(-1))
                 .isInstanceOf(IncorrectStorageException.class).hasMessageContaining("Storage size must be a non negative number");
     }
@@ -66,19 +67,19 @@ public class IronMinerTest {
         miner = new IronMiner(1);
         assertThat(miner.isDestroyed()).isEqualTo(false);
         int durability = miner.getDurability();
-        miner.dealDamage(durability+1);
+        miner.dealDamage(durability+1000);
         assertThat(miner.getDurability()).isEqualTo(0);
         assertThat(miner.isDestroyed()).isEqualTo(true);
     }
 
 
     @Test
-    public void Should_ReturnNullOre_When_MineDestroyed() {
-        miner = new IronMiner(1);
+    public void Should_ThrowException_When_WaitForOreWhenMineDestroyed() {
+        miner = new IronMiner(0);
         Thread thread = new Thread(miner);
         thread.start();
         int durability = miner.getDurability();
         miner.dealDamage(durability+1);
-        assertThat(miner.getOre()).isEqualTo(null);
+        assertThatThrownBy(() -> miner.getOre()).isInstanceOf(BuildingDestroyedException.class);
     }
 }
