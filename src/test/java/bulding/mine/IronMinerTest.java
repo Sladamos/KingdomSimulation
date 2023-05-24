@@ -74,6 +74,11 @@ public class IronMinerTest {
 
     @Test
     public void Should_ReturnNullOre_When_MineDestroyed() {
-
+        miner = new IronMiner(1);
+        Thread thread = new Thread(miner);
+        miner.run();
+        int durability = miner.getDurability();
+        miner.dealDamage(durability+1);
+        assertThat(miner.getOre()).isEqualTo(null);
     }
 }
