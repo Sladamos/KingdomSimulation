@@ -6,7 +6,6 @@ import strategy.kingdom.building.exceptions.BuildingDestroyedException;
 import strategy.kingdom.building.exceptions.IncorrectDamageException;
 import strategy.kingdom.building.exceptions.IncorrectStorageException;
 import strategy.kingdom.building.mine.IronMiner;
-import strategy.kingdom.building.mine.Miner;
 import strategy.kingdom.material.ore.IronOre;
 
 import static org.assertj.core.api.Assertions.*;
