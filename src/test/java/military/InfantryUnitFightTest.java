@@ -49,14 +49,14 @@ public class InfantryUnitFightTest {
 
     @Test
     public void Should_ThrowException_When_AttacksIfDead() {
-        attacker.getHit(10000);
+        attacker.getHit(defender.getHitPoints() * 2);
         assertThatThrownBy(() -> attacker.attack(defender))
                 .isInstanceOf(FightActionException.class).hasMessageContaining("Can't attack when attacker is dead");
     }
 
     @Test
     public void Should_ThrowException_When_HitWhenDead() {
-        defender.getHit(10000);
+        defender.getHit(defender.getHitPoints() * 2);
         assertThatThrownBy(() -> defender.getHit(1))
                 .isInstanceOf(FightActionException.class).hasMessageContaining("Can't receive damage when is dead");
     }
