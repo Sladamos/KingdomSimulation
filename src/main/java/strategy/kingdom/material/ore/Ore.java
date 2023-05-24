@@ -1,4 +1,6 @@
 package strategy.kingdom.material.ore;
 
-public interface Ore {
+import strategy.kingdom.material.Material;
+
+public interface Ore extends Material {
 }

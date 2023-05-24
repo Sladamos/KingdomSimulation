@@ -1,4 +1,6 @@
 package strategy.kingdom.material.wood;
 
-public interface Wood {
+import strategy.kingdom.material.Material;
+
+public interface Wood extends Material {
 }
