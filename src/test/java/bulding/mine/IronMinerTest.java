@@ -2,17 +2,17 @@ package bulding.mine;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import strategy.kingdom.building.exceptions.IncorrectDamageException;
+import strategy.kingdom.building.exceptions.IncorrectStorageException;
 import strategy.kingdom.building.mine.IronMiner;
 import strategy.kingdom.building.mine.Miner;
 import strategy.kingdom.material.ore.IronOre;
-import strategy.kingdom.organism.mechanisms.fight.exceptions.IncorrectAttackException;
-import strategy.kingdom.organism.mechanisms.starve.exceptions.IncorrectHungerException;
 
 import static org.assertj.core.api.Assertions.*;
 
 public class IronMinerTest {
 
-    private Miner<IronOre> miner;
+    private IronMiner miner;
 
     @BeforeEach
     public void initializeMiner() {
@@ -51,14 +51,14 @@ public class IronMinerTest {
 
     @Test
     public void Should_ThrowException_When_NegativeDamage() {
-        assertThat(() -> miner.dealDamage(-5))
+        assertThatThrownBy(() -> miner.dealDamage(-5))
                 .isInstanceOf(IncorrectDamageException.class).hasMessageContaining("It's not possible to repair building by dealing damage");
     }
 
     @Test
     public void Should_ThrowException_When_NegativeInitialValue() {
-        assertThat(() -> new Miner(-1))
-                .isInstanceOf(IncorrectStorageSize.class).hasMessageContaining("Storage size must be a non negative number");
+        assertThatThrownBy(() -> new IronMiner(-1))
+                .isInstanceOf(IncorrectStorageException.class).hasMessageContaining("Storage size must be a non negative number");
     }
 
     @Test
@@ -67,7 +67,7 @@ public class IronMinerTest {
         assertThat(miner.isDestroyed()).isEqualTo(false);
         int durability = miner.getDurability();
         miner.dealDamage(durability+1);
-        assertThat(miner.getDurability).isEqualTo(0);
+        assertThat(miner.getDurability()).isEqualTo(0);
         assertThat(miner.isDestroyed()).isEqualTo(true);
     }
 
@@ -76,7 +76,7 @@ public class IronMinerTest {
     public void Should_ReturnNullOre_When_MineDestroyed() {
         miner = new IronMiner(1);
         Thread thread = new Thread(miner);
-        miner.run();
+        thread.start();
         int durability = miner.getDurability();
         miner.dealDamage(durability+1);
         assertThat(miner.getOre()).isEqualTo(null);

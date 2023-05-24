@@ -1,5 +1,6 @@
 package strategy.kingdom.building.mine;
 
+import lombok.Getter;
 import strategy.kingdom.building.Building;
 import strategy.kingdom.material.ore.Ore;
 
@@ -12,6 +13,7 @@ public abstract class Miner <T extends Ore> implements Runnable, Building {
 
     final double miningSpeed;
 
+    @Getter
     private int durability;
 
     private boolean isDestroyed;
