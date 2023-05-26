@@ -10,4 +10,9 @@ public class IronBar implements Bar {
 
     public IronBar(IronOre ore) {
     }
+
+    @Override
+    public String toString() {
+        return "Iron bar";
+    }
 }
