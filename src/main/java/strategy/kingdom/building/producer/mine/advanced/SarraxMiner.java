@@ -1,0 +1,58 @@
+package strategy.kingdom.building.producer.mine.advanced;
+
+import strategy.kingdom.building.Building;
+import strategy.kingdom.building.producer.Producer;
+import strategy.kingdom.building.producer.mine.basic.IronMiner;
+import strategy.kingdom.building.producer.mine.basic.RubyMiner;
+import strategy.kingdom.material.mineral.gem.Ruby;
+import strategy.kingdom.material.mineral.ore.IronOre;
+
+public class SarraxMiner implements Producer {
+
+    private IronMiner ironMiner;
+
+    private RubyMiner rubyMiner;
+
+    @Override
+    public void run() {
+        Thread thread = new Thread(ironMiner);
+        thread.start();
+        rubyMiner.run();
+    }
+
+    @Override
+    public synchronized boolean isDestroyed() {
+        return ironMiner.isDestroyed() && rubyMiner.isDestroyed();
+    }
+
+    // @throws - BuildingDestroyedException if two mines are destroyed
+    @Override
+    public synchronized void dealDamage(int damage) {
+        dealDamageIfOneMineIsDestroyed(damage);
+        dealDamageForBothMines(damage);
+    }
+
+    private void dealDamageIfOneMineIsDestroyed(int damage) {
+        if(ironMiner.isDestroyed()) {
+            rubyMiner.dealDamage(damage);
+        } else if (rubyMiner.isDestroyed()) {
+            ironMiner.dealDamage(damage);
+        }
+    }
+
+    private void dealDamageForBothMines(int damage) {
+        int damageForIronMiner = damage / 2;
+        int damageForRubyMiner = damage - damageForIronMiner;
+
+        ironMiner.dealDamage(damageForIronMiner);
+        rubyMiner.dealDamage(damageForRubyMiner);
+    }
+
+    public IronOre getIronOre() {
+        return ironMiner.getOre();
+    }
+
+    public Ruby getRuby() {
+        return rubyMiner.getOre();
+    }
+}

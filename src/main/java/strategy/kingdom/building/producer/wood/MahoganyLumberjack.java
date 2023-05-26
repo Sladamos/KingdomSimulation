@@ -1,4 +1,4 @@
-package strategy.kingdom.building.wood;
+package strategy.kingdom.building.producer.wood;
 
 import strategy.kingdom.material.wood.Mahogany;
 

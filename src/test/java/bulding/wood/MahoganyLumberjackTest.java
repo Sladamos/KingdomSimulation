@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import strategy.kingdom.building.exceptions.BuildingDestroyedException;
 import strategy.kingdom.building.exceptions.IncorrectDamageException;
 import strategy.kingdom.building.exceptions.IncorrectStorageException;
-import strategy.kingdom.building.wood.MahoganyLumberjack;
+import strategy.kingdom.building.producer.wood.MahoganyLumberjack;
 import strategy.kingdom.material.wood.Mahogany;
 
 import static org.assertj.core.api.Assertions.*;

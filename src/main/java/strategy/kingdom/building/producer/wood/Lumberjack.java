@@ -1,42 +1,43 @@
-package strategy.kingdom.building.mine;
+package strategy.kingdom.building.producer.wood;
 
 import lombok.Getter;
 import strategy.kingdom.building.Building;
 import strategy.kingdom.building.exceptions.BuildingDestroyedException;
 import strategy.kingdom.building.exceptions.IncorrectDamageException;
 import strategy.kingdom.building.exceptions.IncorrectStorageException;
-import strategy.kingdom.material.mineral.Mineral;
+import strategy.kingdom.building.producer.Producer;
+import strategy.kingdom.material.wood.Wood;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-public abstract class Miner <T extends Mineral> implements Runnable, Building {
+public abstract class Lumberjack<T extends Wood> implements Producer {
 
     private final Deque<T> storage;
 
-    final double miningSpeed;
+    final double producingSpeed;
 
     @Getter
     private int durability;
 
     private boolean isDestroyed;
 
-    public Miner(int defaultStorageSize, double miningSpeed, int durability) {
+    public Lumberjack(int defaultStorageSize, double producingSpeed, int durability) {
         isDestroyed = false;
         this.durability = durability;
-        this.miningSpeed = miningSpeed;
+        this.producingSpeed = producingSpeed;
         storage = new ArrayDeque<>();
         checkInitParameters(defaultStorageSize);
-        initiallyFillStorageWithOres(defaultStorageSize);
+        initiallyFillStorageWithWoods(defaultStorageSize);
     }
 
     @Override
     public void run() {
         while(!isDestroyed()) {
-            T ore = createNewOre();
-            store(ore);
+            T wood = createNewWood();
+            store(wood);
             try {
-                Thread.sleep((long) (15 / miningSpeed));
+                Thread.sleep((long) (25 / producingSpeed));
             } catch (InterruptedException ignored) {
             }
         }
@@ -62,24 +63,24 @@ public abstract class Miner <T extends Mineral> implements Runnable, Building {
         return isDestroyed;
     }
 
-    public synchronized void store(T ore) {
-        storage.push(ore);
+    public synchronized void store(T wood) {
+        storage.push(wood);
         notifyAll();
     }
 
-    public synchronized int getNumberOfOresInStorage() {
+    public synchronized int getNumberOfWoodsInStorage() {
         return storage.size();
     }
 
-    public synchronized T getOre() {
-        waitForOreInStorage();
+    public synchronized T getWood() {
+        waitForWoodInStorage();
         if(isDestroyed()) {
             throw new BuildingDestroyedException();
         }
         return storage.pop();
     }
 
-    protected abstract T createNewOre();
+    protected abstract T createNewWood();
 
     private void checkInitParameters(int storageSize) {
         if (storageSize < 0) {
@@ -87,14 +88,14 @@ public abstract class Miner <T extends Mineral> implements Runnable, Building {
         }
     }
 
-    private void initiallyFillStorageWithOres(int numberOfOres) {
-        for(int i = 0; i < numberOfOres; i++) {
-            T ore = createNewOre();
-            store(ore);
+    private void initiallyFillStorageWithWoods(int numberOfWoods) {
+        for(int i = 0; i < numberOfWoods; i++) {
+            T wood = createNewWood();
+            store(wood);
         }
     }
 
-    private synchronized void waitForOreInStorage() {
+    private synchronized void waitForWoodInStorage() {
         while(storage.size() == 0 && !isDestroyed()) {
             try {
                 wait();

@@ -1,4 +1,4 @@
-package strategy.kingdom.building.mine;
+package strategy.kingdom.building.producer.mine.basic;
 
 import strategy.kingdom.material.mineral.ore.IronOre;
 

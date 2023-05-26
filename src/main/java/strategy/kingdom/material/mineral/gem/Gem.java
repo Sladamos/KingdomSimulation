@@ -1,4 +1,7 @@
 package strategy.kingdom.material.mineral.gem;
 
-public interface Gem {
+
+import strategy.kingdom.material.mineral.Mineral;
+
+public interface Gem extends Mineral {
 }

@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import strategy.kingdom.building.exceptions.BuildingDestroyedException;
 import strategy.kingdom.building.exceptions.IncorrectDamageException;
 import strategy.kingdom.building.exceptions.IncorrectStorageException;
-import strategy.kingdom.building.mine.IronMiner;
+import strategy.kingdom.building.producer.mine.basic.IronMiner;
 import strategy.kingdom.material.mineral.ore.IronOre;
 
 import static org.assertj.core.api.Assertions.*;
@@ -67,6 +67,16 @@ public class IronMinerTest {
         assertThat(miner.isDestroyed()).isEqualTo(false);
         int durability = miner.getDurability();
         miner.dealDamage(durability+1000);
+        assertThat(miner.getDurability()).isEqualTo(0);
+        assertThat(miner.isDestroyed()).isEqualTo(true);
+    }
+
+    @Test
+    public void Should_ThrowException_When_DamageDestroyedMiner() {
+        miner = new IronMiner(1);
+        int durability = miner.getDurability();
+        miner.dealDamage(durability+1000);
+        assertThatThrownBy(() -> miner.dealDamage(1)).isInstanceOf(BuildingDestroyedException.class).hasMessageContaining("It's not possible to attack destroyed building");
         assertThat(miner.getDurability()).isEqualTo(0);
         assertThat(miner.isDestroyed()).isEqualTo(true);
     }
