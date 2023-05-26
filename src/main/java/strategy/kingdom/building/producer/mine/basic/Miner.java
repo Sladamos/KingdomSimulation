@@ -38,6 +38,7 @@ public abstract class Miner <T extends Mineral> implements Producer {
                 Thread.sleep((long) (15000 / miningSpeed));
                 if(!isDestroyed()) {
                     T ore = createNewOre();
+                    System.out.println("Produced :" + ore);
                     store(ore);
                 }
             } catch (InterruptedException ignored) {
