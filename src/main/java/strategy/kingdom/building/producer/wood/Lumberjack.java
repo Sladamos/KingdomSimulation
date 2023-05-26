@@ -37,7 +37,7 @@ public abstract class Lumberjack<T extends Wood> implements Producer {
             T wood = createNewWood();
             store(wood);
             try {
-                Thread.sleep((long) (25 / producingSpeed));
+                Thread.sleep((long) (25000 / producingSpeed));
             } catch (InterruptedException ignored) {
             }
         }
