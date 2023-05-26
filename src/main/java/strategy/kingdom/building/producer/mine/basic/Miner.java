@@ -34,10 +34,12 @@ public abstract class Miner <T extends Mineral> implements Producer {
     @Override
     public void run() {
         while(!isDestroyed()) {
-            T ore = createNewOre();
-            store(ore);
             try {
                 Thread.sleep((long) (15000 / miningSpeed));
+                if(!isDestroyed()) {
+                    T ore = createNewOre();
+                    store(ore);
+                }
             } catch (InterruptedException ignored) {
             }
         }

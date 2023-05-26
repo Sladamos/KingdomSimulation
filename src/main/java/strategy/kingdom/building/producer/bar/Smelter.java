@@ -38,10 +38,12 @@ public abstract class Smelter <T extends Ore, S extends Bar> implements Producer
     @Override
     public void run() {
         while(!isDestroyed()) {
-            S bar = createNewBar(oresProducer.get());
-            store(bar);
             try {
                 Thread.sleep((long) (18000 / smeltingSpeed));
+                if(!isDestroyed()) {
+                    S bar = createNewBar(oresProducer.get());
+                    store(bar);
+                }
             } catch (InterruptedException ignored) {
             }
         }
