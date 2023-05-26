@@ -10,6 +10,7 @@ import strategy.kingdom.material.mineral.ore.Ore;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.function.Supplier;
 
 public abstract class Smelter <T extends Ore, S extends Bar> implements Producer {
 
@@ -17,12 +18,15 @@ public abstract class Smelter <T extends Ore, S extends Bar> implements Producer
 
     private final double smeltingSpeed;
 
+    private final Supplier<T> oresProducer;
+
     @Getter
     private int durability;
 
     private boolean isDestroyed;
 
-    public Smelter(int defaultStorageSize, double smeltingSpeed, int durability) {
+    public Smelter(Supplier<T> oresProducer, int defaultStorageSize, double smeltingSpeed, int durability) {
+        this.oresProducer = oresProducer;
         isDestroyed = false;
         this.durability = durability;
         this.smeltingSpeed = smeltingSpeed;
@@ -34,7 +38,7 @@ public abstract class Smelter <T extends Ore, S extends Bar> implements Producer
     @Override
     public void run() {
         while(!isDestroyed()) {
-            S bar = createNewBar();
+            S bar = createNewBar(oresProducer.get());
             store(bar);
             try {
                 Thread.sleep((long) (18000 / smeltingSpeed));
@@ -84,6 +88,8 @@ public abstract class Smelter <T extends Ore, S extends Bar> implements Producer
         return storage.pop();
     }
 
+    protected abstract S createNewBar(T ore);
+
     protected abstract S createNewBar();
 
     private void checkInitParameters(int storageSize) {
@@ -94,8 +100,8 @@ public abstract class Smelter <T extends Ore, S extends Bar> implements Producer
 
     private void initiallyFillStorageWithBars(int numberOfBars) {
         for(int i = 0; i < numberOfBars; i++) {
-            S ore = createNewBar();
-            store(S);
+            S bar = createNewBar();
+            store(bar);
         }
     }
 
