@@ -15,7 +15,7 @@ public abstract class Lumberjack<T extends Wood> implements Producer {
 
     private final Deque<T> storage;
 
-    final double producingSpeed;
+    private final double producingSpeed;
 
     @Getter
     private int durability;

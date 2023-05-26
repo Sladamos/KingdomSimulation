@@ -15,7 +15,7 @@ public abstract class Miner <T extends Mineral> implements Producer {
 
     private final Deque<T> storage;
 
-    final double miningSpeed;
+    private final double miningSpeed;
 
     @Getter
     private int durability;
