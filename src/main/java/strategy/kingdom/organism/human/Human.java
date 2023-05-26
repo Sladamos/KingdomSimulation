@@ -1,12 +1,13 @@
 package strategy.kingdom.organism.human;
 
 import lombok.Getter;
+import strategy.kingdom.organism.Organism;
 import strategy.kingdom.organism.mechanisms.starve.Starvable;
 import strategy.kingdom.organism.mechanisms.starve.exceptions.IncorrectFoodException;
 import strategy.kingdom.organism.mechanisms.starve.exceptions.IncorrectHungerException;
 import strategy.kingdom.organism.mechanisms.starve.exceptions.StarveActionException;
 
-public abstract class Human implements Starvable {
+public abstract class Human implements Organism, Starvable {
 
     private final static int HUNGER_LIMIT = 100;
 

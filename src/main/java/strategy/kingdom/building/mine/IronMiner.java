@@ -1,6 +1,6 @@
 package strategy.kingdom.building.mine;
 
-import strategy.kingdom.material.ore.IronOre;
+import strategy.kingdom.material.mineral.ore.IronOre;
 
 public class IronMiner extends Miner<IronOre> {
 

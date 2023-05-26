@@ -5,12 +5,12 @@ import strategy.kingdom.building.Building;
 import strategy.kingdom.building.exceptions.BuildingDestroyedException;
 import strategy.kingdom.building.exceptions.IncorrectDamageException;
 import strategy.kingdom.building.exceptions.IncorrectStorageException;
-import strategy.kingdom.material.ore.Ore;
+import strategy.kingdom.material.mineral.Mineral;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-public abstract class Miner <T extends Ore> implements Runnable, Building {
+public abstract class Miner <T extends Mineral> implements Runnable, Building {
 
     private final Deque<T> storage;
 
@@ -34,7 +34,7 @@ public abstract class Miner <T extends Ore> implements Runnable, Building {
     public void run() {
         while(!isDestroyed()) {
             T ore = createNewOre();
-            putOreToStorage(ore);
+            store(ore);
             try {
                 Thread.sleep((long) (15 / miningSpeed));
             } catch (InterruptedException ignored) {
@@ -62,7 +62,7 @@ public abstract class Miner <T extends Ore> implements Runnable, Building {
         return isDestroyed;
     }
 
-    public synchronized void putOreToStorage(T ore) {
+    public synchronized void store(T ore) {
         storage.push(ore);
         notifyAll();
     }
@@ -90,7 +90,7 @@ public abstract class Miner <T extends Ore> implements Runnable, Building {
     private void initiallyFillStorageWithOres(int numberOfOres) {
         for(int i = 0; i < numberOfOres; i++) {
             T ore = createNewOre();
-            putOreToStorage(ore);
+            store(ore);
         }
     }
 

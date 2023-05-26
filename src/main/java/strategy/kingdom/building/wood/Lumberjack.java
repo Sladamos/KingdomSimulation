@@ -34,7 +34,7 @@ public abstract class Lumberjack<T extends Wood> implements Runnable, Building {
     public void run() {
         while(!isDestroyed()) {
             T wood = createNewWood();
-            putWoodToStorage(wood);
+            store(wood);
             try {
                 Thread.sleep((long) (25 / producingSpeed));
             } catch (InterruptedException ignored) {
@@ -62,7 +62,7 @@ public abstract class Lumberjack<T extends Wood> implements Runnable, Building {
         return isDestroyed;
     }
 
-    public synchronized void putWoodToStorage(T wood) {
+    public synchronized void store(T wood) {
         storage.push(wood);
         notifyAll();
     }
@@ -90,7 +90,7 @@ public abstract class Lumberjack<T extends Wood> implements Runnable, Building {
     private void initiallyFillStorageWithWoods(int numberOfWoods) {
         for(int i = 0; i < numberOfWoods; i++) {
             T wood = createNewWood();
-            putWoodToStorage(wood);
+            store(wood);
         }
     }
 
