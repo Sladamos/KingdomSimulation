@@ -20,4 +20,9 @@ public abstract class Smelter <T extends Ore, S extends Bar> implements Producer
     public void dealDamage(int damage) {
 
     }
+
+    @Override
+    public int getDurability() {
+        return 0;
+    }
 }

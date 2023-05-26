@@ -9,9 +9,14 @@ import strategy.kingdom.material.mineral.ore.IronOre;
 
 public class SarraxMiner implements Producer {
 
-    private IronMiner ironMiner;
+    private final IronMiner ironMiner;
 
-    private RubyMiner rubyMiner;
+    private final RubyMiner rubyMiner;
+
+    public SarraxMiner() {
+        this.ironMiner = new IronMiner(15);
+        this.rubyMiner = new RubyMiner(10);
+    }
 
     @Override
     public void run() {
@@ -30,6 +35,11 @@ public class SarraxMiner implements Producer {
     public synchronized void dealDamage(int damage) {
         dealDamageIfOneMineIsDestroyed(damage);
         dealDamageForBothMines(damage);
+    }
+
+    @Override
+    public int getDurability() {
+        return ironMiner.getDurability() + rubyMiner.getDurability();
     }
 
     private void dealDamageIfOneMineIsDestroyed(int damage) {
