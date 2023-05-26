@@ -73,7 +73,6 @@ public class IronMinerTest {
 
     @Test
     public void Should_ThrowException_When_DamageDestroyedMiner() {
-        miner = new IronMiner(1);
         int durability = miner.getDurability();
         miner.dealDamage(durability+1000);
         assertThatThrownBy(() -> miner.dealDamage(1)).isInstanceOf(BuildingDestroyedException.class).hasMessageContaining("It's not possible to attack destroyed building");

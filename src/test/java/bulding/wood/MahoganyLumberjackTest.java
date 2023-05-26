@@ -63,7 +63,6 @@ public class MahoganyLumberjackTest {
 
     @Test
     public void Should_BeDestroyed_When_DurabilityIsZero() {
-        lumberjack = new MahoganyLumberjack(1);
         assertThat(lumberjack.isDestroyed()).isEqualTo(false);
         int durability = lumberjack.getDurability();
         lumberjack.dealDamage(durability+1000);
