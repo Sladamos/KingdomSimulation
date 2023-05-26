@@ -76,8 +76,8 @@ public class SarraxMinerTest {
         Thread thread = new Thread(miner);
         thread.start();
         int durability = miner.getDurability();
-        System.out.println(miner.getDurability());
-        miner.dealDamage(durability+1);
+        miner.dealDamage(durability);
+        miner.dealDamage(durability);
         assertThatThrownBy(() -> miner.getRuby()).isInstanceOf(BuildingDestroyedException.class);
         assertThatThrownBy(() -> miner.getIronOre()).isInstanceOf(BuildingDestroyedException.class);
     }

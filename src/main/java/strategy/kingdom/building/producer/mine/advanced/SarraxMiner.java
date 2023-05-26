@@ -33,8 +33,11 @@ public class SarraxMiner implements Producer {
     // @throws - BuildingDestroyedException if two mines are destroyed
     @Override
     public synchronized void dealDamage(int damage) {
-        dealDamageIfOneMineIsDestroyed(damage);
-        dealDamageForBothMines(damage);
+        if(rubyMiner.isDestroyed() || ironMiner.isDestroyed()) {
+            dealDamageIfOneMineIsDestroyed(damage);
+        } else {
+            dealDamageForBothMines(damage);
+        }
     }
 
     @Override
@@ -51,8 +54,9 @@ public class SarraxMiner implements Producer {
     }
 
     private void dealDamageForBothMines(int damage) {
-        int damageForIronMiner = damage / 2;
-        int damageForRubyMiner = damage - damageForIronMiner;
+
+        int damageForIronMiner = ironMiner.getDurability() < damage / 2 ? ironMiner.getDurability() : damage / 2;
+        int damageForRubyMiner = rubyMiner.getDurability() < damage / 2 ? rubyMiner.getDurability() : damage / 2;
 
         ironMiner.dealDamage(damageForIronMiner);
         rubyMiner.dealDamage(damageForRubyMiner);
