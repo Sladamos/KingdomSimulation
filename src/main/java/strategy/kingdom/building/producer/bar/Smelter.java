@@ -1,6 +1,7 @@
 package strategy.kingdom.building.producer.bar;
 
 import lombok.Getter;
+import lombok.Synchronized;
 import strategy.kingdom.building.exceptions.BuildingDestroyedException;
 import strategy.kingdom.building.exceptions.IncorrectDamageException;
 import strategy.kingdom.building.exceptions.IncorrectStorageException;
@@ -20,7 +21,7 @@ public abstract class Smelter <T extends Ore, S extends Bar> implements Producer
 
     private final Supplier<T> oresProducer;
 
-    @Getter
+    @Getter(onMethod_={@Synchronized})
     private int durability;
 
     private boolean isDestroyed;

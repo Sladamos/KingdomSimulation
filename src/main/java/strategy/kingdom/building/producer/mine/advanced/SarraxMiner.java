@@ -41,7 +41,7 @@ public class SarraxMiner implements Producer {
     }
 
     @Override
-    public int getDurability() {
+    public synchronized int getDurability() {
         return ironMiner.getDurability() + rubyMiner.getDurability();
     }
 

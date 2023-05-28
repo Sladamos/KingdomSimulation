@@ -1,6 +1,7 @@
 package strategy.kingdom.building.producer.wood;
 
 import lombok.Getter;
+import lombok.Synchronized;
 import strategy.kingdom.building.Building;
 import strategy.kingdom.building.exceptions.BuildingDestroyedException;
 import strategy.kingdom.building.exceptions.IncorrectDamageException;
@@ -17,7 +18,7 @@ public abstract class Lumberjack<T extends Wood> implements Producer {
 
     private final double producingSpeed;
 
-    @Getter
+    @Getter(onMethod_={@Synchronized})
     private int durability;
 
     private boolean isDestroyed;

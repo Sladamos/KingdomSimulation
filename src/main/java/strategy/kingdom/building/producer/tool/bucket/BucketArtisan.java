@@ -6,6 +6,7 @@ import strategy.kingdom.product.tool.bucket.Bucket;
 
 public abstract class BucketArtisan<T extends Bucket, U extends Bar> implements Artisan {
 
+    //@Getter(onMethod_={@Synchronized})
     @Override
     public void run() {
 
