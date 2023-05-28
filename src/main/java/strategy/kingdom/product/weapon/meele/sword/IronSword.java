@@ -11,4 +11,9 @@ public class IronSword extends Sword {
     public IronSword() {
 
     }
+
+    @Override
+    public String toString() {
+        return "Iron sword";
+    }
 }
