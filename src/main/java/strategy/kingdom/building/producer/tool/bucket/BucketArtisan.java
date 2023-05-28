@@ -4,26 +4,16 @@ import strategy.kingdom.building.producer.tool.Artisan;
 import strategy.kingdom.material.bar.Bar;
 import strategy.kingdom.product.tool.bucket.Bucket;
 
-public abstract class BucketArtisan<T extends Bucket, U extends Bar> implements Artisan {
+import java.util.function.Supplier;
 
-    //@Getter(onMethod_={@Synchronized})
-    @Override
-    public void run() {
+public abstract class BucketArtisan<T extends Bar, U extends Bucket> extends Artisan<T, U> {
 
+    public BucketArtisan(Supplier<T> materialProducer, int defaultStorageSize, double craftingSpeed, int durability) {
+        super(materialProducer, defaultStorageSize, craftingSpeed, durability);
     }
 
     @Override
-    public boolean isDestroyed() {
-        return false;
-    }
-
-    @Override
-    public void dealDamage(int damage) {
-
-    }
-
-    @Override
-    public int getDurability() {
-        return 0;
+    protected int getCraftingTime() {
+        return 20;
     }
 }
