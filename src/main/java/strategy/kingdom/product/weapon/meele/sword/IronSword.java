@@ -5,7 +5,6 @@ import strategy.kingdom.material.bar.IronBar;
 public class IronSword extends Sword {
 
     public IronSword(IronBar material) {
-        super();
     }
 
     public IronSword() {

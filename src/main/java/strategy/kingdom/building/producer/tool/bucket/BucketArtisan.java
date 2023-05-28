@@ -14,6 +14,6 @@ public abstract class BucketArtisan<T extends Bar, U extends Bucket> extends Art
 
     @Override
     protected int getCraftingTime() {
-        return 20;
+        return 24000;
     }
 }

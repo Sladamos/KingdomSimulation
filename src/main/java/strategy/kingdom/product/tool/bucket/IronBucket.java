@@ -9,7 +9,6 @@ public class IronBucket extends Bucket {
     }
 
     public IronBucket(IronBar material) {
-        super();
     }
 
     @Override

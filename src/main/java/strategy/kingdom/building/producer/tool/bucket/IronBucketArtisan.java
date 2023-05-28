@@ -11,7 +11,7 @@ public class IronBucketArtisan extends BucketArtisan<IronBar, IronBucket> {
 
     private static final int IRON_BUCKET_ARTISAN_DURABILITY = 100;
 
-    private static final int IRON_BUCKET_ARTISAN_CRAFTING_SPEED = 2;
+    private static final int IRON_BUCKET_ARTISAN_CRAFTING_SPEED = 3;
 
     public IronBucketArtisan(Supplier<IronBar> materialProducer, int defaultStorageSize) {
         super(materialProducer, defaultStorageSize,
