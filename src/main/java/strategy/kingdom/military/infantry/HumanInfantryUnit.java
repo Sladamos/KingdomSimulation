@@ -1,6 +1,7 @@
 package strategy.kingdom.military.infantry;
 
 import lombok.Getter;
+import lombok.Synchronized;
 import strategy.kingdom.organism.human.Human;
 import strategy.kingdom.organism.mechanisms.fight.Fightable;
 import strategy.kingdom.organism.mechanisms.fight.exceptions.FightActionException;
@@ -15,7 +16,7 @@ public abstract class HumanInfantryUnit extends Human implements InfantryUnit  {
 
     private final int defense;
 
-    @Getter
+    @Getter(onMethod_={@Synchronized})
     private int hitPoints;
 
     private boolean isAlive;
@@ -39,7 +40,7 @@ public abstract class HumanInfantryUnit extends Human implements InfantryUnit  {
     }
 
     @Override
-    public void attack(Fightable target) {
+    public synchronized void attack(Fightable target) {
         if(target == this) {
             throw new FightActionException("Can't attack itself");
         }
@@ -52,7 +53,7 @@ public abstract class HumanInfantryUnit extends Human implements InfantryUnit  {
     }
 
     @Override
-    public void getHit(int damage) {
+    public synchronized void getHit(int damage) {
         if(isDead()) {
             throw new FightActionException("Can't receive damage when is dead");
         }
@@ -67,7 +68,7 @@ public abstract class HumanInfantryUnit extends Human implements InfantryUnit  {
     }
 
     @Override
-    public boolean isDead() {
+    public synchronized boolean isDead() {
         return super.isDead() || !isAlive;
     }
 }

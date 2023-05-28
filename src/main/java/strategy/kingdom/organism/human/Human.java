@@ -1,6 +1,7 @@
 package strategy.kingdom.organism.human;
 
 import lombok.Getter;
+import lombok.Synchronized;
 import strategy.kingdom.organism.Organism;
 import strategy.kingdom.organism.mechanisms.starve.Starvable;
 import strategy.kingdom.organism.mechanisms.starve.exceptions.IncorrectFoodException;
@@ -13,7 +14,7 @@ public abstract class Human implements Organism, Starvable {
 
     private final static int INITIAL_HUNGER = 50;
 
-    @Getter
+    @Getter(onMethod_={@Synchronized})
     private int hunger;
 
     private final int hungerLimit;
@@ -46,7 +47,7 @@ public abstract class Human implements Organism, Starvable {
     }
 
     @Override
-    public void eat(int foodValue) {
+    public synchronized void eat(int foodValue) {
         if(isDead()) {
             throw new StarveActionException("Can't eat when is dead.");
         }
@@ -60,7 +61,7 @@ public abstract class Human implements Organism, Starvable {
     }
 
     @Override
-    public void starve(int hungerValue) {
+    public synchronized void starve(int hungerValue) {
         if(isDead()) {
             throw new StarveActionException("Can't starve when is dead.");
         }
@@ -74,14 +75,14 @@ public abstract class Human implements Organism, Starvable {
         checkIsStillAlive();
     }
 
-    private void checkIsStillAlive() {
+    private synchronized void checkIsStillAlive() {
         if(hunger == hungerLimit) {
             isAlive = false;
         }
     }
 
     @Override
-    public boolean isDead() {
+    public synchronized boolean isDead() {
         return !isAlive;
     }
 }
