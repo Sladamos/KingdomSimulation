@@ -4,25 +4,16 @@ import strategy.kingdom.building.producer.weapon.Smith;
 import strategy.kingdom.material.bar.Bar;
 import strategy.kingdom.product.weapon.meele.MeeleWeapon;
 
-public abstract class Blacksmith<T extends MeeleWeapon, S extends Bar> implements Smith<T, S> {
+import java.util.function.Supplier;
 
-    @Override
-    public void run() {
+public abstract class Blacksmith<T extends Bar, U extends MeeleWeapon> extends Smith<T, U> {
 
+    public Blacksmith(Supplier<T> materialProducer, int defaultStorageSize, double forgingSpeed, int durability) {
+        super(materialProducer, defaultStorageSize, forgingSpeed, durability);
     }
 
     @Override
-    public boolean isDestroyed() {
-        return false;
-    }
-
-    @Override
-    public void dealDamage(int damage) {
-
-    }
-
-    @Override
-    public int getDurability() {
-        return 0;
+    protected int getForgingTime() {
+        return 30;
     }
 }
