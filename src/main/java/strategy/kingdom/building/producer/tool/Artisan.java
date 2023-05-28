@@ -13,7 +13,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.function.Supplier;
 
-public abstract class Artisan<T extends Tool, U extends Material> implements Producer {
+public abstract class Artisan<T extends Material, U extends Tool> implements Producer {
 
     private final Deque<U> storage;
 
@@ -124,4 +124,4 @@ public abstract class Artisan<T extends Tool, U extends Material> implements Pro
     }
 }
 
-}
+
