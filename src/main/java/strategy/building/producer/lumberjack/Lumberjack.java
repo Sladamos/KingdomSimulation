@@ -42,6 +42,7 @@ public abstract class Lumberjack<T extends Wood> implements Producer {
                     store(wood);
                 }
             } catch (InterruptedException ignored) {
+                return;
             }
         }
     }

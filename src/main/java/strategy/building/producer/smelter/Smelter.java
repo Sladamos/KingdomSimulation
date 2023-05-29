@@ -49,6 +49,7 @@ public abstract class Smelter <T extends Ore, S extends Bar> implements Producer
                     store(bar);
                 }
             } catch (InterruptedException ignored) {
+                return;
             }
         }
     }

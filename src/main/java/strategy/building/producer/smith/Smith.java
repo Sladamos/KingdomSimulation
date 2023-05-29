@@ -49,6 +49,7 @@ public abstract class Smith <T extends Material, U extends Weapon> implements Pr
                     store(weapon);
                 }
             } catch (InterruptedException ignored) {
+                return;
             }
         }
     }

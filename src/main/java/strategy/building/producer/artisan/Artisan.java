@@ -49,6 +49,7 @@ public abstract class Artisan<T extends Material, U extends Tool> implements Pro
                     store(tool);
                 }
             } catch (InterruptedException ignored) {
+                return;
             }
         }
     }

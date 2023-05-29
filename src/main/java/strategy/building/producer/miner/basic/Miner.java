@@ -42,6 +42,7 @@ public abstract class Miner <T extends Mineral> implements Producer {
                     store(ore);
                 }
             } catch (InterruptedException ignored) {
+                return;
             }
         }
     }

@@ -49,6 +49,7 @@ public abstract class Well<T extends Bucket, U extends Product> implements Produ
 					store(item);
 				}
 			} catch (InterruptedException ignored) {
+				return;
 			}
 		}
 	}

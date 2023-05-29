@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import strategy.building.producer.artisan.bucket.IronBucketArtisan;
 import strategy.building.producer.artisan.bucket.WoodenBucketArtisan;
 import strategy.building.producer.lumberjack.MahoganyLumberjack;
+import strategy.building.producer.miner.advanced.SarraxMiner;
 import strategy.building.producer.miner.basic.IronMiner;
 import strategy.building.producer.smelter.IronBarSmelter;
 import strategy.building.producer.well.basic.GoldenCoinWell;
