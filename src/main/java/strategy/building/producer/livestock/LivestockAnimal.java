@@ -28,7 +28,7 @@ public abstract class LivestockAnimal<T extends Food> implements Producer {
 		this.producingSpeed = producingSpeed;
 		storage = new ArrayDeque<>();
 		checkInitParameters(defaultStorageSize);
-		initiallyFillStorageWithMaterials(defaultStorageSize);
+		initiallyFillStorageWithFoods(defaultStorageSize);
 	}
 
 	@Override
@@ -37,9 +37,9 @@ public abstract class LivestockAnimal<T extends Food> implements Producer {
 			try {
 				Thread.sleep((long) (19000 / producingSpeed));
 				if(!isDestroyed()) {
-					T material = createNewMaterial();
-					System.out.println("Produced :" + material);
-					store(material);
+					T food = createNewFood();
+					System.out.println("Produced :" + food);
+					store(food);
 				}
 			} catch (InterruptedException ignored) {
 				return;
@@ -71,24 +71,24 @@ public abstract class LivestockAnimal<T extends Food> implements Producer {
 		return isDestroyed;
 	}
 
-	public synchronized void store(T material) {
-		storage.push(material);
+	public synchronized void store(T food) {
+		storage.push(food);
 		notifyAll();
 	}
 
-	public synchronized int getNumberOfMaterialsInStorage() {
+	public synchronized int getNumberOfFoodsInStorage() {
 		return storage.size();
 	}
 
-	public synchronized T getMaterial() {
-		waitForMaterialInStorage();
+	public synchronized T getFood() {
+		waitForFoodInStorage();
 		if(isDestroyed()) {
 			throw new BuildingDestroyedException();
 		}
 		return storage.pop();
 	}
 
-	protected abstract T createNewMaterial();
+	protected abstract T createNewFood();
 
 	private void checkInitParameters(int storageSize) {
 		if (storageSize < 0) {
@@ -96,14 +96,14 @@ public abstract class LivestockAnimal<T extends Food> implements Producer {
 		}
 	}
 
-	private void initiallyFillStorageWithMaterials(int numberOfMaterials) {
-		for(int i = 0; i < numberOfMaterials; i++) {
-			T material = createNewMaterial();
-			store(material);
+	private void initiallyFillStorageWithFoods(int numberOfFoods) {
+		for(int i = 0; i < numberOfFoods; i++) {
+			T food = createNewFood();
+			store(food);
 		}
 	}
 
-	private synchronized void waitForMaterialInStorage() {
+	private synchronized void waitForFoodInStorage() {
 		while(storage.size() == 0 && !isDestroyed()) {
 			try {
 				wait();
