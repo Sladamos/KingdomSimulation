@@ -11,6 +11,7 @@ import strategy.product.weapon.meele.sword.IronSword;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class FromIronOreToProductsTest {
+
     @Test
     public void Should_ProduceBucketAndSword_When_IronBarsInStorage() {
         IronMiner miner = new IronMiner(0);
