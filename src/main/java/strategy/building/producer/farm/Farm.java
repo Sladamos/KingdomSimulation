@@ -1,4 +1,4 @@
-package strategy.building.producer.well;
+package strategy.building.producer.farm;
 
 import lombok.Getter;
 import lombok.Synchronized;
@@ -6,47 +6,47 @@ import strategy.building.exceptions.BuildingDestroyedException;
 import strategy.building.exceptions.IncorrectDamageException;
 import strategy.building.exceptions.IncorrectStorageException;
 import strategy.building.producer.Producer;
-import strategy.product.Product;
-import strategy.product.tool.bucket.Bucket;
+import strategy.material.plant.Plant;
+import strategy.product.fluid.Water;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.function.Supplier;
 
-public abstract class Well<T extends Bucket, U extends Product> implements Producer {
+public abstract class Farm<T extends Water, U extends Plant> implements Producer {
 
 	private final Deque<U> storage;
 
-	private final double extractingSpeed;
+	private final double growingSpeed;
 
-	private final Supplier<T> bucketProducer;
+	private final Supplier<T> waterProducer;
 
 	@Getter(onMethod_={@Synchronized})
 	private int durability;
 
 	private boolean isDestroyed;
 
-	public Well(Supplier<T> bucketProducer, int defaultStorageSize, double extractingSpeed, int durability) {
-		this.bucketProducer = bucketProducer;
+	public Farm(Supplier<T> waterProducer, int defaultStorageSize, double growingSpeed, int durability) {
+		this.waterProducer = waterProducer;
 		isDestroyed = false;
 		this.durability = durability;
-		this.extractingSpeed = extractingSpeed;
+		this.growingSpeed = growingSpeed;
 		storage = new ArrayDeque<>();
 		checkInitParameters(defaultStorageSize);
-		initiallyFillStorageWithItems(defaultStorageSize);
+		initiallyFillStorageWithPlants(defaultStorageSize);
 	}
 
 	@Override
 	public void run() {
 		while(!isDestroyed()) {
 			try {
-				T material = bucketProducer.get();
+				T material = waterProducer.get();
 				System.out.println("Consumed :" + material);
-				Thread.sleep((long) (getExtractingTime() / extractingSpeed));
+				Thread.sleep((long) (getGrowingTime() / growingSpeed));
 				if(!isDestroyed()) {
-					U item = extractNewItem(material);
-					System.out.println("Produced :" + item);
-					store(item);
+					U plant = createNewPlant(material);
+					System.out.println("Produced :" + plant);
+					store(plant);
 				}
 			} catch (InterruptedException ignored) {
 				return;
@@ -78,28 +78,28 @@ public abstract class Well<T extends Bucket, U extends Product> implements Produ
 		return isDestroyed;
 	}
 
-	public synchronized void store(U item) {
-		storage.push(item);
+	public synchronized void store(U plant) {
+		storage.push(plant);
 		notifyAll();
 	}
 
-	public synchronized int getNumberOfItemsInStorage() {
+	public synchronized int getNumberOfPlantsInStorage() {
 		return storage.size();
 	}
 
-	public synchronized U getItem() {
-		waitForItemInStorage();
+	public synchronized U getPlant() {
+		waitForPlantInStorage();
 		if(isDestroyed()) {
 			throw new BuildingDestroyedException();
 		}
 		return storage.pop();
 	}
 
-	protected abstract U extractNewItem(T material);
+	protected abstract U createNewPlant(T material);
 
-	protected abstract U extractNewItem();
+	protected abstract U createNewPlant();
 
-	protected abstract int getExtractingTime();
+	protected abstract int getGrowingTime();
 
 	private void checkInitParameters(int storageSize) {
 		if (storageSize < 0) {
@@ -107,14 +107,14 @@ public abstract class Well<T extends Bucket, U extends Product> implements Produ
 		}
 	}
 
-	private void initiallyFillStorageWithItems(int numberOfItems) {
-		for(int i = 0; i < numberOfItems; i++) {
-			U item = extractNewItem();
-			store(item);
+	private void initiallyFillStorageWithPlants(int numberOfPlants) {
+		for(int i = 0; i < numberOfPlants; i++) {
+			U plant = createNewPlant();
+			store(plant);
 		}
 	}
 
-	private synchronized void waitForItemInStorage() {
+	private synchronized void waitForPlantInStorage() {
 		while(storage.size() == 0 && !isDestroyed()) {
 			try {
 				wait();
@@ -124,4 +124,5 @@ public abstract class Well<T extends Bucket, U extends Product> implements Produ
 		}
 	}
 }
+
 
