@@ -6,14 +6,14 @@ import strategy.building.exceptions.BuildingDestroyedException;
 import strategy.building.exceptions.IncorrectDamageException;
 import strategy.building.exceptions.IncorrectStorageException;
 import strategy.building.producer.Producer;
-import strategy.material.Material;
 import strategy.product.Product;
+import strategy.product.tool.bucket.Bucket;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.function.Supplier;
 
-public abstract class Well<T extends Material, U extends Product> implements Producer {
+public abstract class Well<T extends Bucket, U extends Product> implements Producer {
 
 	private final Deque<U> storage;
 
