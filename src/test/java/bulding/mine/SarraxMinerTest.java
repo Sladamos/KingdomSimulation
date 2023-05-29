@@ -2,11 +2,9 @@ package bulding.mine;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import strategy.kingdom.building.exceptions.BuildingDestroyedException;
-import strategy.kingdom.building.exceptions.IncorrectDamageException;
-import strategy.kingdom.building.producer.mine.advanced.SarraxMiner;
-import strategy.kingdom.material.mineral.gem.Ruby;
-import strategy.kingdom.material.mineral.ore.IronOre;
+import strategy.building.exceptions.BuildingDestroyedException;
+import strategy.building.exceptions.IncorrectDamageException;
+import strategy.building.producer.miner.advanced.SarraxMiner;
 
 import static org.assertj.core.api.Assertions.*;
 

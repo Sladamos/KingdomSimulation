@@ -1,12 +1,12 @@
 package integration;
 
 import org.junit.jupiter.api.Test;
-import strategy.kingdom.building.producer.bar.IronBarSmelter;
-import strategy.kingdom.building.producer.mine.basic.IronMiner;
-import strategy.kingdom.building.producer.tool.bucket.IronBucketArtisan;
-import strategy.kingdom.building.producer.weapon.meele.IronSwordBlacksmith;
-import strategy.kingdom.product.tool.bucket.IronBucket;
-import strategy.kingdom.product.weapon.meele.sword.IronSword;
+import strategy.building.producer.smelter.IronBarSmelter;
+import strategy.building.producer.miner.basic.IronMiner;
+import strategy.building.producer.artisan.bucket.IronBucketArtisan;
+import strategy.building.producer.smith.meele.IronSwordBlacksmith;
+import strategy.product.tool.bucket.IronBucket;
+import strategy.product.weapon.meele.sword.IronSword;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

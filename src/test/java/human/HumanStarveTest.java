@@ -1,10 +1,10 @@
 package human;
 
-import strategy.kingdom.organism.human.Human;
-import strategy.kingdom.organism.human.HumanImpl;
-import strategy.kingdom.organism.mechanisms.starve.exceptions.IncorrectFoodException;
-import strategy.kingdom.organism.mechanisms.starve.exceptions.IncorrectHungerException;
-import strategy.kingdom.organism.mechanisms.starve.exceptions.StarveActionException;
+import strategy.organism.human.Human;
+import strategy.organism.human.HumanImpl;
+import strategy.organism.mechanisms.starve.exceptions.IncorrectFoodException;
+import strategy.organism.mechanisms.starve.exceptions.IncorrectHungerException;
+import strategy.organism.mechanisms.starve.exceptions.StarveActionException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;

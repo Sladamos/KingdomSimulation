@@ -2,11 +2,11 @@ package bulding.mine;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import strategy.kingdom.building.exceptions.BuildingDestroyedException;
-import strategy.kingdom.building.exceptions.IncorrectDamageException;
-import strategy.kingdom.building.exceptions.IncorrectStorageException;
-import strategy.kingdom.building.producer.mine.basic.IronMiner;
-import strategy.kingdom.material.mineral.ore.IronOre;
+import strategy.building.exceptions.BuildingDestroyedException;
+import strategy.building.exceptions.IncorrectDamageException;
+import strategy.building.exceptions.IncorrectStorageException;
+import strategy.building.producer.miner.basic.IronMiner;
+import strategy.material.mineral.ore.IronOre;
 
 import static org.assertj.core.api.Assertions.*;
 

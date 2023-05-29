@@ -1,10 +1,13 @@
 package military;
 
-import strategy.kingdom.military.infantry.Warrior;
-import strategy.kingdom.military.infantry.InfantryUnit;
-import strategy.kingdom.organism.mechanisms.fight.exceptions.*;
+import strategy.military.infantry.Warrior;
+import strategy.military.infantry.InfantryUnit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import strategy.organism.mechanisms.fight.exceptions.FightActionException;
+import strategy.organism.mechanisms.fight.exceptions.IncorrectAttackException;
+import strategy.organism.mechanisms.fight.exceptions.IncorrectDefenseException;
+
 import static org.assertj.core.api.Assertions.*;
 
 public class InfantryUnitFightTest {
