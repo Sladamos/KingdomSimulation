@@ -14,7 +14,7 @@ import java.util.function.Supplier;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class IronbarSmelterTest {
+public class IronBarSmelterTest {
 
     private IronBarSmelter barSmelter;
 
