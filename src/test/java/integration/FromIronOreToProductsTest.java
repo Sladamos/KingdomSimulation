@@ -14,7 +14,7 @@ public class FromIronOreToProductsTest {
     @Test
     public void Should_ProduceBucketAndSword_When_IronBarsInStorage() {
         IronMiner miner = new IronMiner(0);
-        IronBarSmelter smelter = new IronBarSmelter(miner::getOre, 2);
+        IronBarSmelter smelter = new IronBarSmelter(miner::getOre, 0);
         IronBucketArtisan artisan = new IronBucketArtisan(smelter::getBar,0);
         IronSwordBlacksmith blacksmith = new IronSwordBlacksmith(smelter::getBar, 0);
         Thread thread = new Thread(artisan);
