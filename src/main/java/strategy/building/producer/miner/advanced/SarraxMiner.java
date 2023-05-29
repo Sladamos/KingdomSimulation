@@ -61,11 +61,11 @@ public class SarraxMiner implements Producer {
         rubyMiner.dealDamage(damageForRubyMiner);
     }
 
-    public IronOre getIronOre() {
+    public synchronized IronOre getIronOre() {
         return ironMiner.getOre();
     }
 
-    public Ruby getRuby() {
+    public synchronized Ruby getRuby() {
         return rubyMiner.getOre();
     }
 }

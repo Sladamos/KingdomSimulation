@@ -44,7 +44,7 @@ public abstract class Smith <T extends Material, U extends Weapon> implements Pr
                 System.out.println("Consumed :" + material);
                 Thread.sleep((long) (getForgingTime() / forgingSpeed));
                 if(!isDestroyed()) {
-                    U weapon = createNewWeapon(material);
+                    U weapon = forgeNewWeapon(material);
                     System.out.println("Produced :" + weapon);
                     store(weapon);
                 }
@@ -94,9 +94,9 @@ public abstract class Smith <T extends Material, U extends Weapon> implements Pr
         return storage.pop();
     }
 
-    protected abstract U createNewWeapon(T material);
+    protected abstract U forgeNewWeapon(T material);
 
-    protected abstract U createNewWeapon();
+    protected abstract U forgeNewWeapon();
 
     protected abstract int getForgingTime();
 
@@ -108,7 +108,7 @@ public abstract class Smith <T extends Material, U extends Weapon> implements Pr
 
     private void initiallyFillStorageWithWeapons(int numberOfWeapons) {
         for(int i = 0; i < numberOfWeapons; i++) {
-            U weapon = createNewWeapon();
+            U weapon = forgeNewWeapon();
             store(weapon);
         }
     }

@@ -8,8 +8,13 @@ import java.util.function.Supplier;
 
 public class GoldenCoinWell extends Well<WoodenBucket, GoldenCoin> {
 
-	public GoldenCoinWell(Supplier<WoodenBucket> materialProducer, int defaultStorageSize, double extractingSpeed, int durability) {
-		super(materialProducer, defaultStorageSize, extractingSpeed, durability);
+	private static final int GOLDEN_COIN_WELL_DURABILITY = 90;
+
+	private static final int GOLDEN_COIN_WELL_EXTRACTING_SPEED = 1;
+
+	public GoldenCoinWell(Supplier<WoodenBucket> materialProducer, int defaultStorageSize) {
+		super(materialProducer, defaultStorageSize, GOLDEN_COIN_WELL_EXTRACTING_SPEED,
+				GOLDEN_COIN_WELL_DURABILITY);
 	}
 
 	@Override
