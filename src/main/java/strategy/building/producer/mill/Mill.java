@@ -107,10 +107,10 @@ public abstract class Mill<T extends Plant, U extends Flour> implements Producer
         }
     }
 
-    private void initiallyFillStorageWithFlours(int numberOfPlants) {
-        for(int i = 0; i < numberOfPlants; i++) {
-            U plant = createNewFlour();
-            store(plant);
+    private void initiallyFillStorageWithFlours(int numberOfFlours) {
+        for(int i = 0; i < numberOfFlours; i++) {
+            U flour = createNewFlour();
+            store(flour);
         }
     }
 
