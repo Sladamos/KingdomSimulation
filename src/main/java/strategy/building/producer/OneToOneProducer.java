@@ -84,7 +84,7 @@ public abstract class OneToOneProducer<T, U> implements Producer {
 		return storage.size();
 	}
 
-	public synchronized U getItem() {
+	protected synchronized U getItem() {
 		waitForItemInStorage();
 		if(isDestroyed()) {
 			throw new BuildingDestroyedException();

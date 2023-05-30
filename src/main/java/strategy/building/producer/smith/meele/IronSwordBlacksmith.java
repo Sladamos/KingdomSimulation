@@ -17,12 +17,12 @@ public class IronSwordBlacksmith extends Blacksmith<IronBar, IronSword> {
     }
 
     @Override
-    protected IronSword forgeNewWeapon(IronBar material) {
+    protected IronSword produceNewItem(IronBar material) {
         return new IronSword(material);
     }
 
     @Override
-    protected IronSword forgeNewWeapon() {
+    protected IronSword produceNewItem() {
         return new IronSword();
     }
 }

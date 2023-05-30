@@ -9,7 +9,6 @@ import strategy.building.producer.mill.WheatMill;
 import strategy.building.producer.miner.basic.SaltMiner;
 import strategy.building.producer.well.basic.WaterWell;
 import strategy.material.mineral.Salt;
-import strategy.product.flour.WheatFlour;
 import strategy.product.fluid.Water;
 import strategy.product.food.baking.bread.WheatBread;
 
