@@ -42,7 +42,7 @@ public abstract class TwoToOneProducer<T, U, V> implements Producer {
 			try {
 				T material = firstProducer.get();
 				System.out.println("Consumed :" + material);
-				T secondMaterial = secondProducer.get();
+				U secondMaterial = secondProducer.get();
 				System.out.println("Consumed :" + secondMaterial);
 				Thread.sleep((long) (getProducingTime() / producingSpeed));
 				if(!isDestroyed()) {
