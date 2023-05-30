@@ -13,7 +13,7 @@ public abstract class NecklaceJeweller<T extends Material, U extends Necklace> e
 	}
 
 	@Override
-	protected int getCraftingTime() {
+	protected int getProducingTime() {
 		return 50000;
 	}
 }
