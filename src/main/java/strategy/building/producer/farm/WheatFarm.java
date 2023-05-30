@@ -17,17 +17,17 @@ public class WheatFarm extends Farm<Water, Wheat> {
 	}
 
 	@Override
-	protected Wheat createNewPlant(Water water) {
+	protected Wheat produceNewItem(Water water) {
 		return new Wheat();
 	}
 
 	@Override
-	protected Wheat createNewPlant() {
+	protected Wheat produceNewItem() {
 		return new Wheat();
 	}
 
 	@Override
-	protected int getGrowingTime() {
+	protected int getProducingTime() {
 		return 25000;
 	}
 }
