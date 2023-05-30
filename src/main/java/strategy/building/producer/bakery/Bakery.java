@@ -6,6 +6,7 @@ import strategy.building.exceptions.BuildingDestroyedException;
 import strategy.building.exceptions.IncorrectDamageException;
 import strategy.building.exceptions.IncorrectStorageException;
 import strategy.building.producer.Producer;
+import strategy.material.Material;
 import strategy.product.flour.Flour;
 import strategy.product.food.baking.Baking;
 
@@ -13,7 +14,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.function.Supplier;
 
-public abstract class Bakery<T extends Flour, U extends Baking> implements Producer {
+public abstract class Bakery<T extends Flour, U extends Baking, V extends Material> implements Producer {
 
     private final Deque<U> storage;
 
@@ -21,16 +22,19 @@ public abstract class Bakery<T extends Flour, U extends Baking> implements Produ
 
     private final Supplier<T> flourProducer;
 
+    private final Supplier<V> materialProducer;
+
     @Getter(onMethod_={@Synchronized})
     private int durability;
 
     private boolean isDestroyed;
 
-    public Bakery(Supplier<T> flourProducer, int defaultStorageSize, double bakingSpeed, int durability) {
+    public Bakery(Supplier<T> flourProducer, Supplier<V> materialProducer, int defaultStorageSize, double bakingSpeed, int durability) {
         this.flourProducer = flourProducer;
         isDestroyed = false;
         this.durability = durability;
         this.bakingSpeed = bakingSpeed;
+        this.materialProducer = materialProducer;
         storage = new ArrayDeque<>();
         checkInitParameters(defaultStorageSize);
         initiallyFillStorageWithBakings(defaultStorageSize);
@@ -42,6 +46,8 @@ public abstract class Bakery<T extends Flour, U extends Baking> implements Produ
             try {
                 T flour = flourProducer.get();
                 System.out.println("Consumed :" + flour);
+                V material = materialProducer.get();
+                System.out.println("Consumed :" + material);
                 Thread.sleep((long) (getBakingTime() / bakingSpeed));
                 if(!isDestroyed()) {
                     U baking = createNewBaking(flour);
