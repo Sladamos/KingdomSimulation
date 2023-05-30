@@ -10,7 +10,7 @@ import strategy.product.fluid.Water;
 
 import java.util.function.Supplier;
 
-public class SarraxVillage implements Village {
+public class SarraxVillage implements Village, Runnable {
 
 	private final WheatFarm farm;
 
@@ -34,5 +34,15 @@ public class SarraxVillage implements Village {
 
 	public synchronized Honey getHoney() {
 		return apiary.getFood();
+	}
+
+	@Override
+	public void run() {
+		Thread thread = new Thread(apiary);
+		thread.start();
+		thread = new Thread(cow);
+		thread.start();
+		thread = new Thread(farm);
+		thread.start();
 	}
 }
