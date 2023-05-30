@@ -28,7 +28,7 @@ public abstract class Miner <T extends Mineral> implements Producer {
         this.miningSpeed = miningSpeed;
         storage = new ArrayDeque<>();
         checkInitParameters(defaultStorageSize);
-        initiallyFillStorageWithOres(defaultStorageSize);
+        initiallyFillStorageWithMinerals(defaultStorageSize);
     }
 
     @Override
@@ -37,9 +37,9 @@ public abstract class Miner <T extends Mineral> implements Producer {
             try {
                 Thread.sleep((long) (15000 / miningSpeed));
                 if(!isDestroyed()) {
-                    T ore = createNewOre();
-                    System.out.println("Produced :" + ore);
-                    store(ore);
+                    T material = createNewMineral();
+                    System.out.println("Produced :" + material);
+                    store(material);
                 }
             } catch (InterruptedException ignored) {
                 return;
@@ -71,24 +71,24 @@ public abstract class Miner <T extends Mineral> implements Producer {
         return isDestroyed;
     }
 
-    public synchronized void store(T ore) {
-        storage.push(ore);
+    public synchronized void store(T material) {
+        storage.push(material);
         notifyAll();
     }
 
-    public synchronized int getNumberOfOresInStorage() {
+    public synchronized int getNumberOfMaterialsInStorage() {
         return storage.size();
     }
 
-    public synchronized T getOre() {
-        waitForOreInStorage();
+    public synchronized T getMaterial() {
+        waitForMineralInStorage();
         if(isDestroyed()) {
             throw new BuildingDestroyedException();
         }
         return storage.pop();
     }
 
-    protected abstract T createNewOre();
+    protected abstract T createNewMineral();
 
     private void checkInitParameters(int storageSize) {
         if (storageSize < 0) {
@@ -96,14 +96,14 @@ public abstract class Miner <T extends Mineral> implements Producer {
         }
     }
 
-    private void initiallyFillStorageWithOres(int numberOfOres) {
+    private void initiallyFillStorageWithMinerals(int numberOfOres) {
         for(int i = 0; i < numberOfOres; i++) {
-            T ore = createNewOre();
-            store(ore);
+            T mineral = createNewMineral();
+            store(mineral);
         }
     }
 
-    private synchronized void waitForOreInStorage() {
+    private synchronized void waitForMineralInStorage() {
         while(storage.size() == 0 && !isDestroyed()) {
             try {
                 wait();

@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import strategy.building.producer.artisan.bucket.IronBucketArtisan;
 import strategy.building.producer.artisan.bucket.WoodenBucketArtisan;
 import strategy.building.producer.lumberjack.MahoganyLumberjack;
-import strategy.building.producer.miner.advanced.SarraxMiner;
 import strategy.building.producer.miner.basic.IronMiner;
 import strategy.building.producer.smelter.IronBarSmelter;
 import strategy.building.producer.well.basic.GoldenCoinWell;
@@ -22,7 +21,7 @@ public class FromRawToWaterAndCoin {
 	@Test
 	public void Should_ProduceWaterAndCoin_When_BucketsInStorage() {
 		IronMiner miner = new IronMiner(50);
-		IronBarSmelter smelter = new IronBarSmelter(miner::getOre,0);
+		IronBarSmelter smelter = new IronBarSmelter(miner::getMaterial,0);
 		MahoganyLumberjack lumberjack = new MahoganyLumberjack(0);
 		WoodenBucketArtisan woodenBucketArtisan = new WoodenBucketArtisan(lumberjack::getWood, 0);
 		IronBucketArtisan ironBucketArtisan = new IronBucketArtisan(smelter::getBar, 0);

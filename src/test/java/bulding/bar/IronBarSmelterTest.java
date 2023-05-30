@@ -23,7 +23,7 @@ public class IronBarSmelterTest {
     @BeforeEach
     public void initialIronBarSmelter() {
         IronMiner miner = new IronMiner(0);
-        oresSupplier = miner::getOre;
+        oresSupplier = miner::getMaterial;
         barSmelter = new IronBarSmelter(oresSupplier, 5);
         Thread thread = new Thread(miner);
         thread.start();

@@ -21,17 +21,17 @@ public class IronMinerTest {
 
     @Test
     public void Should_PutOreToStorage_When_MineOre() {
-        int initOres = miner.getNumberOfOresInStorage();
+        int initOres = miner.getNumberOfMaterialsInStorage();
         miner.store(new IronOre());
-        assertThat(miner.getNumberOfOresInStorage()).isGreaterThan(initOres);
+        assertThat(miner.getNumberOfMaterialsInStorage()).isGreaterThan(initOres);
 
     }
 
     @Test
     public void Should_RemoveOreFromStorage_When_TakenOre() {
-        int initOres = miner.getNumberOfOresInStorage();
-        miner.getOre();
-        assertThat(miner.getNumberOfOresInStorage()).isLessThan(initOres);
+        int initOres = miner.getNumberOfMaterialsInStorage();
+        miner.getMaterial();
+        assertThat(miner.getNumberOfMaterialsInStorage()).isLessThan(initOres);
     }
 
     @Test
@@ -39,7 +39,7 @@ public class IronMinerTest {
         miner = new IronMiner(0);
         Thread thread = new Thread(miner);
         thread.start();
-        miner.getOre();
+        miner.getMaterial();
     }
 
     @Test
@@ -88,6 +88,6 @@ public class IronMinerTest {
         thread.start();
         int durability = miner.getDurability();
         miner.dealDamage(durability+1);
-        assertThatThrownBy(() -> miner.getOre()).isInstanceOf(BuildingDestroyedException.class);
+        assertThatThrownBy(() -> miner.getMaterial()).isInstanceOf(BuildingDestroyedException.class);
     }
 }

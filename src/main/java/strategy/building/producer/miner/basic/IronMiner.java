@@ -13,7 +13,7 @@ public class IronMiner extends Miner<IronOre> {
     }
 
     @Override
-    protected IronOre createNewOre() {
+    protected IronOre createNewMineral() {
         return new IronOre();
     }
 }

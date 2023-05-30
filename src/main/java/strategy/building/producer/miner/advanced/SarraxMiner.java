@@ -62,10 +62,10 @@ public class SarraxMiner implements Producer {
     }
 
     public synchronized IronOre getIronOre() {
-        return ironMiner.getOre();
+        return ironMiner.getMaterial();
     }
 
     public synchronized Ruby getRuby() {
-        return rubyMiner.getOre();
+        return rubyMiner.getMaterial();
     }
 }
