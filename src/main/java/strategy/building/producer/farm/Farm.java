@@ -6,7 +6,7 @@ import strategy.building.exceptions.BuildingDestroyedException;
 import strategy.building.exceptions.IncorrectDamageException;
 import strategy.building.exceptions.IncorrectStorageException;
 import strategy.building.producer.Producer;
-import strategy.material.plant.Plant;
+import strategy.water.plant.Plant;
 import strategy.product.fluid.Water;
 
 import java.util.ArrayDeque;
@@ -40,11 +40,11 @@ public abstract class Farm<T extends Water, U extends Plant> implements Producer
 	public void run() {
 		while(!isDestroyed()) {
 			try {
-				T material = waterProducer.get();
-				System.out.println("Consumed :" + material);
+				T water = waterProducer.get();
+				System.out.println("Consumed :" + water);
 				Thread.sleep((long) (getGrowingTime() / growingSpeed));
 				if(!isDestroyed()) {
-					U plant = createNewPlant(material);
+					U plant = createNewPlant(water);
 					System.out.println("Produced :" + plant);
 					store(plant);
 				}
@@ -95,7 +95,7 @@ public abstract class Farm<T extends Water, U extends Plant> implements Producer
 		return storage.pop();
 	}
 
-	protected abstract U createNewPlant(T material);
+	protected abstract U createNewPlant(T water);
 
 	protected abstract U createNewPlant();
 

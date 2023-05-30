@@ -17,7 +17,7 @@ public class WheatFarm extends Farm<Water, Wheat> {
 	}
 
 	@Override
-	protected Wheat createNewPlant(Water material) {
+	protected Wheat createNewPlant(Water water) {
 		return new Wheat();
 	}
 
