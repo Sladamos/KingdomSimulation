@@ -3,7 +3,6 @@ package strategy.building.producer.miner.basic;
 import strategy.building.producer.ZeroToOneProducer;
 import strategy.material.mineral.Mineral;
 
-
 public abstract class Miner <T extends Mineral> extends ZeroToOneProducer<T> {
 
     public Miner(int defaultStorageSize, double producingSpeed, int durability) {

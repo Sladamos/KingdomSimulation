@@ -13,7 +13,7 @@ public class Apiary extends LivestockAnimal<Honey> {
 	}
 
 	@Override
-	protected Honey createNewFood() {
+	protected Honey produceNewItem() {
 		return new Honey();
 	}
 }

@@ -1,111 +1,24 @@
 package strategy.building.producer.lumberjack;
 
-import lombok.Getter;
-import lombok.Synchronized;
-import strategy.building.exceptions.BuildingDestroyedException;
-import strategy.building.exceptions.IncorrectDamageException;
-import strategy.building.exceptions.IncorrectStorageException;
-import strategy.building.producer.Producer;
+import strategy.building.producer.ZeroToOneProducer;
 import strategy.material.wood.Wood;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-
-public abstract class Lumberjack<T extends Wood> implements Producer {
-
-    private final Deque<T> storage;
-
-    private final double producingSpeed;
-
-    @Getter(onMethod_={@Synchronized})
-    private int durability;
-
-    private boolean isDestroyed;
+public abstract class Lumberjack<T extends Wood> extends ZeroToOneProducer<T> {
 
     public Lumberjack(int defaultStorageSize, double producingSpeed, int durability) {
-        isDestroyed = false;
-        this.durability = durability;
-        this.producingSpeed = producingSpeed;
-        storage = new ArrayDeque<>();
-        checkInitParameters(defaultStorageSize);
-        initiallyFillStorageWithWoods(defaultStorageSize);
-    }
-
-    @Override
-    public void run() {
-        while(!isDestroyed()) {
-            try {
-                Thread.sleep((long) (25000 / producingSpeed));
-                if(!isDestroyed()) {
-                    T wood = createNewWood();
-                    System.out.println("Produced :" + wood);
-                    store(wood);
-                }
-            } catch (InterruptedException ignored) {
-                return;
-            }
-        }
-    }
-
-    @Override
-    public synchronized void dealDamage(int damage) {
-        if(damage < 0) {
-            throw new IncorrectDamageException("Damage must be a non negative number");
-        }
-
-        durability -= damage;
-        durability = Math.max(0, durability);
-
-        if(durability == 0) {
-            isDestroyed = true;
-            notifyAll();
-        }
-    }
-
-    @Override
-    public synchronized boolean isDestroyed() {
-        return isDestroyed;
-    }
-
-    public synchronized void store(T wood) {
-        storage.push(wood);
-        notifyAll();
-    }
-
-    public synchronized int getNumberOfWoodsInStorage() {
-        return storage.size();
+        super(defaultStorageSize, producingSpeed, durability);
     }
 
     public synchronized T getWood() {
-        waitForWoodInStorage();
-        if(isDestroyed()) {
-            throw new BuildingDestroyedException();
-        }
-        return storage.pop();
+        return getItem();
     }
 
-    protected abstract T createNewWood();
-
-    private void checkInitParameters(int storageSize) {
-        if (storageSize < 0) {
-            throw new IncorrectStorageException("Storage size must be a non negative number");
-        }
+    public synchronized int getNumberOfWoodsInStorage() {
+        return getNumberOfItemsInStorage();
     }
 
-    private void initiallyFillStorageWithWoods(int numberOfWoods) {
-        for(int i = 0; i < numberOfWoods; i++) {
-            T wood = createNewWood();
-            store(wood);
-        }
-    }
-
-    private synchronized void waitForWoodInStorage() {
-        while(storage.size() == 0 && !isDestroyed()) {
-            try {
-                wait();
-            }
-            catch (InterruptedException ignored) {
-            }
-        }
+    @Override
+    protected int getProducingTime() {
+        return 25000;
     }
 }
