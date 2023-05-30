@@ -33,7 +33,7 @@ public class SarraxWell implements Producer {
 		return waterWell.isDestroyed() && goldenCoinWell.isDestroyed();
 	}
 
-	// @throws - BuildingDestroyedException if two mines are destroyed
+	// @throws - BuildingDestroyedException if two wells are destroyed
 	@Override
 	public synchronized void dealDamage(int damage) {
 		if(goldenCoinWell.isDestroyed() || waterWell.isDestroyed()) {

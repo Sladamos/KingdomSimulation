@@ -7,7 +7,6 @@ import java.util.function.Supplier;
 
 public class SapphireRingJeweller extends strategy.building.producer.jewellery.basic.ring.RingJeweller<Sapphire, SapphireRing> {
 
-
 	private static final int SAPPHIRE_RING_JEWELLER_DURABILITY = 300;
 
 	private static final int SAPPHIRE_RING_JEWELLER_CRAFTING_SPEED = 2;

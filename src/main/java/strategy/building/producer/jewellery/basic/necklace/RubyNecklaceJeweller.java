@@ -7,7 +7,6 @@ import java.util.function.Supplier;
 
 public class RubyNecklaceJeweller extends strategy.building.producer.jewellery.basic.necklace.NecklaceJeweller<Ruby, RubyNecklace> {
 
-
 	private static final int RUBY_NECKLACE_JEWELLER_DURABILITY = 300;
 
 	private static final int RUBY_NECKLACE_JEWELLER_CRAFTING_SPEED = 2;
