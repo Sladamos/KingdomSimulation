@@ -1,6 +1,5 @@
 package strategy.building.producer.jewellery.advanced;
 
-import strategy.building.producer.Producer;
 import strategy.building.producer.TwoToTwoProducer;
 import strategy.building.producer.jewellery.basic.necklace.RubyNecklaceJeweller;
 import strategy.building.producer.jewellery.basic.ring.SapphireRingJeweller;
