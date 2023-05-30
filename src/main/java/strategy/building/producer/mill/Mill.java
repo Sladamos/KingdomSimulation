@@ -7,6 +7,7 @@ import strategy.building.exceptions.IncorrectDamageException;
 import strategy.building.exceptions.IncorrectStorageException;
 import strategy.building.producer.Producer;
 import strategy.material.plant.Plant;
+import strategy.product.flour.Flour;
 
 import java.util.ArrayDeque;
 import java.util.Deque;

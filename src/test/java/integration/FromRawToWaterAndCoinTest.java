@@ -16,7 +16,7 @@ import java.util.concurrent.Executors;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class FromRawToWaterAndCoin {
+public class FromRawToWaterAndCoinTest {
 
 	@Test
 	public void Should_ProduceWaterAndCoin_When_BucketsInStorage() {

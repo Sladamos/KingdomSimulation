@@ -6,7 +6,7 @@ import strategy.building.exceptions.BuildingDestroyedException;
 import strategy.building.exceptions.IncorrectDamageException;
 import strategy.building.exceptions.IncorrectStorageException;
 import strategy.building.producer.Producer;
-import strategy.water.plant.Plant;
+import strategy.material.plant.Plant;
 import strategy.product.fluid.Water;
 
 import java.util.ArrayDeque;
