@@ -87,8 +87,6 @@ public abstract class ZeroToOneProducer<T> implements Producer {
 		return storage.pop();
 	}
 
-	protected abstract T produceNewItem(T material);
-
 	protected abstract T produceNewItem();
 
 	protected abstract int getProducingTime();

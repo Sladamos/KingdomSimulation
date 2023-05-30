@@ -22,11 +22,11 @@ public class FromWaterToBreadTest {
         WaterWell well = Mockito.mock(WaterWell.class);
         Mockito.when(well.getItem()).thenReturn(new Water());
         SaltMiner saltMiner = Mockito.mock(SaltMiner.class);
-        Mockito.when(saltMiner.getMaterial()).thenReturn(new Salt());
+        Mockito.when(saltMiner.getMineral()).thenReturn(new Salt());
         WheatFarm farm = new WheatFarm(well::getItem, 0);
         ExecutorService executorService = Executors.newFixedThreadPool(3);
         WheatMill mill = new WheatMill(farm::getPlant, 0);
-        WheatBreadBakery bakery = new WheatBreadBakery(mill::getFlour, saltMiner::getMaterial, 0);
+        WheatBreadBakery bakery = new WheatBreadBakery(mill::getFlour, saltMiner::getMineral, 0);
         executorService.execute(farm);
         executorService.execute(mill);
         executorService.execute(bakery);

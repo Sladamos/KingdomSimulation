@@ -13,7 +13,7 @@ public class SaltMiner extends Miner<Salt> {
 	}
 
 	@Override
-	protected Salt createNewMineral() {
+	protected Salt produceNewItem() {
 		return new Salt();
 	}
 }
