@@ -10,7 +10,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.function.Supplier;
 
-public abstract class OneToOneProducer<T, U> implements Producer {
+public abstract class OneToOneProducer<T, U> implements OneItemProducer<U> {
 
 	private final Deque<U> storage;
 
@@ -84,7 +84,8 @@ public abstract class OneToOneProducer<T, U> implements Producer {
 		return storage.size();
 	}
 
-	protected synchronized U getItem() {
+	@Override
+	public synchronized U getItem() {
 		waitForItemInStorage();
 		if(isDestroyed()) {
 			throw new BuildingDestroyedException();
