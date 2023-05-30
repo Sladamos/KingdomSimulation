@@ -18,17 +18,17 @@ public class WaterWell extends Well<IronBucket, Water> {
 	}
 
 	@Override
-	protected Water extractNewItem(IronBucket material) {
+	protected Water produceNewItem(IronBucket material) {
 		return new Water();
 	}
 
 	@Override
-	protected Water extractNewItem() {
+	protected Water produceNewItem() {
 		return new Water();
 	}
 
 	@Override
-	protected int getExtractingTime() {
+	protected int getProducingTime() {
 		return 5000;
 	}
 }

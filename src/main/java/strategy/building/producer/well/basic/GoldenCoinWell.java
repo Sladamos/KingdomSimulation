@@ -18,17 +18,17 @@ public class GoldenCoinWell extends Well<WoodenBucket, GoldenCoin> {
 	}
 
 	@Override
-	protected GoldenCoin extractNewItem(WoodenBucket material) {
+	protected GoldenCoin produceNewItem(WoodenBucket material) {
 		return new GoldenCoin();
 	}
 
 	@Override
-	protected GoldenCoin extractNewItem() {
+	protected GoldenCoin produceNewItem() {
 		return new GoldenCoin();
 	}
 
 	@Override
-	protected int getExtractingTime() {
+	protected int getProducingTime() {
 		return 7000;
 	}
 }
