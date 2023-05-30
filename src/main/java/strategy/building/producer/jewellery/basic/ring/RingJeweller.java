@@ -13,7 +13,7 @@ public abstract class RingJeweller<T extends Material, U extends Ring> extends J
 	}
 
 	@Override
-	protected int getCraftingTime() {
+	protected int getProducingTime() {
 		return 40000;
 	}
 }

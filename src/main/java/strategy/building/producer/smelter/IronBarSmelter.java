@@ -17,12 +17,12 @@ public class IronBarSmelter extends Smelter<IronOre, IronBar> {
     }
 
     @Override
-    protected IronBar createNewBar(IronOre ore) {
+    protected IronBar produceNewItem(IronOre ore) {
         return new IronBar(ore);
     }
 
     @Override
-    protected IronBar createNewBar() {
+    protected IronBar produceNewItem() {
         return new IronBar();
     }
 }

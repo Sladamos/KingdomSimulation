@@ -13,7 +13,7 @@ public abstract class Blacksmith<T extends Bar, U extends MeeleWeapon> extends S
     }
 
     @Override
-    protected int getForgingTime() {
+    protected int getProducingTime() {
         return 30000;
     }
 }

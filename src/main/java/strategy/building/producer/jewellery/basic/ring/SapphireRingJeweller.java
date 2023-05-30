@@ -17,12 +17,12 @@ public class SapphireRingJeweller extends strategy.building.producer.jewellery.b
 	}
 
 	@Override
-	protected SapphireRing createNewJewellery(Sapphire material) {
+	protected SapphireRing produceNewItem(Sapphire material) {
 		return new SapphireRing();
 	}
 
 	@Override
-	protected SapphireRing createNewJewellery() {
+	protected SapphireRing produceNewItem() {
 		return new SapphireRing();
 	}
 }

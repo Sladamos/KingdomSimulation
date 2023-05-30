@@ -6,7 +6,7 @@ import strategy.product.food.baking.bread.WheatBread;
 
 import java.util.function.Supplier;
 
-public class WheatBreadBakery extends BreadBakery<WheatFlour, WheatBread, Salt> {
+public class WheatBreadBakery extends BreadBakery<WheatFlour, Salt, WheatBread> {
 
     private static final int WHEAT_BREAD_BAKERY_DURABILITY = 140;
 
@@ -18,12 +18,12 @@ public class WheatBreadBakery extends BreadBakery<WheatFlour, WheatBread, Salt> 
     }
 
     @Override
-    protected WheatBread createNewBaking(WheatFlour flour) {
+    protected WheatBread produceNewItem(WheatFlour flour, Salt salt) {
         return new WheatBread();
     }
 
     @Override
-    protected WheatBread createNewBaking() {
+    protected WheatBread produceNewItem() {
         return new WheatBread();
     }
 }

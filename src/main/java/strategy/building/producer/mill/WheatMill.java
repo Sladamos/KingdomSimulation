@@ -17,17 +17,17 @@ public class WheatMill extends Mill<Wheat, WheatFlour> {
     }
 
     @Override
-    protected WheatFlour createNewFlour(Wheat plant) {
+    protected WheatFlour produceNewItem(Wheat plant) {
         return new WheatFlour();
     }
 
     @Override
-    protected WheatFlour createNewFlour() {
+    protected WheatFlour produceNewItem() {
         return new WheatFlour();
     }
 
     @Override
-    protected int getMillingTime() {
+    protected int getProducingTime() {
         return 32000;
     }
 }

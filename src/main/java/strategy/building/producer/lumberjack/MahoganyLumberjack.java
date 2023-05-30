@@ -13,7 +13,7 @@ public class MahoganyLumberjack extends Lumberjack<Mahogany> {
     }
 
     @Override
-    protected Mahogany createNewWood() {
+    protected Mahogany produceNewItem() {
         return new Mahogany();
     }
 }

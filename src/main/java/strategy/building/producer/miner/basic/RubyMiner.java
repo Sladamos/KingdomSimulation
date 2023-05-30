@@ -13,7 +13,7 @@ public class RubyMiner extends Miner<Ruby> {
     }
 
     @Override
-    protected Ruby createNewMineral() {
+    protected Ruby produceNewItem() {
         return new Ruby();
     }
 }

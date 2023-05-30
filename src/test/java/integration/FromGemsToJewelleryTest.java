@@ -17,8 +17,8 @@ public class FromGemsToJewelleryTest {
 	@Test
 	public void Should_ReturnRubyNecklace_When_GetRubyNecklaceCalled() {
 		RubyMiner miner = Mockito.mock(RubyMiner.class);
-		Mockito.when(miner.getMaterial()).thenReturn(new Ruby());
-		RubyNecklaceJeweller jeweller = new RubyNecklaceJeweller(miner::getMaterial, 0);
+		Mockito.when(miner.getMineral()).thenReturn(new Ruby());
+		RubyNecklaceJeweller jeweller = new RubyNecklaceJeweller(miner::getMineral, 0);
 		Thread thread = new Thread(jeweller);
 		thread.start();
 		Assertions.assertThat(jeweller.getJewellery()).isInstanceOf(RubyNecklace.class);
@@ -27,8 +27,8 @@ public class FromGemsToJewelleryTest {
 	@Test
 	public void Should_ReturnSapphireRing_When_GetSapphireRingCalled() {
 		SapphireMiner miner = Mockito.mock(SapphireMiner.class);
-		Mockito.when(miner.getMaterial()).thenReturn(new Sapphire());
-		SapphireRingJeweller jeweller = new SapphireRingJeweller(miner::getMaterial, 0);
+		Mockito.when(miner.getMineral()).thenReturn(new Sapphire());
+		SapphireRingJeweller jeweller = new SapphireRingJeweller(miner::getMineral, 0);
 		Thread thread = new Thread(jeweller);
 		thread.start();
 		Assertions.assertThat(jeweller.getJewellery()).isInstanceOf(SapphireRing.class);

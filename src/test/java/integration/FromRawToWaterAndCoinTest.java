@@ -21,7 +21,7 @@ public class FromRawToWaterAndCoinTest {
 	@Test
 	public void Should_ProduceWaterAndCoin_When_BucketsInStorage() {
 		IronMiner miner = new IronMiner(50);
-		IronBarSmelter smelter = new IronBarSmelter(miner::getMaterial,0);
+		IronBarSmelter smelter = new IronBarSmelter(miner::getMineral,0);
 		MahoganyLumberjack lumberjack = new MahoganyLumberjack(0);
 		WoodenBucketArtisan woodenBucketArtisan = new WoodenBucketArtisan(lumberjack::getWood, 0);
 		IronBucketArtisan ironBucketArtisan = new IronBucketArtisan(smelter::getBar, 0);

@@ -33,11 +33,11 @@ public class SarraxMountain implements Mountain, Runnable {
     }
 
     public synchronized Salt getSalt() {
-        return saltMiner.getMaterial();
+        return saltMiner.getMineral();
     }
 
     public synchronized Sapphire getSapphire() {
-        return sapphireMiner.getMaterial();
+        return sapphireMiner.getMineral();
     }
 
     public synchronized Ruby getRuby() {

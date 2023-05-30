@@ -14,7 +14,7 @@ public abstract class BucketArtisan<T extends Material, U extends Bucket> extend
     }
 
     @Override
-    protected int getCraftingTime() {
+    protected int getProducingTime() {
         return 24000;
     }
 }

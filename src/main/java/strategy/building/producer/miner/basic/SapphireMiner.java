@@ -13,7 +13,7 @@ public class SapphireMiner extends Miner<Sapphire> {
 	}
 
 	@Override
-	protected Sapphire createNewMineral() {
+	protected Sapphire produceNewItem() {
 		return new Sapphire();
 	}
 }
