@@ -1,8 +1,7 @@
 package strategy.location.mountain;
 
 import strategy.building.producer.miner.advanced.SarraxMiner;
-import strategy.building.producer.miner.basic.SaltMiner;
-import strategy.building.producer.miner.basic.SapphireMiner;
+import strategy.building.producer.miner.basic.*;
 import strategy.material.mineral.Salt;
 import strategy.material.mineral.gem.Ruby;
 import strategy.material.mineral.gem.Sapphire;
@@ -10,9 +9,9 @@ import strategy.material.mineral.ore.IronOre;
 
 public class SarraxMountain implements Mountain, Runnable {
 
-    private final SapphireMiner sapphireMiner;
+    private final Miner<Sapphire> sapphireMiner;
 
-    private final SaltMiner saltMiner;
+    private final Miner<Salt> saltMiner;
 
     private final SarraxMiner sarraxMiner;
 
