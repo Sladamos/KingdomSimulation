@@ -11,6 +11,10 @@ public abstract class Alchemist<T, U, V extends Elixir> extends TwoToOneProducer
 		super(firstProducer, secondProducer, defaultStorageSize, producingSpeed, durability);
 	}
 
+	public synchronized V getElixir() {
+		return getItem();
+	}
+
 	@Override
 	protected int getProducingTime() {
 		return 27000;
