@@ -26,6 +26,7 @@ import strategy.material.mineral.Salt;
 import strategy.material.mineral.ore.IronOre;
 import strategy.material.plant.Wheat;
 import strategy.material.wood.Mahogany;
+import strategy.organism.human.Adult;
 import strategy.product.coin.GoldenCoin;
 import strategy.product.elixir.GrowthElixir;
 import strategy.product.flour.WheatFlour;
@@ -33,6 +34,8 @@ import strategy.product.food.baking.bread.WheatBread;
 import strategy.product.tool.bucket.IronBucket;
 import strategy.product.tool.bucket.WoodenBucket;
 import strategy.product.weapon.meele.sword.IronSword;
+
+import java.util.function.Supplier;
 
 public class SarraxSettlement implements Settlement {
 
@@ -62,7 +65,6 @@ public class SarraxSettlement implements Settlement {
 		ironBarSmelter = new IronBarSmelter(mountain::getIronOre, 13);
 		blacksmith = new IronSwordBlacksmith(ironBarSmelter::getBar, 2);
 		barracks = new WarriorBarracks<>(null, blacksmith::getWeapon, 0);
-		//TODO: implement castle
 
 		ironBucketArtisan = new IronBucketArtisan(ironBarSmelter::getBar, 2);
 		woodenBucketArtisan = new WoodenBucketArtisan(village::getWood, 2);
@@ -74,5 +76,9 @@ public class SarraxSettlement implements Settlement {
 
 		jeweller = new SarraxJeweller(mountain::getRuby, mountain::getSapphire);
 		alchemist = new GrowthElixirAlchemist(village::getMilk, village::getHoney, 2);
+	}
+
+	public void setAdultsProducer(Supplier<Adult> adultsProducer) {
+		barracks.setFirstProducer(adultsProducer);
 	}
 }
