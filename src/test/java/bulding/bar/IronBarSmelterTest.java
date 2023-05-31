@@ -2,7 +2,7 @@ package bulding.bar;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import strategy.producer.exceptions.BuildingDestroyedException;
+import strategy.producer.exceptions.ProducerDestroyedException;
 import strategy.producer.exceptions.IncorrectDamageException;
 import strategy.producer.exceptions.IncorrectStorageException;
 import strategy.producer.building.smelter.IronBarSmelter;
@@ -84,7 +84,7 @@ public class IronBarSmelterTest {
     public void Should_ThrowException_When_DamageDestroyedIronBarSmelter() {
         int durability = barSmelter.getDurability();
         barSmelter.dealDamage(durability+1000);
-        assertThatThrownBy(() -> barSmelter.dealDamage(1)).isInstanceOf(BuildingDestroyedException.class).hasMessageContaining("It's not possible to attack destroyed building");
+        assertThatThrownBy(() -> barSmelter.dealDamage(1)).isInstanceOf(ProducerDestroyedException.class).hasMessageContaining("It's not possible to attack destroyed building");
         assertThat(barSmelter.getDurability()).isEqualTo(0);
         assertThat(barSmelter.isDestroyed()).isEqualTo(true);
     }
@@ -97,6 +97,6 @@ public class IronBarSmelterTest {
         thread.start();
         int durability = barSmelter.getDurability();
         barSmelter.dealDamage(durability+1);
-        assertThatThrownBy(() -> barSmelter.getBar()).isInstanceOf(BuildingDestroyedException.class);
+        assertThatThrownBy(() -> barSmelter.getBar()).isInstanceOf(ProducerDestroyedException.class);
     }
 }

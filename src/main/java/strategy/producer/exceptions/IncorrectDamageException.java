@@ -1,4 +1,4 @@
-package strategy.building.exceptions;
+package strategy.producer.exceptions;
 
 public class IncorrectDamageException extends RuntimeException {
 

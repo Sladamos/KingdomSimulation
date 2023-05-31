@@ -3,7 +3,7 @@ package strategy.producer;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.Synchronized;
-import strategy.producer.exceptions.BuildingDestroyedException;
+import strategy.producer.exceptions.ProducerDestroyedException;
 import strategy.producer.exceptions.IncorrectDamageException;
 import strategy.producer.exceptions.IncorrectStorageException;
 
@@ -65,7 +65,7 @@ public abstract class TwoToOneProducer<T, U, V> implements Producer {
 		}
 
 		if(isDestroyed()) {
-			throw new BuildingDestroyedException("It's not possible to attack destroyed building");
+			throw new ProducerDestroyedException("It's not possible to attack destroyed building");
 		}
 
 		durability -= damage;
@@ -94,7 +94,7 @@ public abstract class TwoToOneProducer<T, U, V> implements Producer {
 	protected synchronized V getItem() {
 		waitForItemInStorage();
 		if(isDestroyed()) {
-			throw new BuildingDestroyedException();
+			throw new ProducerDestroyedException();
 		}
 		return storage.pop();
 	}

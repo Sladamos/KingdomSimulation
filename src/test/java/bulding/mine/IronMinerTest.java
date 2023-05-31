@@ -2,7 +2,7 @@ package bulding.mine;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import strategy.producer.exceptions.BuildingDestroyedException;
+import strategy.producer.exceptions.ProducerDestroyedException;
 import strategy.producer.exceptions.IncorrectDamageException;
 import strategy.producer.exceptions.IncorrectStorageException;
 import strategy.producer.building.miner.basic.IronMiner;
@@ -75,7 +75,7 @@ public class IronMinerTest {
     public void Should_ThrowException_When_DamageDestroyedMiner() {
         int durability = miner.getDurability();
         miner.dealDamage(durability+1000);
-        assertThatThrownBy(() -> miner.dealDamage(1)).isInstanceOf(BuildingDestroyedException.class).hasMessageContaining("It's not possible to attack destroyed building");
+        assertThatThrownBy(() -> miner.dealDamage(1)).isInstanceOf(ProducerDestroyedException.class).hasMessageContaining("It's not possible to attack destroyed building");
         assertThat(miner.getDurability()).isEqualTo(0);
         assertThat(miner.isDestroyed()).isEqualTo(true);
     }
@@ -88,6 +88,6 @@ public class IronMinerTest {
         thread.start();
         int durability = miner.getDurability();
         miner.dealDamage(durability+1);
-        assertThatThrownBy(() -> miner.getMineral()).isInstanceOf(BuildingDestroyedException.class);
+        assertThatThrownBy(() -> miner.getMineral()).isInstanceOf(ProducerDestroyedException.class);
     }
 }

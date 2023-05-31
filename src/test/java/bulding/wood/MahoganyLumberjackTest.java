@@ -2,7 +2,7 @@ package bulding.wood;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import strategy.producer.exceptions.BuildingDestroyedException;
+import strategy.producer.exceptions.ProducerDestroyedException;
 import strategy.producer.exceptions.IncorrectDamageException;
 import strategy.producer.exceptions.IncorrectStorageException;
 import strategy.producer.building.lumberjack.MahoganyLumberjack;
@@ -78,6 +78,6 @@ public class MahoganyLumberjackTest {
         thread.start();
         int durability = lumberjack.getDurability();
         lumberjack.dealDamage(durability+1);
-        assertThatThrownBy(() -> lumberjack.getWood()).isInstanceOf(BuildingDestroyedException.class);
+        assertThatThrownBy(() -> lumberjack.getWood()).isInstanceOf(ProducerDestroyedException.class);
     }
 }

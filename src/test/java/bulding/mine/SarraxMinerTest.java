@@ -2,7 +2,7 @@ package bulding.mine;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import strategy.producer.exceptions.BuildingDestroyedException;
+import strategy.producer.exceptions.ProducerDestroyedException;
 import strategy.producer.exceptions.IncorrectDamageException;
 import strategy.producer.building.miner.advanced.SarraxMiner;
 
@@ -56,7 +56,7 @@ public class SarraxMinerTest {
         miner = new SarraxMiner();
         int durability = miner.getDurability();
         miner.dealDamage(durability+1000);
-        assertThatThrownBy(() -> miner.dealDamage(1)).isInstanceOf(BuildingDestroyedException.class).hasMessageContaining("It's not possible to attack destroyed building");
+        assertThatThrownBy(() -> miner.dealDamage(1)).isInstanceOf(ProducerDestroyedException.class).hasMessageContaining("It's not possible to attack destroyed building");
     }
 
     @Test
@@ -76,7 +76,7 @@ public class SarraxMinerTest {
         int durability = miner.getDurability();
         miner.dealDamage(durability);
         miner.dealDamage(durability);
-        assertThatThrownBy(() -> miner.getRuby()).isInstanceOf(BuildingDestroyedException.class);
-        assertThatThrownBy(() -> miner.getIronOre()).isInstanceOf(BuildingDestroyedException.class);
+        assertThatThrownBy(() -> miner.getRuby()).isInstanceOf(ProducerDestroyedException.class);
+        assertThatThrownBy(() -> miner.getIronOre()).isInstanceOf(ProducerDestroyedException.class);
     }
 }
