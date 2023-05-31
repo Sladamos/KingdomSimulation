@@ -12,4 +12,8 @@ public abstract class House<T extends Coin, U extends Food, V extends Human> ext
 	public House(Supplier<T> firstProducer, Supplier<U> secondProducer, int defaultStorageSize, double producingSpeed, int durability) {
 		super(firstProducer, secondProducer, defaultStorageSize, producingSpeed, durability);
 	}
+
+	public synchronized V getHuman() {
+		return getItem();
+	}
 }
