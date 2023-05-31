@@ -1,6 +1,7 @@
 package strategy.building.producer;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.Synchronized;
 import strategy.building.exceptions.BuildingDestroyedException;
 import strategy.building.exceptions.IncorrectDamageException;
@@ -16,7 +17,8 @@ public abstract class OneToOneProducer<T, U> implements OneItemProducer<U> {
 
 	private final double producingSpeed;
 
-	private final Supplier<T> producer;
+	@Setter
+	private Supplier<T> producer;
 
 	@Getter(onMethod_={@Synchronized})
 	private int durability;

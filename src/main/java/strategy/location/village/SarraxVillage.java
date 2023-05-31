@@ -25,11 +25,15 @@ public class SarraxVillage implements Village, Runnable {
 
 	private final Lumberjack<Mahogany> lumberjack;
 
-	public SarraxVillage(Supplier<Water> waterSupplier) {
+	public SarraxVillage() {
 		cow = new Cow(4);
 		apiary = new Apiary(2);
-		farm = new WheatFarm(waterSupplier, 12);
+		farm = new WheatFarm(null, 12);
 		lumberjack = new MahoganyLumberjack(14);
+	}
+
+	public void setWaterProducer(Supplier<Water> waterProducer) {
+		farm.setProducer(waterProducer);
 	}
 
 	public synchronized Wheat getWheat() {
