@@ -2,11 +2,11 @@ package bulding.bar;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import strategy.building.exceptions.BuildingDestroyedException;
-import strategy.building.exceptions.IncorrectDamageException;
-import strategy.building.exceptions.IncorrectStorageException;
-import strategy.building.producer.smelter.IronBarSmelter;
-import strategy.building.producer.miner.basic.IronMiner;
+import strategy.producer.exceptions.BuildingDestroyedException;
+import strategy.producer.exceptions.IncorrectDamageException;
+import strategy.producer.exceptions.IncorrectStorageException;
+import strategy.producer.building.smelter.IronBarSmelter;
+import strategy.producer.building.miner.basic.IronMiner;
 import strategy.material.bar.IronBar;
 import strategy.material.mineral.ore.IronOre;
 

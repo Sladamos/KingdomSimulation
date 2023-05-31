@@ -1,10 +1,10 @@
 package integration;
 
 import org.junit.jupiter.api.Test;
-import strategy.building.producer.smelter.IronBarSmelter;
-import strategy.building.producer.miner.basic.IronMiner;
-import strategy.building.producer.artisan.bucket.IronBucketArtisan;
-import strategy.building.producer.smith.meele.IronSwordBlacksmith;
+import strategy.producer.building.smelter.IronBarSmelter;
+import strategy.producer.building.miner.basic.IronMiner;
+import strategy.producer.building.artisan.bucket.IronBucketArtisan;
+import strategy.producer.building.smith.meele.IronSwordBlacksmith;
 import strategy.product.tool.bucket.IronBucket;
 import strategy.product.weapon.meele.sword.IronSword;
 

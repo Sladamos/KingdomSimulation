@@ -1,13 +1,13 @@
 package integration;
 
 import org.junit.jupiter.api.Test;
-import strategy.building.producer.artisan.bucket.IronBucketArtisan;
-import strategy.building.producer.artisan.bucket.WoodenBucketArtisan;
-import strategy.building.producer.lumberjack.MahoganyLumberjack;
-import strategy.building.producer.miner.basic.IronMiner;
-import strategy.building.producer.smelter.IronBarSmelter;
-import strategy.building.producer.well.basic.GoldenCoinWell;
-import strategy.building.producer.well.basic.WaterWell;
+import strategy.producer.building.artisan.bucket.IronBucketArtisan;
+import strategy.producer.building.artisan.bucket.WoodenBucketArtisan;
+import strategy.producer.building.lumberjack.MahoganyLumberjack;
+import strategy.producer.building.miner.basic.IronMiner;
+import strategy.producer.building.smelter.IronBarSmelter;
+import strategy.producer.building.well.basic.GoldenCoinWell;
+import strategy.producer.building.well.basic.WaterWell;
 import strategy.product.coin.GoldenCoin;
 import strategy.product.fluid.Water;
 

@@ -1,7 +1,7 @@
 package strategy.location.mountain;
 
-import strategy.building.producer.miner.advanced.SarraxMiner;
-import strategy.building.producer.miner.basic.*;
+import strategy.producer.building.miner.advanced.SarraxMiner;
+import strategy.producer.building.miner.basic.*;
 import strategy.material.mineral.Salt;
 import strategy.material.mineral.gem.Ruby;
 import strategy.material.mineral.gem.Sapphire;

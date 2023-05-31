@@ -1,6 +1,6 @@
 package strategy.kingdom;
 
-import strategy.building.producer.miner.advanced.SarraxMiner;
+import strategy.producer.building.miner.advanced.SarraxMiner;
 
 public class SarraxKingdom implements Kingdom {
 

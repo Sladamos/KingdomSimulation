@@ -1,12 +1,12 @@
 package strategy.location.village;
 
-import strategy.building.producer.farm.Farm;
-import strategy.building.producer.farm.WheatFarm;
-import strategy.building.producer.livestock.Apiary;
-import strategy.building.producer.livestock.Cow;
-import strategy.building.producer.livestock.LivestockAnimal;
-import strategy.building.producer.lumberjack.Lumberjack;
-import strategy.building.producer.lumberjack.MahoganyLumberjack;
+import strategy.producer.building.farm.Farm;
+import strategy.producer.building.farm.WheatFarm;
+import strategy.producer.building.livestock.Apiary;
+import strategy.producer.building.livestock.Cow;
+import strategy.producer.building.livestock.LivestockAnimal;
+import strategy.producer.building.lumberjack.Lumberjack;
+import strategy.producer.building.lumberjack.MahoganyLumberjack;
 import strategy.material.food.Honey;
 import strategy.material.food.Milk;
 import strategy.material.plant.Wheat;

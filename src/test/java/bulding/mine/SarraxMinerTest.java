@@ -2,9 +2,9 @@ package bulding.mine;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import strategy.building.exceptions.BuildingDestroyedException;
-import strategy.building.exceptions.IncorrectDamageException;
-import strategy.building.producer.miner.advanced.SarraxMiner;
+import strategy.producer.exceptions.BuildingDestroyedException;
+import strategy.producer.exceptions.IncorrectDamageException;
+import strategy.producer.building.miner.advanced.SarraxMiner;
 
 import static org.assertj.core.api.Assertions.*;
 

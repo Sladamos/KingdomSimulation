@@ -2,10 +2,10 @@ package bulding.wood;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import strategy.building.exceptions.BuildingDestroyedException;
-import strategy.building.exceptions.IncorrectDamageException;
-import strategy.building.exceptions.IncorrectStorageException;
-import strategy.building.producer.lumberjack.MahoganyLumberjack;
+import strategy.producer.exceptions.BuildingDestroyedException;
+import strategy.producer.exceptions.IncorrectDamageException;
+import strategy.producer.exceptions.IncorrectStorageException;
+import strategy.producer.building.lumberjack.MahoganyLumberjack;
 import strategy.material.wood.Mahogany;
 
 import static org.assertj.core.api.Assertions.*;
