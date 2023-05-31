@@ -14,6 +14,6 @@ public abstract class House<T extends Coin, U extends Human> extends OneToOnePro
 
 	@Override
 	protected int getProducingTime() {
-		return 50000;
+		return 0;
 	}
 }
