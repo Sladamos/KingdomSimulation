@@ -7,19 +7,18 @@ import strategy.producer.building.jewellery.basic.ring.SapphireRingJeweller;
 import strategy.material.mineral.gem.Sapphire;
 import strategy.material.mineral.gem.Ruby;
 import strategy.product.jewellery.necklace.RubyNecklace;
-import strategy.product.jewellery.ring.SapphireRing;
 
 import java.util.function.Supplier;
 
 public class SarraxJeweller extends TwoToTwoProducer<SapphireRingJeweller, RubyNecklaceJeweller,
-		SapphireRing, RubyNecklace> implements Building {
+		strategy.product.jewellery.ring.SapphireRing, RubyNecklace> implements Building {
 
 	public SarraxJeweller(Supplier<Ruby> rubySupplier, Supplier<Sapphire> sapphireSupplier) {
 		super(new SapphireRingJeweller(sapphireSupplier, 3),
 				new RubyNecklaceJeweller(rubySupplier, 2));
 	}
 
-	public synchronized SapphireRing getSapphireRing() {
+	public synchronized strategy.product.jewellery.ring.SapphireRing getSapphireRing() {
 		return getFirstItem();
 	}
 
