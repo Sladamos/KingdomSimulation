@@ -1,5 +1,6 @@
 package strategy.location.settlement;
 
+import strategy.organism.human.Child;
 import strategy.producer.building.alchemist.Alchemist;
 import strategy.producer.building.alchemist.GrowthElixirAlchemist;
 import strategy.producer.building.artisan.Artisan;
@@ -31,6 +32,8 @@ import strategy.product.coin.GoldenCoin;
 import strategy.product.elixir.GrowthElixir;
 import strategy.product.flour.WheatFlour;
 import strategy.product.food.baking.bread.WheatBread;
+import strategy.product.jewellery.necklace.RubyNecklace;
+import strategy.product.jewellery.ring.SapphireRing;
 import strategy.product.tool.bucket.IronBucket;
 import strategy.product.tool.bucket.WoodenBucket;
 import strategy.product.weapon.meele.sword.IronSword;
@@ -76,6 +79,22 @@ public class SarraxSettlement implements Settlement {
 
 		jeweller = new SarraxJeweller(mountain::getRuby, mountain::getSapphire);
 		alchemist = new GrowthElixirAlchemist(village::getMilk, village::getHoney, 2);
+	}
+
+	public synchronized  GrowthElixir getGrowthElixir() {
+		return alchemist.getElixir();
+	}
+
+	public synchronized Child getChild() {
+		return childHouse.getHuman();
+	}
+
+	public synchronized RubyNecklace getRubyNecklace() {
+		return jeweller.getRubyNecklace();
+	}
+
+	public synchronized SapphireRing getSapphireRing() {
+		return jeweller.getSapphireRing();
 	}
 
 	public void setAdultsProducer(Supplier<Adult> adultsProducer) {
