@@ -15,6 +15,15 @@ public abstract class PresentCraftsman<T, S extends Present> extends Craftsman<T
 		super(producer, defaultStorageSize, CRAFTSMAN_CRAFTING_SPEED, CRAFTSMAN_DURABILITY);
 	}
 
+	public synchronized S getPresent() {
+		return getItem();
+	}
+
+	@Override
+	public S produceNewItem(T material) {
+		return produceNewItem();
+	}
+
 	@Override
 	protected int getProducingTime() {
 		return 35000;
