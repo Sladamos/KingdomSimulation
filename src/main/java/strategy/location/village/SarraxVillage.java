@@ -1,5 +1,6 @@
 package strategy.location.village;
 
+import strategy.producer.Producer;
 import strategy.producer.building.farm.Farm;
 import strategy.producer.building.farm.WheatFarm;
 import strategy.producer.building.livestock.Apiary;
@@ -13,8 +14,10 @@ import strategy.material.plant.Wheat;
 import strategy.material.wood.Mahogany;
 import strategy.product.fluid.Water;
 
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
 public class SarraxVillage implements Village {
@@ -63,5 +66,13 @@ public class SarraxVillage implements Village {
 		executorService.execute(cow);
 		executorService.execute(farm);
 		executorService.execute(lumberjack);
+	}
+
+	@Override
+	public void terminate() {
+		apiary.terminate();
+		cow.terminate();
+		farm.terminate();
+		lumberjack.terminate();
 	}
 }

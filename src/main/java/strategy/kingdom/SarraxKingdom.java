@@ -32,4 +32,12 @@ public class SarraxKingdom implements Kingdom {
         village.run();
         castle.run();
     }
+
+    @Override
+    public void terminate() {
+        mountain.terminate();
+        settlement.terminate();
+        village.terminate();
+        castle.terminate();
+    }
 }

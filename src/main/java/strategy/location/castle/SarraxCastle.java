@@ -17,6 +17,7 @@ import strategy.product.present.RingPresent;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class SarraxCastle implements Castle {
 
@@ -52,5 +53,9 @@ public class SarraxCastle implements Castle {
 		executorService.execute(queen);
 		executorService.execute(king);
 		executorService.execute(princess);
+	}
+
+	@Override
+	public void terminate() {
 	}
 }

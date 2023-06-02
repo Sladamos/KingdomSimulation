@@ -3,7 +3,7 @@ package strategy.producer;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class TwoToTwoProducer<T extends OneItemProducer<V>, U extends OneItemProducer<W>, V, W> implements Producer {
+public abstract class TwoToTwoProducer<T extends OneItemProducer<V>, U extends OneItemProducer<W>, V, W> implements Producer {
 
 	private final T firstProducer;
 
@@ -41,6 +41,11 @@ public class TwoToTwoProducer<T extends OneItemProducer<V>, U extends OneItemPro
 	@Override
 	public synchronized int getDurability() {
 		return firstProducer.getDurability() + secondProducer.getDurability();
+	}
+
+	@Override
+	public void terminate() {
+
 	}
 
 	private void dealDamageIfOneProducerIsDestroyed(int damage) {

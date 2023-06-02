@@ -6,6 +6,7 @@ import lombok.Synchronized;
 import strategy.producer.exceptions.ProducerDestroyedException;
 import strategy.producer.exceptions.IncorrectDamageException;
 import strategy.producer.exceptions.IncorrectStorageException;
+import strategy.producer.exceptions.ProducerTerminatedException;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -25,6 +26,8 @@ public abstract class OneToOneProducer<T, U> implements OneItemProducer<U> {
 
 	private boolean isDestroyed;
 
+	private boolean isWorking;
+
 	public OneToOneProducer(Supplier<T> producer, int defaultStorageSize, double producingSpeed, int durability) {
 		this.producer = producer;
 		isDestroyed = false;
@@ -33,22 +36,23 @@ public abstract class OneToOneProducer<T, U> implements OneItemProducer<U> {
 		storage = new ArrayDeque<>();
 		checkInitParameters(defaultStorageSize);
 		initiallyFillStorageWithItems(defaultStorageSize);
+		isWorking = true;
 	}
 
 	@Override
 	public void run() {
-		while(!isDestroyed()) {
+		while(!isDestroyed() && isWorking()) {
 			try {
 				T material = producer.get();
 				System.out.println("Consumed :" + material);
 				Thread.sleep((long) (getProducingTime() / producingSpeed));
-				if(!isDestroyed()) {
+				if(!isDestroyed() && isWorking()) {
 					U item = produceNewItem(material);
 					System.out.println("Produced :" + item);
 					store(item);
 				}
-			} catch (InterruptedException ignored) {
-				return;
+			} catch (Exception err) {
+				terminate();
 			}
 		}
 	}
@@ -77,6 +81,16 @@ public abstract class OneToOneProducer<T, U> implements OneItemProducer<U> {
 		return isDestroyed;
 	}
 
+	@Override
+	public synchronized void terminate() {
+		isWorking = false;
+		notifyAll();
+	}
+
+	public synchronized boolean isWorking() {
+		return isWorking;
+	}
+
 	public synchronized void store(U item) {
 		storage.push(item);
 		notifyAll();
@@ -91,6 +105,9 @@ public abstract class OneToOneProducer<T, U> implements OneItemProducer<U> {
 		waitForItemInStorage();
 		if(isDestroyed()) {
 			throw new ProducerDestroyedException();
+		}
+		if(!isWorking()) {
+			throw new ProducerTerminatedException();
 		}
 		return storage.pop();
 	}
@@ -115,7 +132,7 @@ public abstract class OneToOneProducer<T, U> implements OneItemProducer<U> {
 	}
 
 	private synchronized void waitForItemInStorage() {
-		while(storage.size() == 0 && !isDestroyed()) {
+		while(storage.size() == 0 && !isDestroyed() && isWorking()) {
 			try {
 				wait();
 			}

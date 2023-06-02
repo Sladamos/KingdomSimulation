@@ -41,6 +41,7 @@ import strategy.product.weapon.meele.sword.IronSword;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
 public class SarraxSettlement implements Settlement {
@@ -125,5 +126,9 @@ public class SarraxSettlement implements Settlement {
 		executorService.execute(childHouse);
 		executorService.execute(jeweller);
 		executorService.execute(alchemist);
+	}
+
+	@Override
+	public void terminate() {
 	}
 }

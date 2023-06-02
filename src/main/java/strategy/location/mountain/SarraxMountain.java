@@ -9,6 +9,7 @@ import strategy.material.mineral.ore.IronOre;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class SarraxMountain implements Mountain, Runnable {
 
@@ -48,5 +49,9 @@ public class SarraxMountain implements Mountain, Runnable {
 
     public IronOre getIronOre() {
         return sarraxMiner.getIronOre();
+    }
+
+    @Override
+    public void terminate() {
     }
 }
