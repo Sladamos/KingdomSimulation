@@ -20,6 +20,7 @@ public class SarraxKingdom implements Kingdom {
         mountain = new SarraxMountain();
         village = new SarraxVillage();
         settlement = new SarraxSettlement(mountain, village);
+        village.setWaterProducer(settlement::getWater);
         castle = new SarraxCastle(settlement);
         settlement.setAdultsProducer(castle::getAdult);
     }

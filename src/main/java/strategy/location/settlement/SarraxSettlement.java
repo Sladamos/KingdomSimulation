@@ -31,6 +31,7 @@ import strategy.organism.human.Adult;
 import strategy.product.coin.GoldenCoin;
 import strategy.product.elixir.GrowthElixir;
 import strategy.product.flour.WheatFlour;
+import strategy.product.fluid.Water;
 import strategy.product.food.baking.bread.WheatBread;
 import strategy.product.jewellery.necklace.RubyNecklace;
 import strategy.product.jewellery.ring.SapphireRing;
@@ -87,19 +88,23 @@ public class SarraxSettlement implements Settlement {
 		executorService = Executors.newFixedThreadPool(11);
 	}
 
-	public synchronized  GrowthElixir getGrowthElixir() {
+	public Water getWater() {
+		return well.getWater();
+	}
+
+	public GrowthElixir getGrowthElixir() {
 		return alchemist.getElixir();
 	}
 
-	public synchronized Child getChild() {
+	public Child getChild() {
 		return childHouse.getHuman();
 	}
 
-	public synchronized RubyNecklace getRubyNecklace() {
+	public RubyNecklace getRubyNecklace() {
 		return jeweller.getRubyNecklace();
 	}
 
-	public synchronized SapphireRing getSapphireRing() {
+	public SapphireRing getSapphireRing() {
 		return jeweller.getSapphireRing();
 	}
 

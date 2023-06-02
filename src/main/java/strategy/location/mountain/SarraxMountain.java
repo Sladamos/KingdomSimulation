@@ -34,19 +34,19 @@ public class SarraxMountain implements Mountain, Runnable {
         executorService.execute(sapphireMiner);
     }
 
-    public synchronized Salt getSalt() {
+    public Salt getSalt() {
         return saltMiner.getMineral();
     }
 
-    public synchronized Sapphire getSapphire() {
+    public Sapphire getSapphire() {
         return sapphireMiner.getMineral();
     }
 
-    public synchronized Ruby getRuby() {
+    public Ruby getRuby() {
         return sarraxMiner.getRuby();
     }
 
-    public synchronized IronOre getIronOre() {
+    public IronOre getIronOre() {
         return sarraxMiner.getIronOre();
     }
 }
