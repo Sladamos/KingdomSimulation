@@ -57,7 +57,7 @@ public abstract class TwoToOneProducer<T, U, V> implements Producer {
 					store(item);
 				}
 			} catch (Exception err) {
-				terminate();
+				return;
 			}
 		}
 	}

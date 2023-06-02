@@ -13,6 +13,5 @@ public class Simulation {
         } catch (InterruptedException ignored) {
         }
         kingdom.terminate();
-        System.out.println("łazap");
     }
 }

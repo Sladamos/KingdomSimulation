@@ -60,5 +60,6 @@ public class SarraxCastle implements Castle {
 		queen.terminate();
 		king.terminate();
 		princess.terminate();
+		executorService.shutdownNow();
 	}
 }

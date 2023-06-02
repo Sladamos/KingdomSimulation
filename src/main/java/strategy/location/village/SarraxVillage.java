@@ -74,5 +74,6 @@ public class SarraxVillage implements Village {
 		cow.terminate();
 		farm.terminate();
 		lumberjack.terminate();
+		executorService.shutdownNow();
 	}
 }

@@ -44,7 +44,7 @@ public abstract class ZeroToOneProducer<T> implements OneItemProducer<T> {
 					store(item);
 				}
 			} catch (Exception err) {
-				terminate();
+				return;
 			}
 		}
 	}

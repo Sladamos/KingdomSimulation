@@ -52,7 +52,7 @@ public abstract class OneToOneProducer<T, U> implements OneItemProducer<U> {
 					store(item);
 				}
 			} catch (Exception err) {
-				terminate();
+				return;
 			}
 		}
 	}

@@ -56,5 +56,6 @@ public class SarraxMountain implements Mountain, Runnable {
         saltMiner.terminate();
         sarraxMiner.terminate();
         sapphireMiner.terminate();
+        executorService.shutdownNow();
     }
 }

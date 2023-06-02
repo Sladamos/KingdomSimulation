@@ -141,5 +141,6 @@ public class SarraxSettlement implements Settlement {
 		childHouse.terminate();
 		jeweller.terminate();
 		alchemist.terminate();
+		executorService.shutdownNow();
 	}
 }

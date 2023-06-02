@@ -9,18 +9,18 @@ public abstract class TwoToTwoProducer<T extends OneItemProducer<V>, U extends O
 
 	private final U secondProducer;
 
-	private final ExecutorService service;
+	private final ExecutorService executorService;
 
 	public TwoToTwoProducer(T firstProducer, U secondProducer) {
 		this.firstProducer = firstProducer;
 		this.secondProducer = secondProducer;
-		service = Executors.newFixedThreadPool(2);
+		executorService = Executors.newFixedThreadPool(2);
 	}
 
 	@Override
 	public void run() {
-		service.execute(firstProducer);
-		service.execute(secondProducer);
+		executorService.execute(firstProducer);
+		executorService.execute(secondProducer);
 	}
 
 	@Override
@@ -47,6 +47,7 @@ public abstract class TwoToTwoProducer<T extends OneItemProducer<V>, U extends O
 	public void terminate() {
 		firstProducer.terminate();
 		secondProducer.terminate();
+		executorService.shutdownNow();
 	}
 
 	private void dealDamageIfOneProducerIsDestroyed(int damage) {
