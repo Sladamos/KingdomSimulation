@@ -70,20 +70,20 @@ public class SarraxSettlement implements Settlement {
 	private final ExecutorService executorService;
 
 	public SarraxSettlement(SarraxMountain mountain, SarraxVillage village) {
-		ironBarSmelter = new IronBarSmelter(mountain::getIronOre, 13);
-		blacksmith = new IronSwordBlacksmith(ironBarSmelter::getBar, 2);
+		ironBarSmelter = new IronBarSmelter(mountain::getIronOre, 0);
+		blacksmith = new IronSwordBlacksmith(ironBarSmelter::getBar, 0);
 		barracks = new WarriorBarracks<>(null, blacksmith::getWeapon, 0);
 
-		ironBucketArtisan = new IronBucketArtisan(ironBarSmelter::getBar, 2);
-		woodenBucketArtisan = new WoodenBucketArtisan(village::getWood, 2);
+		ironBucketArtisan = new IronBucketArtisan(ironBarSmelter::getBar, 0);
+		woodenBucketArtisan = new WoodenBucketArtisan(village::getWood, 0);
 		well = new SarraxWell(woodenBucketArtisan::getTool, ironBucketArtisan::getTool);
 
-		wheatMill = new WheatMill(village::getWheat, 1);
-		bakery = new WheatBreadBakery(wheatMill::getFlour, mountain::getSalt, 3);
+		wheatMill = new WheatMill(village::getWheat, 0);
+		bakery = new WheatBreadBakery(wheatMill::getFlour, mountain::getSalt, 0);
 		childHouse = new ChildHouse<>(well::getGoldenCoin, bakery::getBaking, 0);
 
 		jeweller = new SarraxJeweller(mountain::getRuby, mountain::getSapphire);
-		alchemist = new GrowthElixirAlchemist(village::getMilk, village::getHoney, 2);
+		alchemist = new GrowthElixirAlchemist(village::getMilk, village::getHoney, 0);
 
 		executorService = Executors.newFixedThreadPool(11);
 	}

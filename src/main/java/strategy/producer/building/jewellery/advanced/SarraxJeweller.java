@@ -14,8 +14,8 @@ public class SarraxJeweller extends TwoToTwoProducer<SapphireRingJeweller, RubyN
 		strategy.product.jewellery.ring.SapphireRing, RubyNecklace> implements Building {
 
 	public SarraxJeweller(Supplier<Ruby> rubySupplier, Supplier<Sapphire> sapphireSupplier) {
-		super(new SapphireRingJeweller(sapphireSupplier, 3),
-				new RubyNecklaceJeweller(rubySupplier, 2));
+		super(new SapphireRingJeweller(sapphireSupplier, 0),
+				new RubyNecklaceJeweller(rubySupplier, 0));
 	}
 
 	public synchronized strategy.product.jewellery.ring.SapphireRing getSapphireRing() {

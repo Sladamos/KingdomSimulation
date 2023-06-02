@@ -43,7 +43,7 @@ public class SarraxCastle implements Castle {
 		return new SarraxKing(necklacePresentCraftsman, ringPresentCraftsman);
 	}
 
-	public synchronized Adult getAdult() {
+	public Adult getAdult() {
 		return queen.getAdult();
 	}
 

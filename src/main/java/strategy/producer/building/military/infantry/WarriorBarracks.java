@@ -10,7 +10,7 @@ public class WarriorBarracks<T extends Sword> extends Barracks<Adult, T, Warrior
 
 	private static final int WARRIOR_BARRACKS_DURABILITY = 500;
 
-	private static final int WARRIOR_BARRACKS_TRAINING_SPEED = 3;
+	private static final int WARRIOR_BARRACKS_TRAINING_SPEED = 5;
 
 	public WarriorBarracks(Supplier<Adult> firstProducer, Supplier<T> secondProducer, int defaultStorageSize) {
 		super(firstProducer, secondProducer, defaultStorageSize, WARRIOR_BARRACKS_TRAINING_SPEED,

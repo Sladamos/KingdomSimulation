@@ -13,7 +13,7 @@ import java.util.function.Supplier;
 public class SarraxWell extends TwoToTwoProducer<WaterWell, GoldenCoinWell, Water, GoldenCoin> {
 
 	public SarraxWell(Supplier<WoodenBucket> woodenBucketSupplier, Supplier<IronBucket> ironBucketSupplier) {
-		super(new WaterWell(ironBucketSupplier, 15), new GoldenCoinWell(woodenBucketSupplier, 10));
+		super(new WaterWell(ironBucketSupplier, 0), new GoldenCoinWell(woodenBucketSupplier, 0));
 	}
 
 	public synchronized Water getWater() {

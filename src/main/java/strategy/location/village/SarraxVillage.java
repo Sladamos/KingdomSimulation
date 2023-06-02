@@ -30,10 +30,10 @@ public class SarraxVillage implements Village {
 	private final ExecutorService executorService;
 
 	public SarraxVillage() {
-		cow = new Cow(4);
-		apiary = new Apiary(2);
-		farm = new WheatFarm(null, 12);
-		lumberjack = new MahoganyLumberjack(14);
+		cow = new Cow(0);
+		apiary = new Apiary(0);
+		farm = new WheatFarm(null, 0);
+		lumberjack = new MahoganyLumberjack(0);
 		executorService = Executors.newFixedThreadPool(4);
 	}
 
@@ -41,19 +41,19 @@ public class SarraxVillage implements Village {
 		farm.setProducer(waterProducer);
 	}
 
-	public synchronized Wheat getWheat() {
+	public Wheat getWheat() {
 		return farm.getPlant();
 	}
 
-	public synchronized Milk getMilk() {
+	public Milk getMilk() {
 		return cow.getFood();
 	}
 
-	public synchronized Honey getHoney() {
+	public Honey getHoney() {
 		return apiary.getFood();
 	}
 
-	public synchronized Mahogany getWood() {
+	public Mahogany getWood() {
 		return lumberjack.getWood();
 	}
 

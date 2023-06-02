@@ -10,7 +10,7 @@ import strategy.material.mineral.ore.IronOre;
 public class SarraxMiner extends TwoToTwoProducer<IronMiner, RubyMiner, IronOre, Ruby> implements Building {
 
     public SarraxMiner() {
-        super(new IronMiner(15), new RubyMiner(10));
+        super(new IronMiner(0), new RubyMiner(0));
     }
 
     public synchronized IronOre getIronOre() {

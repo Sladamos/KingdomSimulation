@@ -10,7 +10,7 @@ public class ChildHouse<T extends Coin, U extends Bread> extends House<T, U, Chi
 
 	private static final int CHILD_HOUSE_DURABILITY = 100;
 
-	private static final int CHILD_HOUSE_PRODUCING_SPEED = 1;
+	private static final int CHILD_HOUSE_PRODUCING_SPEED = 4;
 
 	public ChildHouse(Supplier<T> firstProducer, Supplier<U> secondProducer, int defaultStorageSize) {
 		super(firstProducer, secondProducer, defaultStorageSize, CHILD_HOUSE_PRODUCING_SPEED,

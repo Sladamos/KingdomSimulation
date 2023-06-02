@@ -21,8 +21,8 @@ public class SarraxMountain implements Mountain, Runnable {
     private final ExecutorService executorService;
 
     public SarraxMountain() {
-        saltMiner = new SaltMiner(4);
-        sapphireMiner = new SapphireMiner(4);
+        saltMiner = new SaltMiner(0);
+        sapphireMiner = new SapphireMiner(0);
         sarraxMiner = new SarraxMiner();
         executorService = Executors.newFixedThreadPool(3);
     }
