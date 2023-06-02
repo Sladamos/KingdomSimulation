@@ -14,6 +14,9 @@ import strategy.product.jewellery.ring.SapphireRing;
 import strategy.product.present.NecklacePresent;
 import strategy.product.present.RingPresent;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class SarraxCastle implements Castle {
 
 	private final SarraxKing king;
@@ -22,10 +25,13 @@ public class SarraxCastle implements Castle {
 
 	private final SarraxPrincess<NecklacePresent, RingPresent> princess;
 
+	private final ExecutorService executorService;
+
 	public SarraxCastle(SarraxSettlement settlement) {
 		queen = new SarraxQueen(settlement::getChild, settlement::getGrowthElixir);
 		king = createKing(settlement);
 		princess = new SarraxPrincess<>(king::getFirstItem, king::getSecondItem);
+		executorService = Executors.newFixedThreadPool(4);
 	}
 
 	private SarraxKing createKing(SarraxSettlement settlement) {
@@ -34,5 +40,12 @@ public class SarraxCastle implements Castle {
 		RingPresentCraftsman<SapphireRing> ringPresentCraftsman =
 				new RingPresentCraftsman<>(settlement::getSapphireRing, 0);
 		return new SarraxKing(necklacePresentCraftsman, ringPresentCraftsman);
+	}
+
+	@Override
+	public void run() {
+		executorService.execute(queen);
+		executorService.execute(king);
+		executorService.execute(princess);
 	}
 }
