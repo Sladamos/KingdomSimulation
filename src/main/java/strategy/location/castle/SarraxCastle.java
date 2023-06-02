@@ -57,5 +57,8 @@ public class SarraxCastle implements Castle {
 
 	@Override
 	public void terminate() {
+		queen.terminate();
+		king.terminate();
+		princess.terminate();
 	}
 }

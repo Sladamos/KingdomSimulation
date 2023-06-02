@@ -53,5 +53,8 @@ public class SarraxMountain implements Mountain, Runnable {
 
     @Override
     public void terminate() {
+        saltMiner.terminate();
+        sarraxMiner.terminate();
+        sapphireMiner.terminate();
     }
 }

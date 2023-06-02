@@ -45,7 +45,8 @@ public abstract class TwoToTwoProducer<T extends OneItemProducer<V>, U extends O
 
 	@Override
 	public void terminate() {
-
+		firstProducer.terminate();
+		secondProducer.terminate();
 	}
 
 	private void dealDamageIfOneProducerIsDestroyed(int damage) {

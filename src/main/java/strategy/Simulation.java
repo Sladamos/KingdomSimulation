@@ -14,9 +14,5 @@ public class Simulation {
         }
         kingdom.terminate();
         System.out.println("łazap");
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException ignored) {
-        }
     }
 }

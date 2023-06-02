@@ -130,5 +130,16 @@ public class SarraxSettlement implements Settlement {
 
 	@Override
 	public void terminate() {
+		ironBarSmelter.terminate();
+		blacksmith.terminate();
+		barracks.terminate();
+		ironBucketArtisan.terminate();
+		woodenBucketArtisan.terminate();
+		well.terminate();
+		wheatMill.terminate();
+		bakery.terminate();
+		childHouse.terminate();
+		jeweller.terminate();
+		alchemist.terminate();
 	}
 }
