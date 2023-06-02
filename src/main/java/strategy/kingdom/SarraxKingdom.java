@@ -1,10 +1,10 @@
 package strategy.kingdom;
 
+import lombok.Getter;
 import strategy.location.castle.SarraxCastle;
 import strategy.location.mountain.SarraxMountain;
 import strategy.location.settlement.SarraxSettlement;
 import strategy.location.village.SarraxVillage;
-import strategy.producer.building.miner.advanced.SarraxMiner;
 
 public class SarraxKingdom implements Kingdom {
 
@@ -14,6 +14,7 @@ public class SarraxKingdom implements Kingdom {
 
     private final SarraxVillage village;
 
+    @Getter
     private final SarraxCastle castle;
 
     public SarraxKingdom() {
@@ -39,5 +40,10 @@ public class SarraxKingdom implements Kingdom {
         settlement.terminate();
         village.terminate();
         castle.terminate();
+    }
+
+    @Override
+    public void attack(Kingdom kingdom) {
+        castle.attack(kingdom.getCastle());
     }
 }

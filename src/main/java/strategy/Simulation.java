@@ -8,7 +8,7 @@ public class Simulation {
     public static void main(String[] args) {
         Kingdom strongerKingdom = createKingdom(50000);
         Kingdom weakerKingdom = createKingdom(25000);
-        //strongerKingdom.attack(weakerKingdom)
+        strongerKingdom.attack(weakerKingdom)
         strongerKingdom.terminate();
         weakerKingdom.terminate();
     }

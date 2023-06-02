@@ -62,4 +62,9 @@ public class SarraxCastle implements Castle {
 		princess.terminate();
 		executorService.shutdownNow();
 	}
+
+	@Override
+	public void attack(Castle castle) {
+
+	}
 }
