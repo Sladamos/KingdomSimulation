@@ -38,6 +38,8 @@ import strategy.product.tool.bucket.IronBucket;
 import strategy.product.tool.bucket.WoodenBucket;
 import strategy.product.weapon.meele.sword.IronSword;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.function.Supplier;
 
 public class SarraxSettlement implements Settlement {
@@ -64,6 +66,8 @@ public class SarraxSettlement implements Settlement {
 
 	private final WarriorBarracks<IronSword> barracks;
 
+	private final ExecutorService executorService;
+
 	public SarraxSettlement(SarraxMountain mountain, SarraxVillage village) {
 		ironBarSmelter = new IronBarSmelter(mountain::getIronOre, 13);
 		blacksmith = new IronSwordBlacksmith(ironBarSmelter::getBar, 2);
@@ -79,6 +83,8 @@ public class SarraxSettlement implements Settlement {
 
 		jeweller = new SarraxJeweller(mountain::getRuby, mountain::getSapphire);
 		alchemist = new GrowthElixirAlchemist(village::getMilk, village::getHoney, 2);
+
+		executorService = Executors.newFixedThreadPool(11);
 	}
 
 	public synchronized  GrowthElixir getGrowthElixir() {
@@ -99,5 +105,20 @@ public class SarraxSettlement implements Settlement {
 
 	public void setAdultsProducer(Supplier<Adult> adultsProducer) {
 		barracks.setFirstProducer(adultsProducer);
+	}
+
+	@Override
+	public void run() {
+		executorService.execute(ironBarSmelter);
+		executorService.execute(blacksmith);
+		executorService.execute(barracks);
+		executorService.execute(ironBucketArtisan);
+		executorService.execute(woodenBucketArtisan);
+		executorService.execute(well);
+		executorService.execute(wheatMill);
+		executorService.execute(bakery);
+		executorService.execute(childHouse);
+		executorService.execute(jeweller);
+		executorService.execute(alchemist);
 	}
 }
