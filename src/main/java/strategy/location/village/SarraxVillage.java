@@ -13,6 +13,8 @@ import strategy.material.plant.Wheat;
 import strategy.material.wood.Mahogany;
 import strategy.product.fluid.Water;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.function.Supplier;
 
 public class SarraxVillage implements Village {
@@ -25,11 +27,14 @@ public class SarraxVillage implements Village {
 
 	private final Lumberjack<Mahogany> lumberjack;
 
+	private final ExecutorService executorService;
+
 	public SarraxVillage() {
 		cow = new Cow(4);
 		apiary = new Apiary(2);
 		farm = new WheatFarm(null, 12);
 		lumberjack = new MahoganyLumberjack(14);
+		executorService = Executors.newFixedThreadPool(4);
 	}
 
 	public void setWaterProducer(Supplier<Water> waterProducer) {
@@ -54,13 +59,9 @@ public class SarraxVillage implements Village {
 
 	@Override
 	public void run() {
-		Thread thread = new Thread(apiary);
-		thread.start();
-		thread = new Thread(cow);
-		thread.start();
-		thread = new Thread(farm);
-		thread.start();
-		thread = new Thread(lumberjack);
-		thread.start();
+		executorService.execute(apiary);
+		executorService.execute(cow);
+		executorService.execute(farm);
+		executorService.execute(lumberjack);
 	}
 }
