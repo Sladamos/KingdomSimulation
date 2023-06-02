@@ -32,7 +32,7 @@ public class SarraxCastle implements Castle {
 		queen = new SarraxQueen(settlement::getChild, settlement::getGrowthElixir);
 		king = createKing(settlement);
 		princess = new SarraxPrincess<>(king::getNecklacePresent, king::getRingPresent);
-		executorService = Executors.newFixedThreadPool(4);
+		executorService = Executors.newFixedThreadPool(3);
 	}
 
 	private SarraxKing createKing(SarraxSettlement settlement) {

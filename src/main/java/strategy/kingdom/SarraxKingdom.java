@@ -23,4 +23,12 @@ public class SarraxKingdom implements Kingdom {
         castle = new SarraxCastle(settlement);
         settlement.setAdultsProducer(castle::getAdult);
     }
+
+    @Override
+    public void run() {
+        mountain.run();
+        settlement.run();
+        village.run();
+        castle.run();
+    }
 }
