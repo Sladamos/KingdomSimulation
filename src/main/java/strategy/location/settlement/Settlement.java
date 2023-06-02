@@ -1,4 +1,6 @@
 package strategy.location.settlement;
 
-public interface Settlement {
+import strategy.location.Location;
+
+public interface Settlement extends Location {
 }

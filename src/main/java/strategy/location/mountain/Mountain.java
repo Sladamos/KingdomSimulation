@@ -1,4 +1,6 @@
 package strategy.location.mountain;
 
-public interface Mountain {
+import strategy.location.Location;
+
+public interface Mountain extends Location {
 }

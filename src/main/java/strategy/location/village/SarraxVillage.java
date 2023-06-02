@@ -15,7 +15,7 @@ import strategy.product.fluid.Water;
 
 import java.util.function.Supplier;
 
-public class SarraxVillage implements Village, Runnable {
+public class SarraxVillage implements Village {
 
 	private final Farm<Water, Wheat> farm;
 

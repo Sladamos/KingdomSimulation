@@ -1,4 +1,4 @@
 package strategy.location;
 
-public interface Location {
+public interface Location extends Runnable {
 }

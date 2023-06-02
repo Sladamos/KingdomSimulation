@@ -1,4 +1,6 @@
 package strategy.location.village;
 
-public interface Village {
+import strategy.location.Location;
+
+public interface Village extends Location {
 }
