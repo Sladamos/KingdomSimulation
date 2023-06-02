@@ -14,4 +14,12 @@ public class SarraxKing extends TwoToTwoProducer<PresentCraftsman<RubyNecklace, 
 	                  PresentCraftsman<SapphireRing, RingPresent> secondProducer) {
 		super(firstProducer, secondProducer);
 	}
+
+	public synchronized NecklacePresent getNecklacePresent() {
+		return getFirstItem();
+	}
+
+	public synchronized RingPresent getRingPresent() {
+		return getSecondItem();
+	}
 }

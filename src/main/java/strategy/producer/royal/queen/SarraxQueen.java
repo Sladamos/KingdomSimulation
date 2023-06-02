@@ -18,6 +18,10 @@ public class SarraxQueen extends TwoToOneProducer<Child, GrowthElixir, Adult> im
 				QUEEN_DURABILITY);
 	}
 
+	public synchronized Adult getAdult() {
+		return getItem();
+	}
+
 	@Override
 	protected Adult produceNewItem(Child material, GrowthElixir secondMaterial) {
 		return new Adult(10, 100);

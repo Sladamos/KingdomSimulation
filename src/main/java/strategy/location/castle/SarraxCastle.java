@@ -1,6 +1,7 @@
 package strategy.location.castle;
 
 import strategy.location.settlement.SarraxSettlement;
+import strategy.organism.human.Adult;
 import strategy.producer.building.craftsman.present.NecklacePresentCraftsman;
 import strategy.producer.building.craftsman.present.PresentCraftsman;
 import strategy.producer.building.craftsman.present.RingPresentCraftsman;
@@ -30,7 +31,7 @@ public class SarraxCastle implements Castle {
 	public SarraxCastle(SarraxSettlement settlement) {
 		queen = new SarraxQueen(settlement::getChild, settlement::getGrowthElixir);
 		king = createKing(settlement);
-		princess = new SarraxPrincess<>(king::getFirstItem, king::getSecondItem);
+		princess = new SarraxPrincess<>(king::getNecklacePresent, king::getRingPresent);
 		executorService = Executors.newFixedThreadPool(4);
 	}
 
@@ -40,6 +41,10 @@ public class SarraxCastle implements Castle {
 		RingPresentCraftsman<SapphireRing> ringPresentCraftsman =
 				new RingPresentCraftsman<>(settlement::getSapphireRing, 0);
 		return new SarraxKing(necklacePresentCraftsman, ringPresentCraftsman);
+	}
+
+	public synchronized Adult getAdult() {
+		return queen.getAdult();
 	}
 
 	@Override
