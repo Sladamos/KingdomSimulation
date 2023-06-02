@@ -1,21 +1,26 @@
 package strategy.producer;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class TwoToTwoProducer<T extends OneItemProducer<V>, U extends OneItemProducer<W>, V, W> implements Producer {
 
 	private final T firstProducer;
 
 	private final U secondProducer;
 
+	private final ExecutorService service;
+
 	public TwoToTwoProducer(T firstProducer, U secondProducer) {
 		this.firstProducer = firstProducer;
 		this.secondProducer = secondProducer;
+		service = Executors.newFixedThreadPool(2);
 	}
 
 	@Override
 	public void run() {
-		Thread thread = new Thread(firstProducer);
-		thread.start();
-		secondProducer.run();
+		service.execute(firstProducer);
+		service.execute(secondProducer);
 	}
 
 	@Override
