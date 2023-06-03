@@ -30,7 +30,7 @@ public class SimpleBattle implements Battle {
 
     private void firstAttack() {
         try {
-            Thread.sleep(5000);
+            Thread.sleep(10000);
             System.out.println("First kingdom attacked");
             firstKingdom.attack(secondKingdom);
         } catch (ArmyDestroyedException ignored) {
@@ -44,7 +44,7 @@ public class SimpleBattle implements Battle {
 
     private void secondAttack() {
         try {
-            Thread.sleep(5000);
+            Thread.sleep(10000);
             System.out.println("Second kingdom attacked");
             secondKingdom.attack(firstKingdom);
         } catch (ArmyDestroyedException ignored) {

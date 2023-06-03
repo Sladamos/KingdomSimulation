@@ -1,5 +1,6 @@
 package strategy.location.settlement;
 
+import strategy.military.infantry.Warrior;
 import strategy.organism.human.Child;
 import strategy.producer.building.alchemist.Alchemist;
 import strategy.producer.building.alchemist.GrowthElixirAlchemist;
@@ -99,6 +100,10 @@ public class SarraxSettlement implements Settlement {
 
 	public Child getChild() {
 		return childHouse.getHuman();
+	}
+
+	public Warrior getWarrior() {
+		return barracks.getMilitaryUnit();
 	}
 
 	public RubyNecklace getRubyNecklace() {

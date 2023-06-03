@@ -1,8 +1,14 @@
 package strategy.military;
 
-import java.util.Collection;
+import strategy.product.statistic.Happiness;
 
-public interface General {
+import java.util.Collection;
+import java.util.function.Consumer;
+
+public interface General extends Consumer<Happiness> {
     Collection<Integer> getArmyDamage();
     void receiveDamage(Collection<Integer> damages);
+    void runHappinessConusmer();
+    void runUnitsConusmer();
+    void terminate();
 }

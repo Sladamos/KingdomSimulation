@@ -16,6 +16,10 @@ public class SarraxPrincess<T extends Present, S extends Present> extends TwoToO
         super(firstProducer, secondProducer, 0, PRINCESS_PRODUCING_SPEED, PRINCESS_DURABILITY);
     }
 
+    public synchronized Happiness getHappiness() {
+        return getItem();
+    }
+
     @Override
     protected Happiness produceNewItem(T material, S secondMaterial) {
         return new Happiness();

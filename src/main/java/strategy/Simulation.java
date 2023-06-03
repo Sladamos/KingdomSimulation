@@ -8,8 +8,8 @@ import strategy.kingdom.SarraxKingdom;
 public class Simulation {
 
     public static void main(String[] args) {
-        Kingdom strongerKingdom = createKingdom(5000);
-        Kingdom weakerKingdom = createKingdom(2500);
+        Kingdom strongerKingdom = createKingdom(50000);
+        Kingdom weakerKingdom = createKingdom(25000);
         Battle battle = new SimpleBattle(strongerKingdom, weakerKingdom);
         Thread thread = new Thread(battle);
         thread.start();

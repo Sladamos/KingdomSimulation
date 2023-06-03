@@ -38,8 +38,8 @@ public class SarraxCastle implements Castle {
 		queen = new SarraxQueen(settlement::getChild, settlement::getGrowthElixir);
 		king = createKing(settlement);
 		princess = new SarraxPrincess<>(king::getNecklacePresent, king::getRingPresent);
-		warriorsGeneral = new HumanInfantryGeneral(50, 10, 3);
-		executorService = Executors.newFixedThreadPool(3);
+		warriorsGeneral = new HumanInfantryGeneral(princess::getHappiness, settlement::getWarrior, 50, 25, 3);
+		executorService = Executors.newFixedThreadPool(5);
 	}
 
 	private SarraxKing createKing(SarraxSettlement settlement) {
@@ -59,6 +59,8 @@ public class SarraxCastle implements Castle {
 		executorService.execute(queen);
 		executorService.execute(king);
 		executorService.execute(princess);
+		executorService.execute(warriorsGeneral::runUnitsConusmer);
+		executorService.execute(warriorsGeneral::runHappinessConusmer);
 	}
 
 	@Override
@@ -66,6 +68,7 @@ public class SarraxCastle implements Castle {
 		queen.terminate();
 		king.terminate();
 		princess.terminate();
+		warriorsGeneral.terminate();
 		executorService.shutdownNow();
 	}
 

@@ -24,6 +24,6 @@ public class WarriorBarracks<T extends Sword> extends Barracks<Adult, T, Warrior
 
 	@Override
 	protected Warrior produceNewItem() {
-		return new Warrior(10, 5);
+		return new Warrior(15, 5);
 	}
 }
