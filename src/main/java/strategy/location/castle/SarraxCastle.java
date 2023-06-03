@@ -1,6 +1,8 @@
 package strategy.location.castle;
 
 import strategy.location.settlement.SarraxSettlement;
+import strategy.military.infantry.HumanInfantryGeneral;
+import strategy.military.infantry.InfantryGeneral;
 import strategy.organism.human.Adult;
 import strategy.producer.building.craftsman.present.NecklacePresentCraftsman;
 import strategy.producer.building.craftsman.present.PresentCraftsman;
@@ -15,6 +17,7 @@ import strategy.product.jewellery.ring.SapphireRing;
 import strategy.product.present.NecklacePresent;
 import strategy.product.present.RingPresent;
 
+import java.util.Collection;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -27,12 +30,15 @@ public class SarraxCastle implements Castle {
 
 	private final SarraxPrincess<NecklacePresent, RingPresent> princess;
 
+	private final InfantryGeneral warriorsGeneral;
+
 	private final ExecutorService executorService;
 
 	public SarraxCastle(SarraxSettlement settlement) {
 		queen = new SarraxQueen(settlement::getChild, settlement::getGrowthElixir);
 		king = createKing(settlement);
 		princess = new SarraxPrincess<>(king::getNecklacePresent, king::getRingPresent);
+		warriorsGeneral = new HumanInfantryGeneral(50, 10, 3);
 		executorService = Executors.newFixedThreadPool(3);
 	}
 
@@ -65,18 +71,12 @@ public class SarraxCastle implements Castle {
 
 	@Override
 	public void attack(Castle castle) {
-		//int totalDamage = warriorsGeneral.getArmyDamage();
-		//castle.receiveDamage(this, totalDamage);
+		Collection<Integer> totalDamage = warriorsGeneral.getArmyDamage();
+		castle.receiveDamage(totalDamage);
 	}
 
 	@Override
-	public void receiveDamage(int damage) {
-		//warriorsGeneral.receiveDamage(damage);
-	}
-
-	@Override
-	public boolean canFight() {
-		//return warriorsGeneral.hasArmy();
-		return false;
+	public void receiveDamage(Collection<Integer> damage) {
+		warriorsGeneral.receiveDamage(damage);
 	}
 }

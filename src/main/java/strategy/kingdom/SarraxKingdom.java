@@ -46,9 +46,4 @@ public class SarraxKingdom implements Kingdom {
     public void attack(Kingdom kingdom) {
         castle.attack(kingdom.getCastle());
     }
-
-    @Override
-    public boolean canFight() {
-        return castle.canFight();
-    }
 }

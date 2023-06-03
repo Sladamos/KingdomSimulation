@@ -1,6 +1,7 @@
 package strategy.battle;
 
 import strategy.kingdom.Kingdom;
+import strategy.military.ArmyDestroyedException;
 
 public class SimpleBattle implements Battle {
 
@@ -29,13 +30,12 @@ public class SimpleBattle implements Battle {
 
     private void firstAttack() {
         try {
-            Thread.sleep(15000);
-            firstKingdom.attack(secondKingdom);
+            Thread.sleep(5000);
             System.out.println("First kingdom attacked");
-            if(!secondKingdom.canFight()) {
-                System.out.println("First kingdom won the battle");
-                areFighting = false;
-            }
+            firstKingdom.attack(secondKingdom);
+        } catch (ArmyDestroyedException ignored) {
+            System.out.println("First kingdom won the battle");
+            areFighting = false;
         } catch (Exception ignored) {
             areFighting = false;
         }
@@ -44,13 +44,12 @@ public class SimpleBattle implements Battle {
 
     private void secondAttack() {
         try {
-            Thread.sleep(15000);
-            secondKingdom.attack(firstKingdom);
+            Thread.sleep(5000);
             System.out.println("Second kingdom attacked");
-            if (!firstKingdom.canFight()) {
-                System.out.println("Second kingdom won the battle");
-                areFighting = false;
-            }
+            secondKingdom.attack(firstKingdom);
+        } catch (ArmyDestroyedException ignored) {
+            System.out.println("Second kingdom won the battle");
+            areFighting = false;
         } catch (Exception ignored) {
             areFighting = false;
         }

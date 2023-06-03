@@ -12,7 +12,8 @@ public abstract class HumanInfantryUnit extends Human implements InfantryUnit  {
 
     private static final int HUMAN_MAX_HITPOINTS = 100;
 
-    private final int damage;
+    @Getter(onMethod_={@Synchronized})
+    private final Integer damage;
 
     private final int defense;
 
