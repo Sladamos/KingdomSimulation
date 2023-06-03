@@ -85,6 +85,7 @@ public class HumanInfantryGeneral implements InfantryGeneral {
                 }
             }
         }
+        System.out.println("Get attacked, infantry left: " + army.size());
         if(!hasArmy())
             throw new ArmyDestroyedException();
     }
