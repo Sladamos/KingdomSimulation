@@ -27,33 +27,33 @@ public class SimpleBattle implements Battle {
         }
     }
 
-    private void secondAttack() {
-        try {
-            Thread.sleep(15000);
-            System.out.println("Second attacks");
-            secondKingdom.attack(firstKingdom);
-            if (!firstKingdom.canFight()) {
-                System.out.println("Second kingdom won the battle");
-                areFighting = false;
-            }
-        } catch (InterruptedException ignored) {
-            areFighting = false;
-        }
-    }
-
     private void firstAttack() {
         try {
             Thread.sleep(15000);
-            System.out.println("First attacks");
             firstKingdom.attack(secondKingdom);
+            System.out.println("First kingdom attacked");
             if(!secondKingdom.canFight()) {
                 System.out.println("First kingdom won the battle");
                 areFighting = false;
             }
-        } catch (InterruptedException ignored) {
+        } catch (Exception ignored) {
             areFighting = false;
         }
 
+    }
+
+    private void secondAttack() {
+        try {
+            Thread.sleep(15000);
+            secondKingdom.attack(firstKingdom);
+            System.out.println("Second kingdom attacked");
+            if (!firstKingdom.canFight()) {
+                System.out.println("Second kingdom won the battle");
+                areFighting = false;
+            }
+        } catch (Exception ignored) {
+            areFighting = false;
+        }
     }
 
 }
