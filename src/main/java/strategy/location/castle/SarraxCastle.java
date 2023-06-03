@@ -65,6 +65,18 @@ public class SarraxCastle implements Castle {
 
 	@Override
 	public void attack(Castle castle) {
+		//int totalDamage = warriorsGeneral.getArmyDamage();
+		//castle.receiveDamage(this, totalDamage);
+	}
 
+	@Override
+	public void receiveDamage(int damage) {
+		//warriorsGeneral.receiveDamage(damage);
+	}
+
+	@Override
+	public boolean canFight() {
+		//return warriorsGeneral.hasArmy();
+		return false;
 	}
 }
