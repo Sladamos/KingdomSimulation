@@ -87,6 +87,18 @@ public abstract class OneToOneProducer<T, U> implements OneItemProducer<U> {
 		notifyAll();
 	}
 
+	@Override
+	public synchronized U getItem() {
+		waitForItemInStorage();
+		if(isDestroyed()) {
+			throw new ProducerDestroyedException();
+		}
+		if(!isWorking()) {
+			throw new ProducerTerminatedException();
+		}
+		return storage.pop();
+	}
+
 	public synchronized boolean isWorking() {
 		return isWorking;
 	}
@@ -98,18 +110,6 @@ public abstract class OneToOneProducer<T, U> implements OneItemProducer<U> {
 
 	public synchronized int getNumberOfItemsInStorage() {
 		return storage.size();
-	}
-
-	@Override
-	public synchronized U getItem() {
-		waitForItemInStorage();
-		if(isDestroyed()) {
-			throw new ProducerDestroyedException();
-		}
-		if(!isWorking()) {
-			throw new ProducerTerminatedException();
-		}
-		return storage.pop();
 	}
 
 	protected abstract U produceNewItem(T material);

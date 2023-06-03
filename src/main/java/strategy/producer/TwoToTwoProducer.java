@@ -17,14 +17,6 @@ public abstract class TwoToTwoProducer<T extends OneItemProducer<V>, U extends O
 		executorService = Executors.newFixedThreadPool(2);
 	}
 
-	public synchronized V getFirstItem() {
-		return firstProducer.getItem();
-	}
-
-	public synchronized W getSecondItem() {
-		return secondProducer.getItem();
-	}
-
 	@Override
 	public void run() {
 		executorService.execute(firstProducer);
@@ -56,6 +48,14 @@ public abstract class TwoToTwoProducer<T extends OneItemProducer<V>, U extends O
 		firstProducer.terminate();
 		secondProducer.terminate();
 		executorService.shutdownNow();
+	}
+
+	public synchronized V getFirstItem() {
+		return firstProducer.getItem();
+	}
+
+	public synchronized W getSecondItem() {
+		return secondProducer.getItem();
 	}
 
 	private void dealDamageIfOneProducerIsDestroyed(int damage) {

@@ -79,6 +79,18 @@ public abstract class ZeroToOneProducer<T> implements OneItemProducer<T> {
 		notifyAll();
 	}
 
+	@Override
+	public synchronized T getItem() {
+		waitForItemInStorage();
+		if (isDestroyed()) {
+			throw new ProducerDestroyedException();
+		}
+		if (!isWorking()) {
+			throw new ProducerTerminatedException();
+		}
+		return storage.pop();
+	}
+
 	public synchronized boolean isWorking() {
 		return isWorking;
 	}
@@ -90,18 +102,6 @@ public abstract class ZeroToOneProducer<T> implements OneItemProducer<T> {
 
 	public synchronized int getNumberOfItemsInStorage() {
 		return storage.size();
-	}
-
-	@Override
-	public synchronized T getItem() {
-		waitForItemInStorage();
-		if (isDestroyed()) {
-			throw new ProducerDestroyedException();
-		}
-		if (!isWorking()) {
-			throw new ProducerTerminatedException();
-		}
-		return storage.pop();
 	}
 
 	protected abstract T produceNewItem();
