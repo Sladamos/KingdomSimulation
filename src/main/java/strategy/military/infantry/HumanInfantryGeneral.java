@@ -23,16 +23,12 @@ public class HumanInfantryGeneral implements InfantryGeneral {
 
     private boolean isConsuming;
 
-    public HumanInfantryGeneral(Supplier<Happiness> happinessSupplier, Supplier<InfantryUnit> infantryUnitSupplier, int numberOfWarriors, int warriorDamage, int warriorDefense) {
+    public HumanInfantryGeneral(Supplier<Happiness> happinessSupplier, Supplier<InfantryUnit> infantryUnitSupplier) {
         this.happinessSupplier = happinessSupplier;
         this.infantryUnitSupplier = infantryUnitSupplier;
         isConsuming = false;
         damageModificator = HAPPINESS_DAMAGE_MODIFICATOR;
         army = new LinkedList<>();
-        while(numberOfWarriors > 0) {
-            army.add(new Warrior(warriorDamage, warriorDefense));
-            numberOfWarriors--;
-        }
     }
 
     @Override
@@ -97,6 +93,11 @@ public class HumanInfantryGeneral implements InfantryGeneral {
     public synchronized void accept(InfantryUnit infantryUnit) {
         System.out.println("Infantry unit consumed");
         army.add(infantryUnit);
+    }
+
+    @Override
+    public synchronized void addInfantryUnits(Collection<InfantryUnit> infantryUnits) {
+        army.addAll(infantryUnits);
     }
 
     @Override

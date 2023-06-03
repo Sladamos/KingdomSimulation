@@ -1,10 +1,14 @@
 package strategy.kingdom;
 
 import lombok.Getter;
+import strategy.location.castle.Castle;
 import strategy.location.castle.SarraxCastle;
 import strategy.location.mountain.SarraxMountain;
 import strategy.location.settlement.SarraxSettlement;
 import strategy.location.village.SarraxVillage;
+import strategy.military.infantry.InfantryUnit;
+
+import java.util.Collection;
 
 public class SarraxKingdom implements Kingdom {
 
@@ -46,4 +50,10 @@ public class SarraxKingdom implements Kingdom {
     public void attack(Kingdom kingdom) {
         castle.attack(kingdom.getCastle());
     }
+
+    @Override
+    public void addInfantry(Collection<InfantryUnit> infantryUnits) {
+        castle.addInfantry(infantryUnits);
+    }
+
 }

@@ -3,14 +3,12 @@ package strategy.location.castle;
 import strategy.location.settlement.SarraxSettlement;
 import strategy.military.infantry.HumanInfantryGeneral;
 import strategy.military.infantry.InfantryGeneral;
+import strategy.military.infantry.InfantryUnit;
 import strategy.organism.human.Adult;
 import strategy.producer.building.craftsman.present.NecklacePresentCraftsman;
-import strategy.producer.building.craftsman.present.PresentCraftsman;
 import strategy.producer.building.craftsman.present.RingPresentCraftsman;
-import strategy.producer.royal.king.King;
 import strategy.producer.royal.king.SarraxKing;
 import strategy.producer.royal.princess.SarraxPrincess;
-import strategy.producer.royal.queen.Queen;
 import strategy.producer.royal.queen.SarraxQueen;
 import strategy.product.jewellery.necklace.RubyNecklace;
 import strategy.product.jewellery.ring.SapphireRing;
@@ -20,7 +18,6 @@ import strategy.product.present.RingPresent;
 import java.util.Collection;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 public class SarraxCastle implements Castle {
 
@@ -38,7 +35,7 @@ public class SarraxCastle implements Castle {
 		queen = new SarraxQueen(settlement::getChild, settlement::getGrowthElixir);
 		king = createKing(settlement);
 		princess = new SarraxPrincess<>(king::getNecklacePresent, king::getRingPresent);
-		warriorsGeneral = new HumanInfantryGeneral(princess::getHappiness, settlement::getWarrior, 50, 25, 3);
+		warriorsGeneral = new HumanInfantryGeneral(princess::getHappiness, settlement::getWarrior);
 		executorService = Executors.newFixedThreadPool(5);
 	}
 
@@ -81,5 +78,10 @@ public class SarraxCastle implements Castle {
 	@Override
 	public void receiveDamage(Collection<Integer> damage) {
 		warriorsGeneral.receiveDamage(damage);
+	}
+
+	@Override
+	public void addInfantry(Collection<InfantryUnit> infantryUnits) {
+		warriorsGeneral.addInfantryUnits(infantryUnits);
 	}
 }
