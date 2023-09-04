@@ -25,42 +25,26 @@ public class SimpleBattle implements Battle {
     public void run() {
         areKingdomsFighting = true;
         while(areKingdomsFighting) {
-            firstKingdomAttacks();
+            simulateAttack(firstKingdom, secondKingdom);
             if(areKingdomsFighting) {
-                secondKingdomAttacks();
+                simulateAttack(secondKingdom, firstKingdom);
             }
         }
     }
 
-    private void firstKingdomAttacks() {
+    private void simulateAttack(Kingdom attacker, Kingdom defender) {
         try {
-            Thread.sleep(10000);
-            String messageAboutAttack = "First kingdom attacked";
+            long attackTime = attacker.getAttackTime();
+            Thread.sleep(attackTime);
+            String messageAboutAttack = attacker + " attacked";
             messagesReceiver.receiveMessage(messageAboutAttack);
-            firstKingdom.attack(secondKingdom);
+            attacker.attack(defender);
         } catch (ArmyDestroyedException ignored) {
-            String messageAboutWon = "First kingdom won the battle";
-            messagesReceiver.receiveMessage(messageAboutWon);
-            areKingdomsFighting = false;
-        } catch (Exception ignored) {
-            areKingdomsFighting = false;
-        }
-
-    }
-
-    private void secondKingdomAttacks() {
-        try {
-            Thread.sleep(10000);
-            String messageAboutAttack = "Second kingdom attacked";
-            messagesReceiver.receiveMessage(messageAboutAttack);
-            secondKingdom.attack(firstKingdom);
-        } catch (ArmyDestroyedException ignored) {
-            String messageAboutWon = "Second kingdom won the battle";
+            String messageAboutWon = attacker + " won the battle";
             messagesReceiver.receiveMessage(messageAboutWon);
             areKingdomsFighting = false;
         } catch (Exception ignored) {
             areKingdomsFighting = false;
         }
     }
-
 }

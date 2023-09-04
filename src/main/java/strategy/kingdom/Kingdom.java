@@ -10,4 +10,6 @@ public interface Kingdom extends Runnable {
     void attack(Kingdom kingdom);
     Castle getCastle();
     void addInfantry(Collection<InfantryUnit> infantryUnits);
+
+	long getAttackTime();
 }

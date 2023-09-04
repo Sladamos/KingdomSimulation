@@ -36,20 +36,20 @@ public class Simulation {
     }
 
     private static Kingdom createStrongerKingdom() {
-        Kingdom strongerKingdom = createKingdom(50000);
+        Kingdom strongerKingdom = createKingdom(50000, "Stronger");
         Collection<InfantryUnit> strongerWarriors = createWarriors(40, 25, 5);
         strongerKingdom.addInfantry(strongerWarriors);
         return strongerKingdom;
     }
     private static Kingdom createWeakerKingdom() {
-        Kingdom weakerKingdom = createKingdom(25000);
+        Kingdom weakerKingdom = createKingdom(25000, "Weaker");
         Collection<InfantryUnit> weakerWarriors = createWarriors(35, 20, 7);
         weakerKingdom.addInfantry(weakerWarriors);
         return weakerKingdom;
     }
 
-    private static Kingdom createKingdom(long sleep) {
-        Kingdom kingdom = new SarraxKingdom();
+    private static Kingdom createKingdom(long sleep, String kingdomId) {
+        Kingdom kingdom = new SarraxKingdom(kingdomId);
         kingdom.run();
         try {
             Thread.sleep(sleep);

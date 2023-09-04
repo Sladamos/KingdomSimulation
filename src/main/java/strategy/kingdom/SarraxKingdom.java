@@ -21,13 +21,19 @@ public class SarraxKingdom implements Kingdom {
     @Getter
     private final SarraxCastle castle;
 
-    public SarraxKingdom() {
+    private final long attackTime;
+
+    private final String kingdomId;
+    //TODO: change kingdomId to JSON config
+    public SarraxKingdom(String kingdomId) {
         mountain = new SarraxMountain();
         village = new SarraxVillage();
         settlement = new SarraxSettlement(mountain, village);
         village.setWaterProducer(settlement::getWater);
         castle = new SarraxCastle(settlement);
         settlement.setAdultsProducer(castle::getAdult);
+        this.kingdomId = kingdomId;
+        this.attackTime = 10000; //TODO get Value from json config
     }
 
     @Override
@@ -56,4 +62,13 @@ public class SarraxKingdom implements Kingdom {
         castle.addInfantry(infantryUnits);
     }
 
+    @Override
+    public long getAttackTime() {
+        return attackTime;
+    }
+
+    @Override
+    public String toString() {
+        return kingdomId + " kingdom";
+    }
 }
