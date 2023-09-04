@@ -1,7 +1,6 @@
 package strategy.kingdom;
 
 import lombok.Getter;
-import strategy.location.castle.Castle;
 import strategy.location.castle.SarraxCastle;
 import strategy.location.mountain.SarraxMountain;
 import strategy.location.settlement.SarraxSettlement;
