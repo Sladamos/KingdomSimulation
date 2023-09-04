@@ -4,6 +4,8 @@ import strategy.battle.Battle;
 import strategy.battle.SimpleBattle;
 import strategy.kingdom.Kingdom;
 import strategy.kingdom.SarraxKingdom;
+import strategy.message.receiver.ConsoleMessagesReceiver;
+import strategy.message.receiver.MessagesReceiver;
 import strategy.military.infantry.InfantryUnit;
 import strategy.military.infantry.Warrior;
 
@@ -22,7 +24,8 @@ public class Simulation {
     }
 
     private static void simulateBattle(Kingdom strongerKingdom, Kingdom weakerKingdom) {
-        Battle battle = new SimpleBattle(strongerKingdom, weakerKingdom);
+        MessagesReceiver messagesReceiver = new ConsoleMessagesReceiver();
+        Battle battle = new SimpleBattle(strongerKingdom, weakerKingdom, messagesReceiver);
         Thread thread = new Thread(battle);
         thread.start();
         try {

@@ -1,6 +1,7 @@
 package strategy.battle;
 
 import strategy.kingdom.Kingdom;
+import strategy.message.receiver.MessagesReceiver;
 import strategy.military.ArmyDestroyedException;
 
 public class SimpleBattle implements Battle {
@@ -9,49 +10,56 @@ public class SimpleBattle implements Battle {
 
     private final Kingdom secondKingdom;
 
-    private boolean areFighting;
+    private final MessagesReceiver messagesReceiver;
 
-    public SimpleBattle(Kingdom firstKingdom, Kingdom secondKingdom) {
+    private boolean areKingdomsFighting;
+
+    public SimpleBattle(Kingdom firstKingdom, Kingdom secondKingdom, MessagesReceiver messagesReceiver) {
         this.firstKingdom = firstKingdom;
         this.secondKingdom = secondKingdom;
-        areFighting = false;
+        this.messagesReceiver = messagesReceiver;
+        areKingdomsFighting = false;
     }
 
     @Override
     public void run() {
-        areFighting = true;
-        while(areFighting) {
-            firstAttack();
-            if(areFighting) {
-                secondAttack();
+        areKingdomsFighting = true;
+        while(areKingdomsFighting) {
+            firstKingdomAttacks();
+            if(areKingdomsFighting) {
+                secondKingdomAttacks();
             }
         }
     }
 
-    private void firstAttack() {
+    private void firstKingdomAttacks() {
         try {
             Thread.sleep(10000);
-            System.out.println("First kingdom attacked");
+            String messageAboutAttack = "First kingdom attacked";
+            messagesReceiver.receiveMessage(messageAboutAttack);
             firstKingdom.attack(secondKingdom);
         } catch (ArmyDestroyedException ignored) {
-            System.out.println("First kingdom won the battle");
-            areFighting = false;
+            String messageAboutWon = "First kingdom won the battle";
+            messagesReceiver.receiveMessage(messageAboutWon);
+            areKingdomsFighting = false;
         } catch (Exception ignored) {
-            areFighting = false;
+            areKingdomsFighting = false;
         }
 
     }
 
-    private void secondAttack() {
+    private void secondKingdomAttacks() {
         try {
             Thread.sleep(10000);
-            System.out.println("Second kingdom attacked");
+            String messageAboutAttack = "Second kingdom attacked";
+            messagesReceiver.receiveMessage(messageAboutAttack);
             secondKingdom.attack(firstKingdom);
         } catch (ArmyDestroyedException ignored) {
-            System.out.println("Second kingdom won the battle");
-            areFighting = false;
+            String messageAboutWon = "Second kingdom won the battle";
+            messagesReceiver.receiveMessage(messageAboutWon);
+            areKingdomsFighting = false;
         } catch (Exception ignored) {
-            areFighting = false;
+            areKingdomsFighting = false;
         }
     }
 
