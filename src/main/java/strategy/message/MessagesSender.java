@@ -1,4 +1,5 @@
 package strategy.message;
 
-public class MessagesSender {
+public interface MessagesSender {
+	Message sendMessage();
 }

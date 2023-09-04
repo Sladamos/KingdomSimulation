@@ -1,5 +1,7 @@
 package strategy.message.receiver;
 
+import strategy.message.Message;
+
 public interface MessagesReceiver {
-	void receiveMessage(String message);
+	void receiveMessage(Message message);
 }
