@@ -36,9 +36,7 @@ public class Simulation {
         SimulationConfigParser configParser = new SimulationConfigParser();
         var loader = new JsonLoaderImpl();
         JSON json = loader.loadJsonFromFile("config.json");
-
-        // Parse the JSON content into a JSONObject
-        //configParser.createSimulationConfig(jsonObject);
+        configParser.createSimulationConfig(json);
 //
 //        Kingdom strongerKingdom = createStrongerKingdom();
 //        Kingdom weakerKingdom = createWeakerKingdom();
