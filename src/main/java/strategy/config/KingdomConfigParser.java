@@ -27,7 +27,7 @@ public class KingdomConfigParser {
 			return new KingdomConfig(kingdomId, attackTime, kingdomType);
 		}
 		catch (Exception err) {
-			throw new AppError("Something went wrong on creating kingdom config.");
+			throw new AppError("Something went wrong on creating kingdom config. " + err.getMessage());
 		}
 	}
 
