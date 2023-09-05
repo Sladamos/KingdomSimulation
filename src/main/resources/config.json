@@ -1,12 +1,12 @@
 {
   "first_kingdom": {
-    "id": "stronger",
-    "castle_type": "Sarrax",
+    "id": "Stronger",
+    "kingdom_type": "Sarrax",
     "attack_time": 10
   },
   "second_kingdom": {
-    "id": "weaker",
-    "castle_type": "Sarrax",
+    "id": "Weaker",
+    "kingdom_type": "Sarrax",
     "attack_time": 7
   }
 }

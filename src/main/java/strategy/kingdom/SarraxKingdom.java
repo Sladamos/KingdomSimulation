@@ -18,7 +18,7 @@ public class SarraxKingdom implements Kingdom {
     private final SarraxVillage village;
 
     @Getter
-    private final SarraxCastle castle;
+    private final SarraxCastle castle; //TODO: switch to Castle when Magazines added
 
     private final long attackTime;
 

@@ -22,6 +22,7 @@ public class Simulation {
     one button -> start battle
     mid panel -> battle results
     button to clear panel
+    layer for error handling -> both for console and gui
      */
     public static void main(String[] args) {
         Kingdom strongerKingdom = createStrongerKingdom();
