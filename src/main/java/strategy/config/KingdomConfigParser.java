@@ -39,6 +39,9 @@ public class KingdomConfigParser implements ConfigParser<KingdomConfig> {
 	}
 
 	private KingdomTypes getKingdomType(String strKingdomType) {
+		if(!kingdomTypes.containsKey(strKingdomType)) {
+			throw new AppError("Incorrect kingdom type!");
+		}
 		return kingdomTypes.get(strKingdomType);
 	}
 }
