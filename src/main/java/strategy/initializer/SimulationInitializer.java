@@ -11,6 +11,7 @@ import strategy.message.receiver.ConsoleMessagesReceiver;
 import strategy.message.receiver.MessagesReceiver;
 
 public class SimulationInitializer {
+
     public void initializeSimulation() {
         SimulationConfig simulationConfig = createSimulationConfig();
         KingdomInitializer kingdomInitializer = new KingdomInitializer();
