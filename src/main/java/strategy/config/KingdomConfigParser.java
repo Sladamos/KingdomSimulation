@@ -1,6 +1,7 @@
 package strategy.config;
 
 import org.json.JSONObject;
+import strategy.AppError;
 import strategy.json.JSON;
 import strategy.kingdom.KingdomConfig;
 import strategy.kingdom.KingdomTypes;
@@ -18,11 +19,16 @@ public class KingdomConfigParser {
 	}
 
 	public KingdomConfig createKingdomConfig(JSON json) {
-		String kingdomId = json.getString("id");
-		long attackTime = json.getLong("attack_time") * 1000;
-		String kingdomTypeStr = json.getString("kingdom_type");
-		KingdomTypes kingdomType = getKingdomType(kingdomTypeStr);
-		return new KingdomConfig(kingdomId, attackTime, kingdomType);
+		try {
+			String kingdomId = json.getString("id");
+			long attackTime = json.getLong("attack_time") * 1000;
+			String kingdomTypeStr = json.getString("kingdom_type");
+			KingdomTypes kingdomType = getKingdomType(kingdomTypeStr);
+			return new KingdomConfig(kingdomId, attackTime, kingdomType);
+		}
+		catch (Exception err) {
+			throw new AppError("Something went wrong on creating kingdom config.");
+		}
 	}
 
 	private KingdomTypes getKingdomType(String strKingdomType) {
