@@ -2,11 +2,21 @@
   "first_kingdom": {
     "id": "Stronger",
     "kingdom_type": "Sarrax",
-    "attack_time": 10
+    "attack_time": 10,
+    "warriors": {
+      "number_of_warriors": 40,
+      "max_damage": 25,
+      "max_defense": 5
+    }
   },
   "second_kingdom": {
     "id": "Weaker",
     "kingdom_type": "Sarrax",
-    "attack_time": 7
+    "attack_time": 7,
+    "warriors": {
+      "number_of_warriors": 35,
+      "max_damage": 20,
+      "max_defense": 7
+    }
   }
 }

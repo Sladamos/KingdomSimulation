@@ -1,8 +1,8 @@
 package strategy.json;
 
 import org.json.JSONObject;
+import strategy.AppError;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
@@ -16,10 +16,10 @@ public class JsonLoaderImpl implements JsonLoader {
                 JSONObject jsonObject = new JSONObject(jsonContent);
                 return new JSON(jsonObject);
             } else {
-                throw new IOException("Config file not found: " + fileName);
+                throw new AppError("Config file not found: " + fileName);
             }
-        } catch (IOException e) {
-            throw new RuntimeException("Error loading config file: " + e.getMessage(), e);
+        } catch (Exception e) {
+            throw new AppError("Error loading config file: " + e.getMessage());
         }
     }
 }

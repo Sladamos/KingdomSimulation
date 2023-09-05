@@ -1,6 +1,5 @@
 package strategy;
 
-import org.json.JSONObject;
 import strategy.battle.Battle;
 import strategy.battle.SimpleBattle;
 import strategy.config.SimulationConfigParser;
@@ -11,17 +10,19 @@ import strategy.kingdom.KingdomConfig;
 import strategy.kingdom.SarraxKingdom;
 import strategy.message.receiver.ConsoleMessagesReceiver;
 import strategy.message.receiver.MessagesReceiver;
+import strategy.military.InitMilitaryConfig;
 import strategy.military.infantry.InfantryUnit;
 import strategy.military.infantry.Warrior;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Simulation {
+
+    private static SimulationConfig simulationConfig;
 
     //TODO gui:
     /*
@@ -33,16 +34,19 @@ public class Simulation {
     layer for error handling -> both for console and gui
      */
     public static void main(String[] args) {
+        simulationConfig = createSimulationConfig();
+        Kingdom firstKingdom = createKingdom(50000, simulationConfig.getFirstKingdomConfig());
+        Kingdom weakerKingdom = createKingdom(25000, simulationConfig.getSecondKingdomConfig());
+        simulateBattle(firstKingdom, weakerKingdom);
+        firstKingdom.terminate();
+        weakerKingdom.terminate();
+    }
+
+    private static SimulationConfig createSimulationConfig() {
         SimulationConfigParser configParser = new SimulationConfigParser();
         var loader = new JsonLoaderImpl();
         JSON json = loader.loadJsonFromFile("config.json");
-        configParser.createSimulationConfig(json);
-//
-//        Kingdom strongerKingdom = createStrongerKingdom();
-//        Kingdom weakerKingdom = createWeakerKingdom();
-//        simulateBattle(strongerKingdom, weakerKingdom);
-//        strongerKingdom.terminate();
-//        weakerKingdom.terminate();
+        return configParser.createConfig(json);
     }
 
     private static void simulateBattle(Kingdom strongerKingdom, Kingdom weakerKingdom) {
@@ -56,22 +60,10 @@ public class Simulation {
             throw new RuntimeException(e);
         }
     }
-
-    private static Kingdom createStrongerKingdom() {
-        Kingdom strongerKingdom = createKingdom(50000, null);
-        Collection<InfantryUnit> strongerWarriors = createWarriors(40, 25, 5);
-        strongerKingdom.addInfantry(strongerWarriors);
-        return strongerKingdom;
-    }
-    private static Kingdom createWeakerKingdom() {
-        Kingdom weakerKingdom = createKingdom(25000, null);
-        Collection<InfantryUnit> weakerWarriors = createWarriors(35, 20, 7);
-        weakerKingdom.addInfantry(weakerWarriors);
-        return weakerKingdom;
-    }
-
     private static Kingdom createKingdom(long sleep, KingdomConfig kingdomConfig) {
         Kingdom kingdom = new SarraxKingdom(kingdomConfig);
+        InitMilitaryConfig militaryConfig = kingdomConfig.getWarriorsConfig();
+        addWarriorsToKingdom(kingdom, militaryConfig);
         kingdom.run();
         try {
             Thread.sleep(sleep);
@@ -80,15 +72,22 @@ public class Simulation {
         return kingdom;
     }
 
+    private static void addWarriorsToKingdom(Kingdom kingdom, InitMilitaryConfig warriorsConfig) {
+        int numberOfUnits = warriorsConfig.getNumberOfUnits();
+        int maxDamage = warriorsConfig.getMaxDamage();
+        int maxDefense = warriorsConfig.getMaxDefense();
+        Collection<InfantryUnit> warriors = createWarriors(numberOfUnits, maxDamage, maxDefense);
+        kingdom.addInfantry(warriors);
+    }
+
     private static Collection<InfantryUnit> createWarriors(int numberOfWarriors, int maxDamage, int maxDefense) {
-        Collection<InfantryUnit> warriors = new LinkedList<>();
+        return IntStream.range(0, numberOfWarriors).mapToObj(el -> createRandomWarrior(maxDamage, maxDefense)).collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    private static Warrior createRandomWarrior(int maxDamage, int maxDefense) {
         Random rand = new Random();
-        while(numberOfWarriors > 0) {
-            numberOfWarriors--;
-            int damage = rand.nextInt(maxDamage);
-            int defense = rand.nextInt(maxDefense);
-            warriors.add(new Warrior(damage, defense));
-        }
-        return warriors;
+        int damage = rand.nextInt(maxDamage);
+        int defense = rand.nextInt(maxDefense);
+        return new Warrior(damage, defense);
     }
 }
