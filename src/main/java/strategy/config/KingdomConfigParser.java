@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class KingdomConfigParser {
 
-	private Map<String, KingdomTypes> kingdomTypes;
+	private final Map<String, KingdomTypes> kingdomTypes;
 
 	public KingdomConfigParser() {
 		kingdomTypes = new HashMap<>();

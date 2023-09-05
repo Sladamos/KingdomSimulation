@@ -23,16 +23,16 @@ public class SarraxKingdom implements Kingdom {
     private final long attackTime;
 
     private final String kingdomId;
-    //TODO: change kingdomId to JSON config
-    public SarraxKingdom(String kingdomId) {
+
+    public SarraxKingdom(KingdomConfig kingdomConfig) {
         mountain = new SarraxMountain();
         village = new SarraxVillage();
         settlement = new SarraxSettlement(mountain, village);
         village.setWaterProducer(settlement::getWater);
         castle = new SarraxCastle(settlement);
         settlement.setAdultsProducer(castle::getAdult);
-        this.kingdomId = kingdomId;
-        this.attackTime = 10000; //TODO get Value from json config
+        this.kingdomId = kingdomConfig.getKingdomId();
+        this.attackTime = kingdomConfig.getAttackTime();
     }
 
     @Override

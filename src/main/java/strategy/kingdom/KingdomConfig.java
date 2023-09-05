@@ -1,20 +1,15 @@
 package strategy.kingdom;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import strategy.Config;
 
-public class KingdomConfig {
-	@Getter
+@Getter
+@AllArgsConstructor
+public class KingdomConfig implements Config {
 	private final String kingdomId;
 
-	@Getter
 	private final long attackTime;
 
-	@Getter
 	private final KingdomTypes kingdomType;
-
-	public KingdomConfig(String kingdomId, long attackTime, KingdomTypes kingdomType) {
-		this.kingdomId = kingdomId;
-		this.attackTime = attackTime;
-		this.kingdomType = kingdomType;
-	}
 }

@@ -1,14 +1,20 @@
 package strategy;
 
+import org.json.JSONObject;
 import strategy.battle.Battle;
 import strategy.battle.SimpleBattle;
+import strategy.config.SimulationConfigParser;
 import strategy.kingdom.Kingdom;
+import strategy.kingdom.KingdomConfig;
 import strategy.kingdom.SarraxKingdom;
 import strategy.message.receiver.ConsoleMessagesReceiver;
 import strategy.message.receiver.MessagesReceiver;
 import strategy.military.infantry.InfantryUnit;
 import strategy.military.infantry.Warrior;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Random;
@@ -25,11 +31,23 @@ public class Simulation {
     layer for error handling -> both for console and gui
      */
     public static void main(String[] args) {
-        Kingdom strongerKingdom = createStrongerKingdom();
-        Kingdom weakerKingdom = createWeakerKingdom();
-        simulateBattle(strongerKingdom, weakerKingdom);
-        strongerKingdom.terminate();
-        weakerKingdom.terminate();
+        SimulationConfigParser configParser = new SimulationConfigParser();
+        String jsonContent = null;
+        try {
+            jsonContent = new String(Files.readAllBytes(Paths.get("config.json")));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        // Parse the JSON content into a JSONObject
+        JSONObject jsonObject = new JSONObject(jsonContent);
+        configParser.createSimulationConfig(jsonObject);
+//
+//        Kingdom strongerKingdom = createStrongerKingdom();
+//        Kingdom weakerKingdom = createWeakerKingdom();
+//        simulateBattle(strongerKingdom, weakerKingdom);
+//        strongerKingdom.terminate();
+//        weakerKingdom.terminate();
     }
 
     private static void simulateBattle(Kingdom strongerKingdom, Kingdom weakerKingdom) {
@@ -45,20 +63,20 @@ public class Simulation {
     }
 
     private static Kingdom createStrongerKingdom() {
-        Kingdom strongerKingdom = createKingdom(50000, "Stronger");
+        Kingdom strongerKingdom = createKingdom(50000, null);
         Collection<InfantryUnit> strongerWarriors = createWarriors(40, 25, 5);
         strongerKingdom.addInfantry(strongerWarriors);
         return strongerKingdom;
     }
     private static Kingdom createWeakerKingdom() {
-        Kingdom weakerKingdom = createKingdom(25000, "Weaker");
+        Kingdom weakerKingdom = createKingdom(25000, null);
         Collection<InfantryUnit> weakerWarriors = createWarriors(35, 20, 7);
         weakerKingdom.addInfantry(weakerWarriors);
         return weakerKingdom;
     }
 
-    private static Kingdom createKingdom(long sleep, String kingdomId) {
-        Kingdom kingdom = new SarraxKingdom(kingdomId);
+    private static Kingdom createKingdom(long sleep, KingdomConfig kingdomConfig) {
+        Kingdom kingdom = new SarraxKingdom(kingdomConfig);
         kingdom.run();
         try {
             Thread.sleep(sleep);
