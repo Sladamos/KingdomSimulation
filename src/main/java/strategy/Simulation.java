@@ -4,6 +4,8 @@ import org.json.JSONObject;
 import strategy.battle.Battle;
 import strategy.battle.SimpleBattle;
 import strategy.config.SimulationConfigParser;
+import strategy.json.JSON;
+import strategy.json.JsonLoaderImpl;
 import strategy.kingdom.Kingdom;
 import strategy.kingdom.KingdomConfig;
 import strategy.kingdom.SarraxKingdom;
@@ -32,16 +34,11 @@ public class Simulation {
      */
     public static void main(String[] args) {
         SimulationConfigParser configParser = new SimulationConfigParser();
-        String jsonContent = null;
-        try {
-            jsonContent = new String(Files.readAllBytes(Paths.get("config.json")));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        var loader = new JsonLoaderImpl();
+        JSON json = loader.loadJsonFromFile("config.json");
 
         // Parse the JSON content into a JSONObject
-        JSONObject jsonObject = new JSONObject(jsonContent);
-        configParser.createSimulationConfig(jsonObject);
+        //configParser.createSimulationConfig(jsonObject);
 //
 //        Kingdom strongerKingdom = createStrongerKingdom();
 //        Kingdom weakerKingdom = createWeakerKingdom();
