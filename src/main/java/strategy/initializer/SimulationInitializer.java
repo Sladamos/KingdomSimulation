@@ -29,7 +29,6 @@ public class SimulationInitializer {
         return configParser.createConfig(json);
     }
 
-    //how to create receiver properly
     private void simulateBattle(Kingdom strongerKingdom, Kingdom weakerKingdom) {
         MessagesReceiver messagesReceiver = new ConsoleMessagesReceiver();
         Battle battle = new SimpleBattle(strongerKingdom, weakerKingdom, messagesReceiver);
