@@ -1,6 +1,4 @@
-package strategy.storage;
-
-import strategy.AppError;
+package strategy;
 
 public class CriticalAppError extends AppError {
 

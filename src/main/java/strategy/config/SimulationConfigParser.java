@@ -4,7 +4,7 @@ import org.json.JSONException;
 import strategy.SimulationConfig;
 import strategy.json.JSON;
 import strategy.kingdom.KingdomConfig;
-import strategy.storage.CriticalAppError;
+import strategy.CriticalAppError;
 
 public class SimulationConfigParser implements ConfigParser<SimulationConfig>{
 	@Override

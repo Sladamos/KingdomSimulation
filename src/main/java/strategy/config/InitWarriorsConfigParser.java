@@ -3,7 +3,7 @@ package strategy.config;
 import org.json.JSONException;
 import strategy.json.JSON;
 import strategy.military.infantry.InitWarriorsConfig;
-import strategy.storage.CriticalAppError;
+import strategy.CriticalAppError;
 
 public class InitWarriorsConfigParser implements ConfigParser<InitWarriorsConfig>{
     @Override
