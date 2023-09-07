@@ -1,39 +1,20 @@
 package strategy.producer.royal.queen;
 
+import strategy.item.elixir.GrowthElixir;
 import strategy.item.organism.human.Adult;
 import strategy.item.organism.human.Child;
+import strategy.producer.ProducerConfig;
 import strategy.producer.TwoToOneProducer;
-import strategy.item.elixir.GrowthElixir;
-
-import java.util.function.Supplier;
+import strategy.storage.OneItemStorage;
 
 public class SarraxQueen extends TwoToOneProducer<Child, GrowthElixir, Adult> implements Queen {
 
-	private static final int QUEEN_TRANSFORMATING_SPEED = 1;
-
-	private static final int QUEEN_DURABILITY = 1000;
-
-	public SarraxQueen(Supplier<Child> firstProducer, Supplier<GrowthElixir> secondProducer) {
-		super(firstProducer, secondProducer, 0, QUEEN_TRANSFORMATING_SPEED,
-				QUEEN_DURABILITY);
-	}
-
-	public synchronized Adult getAdult() {
-		return getItem();
+	public SarraxQueen(OneItemStorage<Child> firstSourceStorage, OneItemStorage<GrowthElixir> secondSourceStorage, OneItemStorage<Adult> destinationStorage, ProducerConfig producerConfig) {
+		super(firstSourceStorage, secondSourceStorage, destinationStorage, producerConfig);
 	}
 
 	@Override
-	protected Adult createNewItem(Child material, GrowthElixir secondMaterial) {
-		return new Adult(10, 100);
-	}
-
-	@Override
-	protected Adult produceNewItem() {
-		return new Adult(10, 100);
-	}
-
-	@Override
-	protected int getProducingTime() {
-		return 3000;
+	protected Adult createNewItem(Child firstMaterial, GrowthElixir secondMaterial) {
+		return new Adult(0, 0);
 	}
 }

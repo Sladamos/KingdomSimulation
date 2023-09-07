@@ -1,25 +1,23 @@
 package strategy.location.castle;
 
-import strategy.location.settlement.SarraxSettlement;
-import strategy.item.military.infantry.HumanInfantryGeneral;
+import strategy.item.jewellery.necklace.RubyNecklace;
+import strategy.item.jewellery.ring.SapphireRing;
+import strategy.item.military.infantry.HumanInfantryUnit;
 import strategy.item.military.infantry.InfantryGeneral;
-import strategy.item.military.infantry.InfantryUnit;
-import strategy.item.organism.human.Adult;
+import strategy.item.military.infantry.InfantryGeneralImpl;
+import strategy.item.present.NecklacePresent;
+import strategy.item.present.RingPresent;
 import strategy.producer.building.craftsman.present.NecklacePresentCraftsman;
 import strategy.producer.building.craftsman.present.RingPresentCraftsman;
 import strategy.producer.royal.king.SarraxKing;
 import strategy.producer.royal.princess.SarraxPrincess;
 import strategy.producer.royal.queen.SarraxQueen;
-import strategy.item.jewellery.necklace.RubyNecklace;
-import strategy.item.jewellery.ring.SapphireRing;
-import strategy.item.present.NecklacePresent;
-import strategy.item.present.RingPresent;
 
 import java.util.Collection;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class SarraxCastle implements Castle {
+public class SarraxCastle<T extends HumanInfantryUnit> implements Castle<T> {
 
 	private final SarraxKing king;
 
@@ -27,28 +25,27 @@ public class SarraxCastle implements Castle {
 
 	private final SarraxPrincess<NecklacePresent, RingPresent> princess;
 
-	private final InfantryGeneral warriorsGeneral;
+	private final InfantryGeneral<T> warriorsGeneral;
 
 	private final ExecutorService executorService;
 
-	public SarraxCastle(SarraxSettlement settlement) {
-		queen = new SarraxQueen(settlement::getChild, settlement::getGrowthElixir);
-		king = createKing(settlement);
-		princess = new SarraxPrincess<>(king::getNecklacePresent, king::getRingPresent);
-		warriorsGeneral = new HumanInfantryGeneral(princess::getHappiness, settlement::getWarrior);
+	public SarraxCastle(CastleStorageManager castleStorageManager) {
+		queen = new SarraxQueen(null, null, castleStorageManager.getAdultStorage(), null);
+		king = createKing(castleStorageManager);
+		princess = new SarraxPrincess<>(castleStorageManager.getNecklacePresentStorage(),
+				castleStorageManager.getRingPresentStorage(),
+				castleStorageManager.getHappinessStorage(),
+				null);
+		warriorsGeneral = new InfantryGeneralImpl<>(castleStorageManager.getHappinessStorage(), null, null);
 		executorService = Executors.newFixedThreadPool(5);
 	}
 
-	private SarraxKing createKing(SarraxSettlement settlement) {
+	private SarraxKing createKing(CastleStorageManager castleStorageManager) {
 		NecklacePresentCraftsman<RubyNecklace> necklacePresentCraftsman =
-				new NecklacePresentCraftsman<>(settlement::getRubyNecklace, 0);
+				new NecklacePresentCraftsman<>(null, castleStorageManager.getNecklacePresentStorage(), null);
 		RingPresentCraftsman<SapphireRing> ringPresentCraftsman =
-				new RingPresentCraftsman<>(settlement::getSapphireRing, 0);
+				new RingPresentCraftsman<>(null, castleStorageManager.getRingPresentStorage(), null);
 		return new SarraxKing(necklacePresentCraftsman, ringPresentCraftsman);
-	}
-
-	public Adult getAdult() {
-		return queen.getAdult();
 	}
 
 	@Override
@@ -81,7 +78,7 @@ public class SarraxCastle implements Castle {
 	}
 
 	@Override
-	public void addInfantry(Collection<InfantryUnit> infantryUnits) {
+	public void addInfantry(Collection<T> infantryUnits) {
 		warriorsGeneral.addInfantryUnits(infantryUnits);
 	}
 }

@@ -1,33 +1,36 @@
 package strategy.item.military.infantry;
 
 import strategy.item.military.ArmyDestroyedException;
-import strategy.producer.exceptions.ProducerTerminatedException;
+import strategy.item.military.GeneralConfig;
 import strategy.item.statistic.Happiness;
+import strategy.producer.exceptions.ProducerTerminatedException;
+import strategy.storage.OneItemStorage;
 
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.function.Supplier;
 
-public class HumanInfantryGeneral implements InfantryGeneral {
+public class InfantryGeneralImpl<T extends InfantryUnit> implements InfantryGeneral<T> {
 
-    Collection<InfantryUnit> army;
+    private final Collection<T> army;
 
-    private final Supplier<Happiness> happinessSupplier;
+    private final OneItemStorage<Happiness> happinessStorage;
 
-    private final Supplier<InfantryUnit> infantryUnitSupplier;
+    private final OneItemStorage<T> infantryUnitStorage;
 
     private int damageModificator;
 
-    private static final int HAPPINESS_DAMAGE_MODIFICATOR = 2;
+    private final int happinessDamageModificator;
 
     private boolean isConsuming;
 
-    public HumanInfantryGeneral(Supplier<Happiness> happinessSupplier, Supplier<InfantryUnit> infantryUnitSupplier) {
-        this.happinessSupplier = happinessSupplier;
-        this.infantryUnitSupplier = infantryUnitSupplier;
+    public InfantryGeneralImpl(OneItemStorage<Happiness> happinessStorage,
+                               OneItemStorage<T> infantryUnitStorage,
+                               GeneralConfig generalConfig) {
+        this.happinessStorage = happinessStorage;
+        this.infantryUnitStorage = infantryUnitStorage;
         isConsuming = false;
-        damageModificator = HAPPINESS_DAMAGE_MODIFICATOR;
+        happinessDamageModificator = generalConfig.getHappinessDamageModificator();
         army = new LinkedList<>();
     }
 
@@ -41,7 +44,7 @@ public class HumanInfantryGeneral implements InfantryGeneral {
         isConsuming = true;
         while(isConsuming()) {
             try {
-                InfantryUnit unit = infantryUnitSupplier.get();
+                T unit = infantryUnitStorage.getItemFromStorage();
                 accept(unit);
             } catch (ProducerTerminatedException err) {
                 return;
@@ -54,7 +57,7 @@ public class HumanInfantryGeneral implements InfantryGeneral {
         isConsuming = true;
         while(isConsuming()) {
             try {
-                Happiness happiness = happinessSupplier.get();
+                Happiness happiness = happinessStorage.getItemFromStorage();
                 accept(happiness);
             } catch (ProducerTerminatedException err) {
                 return;
@@ -64,17 +67,14 @@ public class HumanInfantryGeneral implements InfantryGeneral {
 
     @Override
     public synchronized Collection<Integer> getArmyDamage() {
-        Collection<Integer> damages = new LinkedList<>();
-        for(var infantry : army) {
-            damages.add(infantry.getDamage() * (int)(damageModificator / HAPPINESS_DAMAGE_MODIFICATOR));
-        }
-        return damages;
+        int modificator = damageModificator / happinessDamageModificator;
+        return army.stream().map(el -> el.getDamage() * modificator).toList();
     }
 
     @Override
     public synchronized void receiveDamage(Collection<Integer> damages) {
         var it = army.iterator();
-        InfantryUnit unit = getUnitToHit(it);
+        T unit = getUnitToHit(it);
         for(Integer damage : damages) {
             try {
                 unit.getHit(damage);
@@ -85,36 +85,35 @@ public class HumanInfantryGeneral implements InfantryGeneral {
                 }
             }
         }
+        //TODO REMOVE
         System.out.println("Get attacked, infantry left: " + army.size());
         if(!hasArmy())
             throw new ArmyDestroyedException();
     }
 
     @Override
-    public synchronized void accept(InfantryUnit infantryUnit) {
-        System.out.println("Infantry unit consumed");
+    public synchronized void accept(T infantryUnit) {
         army.add(infantryUnit);
     }
 
     @Override
-    public synchronized void addInfantryUnits(Collection<InfantryUnit> infantryUnits) {
-        army.addAll(infantryUnits);
-    }
-
-    @Override
     public synchronized void accept(Happiness happiness) {
-        System.out.println("Happiness consumed");
         damageModificator++;
     }
 
-    private InfantryUnit getUnitToHit(Iterator<InfantryUnit> it) {
+    @Override
+    public synchronized void addInfantryUnits(Collection<T> infantryUnits) {
+        army.addAll(infantryUnits);
+    }
+
+    private synchronized T getUnitToHit(Iterator<T> it) {
         if(!it.hasNext()) {
             throw new ArmyDestroyedException();
         }
         return it.next();
     }
 
-    private boolean hasArmy() {
+    private synchronized boolean hasArmy() {
         return army.size() > 0;
     }
 

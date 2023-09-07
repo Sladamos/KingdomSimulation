@@ -1,6 +1,7 @@
 package strategy.kingdom;
 
 import lombok.Getter;
+import strategy.item.military.infantry.warrior.Warrior;
 import strategy.location.castle.Castle;
 import strategy.location.castle.SarraxCastle;
 import strategy.location.mountain.Mountain;
@@ -22,7 +23,7 @@ public class SarraxKingdom implements Kingdom {
     private final Village village;
 
     @Getter
-    private final Castle castle;
+    private final Castle<Warrior> castle;
 
     private final long attackTime;
 
@@ -33,7 +34,7 @@ public class SarraxKingdom implements Kingdom {
         mountain = new SarraxMountain(kingdomStorageManager.getMountainStorageManager());
         village = new SarraxVillage(kingdomStorageManager.getVillageStorageManager(), null);
         settlement = new SarraxSettlement();
-        castle = new SarraxCastle();
+        castle = new SarraxCastle<>(kingdomStorageManager.getCastleStorageManager());
         this.kingdomId = kingdomConfig.getKingdomId();
         this.attackTime = kingdomConfig.getAttackTime();
     }
@@ -60,7 +61,7 @@ public class SarraxKingdom implements Kingdom {
     }
 
     @Override
-    public void addInfantry(Collection<InfantryUnit> infantryUnits) {
+    public void addWarriors(Collection<Warrior> infantryUnits) {
         castle.addInfantry(infantryUnits);
     }
 

@@ -1,11 +1,11 @@
 package strategy.initializer;
 
+import strategy.item.military.InitMilitaryConfig;
+import strategy.item.military.infantry.warrior.Warrior;
 import strategy.kingdom.Kingdom;
 import strategy.kingdom.KingdomConfig;
 import strategy.kingdom.KingdomTypes;
 import strategy.kingdom.SarraxKingdom;
-import strategy.item.military.InitMilitaryConfig;
-import strategy.item.military.infantry.InfantryUnit;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -36,7 +36,7 @@ public class KingdomInitializer {
 
     private void addWarriorsToKingdom(Kingdom kingdom, InitMilitaryConfig warriorsConfig) {
         WarriorsInitializer warriorsInitializer = new WarriorsInitializer();
-        Collection<InfantryUnit> warriors = warriorsInitializer.createWarriors(warriorsConfig);
-        kingdom.addInfantry(warriors);
+        Collection<Warrior> warriors = warriorsInitializer.createWarriors(warriorsConfig);
+        kingdom.addWarriors(warriors);
     }
 }

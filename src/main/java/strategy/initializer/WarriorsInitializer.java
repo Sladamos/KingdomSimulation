@@ -1,13 +1,10 @@
 package strategy.initializer;
 
 import strategy.item.military.InitMilitaryConfig;
-import strategy.item.military.infantry.InfantryUnit;
 import strategy.item.military.infantry.warrior.Warrior;
 
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.Random;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class WarriorsInitializer {
@@ -18,11 +15,11 @@ public class WarriorsInitializer {
         rand = new Random();
     }
 
-    public Collection<InfantryUnit> createWarriors(InitMilitaryConfig warriorsConfig) {
+    public Collection<Warrior> createWarriors(InitMilitaryConfig warriorsConfig) {
         int numberOfWarriors = warriorsConfig.getNumberOfUnits();
         int maxDamage = warriorsConfig.getMaxDamage();
         int maxDefense = warriorsConfig.getMaxDefense();
-        return IntStream.range(0, numberOfWarriors).mapToObj(el -> createRandomWarrior(maxDamage, maxDefense)).collect(Collectors.toCollection(LinkedList::new));
+        return IntStream.range(0, numberOfWarriors).mapToObj(el -> createRandomWarrior(maxDamage, maxDefense)).toList();
     }
 
     private Warrior createRandomWarrior(int maxDamage, int maxDefense) {
