@@ -1,19 +1,17 @@
 package strategy.producer.building.miner.basic;
 
 import strategy.item.mineral.ore.IronOre;
+import strategy.producer.ProducerConfig;
+import strategy.storage.OneItemStorage;
 
 public class IronMiner extends Miner<IronOre> {
 
-    private static final int IRON_MINER_DURABILITY = 100;
-
-    private static final int IRON_MINER_MINING_SPEED = 5;
-
-    public IronMiner(int defaultStorageSize) {
-        super(defaultStorageSize, IRON_MINER_MINING_SPEED, IRON_MINER_DURABILITY);
+    public IronMiner(OneItemStorage<IronOre> destinationStorage, ProducerConfig producerConfig) {
+        super(destinationStorage, producerConfig);
     }
 
     @Override
-    protected IronOre produceNewItem() {
+    protected IronOre createNewItem() {
         return new IronOre();
     }
 }

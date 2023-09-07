@@ -1,19 +1,17 @@
 package strategy.producer.building.miner.basic;
 
 import strategy.item.mineral.Salt;
+import strategy.producer.ProducerConfig;
+import strategy.storage.OneItemStorage;
 
 public class SaltMiner extends Miner<Salt> {
 
-	private static final int SALT_MINER_DURABILITY = 200;
-
-	private static final int SALT_MINER_MINING_SPEED = 4;
-
-	public SaltMiner(int defaultStorageSize) {
-		super(defaultStorageSize, SALT_MINER_MINING_SPEED, SALT_MINER_DURABILITY);
+	public SaltMiner(OneItemStorage<Salt> destinationStorage, ProducerConfig producerConfig) {
+		super(destinationStorage, producerConfig);
 	}
 
 	@Override
-	protected Salt produceNewItem() {
+	protected Salt createNewItem() {
 		return new Salt();
 	}
 }
