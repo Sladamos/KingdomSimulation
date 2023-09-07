@@ -1,15 +1,13 @@
 package strategy.producer.building.livestock;
 
 import strategy.item.food.Milk;
+import strategy.producer.ProducerConfig;
+import strategy.storage.OneItemStorage;
 
 public class Cow extends LivestockAnimal<Milk> {
 
-	private static final int COW_DURABILITY = 80;
-
-	private static final int COW_PRODUCING_SPEED = 4;
-
-	public Cow(int defaultStorageSize) {
-		super(defaultStorageSize, COW_PRODUCING_SPEED, COW_DURABILITY);
+	public Cow(OneItemStorage<Milk> destinationStorage, ProducerConfig producerConfig) {
+		super(destinationStorage, producerConfig);
 	}
 
 	@Override
