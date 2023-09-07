@@ -1,31 +1,15 @@
 package strategy.producer.building.craftsman.present;
 
+import strategy.item.Item;
+import strategy.producer.ProducerConfig;
 import strategy.producer.building.craftsman.Craftsman;
 import strategy.item.present.Present;
 
 import java.util.function.Supplier;
 
-public abstract class PresentCraftsman<T, S extends Present> extends Craftsman<T, S> {
+public abstract class PresentCraftsman<T extends Item, S extends Present> extends Craftsman<T, S> {
 
-	private static final int CRAFTSMAN_DURABILITY = 100;
-
-	private static final int CRAFTSMAN_CRAFTING_SPEED = 5;
-
-	public PresentCraftsman(Supplier<T> producer, int defaultStorageSize) {
-		super(producer, defaultStorageSize, CRAFTSMAN_CRAFTING_SPEED, CRAFTSMAN_DURABILITY);
-	}
-
-	public synchronized S getPresent() {
-		return getItem();
-	}
-
-	@Override
-	public S createNewItem(T material) {
-		return createNewItem();
-	}
-
-	@Override
-	protected int getProducingTime() {
-		return 35000;
+	public PresentCraftsman(Supplier<T> producer, ProducerConfig producerConfig) {
+		super(producer, producerConfig);
 	}
 }
