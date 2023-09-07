@@ -38,7 +38,7 @@ public class SarraxVillage implements Village {
 	}
 
 	public void setWaterProducer(Supplier<Water> waterProducer) {
-		farm.setProducer(waterProducer);
+		farm.setSourceStorage(waterProducer);
 	}
 
 	public Wheat getWheat() {
