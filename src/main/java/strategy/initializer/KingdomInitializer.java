@@ -4,8 +4,8 @@ import strategy.kingdom.Kingdom;
 import strategy.kingdom.KingdomConfig;
 import strategy.kingdom.KingdomTypes;
 import strategy.kingdom.SarraxKingdom;
-import strategy.military.InitMilitaryConfig;
-import strategy.military.infantry.InfantryUnit;
+import strategy.item.military.InitMilitaryConfig;
+import strategy.item.military.infantry.InfantryUnit;
 
 import java.util.Collection;
 import java.util.HashMap;

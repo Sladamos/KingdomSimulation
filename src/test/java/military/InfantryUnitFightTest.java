@@ -1,12 +1,12 @@
 package military;
 
-import strategy.military.infantry.warrior.Warrior;
-import strategy.military.infantry.InfantryUnit;
+import strategy.item.military.infantry.warrior.Warrior;
+import strategy.item.military.infantry.InfantryUnit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import strategy.organism.mechanisms.fight.exceptions.FightActionException;
-import strategy.organism.mechanisms.fight.exceptions.IncorrectAttackException;
-import strategy.organism.mechanisms.fight.exceptions.IncorrectDefenseException;
+import strategy.mechanism.fight.exceptions.FightActionException;
+import strategy.mechanism.fight.exceptions.IncorrectAttackException;
+import strategy.mechanism.fight.exceptions.IncorrectDefenseException;
 
 import static org.assertj.core.api.Assertions.*;
 

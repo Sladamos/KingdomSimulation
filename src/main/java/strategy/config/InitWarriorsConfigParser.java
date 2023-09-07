@@ -2,7 +2,7 @@ package strategy.config;
 
 import org.json.JSONException;
 import strategy.json.JSON;
-import strategy.military.infantry.warrior.InitWarriorsConfig;
+import strategy.item.military.infantry.warrior.InitWarriorsConfig;
 import strategy.CriticalAppError;
 
 public class InitWarriorsConfigParser implements ConfigParser<InitWarriorsConfig>{

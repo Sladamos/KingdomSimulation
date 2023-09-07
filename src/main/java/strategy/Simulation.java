@@ -4,6 +4,8 @@ import strategy.initializer.SimulationInitializer;
 
 public class Simulation {
 
+    //TODO: human remove starvation
+
     //TODO: validate config file in config initializers (are values > 0 etc.)
 
     /*TODO gui:

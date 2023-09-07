@@ -1,7 +1,7 @@
 package strategy.location.settlement;
 
-import strategy.military.infantry.warrior.Warrior;
-import strategy.organism.human.Child;
+import strategy.item.military.infantry.warrior.Warrior;
+import strategy.item.organism.human.Child;
 import strategy.producer.building.alchemist.Alchemist;
 import strategy.producer.building.alchemist.GrowthElixirAlchemist;
 import strategy.producer.building.artisan.Artisan;
@@ -28,7 +28,7 @@ import strategy.item.mineral.Salt;
 import strategy.item.mineral.ore.IronOre;
 import strategy.item.plant.Wheat;
 import strategy.item.wood.Mahogany;
-import strategy.organism.human.Adult;
+import strategy.item.organism.human.Adult;
 import strategy.item.coin.GoldenCoin;
 import strategy.item.elixir.GrowthElixir;
 import strategy.item.flour.WheatFlour;

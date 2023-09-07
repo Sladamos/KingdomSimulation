@@ -1,7 +1,7 @@
 package strategy.producer.royal.queen;
 
-import strategy.organism.human.Adult;
-import strategy.organism.human.Child;
+import strategy.item.organism.human.Adult;
+import strategy.item.organism.human.Child;
 import strategy.producer.TwoToOneProducer;
 import strategy.item.elixir.GrowthElixir;
 

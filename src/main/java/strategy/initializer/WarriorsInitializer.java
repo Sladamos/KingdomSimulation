@@ -1,8 +1,8 @@
 package strategy.initializer;
 
-import strategy.military.InitMilitaryConfig;
-import strategy.military.infantry.InfantryUnit;
-import strategy.military.infantry.warrior.Warrior;
+import strategy.item.military.InitMilitaryConfig;
+import strategy.item.military.infantry.InfantryUnit;
+import strategy.item.military.infantry.warrior.Warrior;
 
 import java.util.Collection;
 import java.util.LinkedList;

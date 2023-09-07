@@ -4,7 +4,7 @@ import org.json.JSONException;
 import strategy.json.JSON;
 import strategy.kingdom.KingdomConfig;
 import strategy.kingdom.KingdomTypes;
-import strategy.military.infantry.warrior.InitWarriorsConfig;
+import strategy.item.military.infantry.warrior.InitWarriorsConfig;
 import strategy.CriticalAppError;
 
 import java.util.HashMap;

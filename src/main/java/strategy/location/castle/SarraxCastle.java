@@ -1,10 +1,10 @@
 package strategy.location.castle;
 
 import strategy.location.settlement.SarraxSettlement;
-import strategy.military.infantry.HumanInfantryGeneral;
-import strategy.military.infantry.InfantryGeneral;
-import strategy.military.infantry.InfantryUnit;
-import strategy.organism.human.Adult;
+import strategy.item.military.infantry.HumanInfantryGeneral;
+import strategy.item.military.infantry.InfantryGeneral;
+import strategy.item.military.infantry.InfantryUnit;
+import strategy.item.organism.human.Adult;
 import strategy.producer.building.craftsman.present.NecklacePresentCraftsman;
 import strategy.producer.building.craftsman.present.RingPresentCraftsman;
 import strategy.producer.royal.king.SarraxKing;

@@ -1,28 +1,18 @@
 package strategy.producer.building.jewellery.basic.ring;
 
-import strategy.item.mineral.gem.Sapphire;
 import strategy.item.jewellery.ring.SapphireRing;
-
-import java.util.function.Supplier;
+import strategy.item.mineral.gem.Sapphire;
+import strategy.producer.ProducerConfig;
+import strategy.storage.OneItemStorage;
 
 public class SapphireRingJeweller extends strategy.producer.building.jewellery.basic.ring.RingJeweller<Sapphire, SapphireRing> {
 
-	private static final int SAPPHIRE_RING_JEWELLER_DURABILITY = 300;
-
-	private static final int SAPPHIRE_RING_JEWELLER_CRAFTING_SPEED = 2;
-
-	public SapphireRingJeweller(Supplier<Sapphire> materialProducer, int defaultStorageSize) {
-		super(materialProducer, defaultStorageSize, SAPPHIRE_RING_JEWELLER_CRAFTING_SPEED,
-				SAPPHIRE_RING_JEWELLER_DURABILITY);
+	public SapphireRingJeweller(OneItemStorage<Sapphire> sourceStorage, OneItemStorage<SapphireRing> destinationStorage, ProducerConfig producerConfig) {
+		super(sourceStorage, destinationStorage, producerConfig);
 	}
 
 	@Override
 	protected SapphireRing createNewItem(Sapphire material) {
-		return new SapphireRing();
-	}
-
-	@Override
-	protected SapphireRing produceNewItem() {
 		return new SapphireRing();
 	}
 }

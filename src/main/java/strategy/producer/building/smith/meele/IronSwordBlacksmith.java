@@ -2,13 +2,13 @@ package strategy.producer.building.smith.meele;
 
 import strategy.item.bar.IronBar;
 import strategy.item.weapon.meele.sword.IronSword;
-
-import java.util.function.Supplier;
+import strategy.producer.ProducerConfig;
+import strategy.storage.OneItemStorage;
 
 public class IronSwordBlacksmith extends Blacksmith<IronBar, IronSword> {
 
-    public IronSwordBlacksmith(Supplier<IronBar> materialProducer, int defaultStorageSize, double forgingSpeed, int durability) {
-        super(materialProducer, defaultStorageSize, forgingSpeed, durability);
+    public IronSwordBlacksmith(OneItemStorage<IronBar> sourceStorage, OneItemStorage<IronSword> destinationStorage, ProducerConfig producerConfig) {
+        super(sourceStorage, destinationStorage, producerConfig);
     }
 
     @Override

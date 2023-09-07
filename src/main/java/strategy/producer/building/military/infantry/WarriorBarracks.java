@@ -1,29 +1,19 @@
 package strategy.producer.building.military.infantry;
 
-import strategy.military.infantry.warrior.Warrior;
-import strategy.organism.human.Adult;
+import strategy.item.military.infantry.warrior.Warrior;
+import strategy.item.organism.human.Adult;
 import strategy.item.weapon.meele.sword.Sword;
-
-import java.util.function.Supplier;
+import strategy.producer.ProducerConfig;
+import strategy.storage.OneItemStorage;
 
 public class WarriorBarracks<T extends Sword> extends Barracks<Adult, T, Warrior> {
 
-	private static final int WARRIOR_BARRACKS_DURABILITY = 500;
-
-	private static final int WARRIOR_BARRACKS_TRAINING_SPEED = 5;
-
-	public WarriorBarracks(Supplier<Adult> firstProducer, Supplier<T> secondProducer, int defaultStorageSize) {
-		super(firstProducer, secondProducer, defaultStorageSize, WARRIOR_BARRACKS_TRAINING_SPEED,
-				WARRIOR_BARRACKS_DURABILITY);
+	public WarriorBarracks(OneItemStorage<Adult> firstSourceStorage, OneItemStorage<T> secondSourceStorage, OneItemStorage<Warrior> destinationStorage, ProducerConfig producerConfig) {
+		super(firstSourceStorage, secondSourceStorage, destinationStorage, producerConfig);
 	}
 
 	@Override
 	protected Warrior createNewItem(Adult material, T secondMaterial) {
 		return new Warrior(10, 5);
-	}
-
-	@Override
-	protected Warrior produceNewItem() {
-		return new Warrior(15, 5);
 	}
 }

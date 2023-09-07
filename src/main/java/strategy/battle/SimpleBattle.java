@@ -3,7 +3,7 @@ package strategy.battle;
 import strategy.kingdom.Kingdom;
 import strategy.message.Message;
 import strategy.message.receiver.MessagesReceiver;
-import strategy.military.ArmyDestroyedException;
+import strategy.item.military.ArmyDestroyedException;
 
 public class SimpleBattle implements Battle {
 

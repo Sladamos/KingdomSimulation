@@ -1,33 +1,18 @@
 package strategy.producer.building.farm;
 
-import strategy.item.plant.Wheat;
 import strategy.item.fluid.Water;
-
-import java.util.function.Supplier;
+import strategy.item.plant.Wheat;
+import strategy.producer.ProducerConfig;
+import strategy.storage.OneItemStorage;
 
 public class WheatFarm extends Farm<Water, Wheat> {
 
-	private static final int WHEAT_FARM_DURABILITY = 30;
-
-	private static final int WHEAT_FARM_GROWING_SPEED = 4;
-
-	public WheatFarm(Supplier<Water> waterProducer, int defaultStorageSize) {
-		super(waterProducer, defaultStorageSize, WHEAT_FARM_GROWING_SPEED,
-				WHEAT_FARM_DURABILITY);
+	public WheatFarm(OneItemStorage<Water> sourceStorage, OneItemStorage<Wheat> destinationStorage, ProducerConfig producerConfig) {
+		super(sourceStorage, destinationStorage, producerConfig);
 	}
 
 	@Override
 	protected Wheat createNewItem(Water water) {
 		return new Wheat();
-	}
-
-	@Override
-	protected Wheat produceNewItem() {
-		return new Wheat();
-	}
-
-	@Override
-	protected int getProducingTime() {
-		return 25000;
 	}
 }

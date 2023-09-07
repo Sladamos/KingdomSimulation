@@ -2,27 +2,17 @@ package strategy.producer.building.smelter;
 
 import strategy.item.bar.IronBar;
 import strategy.item.mineral.ore.IronOre;
-
-import java.util.function.Supplier;
+import strategy.producer.ProducerConfig;
+import strategy.storage.OneItemStorage;
 
 public class IronBarSmelter extends Smelter<IronOre, IronBar> {
 
-    private static final int IRON_SMELTER_DURABILITY = 200;
-
-    private static final int IRON_SMELTER_SMELTING_SPEED = 4;
-
-
-    public IronBarSmelter(Supplier<IronOre> oresProducer, int defaultStorageSize) {
-        super(oresProducer, defaultStorageSize, IRON_SMELTER_SMELTING_SPEED, IRON_SMELTER_DURABILITY);
+    public IronBarSmelter(OneItemStorage<IronOre> sourceStorage, OneItemStorage<IronBar> destinationStorage, ProducerConfig producerConfig) {
+        super(sourceStorage, destinationStorage, producerConfig);
     }
 
     @Override
     protected IronBar createNewItem(IronOre ore) {
         return new IronBar(ore);
-    }
-
-    @Override
-    protected IronBar produceNewItem() {
-        return new IronBar();
     }
 }

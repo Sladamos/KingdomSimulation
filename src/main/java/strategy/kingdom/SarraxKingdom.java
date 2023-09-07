@@ -5,7 +5,7 @@ import strategy.location.castle.SarraxCastle;
 import strategy.location.mountain.SarraxMountain;
 import strategy.location.settlement.SarraxSettlement;
 import strategy.location.village.SarraxVillage;
-import strategy.military.infantry.InfantryUnit;
+import strategy.item.military.infantry.InfantryUnit;
 
 import java.util.Collection;
 

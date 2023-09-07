@@ -1,19 +1,15 @@
 package strategy.producer.building.farm;
 
-import strategy.producer.OneToOneProducer;
-import strategy.item.plant.Plant;
-import strategy.producer.building.Building;
 import strategy.item.fluid.Water;
-
-import java.util.function.Supplier;
+import strategy.item.plant.Plant;
+import strategy.producer.OneToOneProducer;
+import strategy.producer.ProducerConfig;
+import strategy.producer.building.Building;
+import strategy.storage.OneItemStorage;
 
 public abstract class Farm<T extends Water, U extends Plant> extends OneToOneProducer<T, U> implements Building {
 
-	public Farm(Supplier<T> producer, int defaultStorageSize, double producingSpeed, int durability) {
-		super(producer, defaultStorageSize, producingSpeed, durability);
-	}
-
-	public synchronized U getPlant() {
-		return getItem();
+	public Farm(OneItemStorage<T> sourceStorage, OneItemStorage<U> destinationStorage, ProducerConfig producerConfig) {
+		super(sourceStorage, destinationStorage, producerConfig);
 	}
 }
