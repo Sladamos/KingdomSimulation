@@ -1,5 +1,7 @@
 package strategy.location.village;
 
+import lombok.Getter;
+import strategy.location.mountain.MountainStorageManager;
 import strategy.producer.building.farm.Farm;
 import strategy.producer.building.farm.WheatFarm;
 import strategy.producer.building.livestock.Apiary;
@@ -12,6 +14,8 @@ import strategy.item.food.Milk;
 import strategy.item.plant.Wheat;
 import strategy.item.wood.Mahogany;
 import strategy.item.fluid.Water;
+import strategy.storage.OneItemStorage;
+import strategy.storage.UnlimitedOneItemStorage;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -26,14 +30,13 @@ public class SarraxVillage implements Village {
 	private final LivestockAnimal<Milk> cow;
 
 	private final Lumberjack<Mahogany> lumberjack;
-
 	private final ExecutorService executorService;
 
-	public SarraxVillage() {
-		cow = new Cow(0);
-		apiary = new Apiary(0);
-		farm = new WheatFarm(null, 0);
-		lumberjack = new MahoganyLumberjack(0);
+	public SarraxVillage(VillageStorageManager villageStorageManager, OneItemStorage<Water> waterStorage) {
+		cow = new Cow(villageStorageManager.getMilkStorage(), null);
+		apiary = new Apiary(villageStorageManager.getHoneyStorage(), null);
+		farm = new WheatFarm(waterStorage, villageStorageManager.getWheatStorage(), null);
+		lumberjack = new MahoganyLumberjack(villageStorageManager.getMahoganyStorage(), null);
 		executorService = Executors.newFixedThreadPool(4);
 	}
 
