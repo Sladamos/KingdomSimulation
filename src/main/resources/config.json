@@ -6,7 +6,8 @@
     "warriors": {
       "number_of_warriors": 40,
       "max_damage": 25,
-      "max_defense": 5
+      "max_defense": 5,
+      "health": 100
     }
   },
   "second_kingdom": {
@@ -16,7 +17,8 @@
     "warriors": {
       "number_of_warriors": 35,
       "max_damage": 20,
-      "max_defense": 7
+      "max_defense": 7,
+      "health": 100
     }
   }
 }

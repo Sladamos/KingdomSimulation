@@ -5,12 +5,8 @@ import lombok.Synchronized;
 import strategy.item.organism.human.Human;
 import strategy.mechanism.fight.Fightable;
 import strategy.mechanism.fight.exceptions.FightActionException;
-import strategy.mechanism.fight.exceptions.IncorrectAttackException;
-import strategy.mechanism.fight.exceptions.IncorrectDefenseException;
 
-public abstract class HumanInfantryUnit extends Human implements InfantryUnit  {
-
-    private static final int HUMAN_MAX_HITPOINTS = 100;
+public abstract class HumanInfantryUnit implements Human, InfantryUnit  {
 
     @Getter(onMethod_={@Synchronized})
     private final Integer damage;
@@ -22,22 +18,11 @@ public abstract class HumanInfantryUnit extends Human implements InfantryUnit  {
 
     private boolean isAlive;
 
-    public HumanInfantryUnit(int damage, int defense) {
-        this.damage = damage;
-        this.defense = defense;
-        validateStatistics();
-        this.hitPoints = HUMAN_MAX_HITPOINTS;
+    public HumanInfantryUnit(InfantryConfig config) {
+        this.damage = config.getDamage();
+        this.defense = config.getDefense();
+        this.hitPoints = config.getHealth();
         isAlive = true;
-    }
-
-    private void validateStatistics() {
-        if(damage < 0) {
-            throw new IncorrectAttackException("Attack must be a not negative number");
-        }
-
-        if(defense < 0) {
-            throw new IncorrectDefenseException("Defense must be a not negative number");
-        }
     }
 
     @Override
@@ -70,6 +55,6 @@ public abstract class HumanInfantryUnit extends Human implements InfantryUnit  {
 
     @Override
     public synchronized boolean isDead() {
-        return super.isDead() || !isAlive;
+        return !isAlive;
     }
 }

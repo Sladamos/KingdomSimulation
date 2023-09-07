@@ -13,4 +13,6 @@ public class InitWarriorsConfig implements InitMilitaryConfig {
     private final int maxDamage;
 
     private final int maxDefense;
+
+    private final int health;
 }

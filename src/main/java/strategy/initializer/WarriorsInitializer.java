@@ -2,6 +2,7 @@ package strategy.initializer;
 
 import strategy.item.military.InitMilitaryConfig;
 import strategy.item.military.infantry.warrior.Warrior;
+import strategy.item.military.infantry.warrior.WarriorConfig;
 
 import java.util.Collection;
 import java.util.Random;
@@ -19,12 +20,14 @@ public class WarriorsInitializer {
         int numberOfWarriors = warriorsConfig.getNumberOfUnits();
         int maxDamage = warriorsConfig.getMaxDamage();
         int maxDefense = warriorsConfig.getMaxDefense();
-        return IntStream.range(0, numberOfWarriors).mapToObj(el -> createRandomWarrior(maxDamage, maxDefense)).toList();
+        int health = warriorsConfig.getHealth();
+        return IntStream.range(0, numberOfWarriors).mapToObj(el -> createRandomWarrior(maxDamage, maxDefense, health)).toList();
     }
 
-    private Warrior createRandomWarrior(int maxDamage, int maxDefense) {
+    private Warrior createRandomWarrior(int maxDamage, int maxDefense, int health) {
         int damage = rand.nextInt(maxDamage);
         int defense = rand.nextInt(maxDefense);
-        return new Warrior(damage, defense);
+        WarriorConfig warriorConfig = new WarriorConfig(damage, defense, health);
+        return new Warrior(warriorConfig);
     }
 }

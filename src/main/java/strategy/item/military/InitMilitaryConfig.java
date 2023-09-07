@@ -6,4 +6,5 @@ public interface InitMilitaryConfig extends Config {
     int getNumberOfUnits();
     int getMaxDamage();
     int getMaxDefense();
+    int getHealth();
 }

@@ -15,6 +15,6 @@ public class SarraxQueen extends TwoToOneProducer<Child, GrowthElixir, Adult> im
 
 	@Override
 	protected Adult createNewItem(Child firstMaterial, GrowthElixir secondMaterial) {
-		return new Adult(0, 0);
+		return new Adult();
 	}
 }

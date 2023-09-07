@@ -14,6 +14,6 @@ public class ChildHouse<T extends Coin, U extends Bread> extends House<T, U, Chi
 
 	@Override
 	protected Child createNewItem(T material, U secondMaterial) {
-		return new Child(0, 100);
+		return new Child();
 	}
 }
