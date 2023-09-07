@@ -3,7 +3,6 @@ package strategy.item.military.infantry;
 import strategy.item.military.ArmyDestroyedException;
 import strategy.item.military.GeneralConfig;
 import strategy.item.statistic.Happiness;
-import strategy.producer.exceptions.ProducerTerminatedException;
 import strategy.storage.OneItemStorage;
 
 import java.util.Collection;
@@ -30,7 +29,8 @@ public class InfantryGeneralImpl<T extends InfantryUnit> implements InfantryGene
         this.happinessStorage = happinessStorage;
         this.infantryUnitStorage = infantryUnitStorage;
         isConsuming = false;
-        happinessDamageModificator = 0;
+        happinessDamageModificator = 1;
+        //TODO : repair
         //happinessDamageModificator = generalConfig.getHappinessDamageModificator();
         army = new LinkedList<>();
     }
@@ -47,7 +47,7 @@ public class InfantryGeneralImpl<T extends InfantryUnit> implements InfantryGene
             try {
                 T unit = infantryUnitStorage.getItemFromStorage();
                 accept(unit);
-            } catch (ProducerTerminatedException err) {
+            } catch (Exception err) {
                 return;
             }
         }
@@ -60,7 +60,7 @@ public class InfantryGeneralImpl<T extends InfantryUnit> implements InfantryGene
             try {
                 Happiness happiness = happinessStorage.getItemFromStorage();
                 accept(happiness);
-            } catch (ProducerTerminatedException err) {
+            } catch (Exception err) {
                 return;
             }
         }

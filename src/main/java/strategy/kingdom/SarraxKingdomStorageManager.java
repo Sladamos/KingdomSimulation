@@ -52,4 +52,20 @@ public class SarraxKingdomStorageManager implements KingdomStorageManager<Warrio
                 new UnlimitedOneItemStorage<>(),
                 new UnlimitedOneItemStorage<>());
     }
+
+    @Override
+    public void enableAcceptingItems() {
+        mountainStorageManager.enableAcceptingItems();
+        villageStorageManager.enableAcceptingItems();
+        settlementStorageManager.enableAcceptingItems();
+        castleStorageManager.enableAcceptingItems();
+    }
+
+    @Override
+    public void disableAcceptingItems() {
+        mountainStorageManager.disableAcceptingItems();
+        villageStorageManager.disableAcceptingItems();
+        settlementStorageManager.disableAcceptingItems();
+        castleStorageManager.disableAcceptingItems();
+    }
 }

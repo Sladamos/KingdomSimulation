@@ -19,4 +19,20 @@ public class VillageStorageManagerImpl implements VillageStorageManager {
     private final OneItemStorage<Wheat> wheatStorage;
 
     private final OneItemStorage<Mahogany> mahoganyStorage;
+
+    @Override
+    public void enableAcceptingItems() {
+        milkStorage.enableAcceptingItems();
+        honeyStorage.enableAcceptingItems();
+        wheatStorage.enableAcceptingItems();
+        mahoganyStorage.enableAcceptingItems();
+    }
+
+    @Override
+    public void disableAcceptingItems() {
+        milkStorage.disableAcceptingItems();
+        honeyStorage.disableAcceptingItems();
+        wheatStorage.disableAcceptingItems();
+        mahoganyStorage.disableAcceptingItems();
+    }
 }

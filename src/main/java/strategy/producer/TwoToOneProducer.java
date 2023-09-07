@@ -19,7 +19,7 @@ public abstract class TwoToOneProducer<T extends Item, U extends Item, V extends
 		this.firstSourceStorage = firstSourceStorage;
 		this.secondSourceStorage = secondSourceStorage;
 		this.destinationStorage = destinationStorage;
-		this.numberOfItemsPerMinute = 1;//TODO: producerConfig.getNumberOfItemsPerMinute();
+		this.numberOfItemsPerMinute = 15;//TODO: producerConfig.getNumberOfItemsPerMinute();
 	}
 
 	@Override

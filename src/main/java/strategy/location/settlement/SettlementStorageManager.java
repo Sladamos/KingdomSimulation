@@ -1,5 +1,6 @@
 package strategy.location.settlement;
 
+import strategy.StorageManager;
 import strategy.item.bar.IronBar;
 import strategy.item.coin.GoldenCoin;
 import strategy.item.elixir.GrowthElixir;
@@ -15,7 +16,7 @@ import strategy.item.tool.bucket.WoodenBucket;
 import strategy.item.weapon.meele.sword.IronSword;
 import strategy.storage.OneItemStorage;
 
-public interface SettlementStorageManager<T extends InfantryUnit> {
+public interface SettlementStorageManager<T extends InfantryUnit> extends StorageManager {
     OneItemStorage<IronBar> getIronBarStorage();
     OneItemStorage<IronSword> getIronSwordStorage();
     OneItemStorage<IronBucket> getIronBucketStorage();

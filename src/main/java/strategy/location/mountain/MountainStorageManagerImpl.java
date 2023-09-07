@@ -20,4 +20,19 @@ public class MountainStorageManagerImpl implements MountainStorageManager {
 
     private final OneItemStorage<Sapphire> sapphireStorage;
 
+    @Override
+    public void enableAcceptingItems() {
+        saltStorage.enableAcceptingItems();
+        ironOreStorage.enableAcceptingItems();
+        rubyStorage.enableAcceptingItems();
+        sapphireStorage.enableAcceptingItems();
+    }
+
+    @Override
+    public void disableAcceptingItems() {
+        saltStorage.disableAcceptingItems();
+        ironOreStorage.disableAcceptingItems();
+        rubyStorage.disableAcceptingItems();
+        sapphireStorage.disableAcceptingItems();
+    }
 }

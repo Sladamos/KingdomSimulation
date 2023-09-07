@@ -13,7 +13,7 @@ public abstract class ZeroToOneProducer<T extends Item> implements OneItemProduc
 
 	public ZeroToOneProducer(OneItemStorage<T> destinationStorage, ProducerConfig producerConfig) {
 		this.destinationStorage = destinationStorage;
-		this.numberOfItemsPerMinute = 1;//TODO: producerConfig.getNumberOfItemsPerMinute();
+		this.numberOfItemsPerMinute = 15;//TODO: producerConfig.getNumberOfItemsPerMinute();
 	}
 
 	@Override

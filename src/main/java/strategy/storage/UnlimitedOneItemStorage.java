@@ -22,6 +22,7 @@ public class UnlimitedOneItemStorage<T extends Item> implements OneItemStorage<T
 
     @Override
     public synchronized void addItemToStorage(T item) {
+        System.out.println("Item pushed to storage: " + item);
         storage.push(item);
         notifyAll();
     }
@@ -36,7 +37,12 @@ public class UnlimitedOneItemStorage<T extends Item> implements OneItemStorage<T
     }
 
     @Override
-    public synchronized void stopServingItems() {
+    public synchronized void enableAcceptingItems() {
+        working = true;
+    }
+
+    @Override
+    public synchronized void disableAcceptingItems() {
         working = false;
         notifyAll();
     }

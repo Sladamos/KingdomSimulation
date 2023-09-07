@@ -19,4 +19,20 @@ public class CastleStorageManagerImpl implements CastleStorageManager {
     private final OneItemStorage<Adult> adultStorage;
 
     private final OneItemStorage<Happiness> happinessStorage;
+
+    @Override
+    public void enableAcceptingItems() {
+        necklacePresentStorage.enableAcceptingItems();
+        ringPresentStorage.enableAcceptingItems();
+        adultStorage.enableAcceptingItems();
+        happinessStorage.enableAcceptingItems();
+    }
+
+    @Override
+    public void disableAcceptingItems() {
+        necklacePresentStorage.disableAcceptingItems();
+        ringPresentStorage.disableAcceptingItems();
+        adultStorage.disableAcceptingItems();
+        happinessStorage.disableAcceptingItems();
+    }
 }

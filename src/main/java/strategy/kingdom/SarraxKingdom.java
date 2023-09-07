@@ -25,6 +25,8 @@ public class SarraxKingdom implements Kingdom {
 
     private final Village village;
 
+    private final KingdomStorageManager<Warrior> kingdomStorageManager;
+
     @Getter
     private final Castle<Warrior> castle;
 
@@ -33,7 +35,7 @@ public class SarraxKingdom implements Kingdom {
     private final String kingdomId;
 
     public SarraxKingdom(KingdomConfig kingdomConfig) {
-        KingdomStorageManager<Warrior> kingdomStorageManager = new SarraxKingdomStorageManager();
+        kingdomStorageManager = new SarraxKingdomStorageManager();
         MountainStorageManager mountainStorageManager = kingdomStorageManager.getMountainStorageManager();
         SettlementStorageManager<Warrior> settlementStorageManager = kingdomStorageManager.getSettlementStorageManager();
         VillageStorageManager villageStorageManager = kingdomStorageManager.getVillageStorageManager();
@@ -49,6 +51,7 @@ public class SarraxKingdom implements Kingdom {
 
     @Override
     public void run() {
+        kingdomStorageManager.enableAcceptingItems();
         mountain.run();
         settlement.run();
         village.run();
@@ -61,6 +64,7 @@ public class SarraxKingdom implements Kingdom {
         settlement.terminate();
         village.terminate();
         castle.terminate();
+        kingdomStorageManager.disableAcceptingItems();
     }
 
     @Override

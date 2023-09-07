@@ -46,4 +46,38 @@ public class SettlementStorageManagerImpl<T extends HumanInfantryUnit> implement
     private final OneItemStorage<Child> childStorage;
 
     private final OneItemStorage<T> infantryUnitStorage;
+
+    @Override
+    public void enableAcceptingItems() {
+        ironBarStorage.enableAcceptingItems();
+        ironSwordStorage.enableAcceptingItems();
+        ironBucketStorage.enableAcceptingItems();
+        woodenBucketStorage.enableAcceptingItems();
+        waterStorage.enableAcceptingItems();
+        goldenCoinStorage.enableAcceptingItems();
+        wheatFlourStorage.enableAcceptingItems();
+        wheatBreadStorage.enableAcceptingItems();
+        sapphireRingStorage.enableAcceptingItems();
+        rubyNecklaceStorage.enableAcceptingItems();
+        growthElixirStorage.enableAcceptingItems();
+        childStorage.enableAcceptingItems();
+        infantryUnitStorage.enableAcceptingItems();
+    }
+
+    @Override
+    public void disableAcceptingItems() {
+        ironBarStorage.disableAcceptingItems();
+        ironSwordStorage.disableAcceptingItems();
+        ironBucketStorage.disableAcceptingItems();
+        woodenBucketStorage.disableAcceptingItems();
+        waterStorage.disableAcceptingItems();
+        goldenCoinStorage.disableAcceptingItems();
+        wheatFlourStorage.disableAcceptingItems();
+        wheatBreadStorage.disableAcceptingItems();
+        sapphireRingStorage.disableAcceptingItems();
+        rubyNecklaceStorage.disableAcceptingItems();
+        growthElixirStorage.disableAcceptingItems();
+        childStorage.disableAcceptingItems();
+        infantryUnitStorage.disableAcceptingItems();
+    }
 }
