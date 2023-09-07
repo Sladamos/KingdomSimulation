@@ -10,7 +10,7 @@ import strategy.item.fluid.Water;
 import strategy.item.food.baking.bread.WheatBread;
 import strategy.item.jewellery.necklace.RubyNecklace;
 import strategy.item.jewellery.ring.SapphireRing;
-import strategy.item.military.infantry.warrior.Warrior;
+import strategy.item.military.infantry.HumanInfantryUnit;
 import strategy.item.organism.human.Child;
 import strategy.item.tool.bucket.IronBucket;
 import strategy.item.tool.bucket.WoodenBucket;
@@ -19,7 +19,7 @@ import strategy.storage.OneItemStorage;
 
 @AllArgsConstructor
 @Getter
-public class SettlementStorageManagerImpl implements SettlementStorageManager {
+public class SettlementStorageManagerImpl<T extends HumanInfantryUnit> implements SettlementStorageManager<T> {
 
     private final OneItemStorage<IronBar> ironBarStorage;
 
@@ -45,5 +45,5 @@ public class SettlementStorageManagerImpl implements SettlementStorageManager {
 
     private final OneItemStorage<Child> childStorage;
 
-    private final OneItemStorage<Warrior> warriorStorage;
+    private final OneItemStorage<T> infantryUnitStorage;
 }

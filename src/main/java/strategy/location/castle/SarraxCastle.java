@@ -7,6 +7,7 @@ import strategy.item.military.infantry.InfantryGeneral;
 import strategy.item.military.infantry.InfantryGeneralImpl;
 import strategy.item.present.NecklacePresent;
 import strategy.item.present.RingPresent;
+import strategy.location.settlement.SettlementStorageManager;
 import strategy.producer.building.craftsman.present.NecklacePresentCraftsman;
 import strategy.producer.building.craftsman.present.RingPresentCraftsman;
 import strategy.producer.royal.king.SarraxKing;
@@ -29,22 +30,25 @@ public class SarraxCastle<T extends HumanInfantryUnit> implements Castle<T> {
 
 	private final ExecutorService executorService;
 
-	public SarraxCastle(CastleStorageManager castleStorageManager) {
-		queen = new SarraxQueen(null, null, castleStorageManager.getAdultStorage(), null);
-		king = createKing(castleStorageManager);
+	public SarraxCastle(CastleStorageManager castleStorageManager, SettlementStorageManager<T> settlementStorageManager) {
+		queen = new SarraxQueen(settlementStorageManager.getChildStorage(), settlementStorageManager.getGrowthElixirStorage(),
+				castleStorageManager.getAdultStorage(), null);
+		king = createKing(castleStorageManager, settlementStorageManager);
 		princess = new SarraxPrincess<>(castleStorageManager.getNecklacePresentStorage(),
 				castleStorageManager.getRingPresentStorage(),
 				castleStorageManager.getHappinessStorage(),
 				null);
-		warriorsGeneral = new InfantryGeneralImpl<>(castleStorageManager.getHappinessStorage(), null, null);
+		warriorsGeneral = new InfantryGeneralImpl<>(castleStorageManager.getHappinessStorage(), settlementStorageManager.getInfantryUnitStorage(), null);
 		executorService = Executors.newFixedThreadPool(5);
 	}
 
-	private SarraxKing createKing(CastleStorageManager castleStorageManager) {
+	private SarraxKing createKing(CastleStorageManager castleStorageManager, SettlementStorageManager<T> settlementStorageManager) {
 		NecklacePresentCraftsman<RubyNecklace> necklacePresentCraftsman =
-				new NecklacePresentCraftsman<>(null, castleStorageManager.getNecklacePresentStorage(), null);
+				new NecklacePresentCraftsman<>(settlementStorageManager.getRubyNecklaceStorage(),
+						castleStorageManager.getNecklacePresentStorage(), null);
 		RingPresentCraftsman<SapphireRing> ringPresentCraftsman =
-				new RingPresentCraftsman<>(null, castleStorageManager.getRingPresentStorage(), null);
+				new RingPresentCraftsman<>(settlementStorageManager.getSapphireRingStorage(),
+						castleStorageManager.getRingPresentStorage(), null);
 		return new SarraxKing(necklacePresentCraftsman, ringPresentCraftsman);
 	}
 

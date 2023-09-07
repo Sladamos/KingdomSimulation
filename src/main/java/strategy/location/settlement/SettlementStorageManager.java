@@ -8,14 +8,14 @@ import strategy.item.fluid.Water;
 import strategy.item.food.baking.bread.WheatBread;
 import strategy.item.jewellery.necklace.RubyNecklace;
 import strategy.item.jewellery.ring.SapphireRing;
-import strategy.item.military.infantry.warrior.Warrior;
+import strategy.item.military.infantry.InfantryUnit;
 import strategy.item.organism.human.Child;
 import strategy.item.tool.bucket.IronBucket;
 import strategy.item.tool.bucket.WoodenBucket;
 import strategy.item.weapon.meele.sword.IronSword;
 import strategy.storage.OneItemStorage;
 
-public interface SettlementStorageManager {
+public interface SettlementStorageManager<T extends InfantryUnit> {
     OneItemStorage<IronBar> getIronBarStorage();
     OneItemStorage<IronSword> getIronSwordStorage();
     OneItemStorage<IronBucket> getIronBucketStorage();
@@ -28,5 +28,5 @@ public interface SettlementStorageManager {
     OneItemStorage<RubyNecklace> getRubyNecklaceStorage();
     OneItemStorage<GrowthElixir> getGrowthElixirStorage();
     OneItemStorage<Child> getChildStorage();
-    OneItemStorage<Warrior> getWarriorStorage();
+    OneItemStorage<T> getInfantryUnitStorage();
 }

@@ -1,6 +1,7 @@
 package strategy.kingdom;
 
 import lombok.Getter;
+import strategy.item.military.infantry.warrior.Warrior;
 import strategy.location.castle.CastleStorageManager;
 import strategy.location.castle.CastleStorageManagerImpl;
 import strategy.location.mountain.MountainStorageManager;
@@ -12,7 +13,7 @@ import strategy.location.village.VillageStorageManagerImpl;
 import strategy.storage.UnlimitedOneItemStorage;
 
 @Getter
-public class SarraxKingdomStorageManager implements KingdomStorageManager {
+public class SarraxKingdomStorageManager implements KingdomStorageManager<Warrior> {
 
     private final MountainStorageManager mountainStorageManager;
 
@@ -20,7 +21,7 @@ public class SarraxKingdomStorageManager implements KingdomStorageManager {
 
     private final CastleStorageManager castleStorageManager;
 
-    private final SettlementStorageManager settlementStorageManager;
+    private final SettlementStorageManager<Warrior> settlementStorageManager;
 
     public SarraxKingdomStorageManager() {
         mountainStorageManager = new MountainStorageManagerImpl(new UnlimitedOneItemStorage<>(),
@@ -37,7 +38,7 @@ public class SarraxKingdomStorageManager implements KingdomStorageManager {
                 new UnlimitedOneItemStorage<>(),
                 new UnlimitedOneItemStorage<>(),
                 new UnlimitedOneItemStorage<>());
-        settlementStorageManager = new SettlementStorageManagerImpl(new UnlimitedOneItemStorage<>(),
+        settlementStorageManager = new SettlementStorageManagerImpl<>(new UnlimitedOneItemStorage<>(),
                 new UnlimitedOneItemStorage<>(),
                 new UnlimitedOneItemStorage<>(),
                 new UnlimitedOneItemStorage<>(),

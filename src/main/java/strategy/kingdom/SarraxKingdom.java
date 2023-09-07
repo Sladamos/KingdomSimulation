@@ -3,14 +3,17 @@ package strategy.kingdom;
 import lombok.Getter;
 import strategy.item.military.infantry.warrior.Warrior;
 import strategy.location.castle.Castle;
+import strategy.location.castle.CastleStorageManager;
 import strategy.location.castle.SarraxCastle;
 import strategy.location.mountain.Mountain;
+import strategy.location.mountain.MountainStorageManager;
 import strategy.location.mountain.SarraxMountain;
 import strategy.location.settlement.SarraxSettlement;
 import strategy.location.settlement.Settlement;
+import strategy.location.settlement.SettlementStorageManager;
 import strategy.location.village.SarraxVillage;
-import strategy.item.military.infantry.InfantryUnit;
 import strategy.location.village.Village;
+import strategy.location.village.VillageStorageManager;
 
 import java.util.Collection;
 
@@ -30,11 +33,16 @@ public class SarraxKingdom implements Kingdom {
     private final String kingdomId;
 
     public SarraxKingdom(KingdomConfig kingdomConfig) {
-        KingdomStorageManager kingdomStorageManager = new SarraxKingdomStorageManager();
-        mountain = new SarraxMountain(kingdomStorageManager.getMountainStorageManager());
-        village = new SarraxVillage(kingdomStorageManager.getVillageStorageManager(), null);
-        settlement = new SarraxSettlement();
-        castle = new SarraxCastle<>(kingdomStorageManager.getCastleStorageManager());
+        KingdomStorageManager<Warrior> kingdomStorageManager = new SarraxKingdomStorageManager();
+        MountainStorageManager mountainStorageManager = kingdomStorageManager.getMountainStorageManager();
+        SettlementStorageManager<Warrior> settlementStorageManager = kingdomStorageManager.getSettlementStorageManager();
+        VillageStorageManager villageStorageManager = kingdomStorageManager.getVillageStorageManager();
+        CastleStorageManager castleStorageManager = kingdomStorageManager.getCastleStorageManager();
+        mountain = new SarraxMountain(mountainStorageManager);
+        village = new SarraxVillage(villageStorageManager, settlementStorageManager.getWaterStorage());
+        settlement = new SarraxSettlement(settlementStorageManager, villageStorageManager,
+                mountainStorageManager, castleStorageManager.getAdultStorage());
+        castle = new SarraxCastle<>(castleStorageManager, settlementStorageManager);
         this.kingdomId = kingdomConfig.getKingdomId();
         this.attackTime = kingdomConfig.getAttackTime();
     }
