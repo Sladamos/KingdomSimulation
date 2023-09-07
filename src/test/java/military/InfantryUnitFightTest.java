@@ -1,6 +1,6 @@
 package military;
 
-import strategy.military.infantry.Warrior;
+import strategy.military.infantry.warrior.Warrior;
 import strategy.military.infantry.InfantryUnit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

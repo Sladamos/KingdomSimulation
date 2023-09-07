@@ -6,5 +6,5 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class ProducerConfig {
-    int numberOfItemsPerMinute;
+    private final int numberOfItemsPerMinute;
 }

@@ -1,4 +1,4 @@
-package strategy.military.infantry;
+package strategy.military.infantry.warrior;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

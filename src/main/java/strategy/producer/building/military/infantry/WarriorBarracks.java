@@ -1,6 +1,6 @@
 package strategy.producer.building.military.infantry;
 
-import strategy.military.infantry.Warrior;
+import strategy.military.infantry.warrior.Warrior;
 import strategy.organism.human.Adult;
 import strategy.item.weapon.meele.sword.Sword;
 

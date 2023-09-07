@@ -1,4 +1,6 @@
-package strategy.military.infantry;
+package strategy.military.infantry.warrior;
+
+import strategy.military.infantry.HumanInfantryUnit;
 
 public class Warrior extends HumanInfantryUnit {
 

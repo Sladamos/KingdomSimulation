@@ -3,7 +3,7 @@ package strategy.kingdom;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import strategy.Config;
-import strategy.military.infantry.InitWarriorsConfig;
+import strategy.military.infantry.warrior.InitWarriorsConfig;
 
 @Getter
 @AllArgsConstructor

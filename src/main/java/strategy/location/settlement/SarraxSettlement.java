@@ -1,6 +1,6 @@
 package strategy.location.settlement;
 
-import strategy.military.infantry.Warrior;
+import strategy.military.infantry.warrior.Warrior;
 import strategy.organism.human.Child;
 import strategy.producer.building.alchemist.Alchemist;
 import strategy.producer.building.alchemist.GrowthElixirAlchemist;
