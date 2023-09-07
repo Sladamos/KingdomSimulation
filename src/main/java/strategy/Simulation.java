@@ -6,6 +6,8 @@ public class Simulation {
 
     //TODO: human remove starvation
 
+    //TODO: add config to mountain etc
+
     //TODO: validate config file in config initializers (are values > 0 etc.)
 
     /*TODO gui:

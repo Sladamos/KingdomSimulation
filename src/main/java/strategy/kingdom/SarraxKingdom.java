@@ -29,8 +29,9 @@ public class SarraxKingdom implements Kingdom {
     private final String kingdomId;
 
     public SarraxKingdom(KingdomConfig kingdomConfig) {
-        mountain = new SarraxMountain();
-        village = new SarraxVillage();
+        KingdomStorageManager kingdomStorageManager = new SarraxKingdomStorageManager();
+        mountain = new SarraxMountain(kingdomStorageManager.getMountainStorageManager());
+        village = new SarraxVillage(kingdomStorageManager.getVillageStorageManager(), null);
         settlement = new SarraxSettlement();
         castle = new SarraxCastle();
         this.kingdomId = kingdomConfig.getKingdomId();
