@@ -13,7 +13,7 @@ public class Cow extends LivestockAnimal<Milk> {
 	}
 
 	@Override
-	protected Milk produceNewItem() {
+	protected Milk createNewItem() {
 		return new Milk();
 	}
 }

@@ -22,7 +22,6 @@ public abstract class ZeroToOneProducer<T extends Item> implements Producer {
 		while(isWorking()) {
 			try {
 				T item = produceNewItem();
-				////TODO: messages receiver System.out.println("Produced :" + item);
 				destinationStorage.addItemToStorage(item);
 			} catch (Exception err) {
 				return;

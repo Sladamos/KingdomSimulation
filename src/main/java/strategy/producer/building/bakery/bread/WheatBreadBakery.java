@@ -18,7 +18,7 @@ public class WheatBreadBakery extends BreadBakery<WheatFlour, Salt, WheatBread> 
     }
 
     @Override
-    protected WheatBread produceNewItem(WheatFlour flour, Salt salt) {
+    protected WheatBread createNewItem(WheatFlour flour, Salt salt) {
         return new WheatBread();
     }
 

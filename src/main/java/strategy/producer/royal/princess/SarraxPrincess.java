@@ -21,7 +21,7 @@ public class SarraxPrincess<T extends Present, S extends Present> extends TwoToO
     }
 
     @Override
-    protected Happiness produceNewItem(T material, S secondMaterial) {
+    protected Happiness createNewItem(T material, S secondMaterial) {
         return new Happiness();
     }
 
