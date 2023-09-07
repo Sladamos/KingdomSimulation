@@ -5,6 +5,8 @@ import strategy.location.castle.CastleStorageManager;
 import strategy.location.castle.CastleStorageManagerImpl;
 import strategy.location.mountain.MountainStorageManager;
 import strategy.location.mountain.MountainStorageManagerImpl;
+import strategy.location.settlement.SettlementStorageManager;
+import strategy.location.settlement.SettlementStorageManagerImpl;
 import strategy.location.village.VillageStorageManager;
 import strategy.location.village.VillageStorageManagerImpl;
 import strategy.storage.UnlimitedOneItemStorage;
@@ -18,6 +20,8 @@ public class SarraxKingdomStorageManager implements KingdomStorageManager {
 
     private final CastleStorageManager castleStorageManager;
 
+    private final SettlementStorageManager settlementStorageManager;
+
     public SarraxKingdomStorageManager() {
         mountainStorageManager = new MountainStorageManagerImpl(new UnlimitedOneItemStorage<>(),
                 new UnlimitedOneItemStorage<>(),
@@ -30,6 +34,19 @@ public class SarraxKingdomStorageManager implements KingdomStorageManager {
                 new UnlimitedOneItemStorage<>());
 
         castleStorageManager = new CastleStorageManagerImpl(new UnlimitedOneItemStorage<>(),
+                new UnlimitedOneItemStorage<>(),
+                new UnlimitedOneItemStorage<>(),
+                new UnlimitedOneItemStorage<>());
+        settlementStorageManager = new SettlementStorageManagerImpl(new UnlimitedOneItemStorage<>(),
+                new UnlimitedOneItemStorage<>(),
+                new UnlimitedOneItemStorage<>(),
+                new UnlimitedOneItemStorage<>(),
+                new UnlimitedOneItemStorage<>(),
+                new UnlimitedOneItemStorage<>(),
+                new UnlimitedOneItemStorage<>(),
+                new UnlimitedOneItemStorage<>(),
+                new UnlimitedOneItemStorage<>(),
+                new UnlimitedOneItemStorage<>(),
                 new UnlimitedOneItemStorage<>(),
                 new UnlimitedOneItemStorage<>(),
                 new UnlimitedOneItemStorage<>());

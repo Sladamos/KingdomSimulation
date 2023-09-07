@@ -12,6 +12,7 @@ public class WarriorBarracks<T extends Sword> extends Barracks<Adult, T, Warrior
 		super(firstSourceStorage, secondSourceStorage, destinationStorage, producerConfig);
 	}
 
+	//TODO config
 	@Override
 	protected Warrior createNewItem(Adult material, T secondMaterial) {
 		return new Warrior(10, 5);
