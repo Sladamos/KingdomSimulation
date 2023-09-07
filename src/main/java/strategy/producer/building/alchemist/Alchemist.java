@@ -2,7 +2,7 @@ package strategy.producer.building.alchemist;
 
 import strategy.producer.TwoToOneProducer;
 import strategy.producer.building.Building;
-import strategy.product.elixir.Elixir;
+import strategy.item.elixir.Elixir;
 
 import java.util.function.Supplier;
 

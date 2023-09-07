@@ -8,9 +8,9 @@ import strategy.producer.building.farm.WheatFarm;
 import strategy.producer.building.mill.WheatMill;
 import strategy.producer.building.miner.basic.SaltMiner;
 import strategy.producer.building.well.basic.WaterWell;
-import strategy.material.mineral.Salt;
-import strategy.product.fluid.Water;
-import strategy.product.food.baking.bread.WheatBread;
+import strategy.item.mineral.Salt;
+import strategy.item.fluid.Water;
+import strategy.item.food.baking.bread.WheatBread;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

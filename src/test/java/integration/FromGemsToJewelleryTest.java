@@ -7,9 +7,9 @@ import strategy.producer.building.jewellery.basic.necklace.RubyNecklaceJeweller;
 import strategy.producer.building.jewellery.basic.ring.SapphireRingJeweller;
 import strategy.producer.building.miner.basic.RubyMiner;
 import strategy.producer.building.miner.basic.SapphireMiner;
-import strategy.material.mineral.gem.Ruby;
-import strategy.material.mineral.gem.Sapphire;
-import strategy.product.jewellery.necklace.RubyNecklace;
+import strategy.item.mineral.gem.Ruby;
+import strategy.item.mineral.gem.Sapphire;
+import strategy.item.jewellery.necklace.RubyNecklace;
 
 public class FromGemsToJewelleryTest {
 
@@ -30,6 +30,6 @@ public class FromGemsToJewelleryTest {
 		SapphireRingJeweller jeweller = new SapphireRingJeweller(miner::getMineral, 0);
 		Thread thread = new Thread(jeweller);
 		thread.start();
-		Assertions.assertThat(jeweller.getJewellery()).isInstanceOf(strategy.product.jewellery.ring.SapphireRing.class);
+		Assertions.assertThat(jeweller.getJewellery()).isInstanceOf(strategy.item.jewellery.ring.SapphireRing.class);
 	}
 }

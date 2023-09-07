@@ -3,8 +3,8 @@ package strategy.producer.building.house;
 import strategy.producer.TwoToOneProducer;
 import strategy.organism.human.Human;
 import strategy.producer.building.Building;
-import strategy.product.coin.Coin;
-import strategy.product.food.Food;
+import strategy.item.coin.Coin;
+import strategy.item.Food;
 
 import java.util.function.Supplier;
 

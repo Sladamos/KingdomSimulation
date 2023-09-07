@@ -1,6 +1,6 @@
 package strategy.producer.building.miner.basic;
 
-import strategy.material.mineral.Salt;
+import strategy.item.mineral.Salt;
 
 public class SaltMiner extends Miner<Salt> {
 

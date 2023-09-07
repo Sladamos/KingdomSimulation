@@ -1,7 +1,7 @@
 package strategy.producer.building.artisan.bucket;
 
-import strategy.material.bar.IronBar;
-import strategy.product.tool.bucket.IronBucket;
+import strategy.item.bar.IronBar;
+import strategy.item.tool.bucket.IronBucket;
 
 import java.util.function.Supplier;
 

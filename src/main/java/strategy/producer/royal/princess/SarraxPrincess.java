@@ -1,8 +1,8 @@
 package strategy.producer.royal.princess;
 
 import strategy.producer.TwoToOneProducer;
-import strategy.product.present.Present;
-import strategy.product.statistic.Happiness;
+import strategy.item.present.Present;
+import strategy.item.statistic.Happiness;
 
 import java.util.function.Supplier;
 

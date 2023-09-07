@@ -1,7 +1,7 @@
 package strategy.producer.building.smith.meele;
 
-import strategy.material.bar.IronBar;
-import strategy.product.weapon.meele.sword.IronSword;
+import strategy.item.bar.IronBar;
+import strategy.item.weapon.meele.sword.IronSword;
 
 import java.util.function.Supplier;
 

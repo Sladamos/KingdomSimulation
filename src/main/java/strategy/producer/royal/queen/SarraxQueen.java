@@ -3,7 +3,7 @@ package strategy.producer.royal.queen;
 import strategy.organism.human.Adult;
 import strategy.organism.human.Child;
 import strategy.producer.TwoToOneProducer;
-import strategy.product.elixir.GrowthElixir;
+import strategy.item.elixir.GrowthElixir;
 
 import java.util.function.Supplier;
 

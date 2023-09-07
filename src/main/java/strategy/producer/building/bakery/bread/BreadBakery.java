@@ -1,9 +1,9 @@
 package strategy.producer.building.bakery.bread;
 
 import strategy.producer.building.bakery.Bakery;
-import strategy.material.mineral.Salt;
-import strategy.product.flour.Flour;
-import strategy.product.food.baking.bread.Bread;
+import strategy.item.mineral.Salt;
+import strategy.item.flour.Flour;
+import strategy.item.food.baking.bread.Bread;
 
 import java.util.function.Supplier;
 

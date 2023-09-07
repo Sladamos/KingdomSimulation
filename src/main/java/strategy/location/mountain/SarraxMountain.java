@@ -2,14 +2,13 @@ package strategy.location.mountain;
 
 import strategy.producer.building.miner.advanced.SarraxMiner;
 import strategy.producer.building.miner.basic.*;
-import strategy.material.mineral.Salt;
-import strategy.material.mineral.gem.Ruby;
-import strategy.material.mineral.gem.Sapphire;
-import strategy.material.mineral.ore.IronOre;
+import strategy.item.mineral.Salt;
+import strategy.item.mineral.gem.Ruby;
+import strategy.item.mineral.gem.Sapphire;
+import strategy.item.mineral.ore.IronOre;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 public class SarraxMountain implements Mountain, Runnable {
 

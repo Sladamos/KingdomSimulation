@@ -1,7 +1,7 @@
 package strategy.producer.building.mill;
 
-import strategy.material.plant.Wheat;
-import strategy.product.flour.WheatFlour;
+import strategy.item.plant.Wheat;
+import strategy.item.flour.WheatFlour;
 
 import java.util.function.Supplier;
 

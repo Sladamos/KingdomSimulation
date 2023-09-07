@@ -1,8 +1,8 @@
 package strategy.producer.building.bakery.bread;
 
-import strategy.material.mineral.Salt;
-import strategy.product.flour.WheatFlour;
-import strategy.product.food.baking.bread.WheatBread;
+import strategy.item.mineral.Salt;
+import strategy.item.flour.WheatFlour;
+import strategy.item.food.baking.bread.WheatBread;
 
 import java.util.function.Supplier;
 

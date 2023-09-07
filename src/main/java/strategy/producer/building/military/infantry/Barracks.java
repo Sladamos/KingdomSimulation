@@ -4,7 +4,7 @@ import strategy.producer.TwoToOneProducer;
 import strategy.producer.building.military.MilitaryProducer;
 import strategy.military.infantry.InfantryUnit;
 import strategy.organism.human.Human;
-import strategy.product.weapon.meele.MeeleWeapon;
+import strategy.item.weapon.meele.MeeleWeapon;
 
 import java.util.function.Supplier;
 

@@ -2,7 +2,7 @@ package strategy.military.infantry;
 
 import strategy.military.ArmyDestroyedException;
 import strategy.producer.exceptions.ProducerTerminatedException;
-import strategy.product.statistic.Happiness;
+import strategy.item.statistic.Happiness;
 
 import java.util.Collection;
 import java.util.Iterator;

@@ -3,10 +3,10 @@ package strategy.producer.building.well.advanced;
 import strategy.producer.TwoToTwoProducer;
 import strategy.producer.building.well.basic.GoldenCoinWell;
 import strategy.producer.building.well.basic.WaterWell;
-import strategy.product.coin.GoldenCoin;
-import strategy.product.fluid.Water;
-import strategy.product.tool.bucket.IronBucket;
-import strategy.product.tool.bucket.WoodenBucket;
+import strategy.item.coin.GoldenCoin;
+import strategy.item.fluid.Water;
+import strategy.item.tool.bucket.IronBucket;
+import strategy.item.tool.bucket.WoodenBucket;
 
 import java.util.function.Supplier;
 

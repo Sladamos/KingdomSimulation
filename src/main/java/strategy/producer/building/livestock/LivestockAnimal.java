@@ -1,7 +1,7 @@
 package strategy.producer.building.livestock;
 
 import strategy.producer.ZeroToOneProducer;
-import strategy.material.food.Food;
+import strategy.item.Food;
 import strategy.producer.building.Building;
 
 public abstract class LivestockAnimal<T extends Food> extends ZeroToOneProducer<T> implements Building {

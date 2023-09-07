@@ -1,9 +1,9 @@
 package strategy.producer.building.farm;
 
 import strategy.producer.OneToOneProducer;
-import strategy.material.plant.Plant;
+import strategy.item.plant.Plant;
 import strategy.producer.building.Building;
-import strategy.product.fluid.Water;
+import strategy.item.fluid.Water;
 
 import java.util.function.Supplier;
 

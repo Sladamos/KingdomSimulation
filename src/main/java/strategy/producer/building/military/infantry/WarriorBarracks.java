@@ -2,7 +2,7 @@ package strategy.producer.building.military.infantry;
 
 import strategy.military.infantry.Warrior;
 import strategy.organism.human.Adult;
-import strategy.product.weapon.meele.sword.Sword;
+import strategy.item.weapon.meele.sword.Sword;
 
 import java.util.function.Supplier;
 

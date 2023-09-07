@@ -6,7 +6,7 @@ import strategy.producer.exceptions.ProducerDestroyedException;
 import strategy.producer.exceptions.IncorrectDamageException;
 import strategy.producer.exceptions.IncorrectStorageException;
 import strategy.producer.building.miner.basic.IronMiner;
-import strategy.material.mineral.ore.IronOre;
+import strategy.item.mineral.ore.IronOre;
 
 import static org.assertj.core.api.Assertions.*;
 

@@ -1,6 +1,6 @@
 package strategy.producer.building.miner.basic;
 
-import strategy.material.mineral.ore.IronOre;
+import strategy.item.mineral.ore.IronOre;
 
 public class IronMiner extends Miner<IronOre> {
 

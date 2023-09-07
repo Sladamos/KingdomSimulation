@@ -1,6 +1,6 @@
 package strategy.producer.building.miner.basic;
 
-import strategy.material.mineral.gem.Ruby;
+import strategy.item.mineral.gem.Ruby;
 
 public class RubyMiner extends Miner<Ruby> {
 

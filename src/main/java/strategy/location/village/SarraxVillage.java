@@ -1,6 +1,5 @@
 package strategy.location.village;
 
-import strategy.producer.Producer;
 import strategy.producer.building.farm.Farm;
 import strategy.producer.building.farm.WheatFarm;
 import strategy.producer.building.livestock.Apiary;
@@ -8,16 +7,14 @@ import strategy.producer.building.livestock.Cow;
 import strategy.producer.building.livestock.LivestockAnimal;
 import strategy.producer.building.lumberjack.Lumberjack;
 import strategy.producer.building.lumberjack.MahoganyLumberjack;
-import strategy.material.food.Honey;
-import strategy.material.food.Milk;
-import strategy.material.plant.Wheat;
-import strategy.material.wood.Mahogany;
-import strategy.product.fluid.Water;
+import strategy.item.food.Honey;
+import strategy.item.food.Milk;
+import strategy.item.plant.Wheat;
+import strategy.item.wood.Mahogany;
+import strategy.item.fluid.Water;
 
-import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
 public class SarraxVillage implements Village {

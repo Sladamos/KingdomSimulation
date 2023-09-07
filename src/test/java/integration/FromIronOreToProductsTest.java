@@ -5,8 +5,8 @@ import strategy.producer.building.smelter.IronBarSmelter;
 import strategy.producer.building.miner.basic.IronMiner;
 import strategy.producer.building.artisan.bucket.IronBucketArtisan;
 import strategy.producer.building.smith.meele.IronSwordBlacksmith;
-import strategy.product.tool.bucket.IronBucket;
-import strategy.product.weapon.meele.sword.IronSword;
+import strategy.item.tool.bucket.IronBucket;
+import strategy.item.weapon.meele.sword.IronSword;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

@@ -1,8 +1,8 @@
 package strategy.producer.building.well.basic;
 
 import strategy.producer.building.well.Well;
-import strategy.product.fluid.Water;
-import strategy.product.tool.bucket.IronBucket;
+import strategy.item.fluid.Water;
+import strategy.item.tool.bucket.IronBucket;
 
 import java.util.function.Supplier;
 

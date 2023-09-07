@@ -1,8 +1,8 @@
 package strategy.producer.building.smelter;
 
 import strategy.producer.OneToOneProducer;
-import strategy.material.bar.Bar;
-import strategy.material.mineral.ore.Ore;
+import strategy.item.bar.Bar;
+import strategy.item.mineral.ore.Ore;
 import strategy.producer.building.Building;
 
 import java.util.function.Supplier;

@@ -1,7 +1,7 @@
 package strategy.producer.building.jewellery.basic.necklace;
 
-import strategy.material.mineral.gem.Ruby;
-import strategy.product.jewellery.necklace.RubyNecklace;
+import strategy.item.mineral.gem.Ruby;
+import strategy.item.jewellery.necklace.RubyNecklace;
 
 import java.util.function.Supplier;
 

@@ -1,8 +1,8 @@
 package strategy.producer.building.well.basic;
 
 import strategy.producer.building.well.Well;
-import strategy.product.coin.GoldenCoin;
-import strategy.product.tool.bucket.WoodenBucket;
+import strategy.item.coin.GoldenCoin;
+import strategy.item.tool.bucket.WoodenBucket;
 
 import java.util.function.Supplier;
 

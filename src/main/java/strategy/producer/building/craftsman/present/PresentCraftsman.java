@@ -1,7 +1,7 @@
 package strategy.producer.building.craftsman.present;
 
 import strategy.producer.building.craftsman.Craftsman;
-import strategy.product.present.Present;
+import strategy.item.present.Present;
 
 import java.util.function.Supplier;
 

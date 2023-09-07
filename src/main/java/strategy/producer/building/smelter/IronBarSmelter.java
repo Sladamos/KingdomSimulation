@@ -1,7 +1,7 @@
 package strategy.producer.building.smelter;
 
-import strategy.material.bar.IronBar;
-import strategy.material.mineral.ore.IronOre;
+import strategy.item.bar.IronBar;
+import strategy.item.mineral.ore.IronOre;
 
 import java.util.function.Supplier;
 

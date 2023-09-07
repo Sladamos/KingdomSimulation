@@ -2,10 +2,10 @@ package strategy.producer.royal.king;
 
 import strategy.producer.TwoToTwoProducer;
 import strategy.producer.building.craftsman.present.PresentCraftsman;
-import strategy.product.jewellery.necklace.RubyNecklace;
-import strategy.product.jewellery.ring.SapphireRing;
-import strategy.product.present.NecklacePresent;
-import strategy.product.present.RingPresent;
+import strategy.item.jewellery.necklace.RubyNecklace;
+import strategy.item.jewellery.ring.SapphireRing;
+import strategy.item.present.NecklacePresent;
+import strategy.item.present.RingPresent;
 
 public class SarraxKing extends TwoToTwoProducer<PresentCraftsman<RubyNecklace, NecklacePresent>,
 		PresentCraftsman<SapphireRing, RingPresent>, NecklacePresent, RingPresent> implements King {

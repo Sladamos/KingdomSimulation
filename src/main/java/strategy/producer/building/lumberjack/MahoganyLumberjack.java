@@ -1,6 +1,6 @@
 package strategy.producer.building.lumberjack;
 
-import strategy.material.wood.Mahogany;
+import strategy.item.wood.Mahogany;
 
 public class MahoganyLumberjack extends Lumberjack<Mahogany> {
 

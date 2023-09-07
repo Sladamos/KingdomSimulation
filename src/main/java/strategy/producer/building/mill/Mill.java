@@ -1,9 +1,9 @@
 package strategy.producer.building.mill;
 
 import strategy.producer.OneToOneProducer;
-import strategy.material.plant.Plant;
+import strategy.item.plant.Plant;
 import strategy.producer.building.Building;
-import strategy.product.flour.Flour;
+import strategy.item.flour.Flour;
 
 import java.util.function.Supplier;
 

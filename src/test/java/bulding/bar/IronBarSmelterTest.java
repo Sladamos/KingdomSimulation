@@ -7,8 +7,8 @@ import strategy.producer.exceptions.IncorrectDamageException;
 import strategy.producer.exceptions.IncorrectStorageException;
 import strategy.producer.building.smelter.IronBarSmelter;
 import strategy.producer.building.miner.basic.IronMiner;
-import strategy.material.bar.IronBar;
-import strategy.material.mineral.ore.IronOre;
+import strategy.item.bar.IronBar;
+import strategy.item.mineral.ore.IronOre;
 
 import java.util.function.Supplier;
 

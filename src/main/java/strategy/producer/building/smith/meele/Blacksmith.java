@@ -1,8 +1,8 @@
 package strategy.producer.building.smith.meele;
 
 import strategy.producer.building.smith.Smith;
-import strategy.material.bar.Bar;
-import strategy.product.weapon.meele.MeeleWeapon;
+import strategy.item.bar.Bar;
+import strategy.item.weapon.meele.MeeleWeapon;
 
 import java.util.function.Supplier;
 

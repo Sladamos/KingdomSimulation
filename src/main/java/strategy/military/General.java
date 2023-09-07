@@ -1,6 +1,6 @@
 package strategy.military;
 
-import strategy.product.statistic.Happiness;
+import strategy.item.statistic.Happiness;
 
 import java.util.Collection;
 import java.util.function.Consumer;

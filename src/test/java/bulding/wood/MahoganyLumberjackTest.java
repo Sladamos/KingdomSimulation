@@ -6,7 +6,7 @@ import strategy.producer.exceptions.ProducerDestroyedException;
 import strategy.producer.exceptions.IncorrectDamageException;
 import strategy.producer.exceptions.IncorrectStorageException;
 import strategy.producer.building.lumberjack.MahoganyLumberjack;
-import strategy.material.wood.Mahogany;
+import strategy.item.wood.Mahogany;
 
 import static org.assertj.core.api.Assertions.*;
 

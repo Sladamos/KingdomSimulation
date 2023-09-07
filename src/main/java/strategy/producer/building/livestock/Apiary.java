@@ -1,6 +1,6 @@
 package strategy.producer.building.livestock;
 
-import strategy.material.food.Honey;
+import strategy.item.food.Honey;
 
 public class Apiary extends LivestockAnimal<Honey> {
 

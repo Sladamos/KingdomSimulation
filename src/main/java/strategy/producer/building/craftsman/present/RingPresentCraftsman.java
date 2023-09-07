@@ -1,7 +1,7 @@
 package strategy.producer.building.craftsman.present;
 
-import strategy.product.jewellery.ring.Ring;
-import strategy.product.present.RingPresent;
+import strategy.item.jewellery.ring.Ring;
+import strategy.item.present.RingPresent;
 
 import java.util.function.Supplier;
 

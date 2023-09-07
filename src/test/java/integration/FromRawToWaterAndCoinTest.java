@@ -8,8 +8,8 @@ import strategy.producer.building.miner.basic.IronMiner;
 import strategy.producer.building.smelter.IronBarSmelter;
 import strategy.producer.building.well.basic.GoldenCoinWell;
 import strategy.producer.building.well.basic.WaterWell;
-import strategy.product.coin.GoldenCoin;
-import strategy.product.fluid.Water;
+import strategy.item.coin.GoldenCoin;
+import strategy.item.fluid.Water;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

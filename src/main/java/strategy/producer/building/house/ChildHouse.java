@@ -1,8 +1,8 @@
 package strategy.producer.building.house;
 
 import strategy.organism.human.Child;
-import strategy.product.coin.Coin;
-import strategy.product.food.baking.bread.Bread;
+import strategy.item.coin.Coin;
+import strategy.item.food.baking.bread.Bread;
 
 import java.util.function.Supplier;
 

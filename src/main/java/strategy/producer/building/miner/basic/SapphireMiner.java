@@ -1,6 +1,6 @@
 package strategy.producer.building.miner.basic;
 
-import strategy.material.mineral.gem.Sapphire;
+import strategy.item.mineral.gem.Sapphire;
 
 public class SapphireMiner extends Miner<Sapphire> {
 

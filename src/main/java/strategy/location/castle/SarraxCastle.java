@@ -10,10 +10,10 @@ import strategy.producer.building.craftsman.present.RingPresentCraftsman;
 import strategy.producer.royal.king.SarraxKing;
 import strategy.producer.royal.princess.SarraxPrincess;
 import strategy.producer.royal.queen.SarraxQueen;
-import strategy.product.jewellery.necklace.RubyNecklace;
-import strategy.product.jewellery.ring.SapphireRing;
-import strategy.product.present.NecklacePresent;
-import strategy.product.present.RingPresent;
+import strategy.item.jewellery.necklace.RubyNecklace;
+import strategy.item.jewellery.ring.SapphireRing;
+import strategy.item.present.NecklacePresent;
+import strategy.item.present.RingPresent;
 
 import java.util.Collection;
 import java.util.concurrent.ExecutorService;

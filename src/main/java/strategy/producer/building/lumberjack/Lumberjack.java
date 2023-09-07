@@ -1,7 +1,7 @@
 package strategy.producer.building.lumberjack;
 
 import strategy.producer.ZeroToOneProducer;
-import strategy.material.wood.Wood;
+import strategy.item.wood.Wood;
 import strategy.producer.building.Building;
 
 public abstract class Lumberjack<T extends Wood> extends ZeroToOneProducer<T>  implements Building {

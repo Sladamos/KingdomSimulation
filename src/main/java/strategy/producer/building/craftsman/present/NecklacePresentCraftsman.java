@@ -1,7 +1,7 @@
 package strategy.producer.building.craftsman.present;
 
-import strategy.product.jewellery.necklace.Necklace;
-import strategy.product.present.NecklacePresent;
+import strategy.item.jewellery.necklace.Necklace;
+import strategy.item.present.NecklacePresent;
 
 import java.util.function.Supplier;
 

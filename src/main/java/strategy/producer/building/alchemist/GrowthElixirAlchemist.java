@@ -1,8 +1,8 @@
 package strategy.producer.building.alchemist;
 
-import strategy.material.food.Honey;
-import strategy.material.food.Milk;
-import strategy.product.elixir.GrowthElixir;
+import strategy.item.food.Honey;
+import strategy.item.food.Milk;
+import strategy.item.elixir.GrowthElixir;
 
 import java.util.function.Supplier;
 

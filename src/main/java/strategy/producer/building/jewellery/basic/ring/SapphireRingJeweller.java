@@ -1,7 +1,7 @@
 package strategy.producer.building.jewellery.basic.ring;
 
-import strategy.material.mineral.gem.Sapphire;
-import strategy.product.jewellery.ring.SapphireRing;
+import strategy.item.mineral.gem.Sapphire;
+import strategy.item.jewellery.ring.SapphireRing;
 
 import java.util.function.Supplier;
 

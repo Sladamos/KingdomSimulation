@@ -1,7 +1,7 @@
 package strategy.producer.building.artisan.bucket;
 
-import strategy.material.wood.Mahogany;
-import strategy.product.tool.bucket.WoodenBucket;
+import strategy.item.wood.Mahogany;
+import strategy.item.tool.bucket.WoodenBucket;
 
 import java.util.function.Supplier;
 
