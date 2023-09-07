@@ -1,10 +1,11 @@
 package strategy.config;
 
-import strategy.AppError;
+import org.json.JSONException;
 import strategy.json.JSON;
 import strategy.kingdom.KingdomConfig;
 import strategy.kingdom.KingdomTypes;
 import strategy.military.infantry.InitWarriorsConfig;
+import strategy.storage.CriticalAppError;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,8 +29,8 @@ public class KingdomConfigParser implements ConfigParser<KingdomConfig> {
 			InitWarriorsConfig warriorsConfig = createWarriorsConfig(json.getJSONObject("warriors"));
 			return new KingdomConfig(kingdomId, attackTime, kingdomType, warriorsConfig);
 		}
-		catch (Exception err) {
-			throw new AppError("Something went wrong on creating kingdom config. " + err.getMessage());
+		catch (JSONException err) {
+			throw new CriticalAppError("Something went wrong on creating kingdom config. " + err.getMessage());
 		}
 	}
 
@@ -40,7 +41,7 @@ public class KingdomConfigParser implements ConfigParser<KingdomConfig> {
 
 	private KingdomTypes getKingdomType(String strKingdomType) {
 		if(!kingdomTypes.containsKey(strKingdomType)) {
-			throw new AppError("Incorrect kingdom type!");
+			throw new CriticalAppError("Incorrect kingdom type!");
 		}
 		return kingdomTypes.get(strKingdomType);
 	}

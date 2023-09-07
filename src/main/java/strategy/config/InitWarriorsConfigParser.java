@@ -1,8 +1,9 @@
 package strategy.config;
 
-import strategy.AppError;
+import org.json.JSONException;
 import strategy.json.JSON;
 import strategy.military.infantry.InitWarriorsConfig;
+import strategy.storage.CriticalAppError;
 
 public class InitWarriorsConfigParser implements ConfigParser<InitWarriorsConfig>{
     @Override
@@ -13,8 +14,8 @@ public class InitWarriorsConfigParser implements ConfigParser<InitWarriorsConfig
             int maxDefense = json.getInt("max_defense");
             return new InitWarriorsConfig(numberOfWarriors, maxDamage, maxDefense);
         }
-        catch (Exception err) {
-            throw new AppError("Something went wrong on creating init warriors config. " + err.getMessage() );
+        catch (JSONException err) {
+            throw new CriticalAppError("Something went wrong on creating init warriors config. " + err.getMessage());
         }
     }
 }

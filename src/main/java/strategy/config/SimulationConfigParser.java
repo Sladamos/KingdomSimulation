@@ -1,9 +1,10 @@
 package strategy.config;
 
-import strategy.AppError;
+import org.json.JSONException;
 import strategy.SimulationConfig;
 import strategy.json.JSON;
 import strategy.kingdom.KingdomConfig;
+import strategy.storage.CriticalAppError;
 
 public class SimulationConfigParser implements ConfigParser<SimulationConfig>{
 	@Override
@@ -16,8 +17,10 @@ public class SimulationConfigParser implements ConfigParser<SimulationConfig>{
 			KingdomConfig secondKingdomConfig = kingdomConfigParser.createConfig(secondKingdomJson);
 			return new SimulationConfig(firstKingdomConfig, secondKingdomConfig);
 		}
-		catch (Exception err) {
-			throw new AppError("Something went wrong on creating simulation config. " + err.getMessage());
+		catch (JSONException err) {
+			throw new CriticalAppError("Something went wrong on creating simulation config. " + err.getMessage());
 		}
 	}
+
+
 }
