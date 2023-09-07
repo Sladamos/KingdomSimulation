@@ -22,6 +22,7 @@ public class UnlimitedOneItemStorage<T extends Item> implements OneItemStorage<T
 
     @Override
     public synchronized void addItemToStorage(T item) {
+        //TODO: remove and add messenger
         System.out.println("Item pushed to storage: " + item);
         storage.push(item);
         notifyAll();
