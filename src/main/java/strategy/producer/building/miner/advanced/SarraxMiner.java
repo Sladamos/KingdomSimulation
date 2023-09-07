@@ -6,18 +6,11 @@ import strategy.producer.building.miner.basic.IronMiner;
 import strategy.producer.building.miner.basic.RubyMiner;
 import strategy.item.mineral.gem.Ruby;
 import strategy.item.mineral.ore.IronOre;
+import strategy.storage.OneItemStorage;
 
 public class SarraxMiner extends TwoToTwoProducer<IronMiner, RubyMiner, IronOre, Ruby> implements Building {
 
-    public SarraxMiner() {
-        super(new IronMiner(0), new RubyMiner(0));
-    }
-
-    public synchronized IronOre getIronOre() {
-        return getFirstItem();
-    }
-
-    public synchronized Ruby getRuby() {
-        return getSecondItem();
+    public SarraxMiner(OneItemStorage<IronOre> ironOreStorage, OneItemStorage<Ruby> rubyStorage) {
+        super(new IronMiner(ironOreStorage, null), new RubyMiner(rubyStorage, null));
     }
 }

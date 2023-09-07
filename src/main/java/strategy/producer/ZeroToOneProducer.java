@@ -3,7 +3,7 @@ package strategy.producer;
 import strategy.item.Item;
 import strategy.storage.OneItemStorage;
 
-public abstract class ZeroToOneProducer<T extends Item> implements Producer {
+public abstract class ZeroToOneProducer<T extends Item> implements OneItemProducer<T> {
 
 	private final OneItemStorage<T> destinationStorage;
 
