@@ -1,4 +1,6 @@
 package strategy.producer.building;
 
-public interface Building {
+import strategy.producer.Producer;
+
+public interface Building extends Producer {
 }
