@@ -37,7 +37,6 @@ public class SimpleBattle implements Battle {
         try {
             long attackTime = attacker.getAttackTime();
             Thread.sleep(attackTime);
-
             Message messageAboutAttack = new Message(attacker + " attacked");
             messagesReceiver.receiveMessage(messageAboutAttack);
             attacker.attack(defender);
