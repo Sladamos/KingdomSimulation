@@ -30,7 +30,8 @@ public class InfantryGeneralImpl<T extends InfantryUnit> implements InfantryGene
         this.happinessStorage = happinessStorage;
         this.infantryUnitStorage = infantryUnitStorage;
         isConsuming = false;
-        happinessDamageModificator = generalConfig.getHappinessDamageModificator();
+        happinessDamageModificator = 0;
+        //happinessDamageModificator = generalConfig.getHappinessDamageModificator();
         army = new LinkedList<>();
     }
 

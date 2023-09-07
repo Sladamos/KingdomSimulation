@@ -67,7 +67,7 @@ public class SarraxCastle<T extends HumanInfantryUnit> implements Castle<T> {
 	}
 
 	@Override
-	public void attack(Castle castle) {
+	public void attack(Castle<?> castle) {
 		Collection<Integer> totalDamage = warriorsGeneral.getArmyDamage();
 		castle.receiveDamage(totalDamage);
 	}
