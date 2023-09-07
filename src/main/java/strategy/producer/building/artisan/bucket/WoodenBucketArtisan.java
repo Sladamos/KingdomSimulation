@@ -16,7 +16,7 @@ public class WoodenBucketArtisan extends BucketArtisan<Mahogany, WoodenBucket> {
 	}
 
 	@Override
-	protected WoodenBucket produceNewItem(Mahogany material) {
+	protected WoodenBucket createNewItem(Mahogany material) {
 		return new WoodenBucket();
 	}
 

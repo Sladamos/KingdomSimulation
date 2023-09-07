@@ -20,8 +20,8 @@ public abstract class PresentCraftsman<T, S extends Present> extends Craftsman<T
 	}
 
 	@Override
-	public S produceNewItem(T material) {
-		return produceNewItem();
+	public S createNewItem(T material) {
+		return createNewItem();
 	}
 
 	@Override

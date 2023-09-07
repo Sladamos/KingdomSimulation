@@ -18,7 +18,7 @@ public class WaterWell extends Well<IronBucket, Water> {
 	}
 
 	@Override
-	protected Water produceNewItem(IronBucket material) {
+	protected Water createNewItem(IronBucket material) {
 		return new Water();
 	}
 

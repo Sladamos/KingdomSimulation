@@ -17,7 +17,7 @@ public class IronBucketArtisan extends BucketArtisan<IronBar, IronBucket> {
     }
 
     @Override
-    protected IronBucket produceNewItem(IronBar material) {
+    protected IronBucket createNewItem(IronBar material) {
         return new IronBucket(material);
     }
 

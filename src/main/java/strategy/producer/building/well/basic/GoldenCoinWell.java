@@ -18,7 +18,7 @@ public class GoldenCoinWell extends Well<WoodenBucket, GoldenCoin> {
 	}
 
 	@Override
-	protected GoldenCoin produceNewItem(WoodenBucket material) {
+	protected GoldenCoin createNewItem(WoodenBucket material) {
 		return new GoldenCoin();
 	}
 

@@ -17,7 +17,7 @@ public class IronBarSmelter extends Smelter<IronOre, IronBar> {
     }
 
     @Override
-    protected IronBar produceNewItem(IronOre ore) {
+    protected IronBar createNewItem(IronOre ore) {
         return new IronBar(ore);
     }
 

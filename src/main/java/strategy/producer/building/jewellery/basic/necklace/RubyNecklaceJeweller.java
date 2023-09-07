@@ -17,7 +17,7 @@ public class RubyNecklaceJeweller extends strategy.producer.building.jewellery.b
 	}
 
 	@Override
-	protected RubyNecklace produceNewItem(Ruby material) {
+	protected RubyNecklace createNewItem(Ruby material) {
 		return new RubyNecklace();
 	}
 

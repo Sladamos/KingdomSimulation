@@ -17,7 +17,7 @@ public class WheatMill extends Mill<Wheat, WheatFlour> {
     }
 
     @Override
-    protected WheatFlour produceNewItem(Wheat plant) {
+    protected WheatFlour createNewItem(Wheat plant) {
         return new WheatFlour();
     }
 
