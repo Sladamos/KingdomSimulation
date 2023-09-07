@@ -1,5 +1,7 @@
 package strategy.producer;
 
-public interface OneItemProducer<T> extends Producer {
+import strategy.item.Item;
+
+public interface OneItemProducer<T extends Item> extends Producer {
 	T getItem();
 }
