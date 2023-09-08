@@ -22,6 +22,20 @@
       "lumberjack": {
         "items_per_minute": 8
       }
+    },
+    "mountain": {
+      "salt": {
+        "items_per_minute": 8
+      },
+      "iron_ore": {
+        "items_per_minute": 20
+      },
+      "ruby": {
+        "items_per_minute": 12
+      },
+      "sapphire": {
+        "items_per_minute": 14
+      }
     }
   },
   "second_kingdom": {
@@ -46,6 +60,20 @@
       },
       "lumberjack": {
         "items_per_minute": 6
+      }
+    },
+    "mountain": {
+      "salt": {
+        "items_per_minute": 12
+      },
+      "iron_ore": {
+        "items_per_minute": 14
+      },
+      "ruby": {
+        "items_per_minute": 8
+      },
+      "sapphire": {
+        "items_per_minute": 10
       }
     }
   }
