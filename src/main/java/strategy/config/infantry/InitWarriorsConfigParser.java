@@ -1,11 +1,12 @@
-package strategy.config;
+package strategy.config.infantry;
 
 import org.json.JSONException;
+import strategy.config.ConfigParser;
 import strategy.json.JSON;
 import strategy.item.military.infantry.warrior.InitWarriorsConfig;
 import strategy.CriticalAppError;
 
-public class InitWarriorsConfigParser implements ConfigParser<InitWarriorsConfig>{
+public class InitWarriorsConfigParser implements ConfigParser<InitWarriorsConfig> {
     @Override
     public InitWarriorsConfig createConfig(JSON json) {
         try {
