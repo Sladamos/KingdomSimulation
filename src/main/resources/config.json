@@ -8,6 +8,20 @@
       "max_damage": 25,
       "max_defense": 5,
       "health": 100
+    },
+    "village": {
+      "cow": {
+        "items_per_minute": 12
+      },
+      "apiary": {
+        "items_per_minute": 6
+      },
+      "farm": {
+        "items_per_minute": 15
+      },
+      "lumberjack": {
+        "items_per_minute": 8
+      }
     }
   },
   "second_kingdom": {
@@ -19,6 +33,20 @@
       "max_damage": 20,
       "max_defense": 7,
       "health": 100
+    },
+    "village": {
+      "cow": {
+        "items_per_minute": 18
+      },
+      "apiary": {
+        "items_per_minute": 3
+      },
+      "farm": {
+        "items_per_minute": 13
+      },
+      "lumberjack": {
+        "items_per_minute": 6
+      }
     }
   }
 }
