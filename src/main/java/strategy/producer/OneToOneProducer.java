@@ -16,7 +16,7 @@ public abstract class OneToOneProducer<T extends Item, U extends Item> implement
 	public OneToOneProducer(OneItemStorage<T> sourceStorage, OneItemStorage<U> destinationStorage, ProducerConfig producerConfig) {
 		this.sourceStorage = sourceStorage;
 		this.destinationStorage = destinationStorage;
-		this.numberOfItemsPerMinute = 15;//TODO: producerConfig.getNumberOfItemsPerMinute();
+		this.numberOfItemsPerMinute = producerConfig.getNumberOfItemsPerMinute();
 	}
 
 	@Override
