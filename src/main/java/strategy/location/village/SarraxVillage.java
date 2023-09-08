@@ -28,11 +28,11 @@ public class SarraxVillage implements Village {
 	private final Lumberjack<Mahogany> lumberjack;
 	private final ExecutorService executorService;
 
-	public SarraxVillage(VillageStorageManager villageStorageManager, OneItemStorage<Water> waterStorage) {
-		cow = new Cow(villageStorageManager.getMilkStorage(), null);
-		apiary = new Apiary(villageStorageManager.getHoneyStorage(), null);
-		farm = new WheatFarm(waterStorage, villageStorageManager.getWheatStorage(), null);
-		lumberjack = new MahoganyLumberjack(villageStorageManager.getMahoganyStorage(), null);
+	public SarraxVillage(VillageStorageManager villageStorageManager, OneItemStorage<Water> waterStorage, VillageConfig villageConfig) {
+		cow = new Cow(villageStorageManager.getMilkStorage(), villageConfig.getCowConfig());
+		apiary = new Apiary(villageStorageManager.getHoneyStorage(), villageConfig.getApiaryConfig());
+		farm = new WheatFarm(waterStorage, villageStorageManager.getWheatStorage(), villageConfig.getFarmConfig());
+		lumberjack = new MahoganyLumberjack(villageStorageManager.getMahoganyStorage(), villageConfig.getLumberjackConfig());
 		executorService = Executors.newFixedThreadPool(4);
 	}
 

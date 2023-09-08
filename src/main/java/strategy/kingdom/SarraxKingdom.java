@@ -41,7 +41,7 @@ public class SarraxKingdom implements Kingdom {
         VillageStorageManager villageStorageManager = kingdomStorageManager.getVillageStorageManager();
         CastleStorageManager castleStorageManager = kingdomStorageManager.getCastleStorageManager();
         mountain = new SarraxMountain(mountainStorageManager);
-        village = new SarraxVillage(villageStorageManager, settlementStorageManager.getWaterStorage());
+        village = new SarraxVillage(villageStorageManager, settlementStorageManager.getWaterStorage(), kingdomConfig.getVillageConfig());
         settlement = new SarraxSettlement(settlementStorageManager, villageStorageManager,
                 mountainStorageManager, castleStorageManager.getAdultStorage());
         castle = new SarraxCastle<>(castleStorageManager, settlementStorageManager);
