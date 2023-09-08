@@ -6,6 +6,7 @@ import strategy.Config;
 import strategy.item.military.infantry.warrior.InitWarriorsConfig;
 import strategy.location.castle.CastleConfig;
 import strategy.location.mountain.MountainConfig;
+import strategy.location.settlement.SettlementConfig;
 import strategy.location.village.VillageConfig;
 
 @Getter
@@ -24,4 +25,6 @@ public class KingdomConfig implements Config {
 	private final MountainConfig mountainConfig;
 
     private final CastleConfig castleConfig;
+
+	private final SettlementConfig settlementConfig;
 }

@@ -73,38 +73,54 @@ public class SarraxSettlement implements Settlement {
 	public SarraxSettlement(SettlementStorageManager<Warrior> settlementStorageManager,
 							VillageStorageManager villageStorageManager,
 							MountainStorageManager mountainStorageManager,
-							OneItemStorage<Adult> adultStorage) {
-		ironBarSmelter = new IronBarSmelter(mountainStorageManager.getIronOreStorage(), settlementStorageManager.getIronBarStorage(), null);
-		blacksmith = new IronSwordBlacksmith(settlementStorageManager.getIronBarStorage(), settlementStorageManager.getIronSwordStorage(), null);
+							OneItemStorage<Adult> adultStorage,
+							SettlementConfig settlementConfig) {
+		ironBarSmelter = new IronBarSmelter(mountainStorageManager.getIronOreStorage(),
+				settlementStorageManager.getIronBarStorage(), settlementConfig.getSmelterConfig());
+
+		blacksmith = new IronSwordBlacksmith(settlementStorageManager.getIronBarStorage(),
+				settlementStorageManager.getIronSwordStorage(), settlementConfig.getBlacksmithConfig());
+
 		barracks = new WarriorBarracks<>(adultStorage, settlementStorageManager.getIronSwordStorage(),
-				settlementStorageManager.getInfantryUnitStorage(), null);
+				settlementStorageManager.getInfantryUnitStorage(), settlementConfig.getBarracksConfig());
 
-		ironBucketArtisan = new IronBucketArtisan(settlementStorageManager.getIronBarStorage(), settlementStorageManager.getIronBucketStorage(), null);
-		woodenBucketArtisan = new WoodenBucketArtisan(villageStorageManager.getMahoganyStorage(), settlementStorageManager.getWoodenBucketStorage(), null);
-		well = createSarraxWell(settlementStorageManager);
+		ironBucketArtisan = new IronBucketArtisan(settlementStorageManager.getIronBarStorage(),
+				settlementStorageManager.getIronBucketStorage(), settlementConfig.getIronBucketArtisanConfig());
 
-		wheatMill = new WheatMill(villageStorageManager.getWheatStorage(), settlementStorageManager.getWheatFlourStorage(), null);
+		woodenBucketArtisan = new WoodenBucketArtisan(villageStorageManager.getMahoganyStorage(),
+				settlementStorageManager.getWoodenBucketStorage(), settlementConfig.getWoodenBucketArtisanConfig());
+
+		well = createSarraxWell(settlementStorageManager, settlementConfig);
+
+		wheatMill = new WheatMill(villageStorageManager.getWheatStorage(),
+				settlementStorageManager.getWheatFlourStorage(), settlementConfig.getMillConfig());
+
 		bakery = new WheatBreadBakery(settlementStorageManager.getWheatFlourStorage(), mountainStorageManager.getSaltStorage(),
-				settlementStorageManager.getWheatBreadStorage(), null);
-		childHouse = new ChildHouse<>(settlementStorageManager.getGoldenCoinStorage(), settlementStorageManager.getWheatBreadStorage(),
-				settlementStorageManager.getChildStorage(), null);
+				settlementStorageManager.getWheatBreadStorage(), settlementConfig.getBakeryConfig());
 
-		jeweller = createSarraxJeweller(mountainStorageManager, settlementStorageManager);
+		childHouse = new ChildHouse<>(settlementStorageManager.getGoldenCoinStorage(), settlementStorageManager.getWheatBreadStorage(),
+				settlementStorageManager.getChildStorage(), settlementConfig.getChildHouseConfig());
+
+		jeweller = createSarraxJeweller(mountainStorageManager, settlementStorageManager, settlementConfig);
+
 		alchemist = new GrowthElixirAlchemist(villageStorageManager.getMilkStorage(), villageStorageManager.getHoneyStorage(),
-				settlementStorageManager.getGrowthElixirStorage(), null);
+				settlementStorageManager.getGrowthElixirStorage(), settlementConfig.getAlchemistConfig());
 
 		executorService = Executors.newFixedThreadPool(11);
 	}
 
-	private SarraxWell createSarraxWell(SettlementStorageManager<Warrior> settlementStorageManager) {
-		WaterWell waterWell = new WaterWell(settlementStorageManager.getIronBucketStorage(), settlementStorageManager.getWaterStorage(), null);
-		GoldenCoinWell goldenCoinWell = new GoldenCoinWell(settlementStorageManager.getWoodenBucketStorage(), settlementStorageManager.getGoldenCoinStorage(), null);
+	private SarraxWell createSarraxWell(SettlementStorageManager<Warrior> settlementStorageManager, SettlementConfig settlementConfig) {
+		WaterWell waterWell = new WaterWell(settlementStorageManager.getIronBucketStorage(), settlementStorageManager.getWaterStorage(), settlementConfig.getWaterWellConfig());
+		GoldenCoinWell goldenCoinWell = new GoldenCoinWell(settlementStorageManager.getWoodenBucketStorage(), settlementStorageManager.getGoldenCoinStorage(), settlementConfig.goldenCoinWellConfig);
 		return new SarraxWell(waterWell, goldenCoinWell);
 	}
 
-	private SarraxJeweller createSarraxJeweller(MountainStorageManager mountainStorageManager, SettlementStorageManager<Warrior> settlementStorageManager) {
-		SapphireRingJeweller sapphireRingJeweller = new SapphireRingJeweller(mountainStorageManager.getSapphireStorage(), settlementStorageManager.getSapphireRingStorage(), null);
-		RubyNecklaceJeweller rubyNecklaceJeweller = new RubyNecklaceJeweller(mountainStorageManager.getRubyStorage(), settlementStorageManager.getRubyNecklaceStorage(), null);
+	private SarraxJeweller createSarraxJeweller(MountainStorageManager mountainStorageManager,
+												SettlementStorageManager<Warrior> settlementStorageManager, SettlementConfig settlementConfig) {
+		SapphireRingJeweller sapphireRingJeweller = new SapphireRingJeweller(mountainStorageManager.getSapphireStorage(),
+				settlementStorageManager.getSapphireRingStorage(), settlementConfig.getRingJewellerConfig());
+		RubyNecklaceJeweller rubyNecklaceJeweller = new RubyNecklaceJeweller(mountainStorageManager.getRubyStorage(),
+				settlementStorageManager.getRubyNecklaceStorage(), settlementConfig.getNecklaceJewellerConfig());
 		return new SarraxJeweller(sapphireRingJeweller, rubyNecklaceJeweller);
 	}
 

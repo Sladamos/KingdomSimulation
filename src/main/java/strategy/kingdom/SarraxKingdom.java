@@ -35,18 +35,23 @@ public class SarraxKingdom implements Kingdom {
     private final String kingdomId;
 
     public SarraxKingdom(KingdomConfig kingdomConfig) {
+        this.kingdomId = kingdomConfig.getKingdomId();
+        this.attackTime = kingdomConfig.getAttackTime();
         kingdomStorageManager = new SarraxKingdomStorageManager();
         MountainStorageManager mountainStorageManager = kingdomStorageManager.getMountainStorageManager();
         SettlementStorageManager<Warrior> settlementStorageManager = kingdomStorageManager.getSettlementStorageManager();
         VillageStorageManager villageStorageManager = kingdomStorageManager.getVillageStorageManager();
         CastleStorageManager castleStorageManager = kingdomStorageManager.getCastleStorageManager();
+
         mountain = new SarraxMountain(mountainStorageManager, kingdomConfig.getMountainConfig());
-        village = new SarraxVillage(villageStorageManager, settlementStorageManager.getWaterStorage(), kingdomConfig.getVillageConfig());
+
+        village = new SarraxVillage(villageStorageManager, settlementStorageManager.getWaterStorage(),
+                kingdomConfig.getVillageConfig());
+
         settlement = new SarraxSettlement(settlementStorageManager, villageStorageManager,
-                mountainStorageManager, castleStorageManager.getAdultStorage());
+                mountainStorageManager, castleStorageManager.getAdultStorage(), kingdomConfig.getSettlementConfig());
+
         castle = new SarraxCastle<>(castleStorageManager, settlementStorageManager, kingdomConfig.getCastleConfig());
-        this.kingdomId = kingdomConfig.getKingdomId();
-        this.attackTime = kingdomConfig.getAttackTime();
     }
 
     @Override
