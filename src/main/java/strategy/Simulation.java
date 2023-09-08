@@ -4,7 +4,7 @@ import strategy.initializer.SimulationInitializer;
 
 public class Simulation {
 
-    //TODO: add config to mountain and to others
+    //TODO: add sleep time to config???? and boolean to specify automatic / manual
 
     //TODO: validate config file in config initializers (are values > 0 etc.)
 
