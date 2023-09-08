@@ -3,7 +3,6 @@ package strategy.item.military.infantry;
 import lombok.Getter;
 import lombok.Synchronized;
 import strategy.item.organism.human.Human;
-import strategy.mechanism.fight.Fightable;
 import strategy.mechanism.fight.exceptions.FightActionException;
 
 public abstract class HumanInfantryUnit implements Human, InfantryUnit  {
@@ -24,20 +23,6 @@ public abstract class HumanInfantryUnit implements Human, InfantryUnit  {
         this.hitPoints = config.getHealth();
         isAlive = true;
     }
-
-    @Override
-    public synchronized void attack(Fightable target) {
-        if(target == this) {
-            throw new FightActionException("Can't attack itself");
-        }
-
-        if(isDead()) {
-            throw new FightActionException("Can't attack when attacker is dead");
-        }
-
-        target.getHit(damage);
-    }
-
     @Override
     public synchronized void getHit(int damage) {
         if(isDead()) {
