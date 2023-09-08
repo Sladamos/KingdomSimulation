@@ -4,8 +4,6 @@ import strategy.initializer.SimulationInitializer;
 
 public class Simulation {
 
-    //TODO: add sleep time to config???? and boolean to specify automatic / manual
-
     //TODO: validate config file in config initializers (are values > 0 etc.)
 
     //TODO: refactor messages from string to json! and create new messages: StorageMessage / BattleMessage
@@ -14,6 +12,9 @@ public class Simulation {
     //  battlereceiver create StringProperty, and change it when new messsage will come.
     //TODO: messages receiver System.out.println("Consumed :" + material); in STORAGES!!! additionaly some ID  (KingdomFirst: Consumed: material)
     ////TODO: messages receiver System.out.println("Produced :" + item);
+
+
+    //TODO: add sleep time to config???? and boolean to specify automatic / manual -> refactor after messages
 
     /*TODO gui:
         two panels with names of materials and count of each one (consider it!):
