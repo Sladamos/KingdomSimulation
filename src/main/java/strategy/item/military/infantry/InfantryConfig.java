@@ -1,6 +1,8 @@
 package strategy.item.military.infantry;
 
-public interface InfantryConfig {
+import strategy.Config;
+
+public interface InfantryConfig extends Config {
 
     int getDamage();
 
