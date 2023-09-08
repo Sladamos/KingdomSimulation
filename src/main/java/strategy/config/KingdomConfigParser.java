@@ -6,6 +6,7 @@ import strategy.kingdom.KingdomConfig;
 import strategy.kingdom.KingdomTypes;
 import strategy.item.military.infantry.warrior.InitWarriorsConfig;
 import strategy.CriticalAppError;
+import strategy.location.castle.CastleConfig;
 import strategy.location.mountain.MountainConfig;
 import strategy.location.village.VillageConfig;
 
@@ -31,11 +32,17 @@ public class KingdomConfigParser implements ConfigParser<KingdomConfig> {
 			InitWarriorsConfig warriorsConfig = createWarriorsConfig(json.getJSONObject("warriors"));
 			VillageConfig villageConfig = createVillageConfig(json.getJSONObject("village"));
 			MountainConfig mountainConfig = createMountainConfig(json.getJSONObject("mountain"));
-			return new KingdomConfig(kingdomId, attackTime, kingdomType, warriorsConfig, villageConfig, mountainConfig);
+			CastleConfig castleConfig = createCastleConfig(json.getJSONObject("castle"));
+			return new KingdomConfig(kingdomId, attackTime, kingdomType, warriorsConfig, villageConfig, mountainConfig, castleConfig);
 		}
 		catch (JSONException err) {
 			throw new CriticalAppError("Something went wrong on creating kingdom config. " + err.getMessage());
 		}
+	}
+
+	private CastleConfig createCastleConfig(JSON json) {
+		CastleConfigParser castleConfigParser = new CastleConfigParser();
+		return castleConfigParser.createConfig(json);
 	}
 
 	private MountainConfig createMountainConfig(JSON json) {

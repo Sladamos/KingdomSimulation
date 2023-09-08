@@ -44,7 +44,7 @@ public class SarraxKingdom implements Kingdom {
         village = new SarraxVillage(villageStorageManager, settlementStorageManager.getWaterStorage(), kingdomConfig.getVillageConfig());
         settlement = new SarraxSettlement(settlementStorageManager, villageStorageManager,
                 mountainStorageManager, castleStorageManager.getAdultStorage());
-        castle = new SarraxCastle<>(castleStorageManager, settlementStorageManager);
+        castle = new SarraxCastle<>(castleStorageManager, settlementStorageManager, kingdomConfig.getCastleConfig());
         this.kingdomId = kingdomConfig.getKingdomId();
         this.attackTime = kingdomConfig.getAttackTime();
     }

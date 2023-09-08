@@ -36,6 +36,23 @@
       "sapphire": {
         "items_per_minute": 14
       }
+    },
+    "castle": {
+      "princess": {
+        "items_per_minute": 3
+      },
+      "queen": {
+        "items_per_minute": 5
+      },
+      "necklace_present_craftsman": {
+        "items_per_minute": 4
+      },
+      "ring_present_craftsman": {
+        "items_per_minute": 6
+      },
+      "general": {
+        "hapiness_damage_modificator": 2
+      }
     }
   },
   "second_kingdom": {
@@ -74,6 +91,23 @@
       },
       "sapphire": {
         "items_per_minute": 10
+      }
+    },
+    "castle": {
+      "princess": {
+        "items_per_minute": 4
+      },
+      "queen": {
+        "items_per_minute": 3
+      },
+      "necklace_present_craftsman": {
+        "items_per_minute": 2
+      },
+      "ring_present_craftsman": {
+        "items_per_minute": 7
+      },
+      "general": {
+        "hapiness_damage_modificator": 3
       }
     }
   }

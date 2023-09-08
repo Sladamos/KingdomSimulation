@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import strategy.Config;
 import strategy.item.military.infantry.warrior.InitWarriorsConfig;
+import strategy.location.castle.CastleConfig;
 import strategy.location.mountain.MountainConfig;
 import strategy.location.village.VillageConfig;
 
@@ -21,4 +22,6 @@ public class KingdomConfig implements Config {
 	private final VillageConfig villageConfig;
 
 	private final MountainConfig mountainConfig;
+
+    private final CastleConfig castleConfig;
 }
