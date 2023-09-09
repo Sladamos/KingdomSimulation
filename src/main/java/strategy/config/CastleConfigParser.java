@@ -1,7 +1,8 @@
 package strategy.config;
 
 import org.json.JSONException;
-import strategy.CriticalAppError;
+import strategy.error.AppError;
+import strategy.error.CriticalAppError;
 import strategy.item.military.GeneralConfig;
 import strategy.json.JSON;
 import strategy.location.castle.CastleConfig;
@@ -18,7 +19,7 @@ public class CastleConfigParser implements ConfigParser<CastleConfig> {
             GeneralConfig generalConfig = createGeneralConfig(json.getJSONObject("general"));
             return new CastleConfig(queenConfig, princessConfig, necklacePresentCraftsmanConfig, ringPresentCraftsmanConfig, generalConfig);
         }
-        catch (JSONException err) {
+        catch (JSONException | AppError err) {
             throw new CriticalAppError("Something went wrong on creating castle config. " + err.getMessage());
         }
     }

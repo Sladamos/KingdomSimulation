@@ -24,7 +24,7 @@ public class KingdomInitializer {
     public Kingdom createKingdom(long sleep, KingdomConfig kingdomConfig) {
         KingdomTypes kingdomType = kingdomConfig.getKingdomType();
         Kingdom kingdom = kingdomsCreators.get(kingdomType).apply(kingdomConfig);
-        InitMilitaryConfig militaryConfig = kingdomConfig.getWarriorsConfig();
+        InitMilitaryConfig militaryConfig = kingdomConfig.getMilitaryConfig();
         addWarriorsToKingdom(kingdom, militaryConfig);
         kingdom.run();
         try {

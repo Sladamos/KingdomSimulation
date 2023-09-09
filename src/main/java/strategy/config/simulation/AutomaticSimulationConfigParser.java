@@ -1,7 +1,7 @@
 package strategy.config.simulation;
 
 import org.json.JSONException;
-import strategy.CriticalAppError;
+import strategy.error.CriticalAppError;
 import strategy.config.KingdomConfigParser;
 import strategy.json.JSON;
 import strategy.kingdom.KingdomConfig;

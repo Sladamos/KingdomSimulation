@@ -1,7 +1,8 @@
 package strategy.config;
 
 import org.json.JSONException;
-import strategy.CriticalAppError;
+import strategy.error.AppError;
+import strategy.error.CriticalAppError;
 import strategy.json.JSON;
 import strategy.location.mountain.MountainConfig;
 import strategy.producer.ProducerConfig;
@@ -16,7 +17,7 @@ public class MountainConfigParser implements ConfigParser<MountainConfig> {
             ProducerConfig rubyMinerConfig = createProducerConfig(json.getJSONObject("ruby"));
             return new MountainConfig(saltMinerConfig, ironOreMinerConfig, rubyMinerConfig, sapphireMinerConfig);
         }
-        catch (JSONException err) {
+        catch (JSONException | AppError err) {
             throw new CriticalAppError("Something went wrong on creating mountain config. " + err.getMessage());
         }
     }

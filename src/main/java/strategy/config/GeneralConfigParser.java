@@ -1,7 +1,8 @@
 package strategy.config;
 
 import org.json.JSONException;
-import strategy.CriticalAppError;
+import strategy.error.BasicAppError;
+import strategy.error.CriticalAppError;
 import strategy.item.military.GeneralConfig;
 import strategy.json.JSON;
 
@@ -11,7 +12,7 @@ public class GeneralConfigParser implements ConfigParser<GeneralConfig> {
         try {
             int hapinessDamageModificator = json.getInt("hapiness_damage_modificator");
             if(hapinessDamageModificator <= 0) {
-                throw new JSONException("Hapiness damage modificator must be greater than 0.");
+                throw new BasicAppError("Hapiness damage modificator must be greater than 0.");
             }
             return new GeneralConfig(hapinessDamageModificator);
         }

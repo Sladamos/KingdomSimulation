@@ -2,11 +2,12 @@ package strategy.config;
 
 import org.json.JSONException;
 import strategy.config.infantry.InitWarriorsConfigParser;
+import strategy.error.BasicAppError;
+import strategy.error.CriticalAppError;
+import strategy.item.military.InitMilitaryConfig;
 import strategy.json.JSON;
 import strategy.kingdom.KingdomConfig;
 import strategy.kingdom.KingdomTypes;
-import strategy.item.military.infantry.warrior.InitWarriorsConfig;
-import strategy.CriticalAppError;
 import strategy.location.castle.CastleConfig;
 import strategy.location.mountain.MountainConfig;
 import strategy.location.settlement.SettlementConfig;
@@ -29,11 +30,14 @@ public class KingdomConfigParser implements ConfigParser<KingdomConfig> {
 	@Override
 	public KingdomConfig createConfig(JSON json) {
 		try {
-			String kingdomId = json.getString("id");
 			Time attackTime = new TimeImpl(json.getInt("attack_time"));
+			if(attackTime.getSeconds() < 0) {
+				throw new BasicAppError("Attack time can't be less than 0.");
+			}
+			String kingdomId = json.getString("id");
 			String kingdomTypeStr = json.getString("kingdom_type");
 			KingdomTypes kingdomType = getKingdomType(kingdomTypeStr);
-			InitWarriorsConfig warriorsConfig = createWarriorsConfig(json.getJSONObject("warriors"));
+			InitMilitaryConfig warriorsConfig = createMilitaryConfig(json.getJSONObject("warriors"));
 			VillageConfig villageConfig = createVillageConfig(json.getJSONObject("village"));
 			MountainConfig mountainConfig = createMountainConfig(json.getJSONObject("mountain"));
 			CastleConfig castleConfig = createCastleConfig(json.getJSONObject("castle"));
@@ -41,7 +45,7 @@ public class KingdomConfigParser implements ConfigParser<KingdomConfig> {
 			return new KingdomConfig(kingdomId, attackTime, kingdomType, warriorsConfig,
 					villageConfig, mountainConfig, castleConfig, settlementConfig);
 		}
-		catch (JSONException err) {
+		catch (JSONException | BasicAppError err) {
 			throw new CriticalAppError("Something went wrong on creating kingdom config. " + err.getMessage());
 		}
 	}
@@ -66,14 +70,14 @@ public class KingdomConfigParser implements ConfigParser<KingdomConfig> {
 		return villageConfigParser.createConfig(json);
 	}
 
-	private InitWarriorsConfig createWarriorsConfig(JSON json) {
+	private InitMilitaryConfig createMilitaryConfig(JSON json) {
 		InitWarriorsConfigParser warriorsConfigParser  = new InitWarriorsConfigParser();
 		return warriorsConfigParser.createConfig(json);
 	}
 
 	private KingdomTypes getKingdomType(String strKingdomType) {
 		if(!kingdomTypes.containsKey(strKingdomType)) {
-			throw new CriticalAppError("Incorrect kingdom type!");
+			throw new BasicAppError("Incorrect kingdom type!");
 		}
 		return kingdomTypes.get(strKingdomType);
 	}

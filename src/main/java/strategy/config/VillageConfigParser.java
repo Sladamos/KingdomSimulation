@@ -1,7 +1,8 @@
 package strategy.config;
 
 import org.json.JSONException;
-import strategy.CriticalAppError;
+import strategy.error.AppError;
+import strategy.error.CriticalAppError;
 import strategy.json.JSON;
 import strategy.location.village.VillageConfig;
 import strategy.producer.ProducerConfig;
@@ -16,7 +17,7 @@ public class VillageConfigParser implements ConfigParser<VillageConfig> {
             ProducerConfig lumberjackConfig = createProducerConfig(json.getJSONObject("lumberjack"));
             return new VillageConfig(cowConfig, apiaryConfig, farmConfig, lumberjackConfig);
         }
-        catch (JSONException err) {
+        catch (JSONException | AppError err) {
             throw new CriticalAppError("Something went wrong on creating village config. " + err.getMessage());
         }
     }

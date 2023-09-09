@@ -1,4 +1,4 @@
-package strategy;
+package strategy.error;
 
 public class CriticalAppError extends AppError {
 

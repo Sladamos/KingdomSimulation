@@ -1,7 +1,8 @@
 package strategy.config;
 
 import org.json.JSONException;
-import strategy.CriticalAppError;
+import strategy.error.AppError;
+import strategy.error.CriticalAppError;
 import strategy.config.infantry.WarriorConfigParser;
 import strategy.item.military.infantry.warrior.WarriorConfig;
 import strategy.json.JSON;
@@ -29,7 +30,7 @@ public class SettlementConfigParser implements ConfigParser<SettlementConfig> {
             return new SettlementConfig(smelterConfig, blacksmithConfig, barracksConfig, ironBucketArtisan,
                     woodenBucketArtisan, millConfig, bakeryConfig, childHouseConfig, alchemistConfig, waterWellConfig,
                     goldenCoinWellConfig, ringJewellerConfig, necklaceJewellerConfig);
-        } catch (JSONException err) {
+        } catch (JSONException | AppError err) {
             throw new CriticalAppError("Something went wrong on creating settlement config. " + err.getMessage());
         }
     }

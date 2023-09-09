@@ -1,7 +1,7 @@
 package strategy.config.infantry;
 
 import org.json.JSONException;
-import strategy.CriticalAppError;
+import strategy.error.CriticalAppError;
 import strategy.config.ConfigParser;
 import strategy.item.military.infantry.InfantryConfig;
 import strategy.json.JSON;

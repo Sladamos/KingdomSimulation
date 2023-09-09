@@ -1,6 +1,6 @@
-package strategy;
+package strategy.error;
 
-public class AppError extends RuntimeException {
+public abstract class AppError extends RuntimeException {
 
     public AppError() {
         super();

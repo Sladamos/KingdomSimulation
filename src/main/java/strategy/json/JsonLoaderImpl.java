@@ -1,7 +1,7 @@
 package strategy.json;
 
 import org.json.JSONObject;
-import strategy.CriticalAppError;
+import strategy.error.CriticalAppError;
 
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;

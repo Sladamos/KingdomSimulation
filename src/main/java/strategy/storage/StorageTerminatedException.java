@@ -1,6 +1,6 @@
 package strategy.storage;
 
-import strategy.AppError;
+import strategy.error.AppError;
 
 public class StorageTerminatedException extends AppError {
 
