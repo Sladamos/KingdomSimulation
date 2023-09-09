@@ -11,6 +11,9 @@ public class ProducerConfigParser implements ConfigParser<ProducerConfig> {
     public ProducerConfig createConfig(JSON json) {
         try {
             int numberOfItemsPerMinute = json.getInt("items_per_minute");
+            if(numberOfItemsPerMinute <= 0) {
+                throw new JSONException("Number of items must be greater than 0");
+            }
             return new ProducerConfig(numberOfItemsPerMinute);
         }
         catch (JSONException err) {

@@ -10,6 +10,9 @@ public class GeneralConfigParser implements ConfigParser<GeneralConfig> {
     public GeneralConfig createConfig(JSON json) {
         try {
             int hapinessDamageModificator = json.getInt("hapiness_damage_modificator");
+            if(hapinessDamageModificator <= 0) {
+                throw new JSONException("Hapiness damage modificator must be greater than 0.");
+            }
             return new GeneralConfig(hapinessDamageModificator);
         }
         catch (JSONException err) {

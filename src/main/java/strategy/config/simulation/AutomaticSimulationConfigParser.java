@@ -22,6 +22,9 @@ public class AutomaticSimulationConfigParser implements SimulationConfigParser<A
 			JSON simulationSpecifiedJson = json.getJSONObject("automatic_simulation");
 			Time firstKingdomDevelopmentTime = new TimeImpl(simulationSpecifiedJson.getInt("first_kingdom_development"));
 			Time secondKingdomDevelopmentTime = new TimeImpl(simulationSpecifiedJson.getInt("second_kingdom_development"));
+			if(firstKingdomDevelopmentTime.getSeconds() < 0 || secondKingdomDevelopmentTime.getSeconds() < 0) {
+				throw new JSONException("Kingdom development time can't be less than zero");
+			}
 			return new AutomaticSimulationConfigImpl(firstKingdomConfig, secondKingdomConfig, firstKingdomDevelopmentTime, secondKingdomDevelopmentTime);
 		}
 		catch (JSONException err) {

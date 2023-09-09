@@ -17,7 +17,7 @@ public class InitWarriorsConfigParser implements ConfigParser<InitWarriorsConfig
             return new InitWarriorsConfig(numberOfWarriors, maxDamage, maxDefense, health);
         }
         catch (JSONException err) {
-            throw new CriticalAppError("Something went wrong on creating init warriors config. " + err.getMessage());
+            throw new CriticalAppError("Something went wrong on creating initializing warriors config. " + err.getMessage());
         }
     }
 }
