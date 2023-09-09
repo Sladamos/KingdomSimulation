@@ -3,10 +3,10 @@ package strategy.battle;
 import strategy.kingdom.Kingdom;
 import strategy.message.receiver.MessagesReceiver;
 
-public class BattleSimulatorImpl implements BattleSimulator {
+public class BasicBattleSimulator implements BattleSimulator {
     private final MessagesReceiver battleMessagesReceiver;
 
-    public BattleSimulatorImpl(MessagesReceiver battleMessagesReceiver) {
+    public BasicBattleSimulator(MessagesReceiver battleMessagesReceiver) {
         this.battleMessagesReceiver = battleMessagesReceiver;
     }
 

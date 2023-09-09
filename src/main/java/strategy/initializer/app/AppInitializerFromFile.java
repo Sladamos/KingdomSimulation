@@ -1,7 +1,6 @@
 package strategy.initializer.app;
 
-import strategy.battle.BattleSimulator;
-import strategy.battle.BattleSimulatorImpl;
+import strategy.battle.BattleSimulatorCreator;
 import strategy.config.AppConfigParser;
 import strategy.error.CriticalAppError;
 import strategy.initializer.AutomaticSimulationInitializer;
@@ -9,7 +8,6 @@ import strategy.initializer.SimulationInitializer;
 import strategy.json.JSON;
 import strategy.json.JsonLoader;
 import strategy.json.JsonLoaderImpl;
-import strategy.message.receiver.ConsoleMessagesReceiver;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,9 +17,9 @@ public class AppInitializerFromFile implements AppInitializer {
     
     private final Map<String, Supplier<SimulationInitializer>> simulationInitializer;
 
-    public AppInitializerFromFile() {
+    public AppInitializerFromFile(BattleSimulatorCreator battleSimulatorCreator) {
         simulationInitializer = new HashMap<>();
-        simulationInitializer.put("automatic", () -> new AutomaticSimulationInitializer(createBattleSimulator()) );
+        simulationInitializer.put("automatic", () -> new AutomaticSimulationInitializer(battleSimulatorCreator.createBasicBattleSimulator()));
     }
 
     @Override
@@ -31,10 +29,6 @@ public class AppInitializerFromFile implements AppInitializer {
         if(!simulationInitializer.containsKey(simulationType))
             throw new CriticalAppError("Incorrect simulation type in app config file.");
         return simulationInitializer.get(simulationType).get();
-    }
-
-    private BattleSimulator createBattleSimulator() {
-        return new BattleSimulatorImpl(new ConsoleMessagesReceiver());
     }
 
     private AppConfig createAppConfig() {

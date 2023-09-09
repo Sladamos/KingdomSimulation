@@ -1,5 +1,7 @@
 package strategy.simulation;
 
+import strategy.battle.BattleSimulatorCreator;
+import strategy.battle.BattleSimulatorCreatorImpl;
 import strategy.initializer.SimulationInitializer;
 import strategy.initializer.app.AppInitializer;
 import strategy.initializer.app.AppInitializerFromFile;
@@ -18,7 +20,7 @@ public class Simulation {
         two panels with names of materials and count of each one (consider it!):
         three buttons -> Start developing / add infantry  -> new Window (number / maxDamage / maxDefense)/ terminate
         one button -> start battle
-        mid panel -> battle results
+        mid panel -> battle results // or create new window
         button to clear panel
         layer for error handling -> both for console and gui
      */
@@ -31,7 +33,8 @@ public class Simulation {
         //TODO gui and messengerInitializer (gui / console)
         //TODO:
         //  create error handling layer. it should have method run (runnable), which executes some function
-        AppInitializer appInitializer = new AppInitializerFromFile();
+        BattleSimulatorCreator battleSimulatorCreator = new BattleSimulatorCreatorImpl();
+        AppInitializer appInitializer = new AppInitializerFromFile(battleSimulatorCreator);
         SimulationInitializer simulationInitializer = appInitializer.createSimulationInitializer();
         simulationInitializer.initializeSimulation();
     }
