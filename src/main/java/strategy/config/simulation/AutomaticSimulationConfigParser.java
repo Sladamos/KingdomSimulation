@@ -1,6 +1,7 @@
 package strategy.config.simulation;
 
 import org.json.JSONException;
+import strategy.error.BasicAppError;
 import strategy.error.CriticalAppError;
 import strategy.config.KingdomConfigParser;
 import strategy.json.JSON;
@@ -23,11 +24,11 @@ public class AutomaticSimulationConfigParser implements SimulationConfigParser<A
 			Time firstKingdomDevelopmentTime = new TimeImpl(simulationSpecifiedJson.getInt("first_kingdom_development"));
 			Time secondKingdomDevelopmentTime = new TimeImpl(simulationSpecifiedJson.getInt("second_kingdom_development"));
 			if(firstKingdomDevelopmentTime.getSeconds() < 0 || secondKingdomDevelopmentTime.getSeconds() < 0) {
-				throw new JSONException("Kingdom development time can't be less than zero");
+				throw new BasicAppError("Kingdom development time can't be less than zero");
 			}
 			return new AutomaticSimulationConfigImpl(firstKingdomConfig, secondKingdomConfig, firstKingdomDevelopmentTime, secondKingdomDevelopmentTime);
 		}
-		catch (JSONException err) {
+		catch (JSONException | BasicAppError err) {
 			throw new CriticalAppError("Something went wrong on creating simulation config. " + err.getMessage());
 		}
 	}

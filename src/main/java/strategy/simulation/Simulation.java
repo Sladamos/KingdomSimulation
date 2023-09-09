@@ -1,15 +1,10 @@
 package strategy.simulation;
 
-import strategy.battle.BattleSimulator;
-import strategy.battle.BattleSimulatorImpl;
-import strategy.initializer.AutomaticSimulationInitializer;
 import strategy.initializer.SimulationInitializer;
-import strategy.message.receiver.ConsoleMessagesReceiver;
+import strategy.initializer.app.AppInitializer;
+import strategy.initializer.app.AppInitializerFromFile;
 
 public class Simulation {
-
-    //Warrior creator which know how to create warrior from Warrior config (random warrior /  defined warrior)
-
     //TODO: app initializer which create SimulationInitializer
 
     //TODO: refactor messages from string to json! and create new messages: StorageMessage / BattleMessage
@@ -32,8 +27,12 @@ public class Simulation {
     //  Also handle exception: SafeDisable(); -> then display something and end app
 
     public static void main(String[] args) {
-        BattleSimulator battleSimulator = new BattleSimulatorImpl(new ConsoleMessagesReceiver());
-        SimulationInitializer simulationInitializer = new AutomaticSimulationInitializer(battleSimulator);
+
+        //TODO gui and messengerInitializer (gui / console)
+        //TODO:
+        //  create error handling layer. it should have method run (runnable), which executes some function
+        AppInitializer appInitializer = new AppInitializerFromFile();
+        SimulationInitializer simulationInitializer = appInitializer.createSimulationInitializer();
         simulationInitializer.initializeSimulation();
     }
 }
