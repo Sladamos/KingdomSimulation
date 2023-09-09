@@ -1,4 +1,9 @@
 {
+  "simulation_type": "automatic",
+  "automatic_simulation": {
+    "first_kingdom_development": 50,
+    "second_kingdom_development": 25
+  },
   "first_kingdom": {
     "id": "Stronger",
     "kingdom_type": "Sarrax",
