@@ -1,10 +1,16 @@
 package strategy.simulation;
 
+import strategy.battle.BattleSimulator;
+import strategy.battle.BattleSimulatorImpl;
 import strategy.initializer.AutomaticSimulationInitializer;
+import strategy.initializer.SimulationInitializer;
+import strategy.message.receiver.ConsoleMessagesReceiver;
 
 public class Simulation {
 
     //TODO: validate config file in config initializers (are values > 0 etc.)
+
+    //TODO: app initializer which create SimulationInitializer
 
     //TODO: refactor messages from string to json! and create new messages: StorageMessage / BattleMessage
     //TODO: before simulation initialize there should be created all gui (ApplicationMessenger)
@@ -12,9 +18,6 @@ public class Simulation {
     //  battlereceiver create StringProperty, and change it when new messsage will come.
     //TODO: messages receiver System.out.println("Consumed :" + material); in STORAGES!!! additionaly some ID  (KingdomFirst: Consumed: material)
     ////TODO: messages receiver System.out.println("Produced :" + item);
-
-
-    //TODO: add sleep time to config???? and boolean to specify automatic / manual -> refactor after messages
 
     /*TODO gui:
         two panels with names of materials and count of each one (consider it!):
@@ -29,7 +32,8 @@ public class Simulation {
     //  Also handle exception: SafeDisable(); -> then display something and end app
 
     public static void main(String[] args) {
-        AutomaticSimulationInitializer simulationInitializer = new AutomaticSimulationInitializer();
+        BattleSimulator battleSimulator = new BattleSimulatorImpl(new ConsoleMessagesReceiver());
+        SimulationInitializer simulationInitializer = new AutomaticSimulationInitializer(battleSimulator);
         simulationInitializer.initializeSimulation();
     }
 }
