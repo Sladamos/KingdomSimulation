@@ -1,4 +1,4 @@
-package strategy;
+package strategy.simulation;
 
 import strategy.initializer.AutomaticSimulationInitializer;
 

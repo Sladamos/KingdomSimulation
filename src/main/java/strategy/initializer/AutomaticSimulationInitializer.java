@@ -1,31 +1,36 @@
 package strategy.initializer;
 
-import strategy.SimulationConfig;
 import strategy.battle.Battle;
 import strategy.battle.SimpleBattle;
-import strategy.config.SimulationConfigParser;
+import strategy.config.simulation.AutomaticSimulationConfigParser;
 import strategy.json.JSON;
+import strategy.json.JsonLoader;
 import strategy.json.JsonLoaderImpl;
 import strategy.kingdom.Kingdom;
 import strategy.message.receiver.ConsoleMessagesReceiver;
 import strategy.message.receiver.MessagesReceiver;
+import strategy.simulation.AutomaticSimulationConfig;
 
 public class AutomaticSimulationInitializer implements SimulationInitializer {
 
     @Override
     public void initializeSimulation() {
-        SimulationConfig simulationConfig = createSimulationConfig();
+        AutomaticSimulationConfig simulationConfig = createSimulationConfig();
         KingdomInitializer kingdomInitializer = new KingdomInitializer();
-        Kingdom firstKingdom = kingdomInitializer.createKingdom(50000, simulationConfig.getFirstKingdomConfig());
-        Kingdom weakerKingdom = kingdomInitializer.createKingdom(25000, simulationConfig.getSecondKingdomConfig());
-        simulateBattle(firstKingdom, weakerKingdom);
+        Kingdom firstKingdom = kingdomInitializer.createKingdom(simulationConfig.getFirstKingdomDevelopmentTime().getMiliseconds(),
+                simulationConfig.getFirstKingdomConfig());
+
+        Kingdom weakerKingdom = kingdomInitializer.createKingdom(simulationConfig.getSecondKingdomDevelopmentTime().getMiliseconds(),
+                simulationConfig.getSecondKingdomConfig());
+
         firstKingdom.terminate();
         weakerKingdom.terminate();
+        simulateBattle(firstKingdom, weakerKingdom);
     }
 
-    private SimulationConfig createSimulationConfig() {
-        SimulationConfigParser configParser = new SimulationConfigParser();
-        var loader = new JsonLoaderImpl();
+    private AutomaticSimulationConfig createSimulationConfig() {
+        AutomaticSimulationConfigParser configParser = new AutomaticSimulationConfigParser();
+        JsonLoader loader = new JsonLoaderImpl();
         JSON json = loader.loadJsonFromFile("config.json");
         return configParser.createConfig(json);
     }
