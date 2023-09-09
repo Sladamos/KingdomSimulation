@@ -1,9 +1,9 @@
 package strategy.battle;
 
+import strategy.item.military.ArmyDestroyedException;
 import strategy.kingdom.Kingdom;
 import strategy.message.Message;
 import strategy.message.receiver.MessagesReceiver;
-import strategy.item.military.ArmyDestroyedException;
 
 public class SimpleBattle implements Battle {
 
@@ -35,7 +35,7 @@ public class SimpleBattle implements Battle {
 
     private void simulateAttack(Kingdom attacker, Kingdom defender) {
         try {
-            long attackTime = attacker.getAttackTime();
+            long attackTime = attacker.getAttackTime().getMiliseconds();
             Thread.sleep(attackTime);
             Message messageAboutAttack = new Message(attacker + " attacked");
             messagesReceiver.receiveMessage(messageAboutAttack);

@@ -11,6 +11,8 @@ import strategy.location.castle.CastleConfig;
 import strategy.location.mountain.MountainConfig;
 import strategy.location.settlement.SettlementConfig;
 import strategy.location.village.VillageConfig;
+import util.Time;
+import util.TimeImpl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,7 +30,7 @@ public class KingdomConfigParser implements ConfigParser<KingdomConfig> {
 	public KingdomConfig createConfig(JSON json) {
 		try {
 			String kingdomId = json.getString("id");
-			long attackTime = json.getLong("attack_time") * 1000;
+			Time attackTime = new TimeImpl(json.getInt("attack_time"));
 			String kingdomTypeStr = json.getString("kingdom_type");
 			KingdomTypes kingdomType = getKingdomType(kingdomTypeStr);
 			InitWarriorsConfig warriorsConfig = createWarriorsConfig(json.getJSONObject("warriors"));

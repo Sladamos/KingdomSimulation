@@ -14,6 +14,7 @@ import strategy.location.settlement.SettlementStorageManager;
 import strategy.location.village.SarraxVillage;
 import strategy.location.village.Village;
 import strategy.location.village.VillageStorageManager;
+import util.Time;
 
 import java.util.Collection;
 
@@ -30,7 +31,7 @@ public class SarraxKingdom implements Kingdom {
     @Getter
     private final Castle<Warrior> castle;
 
-    private final long attackTime;
+    private final Time attackTime;
 
     private final String kingdomId;
 
@@ -83,7 +84,7 @@ public class SarraxKingdom implements Kingdom {
     }
 
     @Override
-    public long getAttackTime() {
+    public Time getAttackTime() {
         return attackTime;
     }
 

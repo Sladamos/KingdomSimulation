@@ -8,13 +8,14 @@ import strategy.location.castle.CastleConfig;
 import strategy.location.mountain.MountainConfig;
 import strategy.location.settlement.SettlementConfig;
 import strategy.location.village.VillageConfig;
+import util.Time;
 
 @Getter
 @AllArgsConstructor
 public class KingdomConfig implements Config {
 	private final String kingdomId;
 
-	private final long attackTime;
+	private final Time attackTime;
 
 	private final KingdomTypes kingdomType;
 
