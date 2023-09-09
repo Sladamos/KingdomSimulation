@@ -1,6 +1,6 @@
 package strategy;
 
-import strategy.initializer.SimulationInitializer;
+import strategy.initializer.AutomaticSimulationInitializer;
 
 public class Simulation {
 
@@ -29,7 +29,7 @@ public class Simulation {
     //  Also handle exception: SafeDisable(); -> then display something and end app
 
     public static void main(String[] args) {
-        SimulationInitializer simulationInitializer = new SimulationInitializer();
+        AutomaticSimulationInitializer simulationInitializer = new AutomaticSimulationInitializer();
         simulationInitializer.initializeSimulation();
     }
 }
