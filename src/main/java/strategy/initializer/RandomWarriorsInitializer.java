@@ -8,11 +8,11 @@ import java.util.Collection;
 import java.util.Random;
 import java.util.stream.IntStream;
 
-public class WarriorsInitializer {
+public class RandomWarriorsInitializer {
 
     private final Random rand;
 
-    public WarriorsInitializer() {
+    public RandomWarriorsInitializer() {
         rand = new Random();
     }
 

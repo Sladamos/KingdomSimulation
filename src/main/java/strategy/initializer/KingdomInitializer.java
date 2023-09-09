@@ -35,7 +35,7 @@ public class KingdomInitializer {
     }
 
     private void addWarriorsToKingdom(Kingdom kingdom, InitMilitaryConfig warriorsConfig) {
-        WarriorsInitializer warriorsInitializer = new WarriorsInitializer();
+        RandomWarriorsInitializer warriorsInitializer = new RandomWarriorsInitializer();
         Collection<Warrior> warriors = warriorsInitializer.createWarriors(warriorsConfig);
         kingdom.addWarriors(warriors);
     }

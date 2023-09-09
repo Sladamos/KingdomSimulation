@@ -8,7 +8,7 @@ import strategy.message.receiver.ConsoleMessagesReceiver;
 
 public class Simulation {
 
-    //TODO: validate config file in config initializers (are values > 0 etc.)
+    //Warrior creator which know how to create warrior from Warrior config (random warrior /  defined warrior)
 
     //TODO: app initializer which create SimulationInitializer
 

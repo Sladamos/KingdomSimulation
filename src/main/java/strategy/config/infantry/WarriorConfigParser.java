@@ -5,6 +5,11 @@ import strategy.item.military.infantry.warrior.WarriorConfig;
 import strategy.json.JSON;
 
 public class WarriorConfigParser extends InfantryConfigParser<WarriorConfig> {
+
+    public WarriorConfig createConfig(int damage, int defense, int health) {
+        return new WarriorConfig(damage, defense, health);
+    }
+
     @Override
     protected WarriorConfig createInfantryConfig(JSON json) {
         int damage = json.getInt("damage");
