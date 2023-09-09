@@ -1,5 +1,4 @@
 {
-  "simulation_type": "automatic",
   "automatic_simulation": {
     "first_kingdom_development": 50,
     "second_kingdom_development": 25
