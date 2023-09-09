@@ -10,7 +10,7 @@ import strategy.json.JSON;
 
 public class InitWarriorsConfigParser implements ConfigParser<InitMilitaryConfig> {
     @Override
-    public InitMilitaryConfig createConfig(JSON json) {
+    public InitWarriorsConfig createConfig(JSON json) {
         try {
             int numberOfUnits = json.getInt("number_of_units");
             if(numberOfUnits < 0) {

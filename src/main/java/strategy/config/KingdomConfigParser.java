@@ -4,7 +4,7 @@ import org.json.JSONException;
 import strategy.config.infantry.InitWarriorsConfigParser;
 import strategy.error.BasicAppError;
 import strategy.error.CriticalAppError;
-import strategy.item.military.InitMilitaryConfig;
+import strategy.item.military.infantry.warrior.InitWarriorsConfig;
 import strategy.json.JSON;
 import strategy.kingdom.KingdomConfig;
 import strategy.kingdom.KingdomTypes;
@@ -37,7 +37,7 @@ public class KingdomConfigParser implements ConfigParser<KingdomConfig> {
 			String kingdomId = json.getString("id");
 			String kingdomTypeStr = json.getString("kingdom_type");
 			KingdomTypes kingdomType = getKingdomType(kingdomTypeStr);
-			InitMilitaryConfig warriorsConfig = createMilitaryConfig(json.getJSONObject("warriors"));
+			InitWarriorsConfig warriorsConfig = createWarriorsConfig(json.getJSONObject("warriors"));
 			VillageConfig villageConfig = createVillageConfig(json.getJSONObject("village"));
 			MountainConfig mountainConfig = createMountainConfig(json.getJSONObject("mountain"));
 			CastleConfig castleConfig = createCastleConfig(json.getJSONObject("castle"));
@@ -70,7 +70,7 @@ public class KingdomConfigParser implements ConfigParser<KingdomConfig> {
 		return villageConfigParser.createConfig(json);
 	}
 
-	private InitMilitaryConfig createMilitaryConfig(JSON json) {
+	private InitWarriorsConfig createWarriorsConfig(JSON json) {
 		InitWarriorsConfigParser warriorsConfigParser  = new InitWarriorsConfigParser();
 		return warriorsConfigParser.createConfig(json);
 	}

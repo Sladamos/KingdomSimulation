@@ -3,7 +3,7 @@ package strategy.kingdom;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import strategy.Config;
-import strategy.item.military.InitMilitaryConfig;
+import strategy.item.military.infantry.warrior.InitWarriorsConfig;
 import strategy.location.castle.CastleConfig;
 import strategy.location.mountain.MountainConfig;
 import strategy.location.settlement.SettlementConfig;
@@ -19,7 +19,7 @@ public class KingdomConfig implements Config {
 
 	private final KingdomTypes kingdomType;
 
-	private final InitMilitaryConfig militaryConfig;
+	private final InitWarriorsConfig warriorsConfig;
 
 	private final VillageConfig villageConfig;
 

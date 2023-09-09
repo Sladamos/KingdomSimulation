@@ -1,6 +1,7 @@
 package strategy.initializer;
 
-import strategy.item.military.InitMilitaryConfig;
+import strategy.initializer.military.RandomWarriorsInitializer;
+import strategy.item.military.infantry.warrior.InitWarriorsConfig;
 import strategy.item.military.infantry.warrior.Warrior;
 import strategy.kingdom.Kingdom;
 import strategy.kingdom.KingdomConfig;
@@ -24,8 +25,8 @@ public class KingdomInitializer {
     public Kingdom createKingdom(long sleep, KingdomConfig kingdomConfig) {
         KingdomTypes kingdomType = kingdomConfig.getKingdomType();
         Kingdom kingdom = kingdomsCreators.get(kingdomType).apply(kingdomConfig);
-        InitMilitaryConfig militaryConfig = kingdomConfig.getMilitaryConfig();
-        addWarriorsToKingdom(kingdom, militaryConfig);
+        InitWarriorsConfig warriorsConfig = kingdomConfig.getWarriorsConfig();
+        addWarriorsToKingdom(kingdom, warriorsConfig);
         kingdom.run();
         try {
             Thread.sleep(sleep);
@@ -34,7 +35,7 @@ public class KingdomInitializer {
         return kingdom;
     }
 
-    private void addWarriorsToKingdom(Kingdom kingdom, InitMilitaryConfig warriorsConfig) {
+    private void addWarriorsToKingdom(Kingdom kingdom, InitWarriorsConfig warriorsConfig) {
         RandomWarriorsInitializer warriorsInitializer = new RandomWarriorsInitializer();
         Collection<Warrior> warriors = warriorsInitializer.createWarriors(warriorsConfig);
         kingdom.addWarriors(warriors);
