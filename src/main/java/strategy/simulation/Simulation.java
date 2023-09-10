@@ -5,14 +5,13 @@ import strategy.battle.BattleSimulatorCreatorImpl;
 import strategy.initializer.SimulationInitializer;
 import strategy.initializer.app.AppInitializer;
 import strategy.initializer.app.AppInitializerFromFile;
+import strategy.message.AppCommunicator;
+import strategy.message.AppCommunicatorImpl;
+import strategy.message.receiver.ConsoleMessagesReceiver;
 
 public class Simulation {
-    //TODO: refactor messages from string to json! and create new messages: StorageMessage / BattleMessage
     //TODO: before simulation initialize there should be created all gui (ApplicationMessenger)
-    //  then there should exist: BattleReceiver FirstKingdomMessenger SecondKingdomMessenger : for example in
-    //  battlereceiver create StringProperty, and change it when new messsage will come.
-    //TODO: messages receiver System.out.println("Consumed :" + material); in STORAGES!!! additionaly some ID  (KingdomFirst: Consumed: material)
-    ////TODO: messages receiver System.out.println("Produced :" + item);
+    //  for example in battlereceiver create StringProperty, and change it when new messsage will come.
 
     //TODO: Kingdoms should have unique id
 
@@ -33,6 +32,9 @@ public class Simulation {
         //TODO gui and messengerInitializer (gui / console)
         //TODO:
         //  create error handling layer. it should have method run (runnable), which executes some function
+        //  create app communicator from guiInitializer
+        AppCommunicator appCommunicator = new AppCommunicatorImpl(new ConsoleMessagesReceiver<>(),
+                new ConsoleMessagesReceiver<>(), new ConsoleMessagesReceiver<>());
         BattleSimulatorCreator battleSimulatorCreator = new BattleSimulatorCreatorImpl();
         AppInitializer appInitializer = new AppInitializerFromFile(battleSimulatorCreator);
         SimulationInitializer simulationInitializer = appInitializer.createSimulationInitializer();
