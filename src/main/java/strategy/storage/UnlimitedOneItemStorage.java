@@ -8,6 +8,7 @@ import strategy.message.JSONMessage;
 import java.util.ArrayDeque;
 import java.util.Collection;
 import java.util.Deque;
+import java.util.function.Consumer;
 
 public class UnlimitedOneItemStorage<T extends Item> implements OneItemStorage<T> {
 
@@ -25,6 +26,11 @@ public class UnlimitedOneItemStorage<T extends Item> implements OneItemStorage<T
     public UnlimitedOneItemStorage(Collection<? extends T> storageInitializer) {
         storage = new ArrayDeque<>(storageInitializer);
         messageEvent = new OneArgEventImpl<>();
+    }
+
+    @Override
+    public void addListener(Consumer<JSONMessage> messageConsumer) {
+        messageEvent.addListener(messageConsumer);
     }
 
     @Override
@@ -63,7 +69,7 @@ public class UnlimitedOneItemStorage<T extends Item> implements OneItemStorage<T
     }
 
     private synchronized void waitForItemInStorage() {
-        while(storage.size() == 0 && isWorking()) {
+        while(storage.isEmpty() && isWorking()) {
             try {
                 wait();
             }

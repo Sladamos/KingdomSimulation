@@ -2,8 +2,7 @@ package strategy.message;
 
 import strategy.events.oneargevent.OneArgEvent;
 import strategy.events.oneargevent.OneArgEventImpl;
-
-import java.util.function.Consumer;
+import strategy.message.receiver.MessagesReceiver;
 
 public class MessagesNotifierImpl<T extends Message<?>> implements MessagesNotifier<T> {
 	
@@ -14,7 +13,7 @@ public class MessagesNotifierImpl<T extends Message<?>> implements MessagesNotif
 	}
 
 	@Override
-	public void addListener(Consumer<T> listener) {
+	public void addListener(MessagesReceiver<T> listener) {
 		notifyEvent.addListener(listener);
 	}
 

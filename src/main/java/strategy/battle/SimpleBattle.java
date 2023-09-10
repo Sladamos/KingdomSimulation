@@ -11,11 +11,11 @@ public class SimpleBattle implements Battle {
 
     private final Kingdom secondKingdom;
 
-    private final MessagesReceiver messagesReceiver;
+    private final MessagesReceiver<StringMessage> messagesReceiver;
 
     private boolean areKingdomsFighting;
 
-    public SimpleBattle(Kingdom firstKingdom, Kingdom secondKingdom, MessagesReceiver messagesReceiver) {
+    public SimpleBattle(Kingdom firstKingdom, Kingdom secondKingdom, MessagesReceiver<StringMessage> messagesReceiver) {
         this.firstKingdom = firstKingdom;
         this.secondKingdom = secondKingdom;
         this.messagesReceiver = messagesReceiver;
@@ -38,11 +38,11 @@ public class SimpleBattle implements Battle {
             long attackTime = attacker.getAttackTime().getMiliseconds();
             Thread.sleep(attackTime);
             StringMessage messageAboutAttack = new StringMessage(attacker + " attacked");
-            messagesReceiver.receiveMessage(messageAboutAttack);
+            messagesReceiver.accept(messageAboutAttack);
             attacker.attack(defender);
         } catch (ArmyDestroyedException ignored) {
             StringMessage messageAboutWon = new StringMessage(attacker + " won the battle");
-            messagesReceiver.receiveMessage(messageAboutWon);
+            messagesReceiver.accept(messageAboutWon);
             areKingdomsFighting = false;
         } catch (Exception ignored) {
             areKingdomsFighting = false;

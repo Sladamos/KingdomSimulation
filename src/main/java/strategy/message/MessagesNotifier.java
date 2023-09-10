@@ -1,7 +1,7 @@
 package strategy.message;
 
-import java.util.function.Consumer;
+import strategy.message.receiver.MessagesReceiver;
 
-public interface MessagesNotifier<T extends Message<?>> extends Consumer<T> {
-	void addListener(Consumer<T> listener);
+public interface MessagesNotifier<T extends Message<?>> extends MessagesReceiver<T> {
+	void addListener(MessagesReceiver<T> listener);
 }
