@@ -1,6 +1,9 @@
 package strategy.storage;
 
+import strategy.events.oneargevent.OneArgEvent;
+import strategy.events.oneargevent.OneArgEventImpl;
 import strategy.item.Item;
+import strategy.message.JSONMessage;
 
 import java.util.ArrayDeque;
 import java.util.Collection;
@@ -12,19 +15,23 @@ public class UnlimitedOneItemStorage<T extends Item> implements OneItemStorage<T
 
     private boolean working;
 
+    private final OneArgEvent<JSONMessage> messageEvent;
+
     public UnlimitedOneItemStorage() {
         storage = new ArrayDeque<>();
+        messageEvent = new OneArgEventImpl<>();
     }
 
     public UnlimitedOneItemStorage(Collection<? extends T> storageInitializer) {
         storage = new ArrayDeque<>(storageInitializer);
+        messageEvent = new OneArgEventImpl<>();
     }
 
     @Override
     public synchronized void addItemToStorage(T item) {
-        //TODO: remove and add messenger
-        System.out.println("Item pushed to storage: " + item);
         storage.push(item);
+        String strMessage = "Item pushed to storage: " + item;
+        sendMessage(strMessage, item);
         notifyAll();
     }
 
@@ -34,7 +41,10 @@ public class UnlimitedOneItemStorage<T extends Item> implements OneItemStorage<T
         if (!isWorking()) {
             throw new StorageTerminatedException();
         }
-        return storage.pop();
+        T item = storage.pop();
+        String strMessage = "Item popped from storage: " + item;
+        sendMessage(strMessage, item);
+        return item;
     }
 
     @Override
@@ -60,5 +70,13 @@ public class UnlimitedOneItemStorage<T extends Item> implements OneItemStorage<T
             catch (InterruptedException ignored) {
             }
         }
+    }
+
+    private void sendMessage(String strMessage, T item) {
+        JSONMessage message = new JSONMessage(strMessage);
+        message.put("size", storage.size());
+        message.put("item", item.toString());
+        System.out.println(strMessage);
+        messageEvent.invoke(message);
     }
 }

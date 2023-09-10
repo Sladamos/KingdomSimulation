@@ -26,5 +26,13 @@ public class JSONMessage implements Message<JSON> {
             throw new BasicAppError("Something went wrong");
         }
     }
+
+    public void put(String key, String value) {
+        content.put(key, value);
+    }
+
+    public void put(String key, int value) {
+        content.put(key, value);
+    }
 }
 
