@@ -4,8 +4,6 @@ import strategy.message.logging.ConsoleLogger;
 import strategy.message.logging.Logger;
 import strategy.message.receiver.MessagesReceiver;
 
-import java.util.Map;
-
 public class AppCommunicatorImpl implements AppCommunicator {
 
     private final MessagesReceiver<StringMessage> battleMessagesReceiver;
@@ -26,18 +24,18 @@ public class AppCommunicatorImpl implements AppCommunicator {
     }
 
     @Override
-    public void bindErrorsNotifier(MessagesNotifier<StringMessage> errorsNotifier) {
-        errorsNotifier.addListener(this::receiveErrorMessage);
+    public void bindErrorsSender(MessagesSender<StringMessage> errorsSender) {
+        errorsSender.addListener(this::receiveErrorMessage);
     }
 
     @Override
-    public void bindBattleNotifier(MessagesNotifier<StringMessage> battleNotifier) {
-        battleNotifier.addListener(this::receiveMessageFromBattle);
+    public void bindBattleSender(MessagesSender<StringMessage> battleSender) {
+        battleSender.addListener(this::receiveMessageFromBattle);
     }
 
     @Override
-    public void bindKingdomNotifier(MessagesNotifier<JSONMessage> kingdomNotifier) {
-        kingdomNotifier.addListener(this::receiveMessageFromKingdom);
+    public void bindKingdomSender(MessagesSender<JSONMessage> kingdomSender) {
+        kingdomSender.addListener(this::receiveMessageFromKingdom);
     }
 
     @Override

@@ -2,15 +2,16 @@ package strategy.location.castle;
 
 import strategy.events.oneargevent.OneArgEvent;
 import strategy.events.oneargevent.OneArgEventImpl;
+import strategy.location.LocationMessagesNotifier;
 import strategy.message.JSONMessage;
 import strategy.message.MessagesNotifier;
 import strategy.message.receiver.MessagesReceiver;
 
-public class CastleMessagesReceiver implements MessagesNotifier<JSONMessage> {
+public class CastleMessagesNotifier implements LocationMessagesNotifier {
 
 	private final OneArgEvent<JSONMessage> messageEvent;
 
-	public CastleMessagesReceiver(MessagesNotifier<JSONMessage> messagesNotifier) {
+	public CastleMessagesNotifier(MessagesNotifier<JSONMessage> messagesNotifier) {
 		messageEvent = new OneArgEventImpl<>();
 		messagesNotifier.addListener(this);
 	}

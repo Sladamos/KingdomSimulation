@@ -2,11 +2,12 @@ package strategy.location.village;
 
 import strategy.events.oneargevent.OneArgEvent;
 import strategy.events.oneargevent.OneArgEventImpl;
+import strategy.location.LocationMessagesNotifier;
 import strategy.message.JSONMessage;
 import strategy.message.MessagesNotifier;
 import strategy.message.receiver.MessagesReceiver;
 
-public class VillageMessagesNotifier implements MessagesNotifier<JSONMessage> {
+public class VillageMessagesNotifier implements LocationMessagesNotifier {
 
     private final OneArgEvent<JSONMessage> messageEvent;
 
