@@ -6,7 +6,7 @@ import strategy.message.JSONMessage;
 import strategy.message.MessagesNotifier;
 import strategy.message.receiver.MessagesReceiver;
 
-public class MountainMessagesReceiver implements MessagesReceiver<JSONMessage> {
+public class MountainMessagesReceiver implements MessagesNotifier<JSONMessage> {
 
 	private final OneArgEvent<JSONMessage> messageEvent;
 
@@ -20,5 +20,10 @@ public class MountainMessagesReceiver implements MessagesReceiver<JSONMessage> {
 		JSONMessage newMessage = new JSONMessage(message);
 		newMessage.put("sender", "mountain");
 		messageEvent.invoke(newMessage);
+	}
+
+	@Override
+	public void addListener(MessagesReceiver<JSONMessage> listener) {
+		messageEvent.addListener(listener);
 	}
 }

@@ -6,7 +6,7 @@ import strategy.message.JSONMessage;
 import strategy.message.MessagesNotifier;
 import strategy.message.receiver.MessagesReceiver;
 
-public class SettlementMessagesReceiver implements MessagesReceiver<JSONMessage> {
+public class SettlementMessagesReceiver implements MessagesNotifier<JSONMessage> {
 
 	private final OneArgEvent<JSONMessage> messageEvent;
 
@@ -20,5 +20,10 @@ public class SettlementMessagesReceiver implements MessagesReceiver<JSONMessage>
 		JSONMessage newMessage = new JSONMessage(message);
 		newMessage.put("sender", "settlement");
 		messageEvent.invoke(newMessage);
+	}
+
+	@Override
+	public void addListener(MessagesReceiver<JSONMessage> listener) {
+		messageEvent.addListener(listener);
 	}
 }
