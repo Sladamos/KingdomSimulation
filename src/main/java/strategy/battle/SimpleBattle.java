@@ -2,7 +2,7 @@ package strategy.battle;
 
 import strategy.item.military.ArmyDestroyedException;
 import strategy.kingdom.Kingdom;
-import strategy.message.Message;
+import strategy.message.StringMessage;
 import strategy.message.receiver.MessagesReceiver;
 
 public class SimpleBattle implements Battle {
@@ -37,11 +37,11 @@ public class SimpleBattle implements Battle {
         try {
             long attackTime = attacker.getAttackTime().getMiliseconds();
             Thread.sleep(attackTime);
-            Message messageAboutAttack = new Message(attacker + " attacked");
+            StringMessage messageAboutAttack = new StringMessage(attacker + " attacked");
             messagesReceiver.receiveMessage(messageAboutAttack);
             attacker.attack(defender);
         } catch (ArmyDestroyedException ignored) {
-            Message messageAboutWon = new Message(attacker + " won the battle");
+            StringMessage messageAboutWon = new StringMessage(attacker + " won the battle");
             messagesReceiver.receiveMessage(messageAboutWon);
             areKingdomsFighting = false;
         } catch (Exception ignored) {
