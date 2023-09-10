@@ -7,6 +7,22 @@ import org.json.JSONObject;
 public class JSON {
     private final JSONObject jsonObject;
 
+    public JSON() {
+        jsonObject = new JSONObject();
+    }
+
+    public JSON(String jsonStr) {
+        jsonObject = new JSONObject(jsonStr);
+    }
+
+    public void put(String key, int value) {
+        jsonObject.put(key, value);
+    }
+
+    public void put(String key, String value) {
+        jsonObject.put(key, value);
+    }
+
     public JSON getJSONObject(String key) {
         JSONObject newJsonObject = jsonObject.getJSONObject(key);
         return new JSON(newJsonObject);

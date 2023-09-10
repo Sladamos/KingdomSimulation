@@ -9,6 +9,11 @@ public class JSONMessage implements Message<JSON> {
     @Getter
     private final JSON content;
 
+    public JSONMessage(String message) {
+        this.content = new JSON();
+        content.put("message", message);
+    }
+
     public JSONMessage(JSON content) {
         this.content = content;
     }
