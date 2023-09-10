@@ -1,6 +1,6 @@
 package strategy.events.noargsevent;
 
-public interface Event {
+public interface NoArgEvent {
 	void addListener(Runnable listener);
 	void removeListener(Runnable listener);
 	void invoke();

@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.function.Consumer;
 
-public class EventImpl<T> implements Event<T> {
+public class OneArgEventImpl<T> implements OneArgEvent<T> {
 
 	private final ArrayList<Consumer<T>> listeners;
 
 	private final ArrayList<Consumer<T>> listenersToRemove;
 
-	public EventImpl() {
+	public OneArgEventImpl() {
 		listeners = new ArrayList<>();
 		listenersToRemove = new ArrayList<>();
 	}

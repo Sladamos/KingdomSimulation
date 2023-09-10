@@ -3,13 +3,13 @@ package strategy.events.noargsevent;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class EventImpl implements Event {
+public class NoArgEventImpl implements NoArgEvent {
 
 	private final ArrayList<Runnable> listeners;
 
 	private final ArrayList<Runnable> listenersToRemove;
 
-	public EventImpl() {
+	public NoArgEventImpl() {
 		listeners = new ArrayList<>();
 		listenersToRemove = new ArrayList<>();
 	}
