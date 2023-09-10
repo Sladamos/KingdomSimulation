@@ -2,7 +2,7 @@ package strategy.config;
 
 import org.json.JSONException;
 import strategy.error.CriticalAppError;
-import strategy.initializer.app.AppConfig;
+import strategy.app.AppConfig;
 import strategy.json.JSON;
 
 public class AppConfigParser implements ConfigParser<AppConfig> {

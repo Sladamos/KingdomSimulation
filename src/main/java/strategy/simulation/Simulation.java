@@ -5,8 +5,8 @@ import strategy.battle.BattleSimulatorCreatorImpl;
 import strategy.initializer.SimulationInitializer;
 import strategy.initializer.app.AppInitializer;
 import strategy.initializer.app.AppInitializerFromFile;
-import strategy.message.AppCommunicator;
-import strategy.message.AppCommunicatorImpl;
+import strategy.app.AppCommunicator;
+import strategy.app.AppCommunicatorImpl;
 import strategy.message.receiver.ConsoleMessagesReceiver;
 
 public class Simulation {

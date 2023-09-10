@@ -4,7 +4,7 @@ import strategy.events.oneargevent.OneArgEvent;
 import strategy.events.oneargevent.OneArgEventImpl;
 import strategy.location.LocationMessagesNotifier;
 import strategy.message.JSONMessage;
-import strategy.message.MessagesNotifier;
+import strategy.message.notifier.MessagesNotifier;
 import strategy.message.receiver.MessagesReceiver;
 
 public class SettlementMessagesNotifier implements LocationMessagesNotifier {

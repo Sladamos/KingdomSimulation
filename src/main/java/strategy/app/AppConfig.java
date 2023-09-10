@@ -1,4 +1,4 @@
-package strategy.initializer.app;
+package strategy.app;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

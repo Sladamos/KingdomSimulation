@@ -1,5 +1,6 @@
 package strategy.initializer.app;
 
+import strategy.app.AppConfig;
 import strategy.battle.BattleSimulatorCreator;
 import strategy.config.AppConfigParser;
 import strategy.error.CriticalAppError;

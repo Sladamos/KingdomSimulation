@@ -1,5 +1,8 @@
-package strategy.message;
+package strategy.app;
 
+import strategy.message.JSONMessage;
+import strategy.message.sender.MessagesSender;
+import strategy.message.StringMessage;
 import strategy.message.logging.ConsoleLogger;
 import strategy.message.logging.Logger;
 import strategy.message.receiver.MessagesReceiver;
