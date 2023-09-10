@@ -5,7 +5,9 @@ import java.util.Iterator;
 import java.util.function.Consumer;
 
 public class EventImpl<T> implements Event<T> {
+
 	private final ArrayList<Consumer<T>> listeners;
+
 	private final ArrayList<Consumer<T>> listenersToRemove;
 
 	public EventImpl() {
@@ -42,10 +44,5 @@ public class EventImpl<T> implements Event<T> {
 			listeners.remove(listener);
 			iterator.remove();
 		}
-	}
-
-	public void removeAll() {
-		listeners.clear();
-		listenersToRemove.clear();
 	}
 }

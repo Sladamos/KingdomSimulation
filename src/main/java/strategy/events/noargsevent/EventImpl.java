@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class EventImpl implements Event {
+
 	private final ArrayList<Runnable> listeners;
+
 	private final ArrayList<Runnable> listenersToRemove;
 
 	public EventImpl() {
@@ -13,12 +15,12 @@ public class EventImpl implements Event {
 	}
 
 	@Override
-	public void addListener(Runnable listener) {
+	public synchronized void addListener(Runnable listener) {
 		listeners.add(listener);
 	}
 
 	@Override
-	public void removeListener(Runnable listener) {
+	public synchronized void removeListener(Runnable listener) {
 		try {
 			listeners.remove(listener);
 		} catch (Exception err) {
@@ -41,11 +43,5 @@ public class EventImpl implements Event {
 			listeners.remove(listener);
 			iterator.remove();
 		}
-	}
-
-	@Override
-	public void removeAll() {
-		listeners.clear();
-		listenersToRemove.clear();
 	}
 }
