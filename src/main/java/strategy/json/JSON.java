@@ -15,6 +15,10 @@ public class JSON {
         jsonObject = new JSONObject(jsonStr);
     }
 
+    public JSON(JSON json) {
+        jsonObject = new JSONObject(json.jsonObject.toString());
+    }
+
     public void put(String key, int value) {
         jsonObject.put(key, value);
     }

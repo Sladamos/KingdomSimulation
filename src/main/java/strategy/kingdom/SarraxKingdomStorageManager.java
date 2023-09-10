@@ -38,6 +38,7 @@ public class SarraxKingdomStorageManager implements KingdomStorageManager<Warrio
                 new UnlimitedOneItemStorage<>(),
                 new UnlimitedOneItemStorage<>(),
                 new UnlimitedOneItemStorage<>());
+
         settlementStorageManager = new SettlementStorageManagerImpl<>(new UnlimitedOneItemStorage<>(),
                 new UnlimitedOneItemStorage<>(),
                 new UnlimitedOneItemStorage<>(),

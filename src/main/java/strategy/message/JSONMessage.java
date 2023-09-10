@@ -18,6 +18,10 @@ public class JSONMessage implements Message<JSON> {
         this.content = content;
     }
 
+    public JSONMessage(JSONMessage message) {
+        content = new JSON(message.content);
+    }
+
     @Override
     public String toString() {
         try {

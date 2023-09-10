@@ -11,4 +11,12 @@ public class AppCommunicator {
     private MessagesReceiver<StringMessage> errorMessagesReceiver;
     private Map<String, Messenger> kingdomsMessengers;
     private Logger logger;
+
+    private void receiveMessage(StringMessage message) {
+        logger.logMessage(message);
+    }
+
+    private void receiveMessage(JSONMessage message) {
+        logger.logMessage(message);
+    }
 }

@@ -5,6 +5,7 @@ import strategy.item.food.Honey;
 import strategy.item.food.Milk;
 import strategy.item.plant.Wheat;
 import strategy.item.wood.Mahogany;
+import strategy.message.JSONMessage;
 import strategy.producer.building.farm.Farm;
 import strategy.producer.building.farm.WheatFarm;
 import strategy.producer.building.livestock.Apiary;
@@ -26,9 +27,11 @@ public class SarraxVillage implements Village {
 	private final LivestockAnimal<Milk> cow;
 
 	private final Lumberjack<Mahogany> lumberjack;
+
 	private final ExecutorService executorService;
 
-	public SarraxVillage(VillageStorageManager villageStorageManager, OneItemStorage<Water> waterStorage, VillageConfig villageConfig) {
+	public SarraxVillage(VillageStorageManager villageStorageManager, OneItemStorage<Water> waterStorage,
+						 VillageConfig villageConfig) {
 		cow = new Cow(villageStorageManager.getMilkStorage(), villageConfig.getCowConfig());
 		apiary = new Apiary(villageStorageManager.getHoneyStorage(), villageConfig.getApiaryConfig());
 		farm = new WheatFarm(waterStorage, villageStorageManager.getWheatStorage(), villageConfig.getFarmConfig());
@@ -51,5 +54,10 @@ public class SarraxVillage implements Village {
 		farm.terminate();
 		lumberjack.terminate();
 		executorService.shutdownNow();
+	}
+
+	private void onMessageReceived(JSONMessage message) {
+		message.put("sender", "village");
+		//invoke
 	}
 }
