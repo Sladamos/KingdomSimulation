@@ -2,21 +2,21 @@ package strategy.kingdom;
 
 import strategy.events.oneargevent.OneArgEvent;
 import strategy.events.oneargevent.OneArgEventImpl;
+import strategy.location.LocationMessagesNotifier;
 import strategy.message.JSONMessage;
-import strategy.message.MessagesNotifier;
-import strategy.message.MessagesSender;
 import strategy.message.receiver.MessagesReceiver;
 
-public class KingdomNotifier implements MessagesNotifier<JSONMessage> {
+public class KingdomMessagesNotifierImpl implements KingdomMessagesNotifier {
 
 	private final OneArgEvent<JSONMessage> messageEvent;
 
-	public KingdomNotifier() {
+	public KingdomMessagesNotifierImpl() {
 		messageEvent = new OneArgEventImpl<>();
 	}
 
-	public void bindSender(MessagesSender<JSONMessage> messagesSender) {
-		messagesSender.addListener(this);
+	@Override
+	public void bindLocationNotifier(LocationMessagesNotifier messagesNotifier) {
+		messagesNotifier.addListener(this);
 	}
 
 	@Override
