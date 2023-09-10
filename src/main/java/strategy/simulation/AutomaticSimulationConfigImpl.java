@@ -3,7 +3,7 @@ package strategy.simulation;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import strategy.kingdom.KingdomConfig;
-import util.Time;
+import strategy.util.Time;
 
 @Getter
 @AllArgsConstructor

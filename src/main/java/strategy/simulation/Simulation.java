@@ -7,14 +7,14 @@ import strategy.initializer.app.AppInitializer;
 import strategy.initializer.app.AppInitializerFromFile;
 
 public class Simulation {
-    //TODO: app initializer which create SimulationInitializer
-
     //TODO: refactor messages from string to json! and create new messages: StorageMessage / BattleMessage
     //TODO: before simulation initialize there should be created all gui (ApplicationMessenger)
     //  then there should exist: BattleReceiver FirstKingdomMessenger SecondKingdomMessenger : for example in
     //  battlereceiver create StringProperty, and change it when new messsage will come.
     //TODO: messages receiver System.out.println("Consumed :" + material); in STORAGES!!! additionaly some ID  (KingdomFirst: Consumed: material)
     ////TODO: messages receiver System.out.println("Produced :" + item);
+
+    //TODO: Kingdoms should have unique id
 
     /*TODO gui:
         two panels with names of materials and count of each one (consider it!):

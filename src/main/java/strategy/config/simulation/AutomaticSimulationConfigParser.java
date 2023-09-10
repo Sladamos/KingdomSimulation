@@ -8,8 +8,8 @@ import strategy.json.JSON;
 import strategy.kingdom.KingdomConfig;
 import strategy.simulation.AutomaticSimulationConfig;
 import strategy.simulation.AutomaticSimulationConfigImpl;
-import util.Time;
-import util.TimeImpl;
+import strategy.util.Time;
+import strategy.util.TimeImpl;
 
 public class AutomaticSimulationConfigParser implements SimulationConfigParser<AutomaticSimulationConfig> {
 	@Override

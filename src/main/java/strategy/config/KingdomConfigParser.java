@@ -12,8 +12,8 @@ import strategy.location.castle.CastleConfig;
 import strategy.location.mountain.MountainConfig;
 import strategy.location.settlement.SettlementConfig;
 import strategy.location.village.VillageConfig;
-import util.Time;
-import util.TimeImpl;
+import strategy.util.Time;
+import strategy.util.TimeImpl;
 
 import java.util.HashMap;
 import java.util.Map;

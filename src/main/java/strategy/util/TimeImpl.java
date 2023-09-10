@@ -1,4 +1,4 @@
-package util;
+package strategy.util;
 
 public class TimeImpl implements Time {
     private final int seconds;

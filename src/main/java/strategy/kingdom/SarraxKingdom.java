@@ -14,7 +14,7 @@ import strategy.location.settlement.SettlementStorageManager;
 import strategy.location.village.SarraxVillage;
 import strategy.location.village.Village;
 import strategy.location.village.VillageStorageManager;
-import util.Time;
+import strategy.util.Time;
 
 import java.util.Collection;
 

@@ -2,7 +2,7 @@ package strategy.kingdom;
 
 import strategy.item.military.infantry.warrior.Warrior;
 import strategy.location.castle.Castle;
-import util.Time;
+import strategy.util.Time;
 
 import java.util.Collection;
 

@@ -1,7 +1,7 @@
 package strategy.simulation;
 
 import strategy.kingdom.KingdomConfig;
-import util.Time;
+import strategy.util.Time;
 
 public interface AutomaticSimulationConfig extends SimulationConfig {
     KingdomConfig getFirstKingdomConfig();

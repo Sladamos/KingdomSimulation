@@ -8,7 +8,7 @@ import strategy.location.castle.CastleConfig;
 import strategy.location.mountain.MountainConfig;
 import strategy.location.settlement.SettlementConfig;
 import strategy.location.village.VillageConfig;
-import util.Time;
+import strategy.util.Time;
 
 @Getter
 @AllArgsConstructor
