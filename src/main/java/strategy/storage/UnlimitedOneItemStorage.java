@@ -4,6 +4,7 @@ import strategy.events.oneargevent.OneArgEvent;
 import strategy.events.oneargevent.OneArgEventImpl;
 import strategy.item.Item;
 import strategy.message.JSONMessage;
+import strategy.message.receiver.MessagesReceiver;
 
 import java.util.ArrayDeque;
 import java.util.Collection;
@@ -29,7 +30,7 @@ public class UnlimitedOneItemStorage<T extends Item> implements OneItemStorage<T
     }
 
     @Override
-    public void addListener(Consumer<JSONMessage> messageConsumer) {
+    public void addListener(MessagesReceiver<JSONMessage> messageConsumer) {
         messageEvent.addListener(messageConsumer);
     }
 

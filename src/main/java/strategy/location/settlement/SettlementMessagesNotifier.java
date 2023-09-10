@@ -1,4 +1,4 @@
-package strategy.location.mountain;
+package strategy.location.settlement;
 
 import strategy.events.oneargevent.OneArgEvent;
 import strategy.events.oneargevent.OneArgEventImpl;
@@ -6,11 +6,11 @@ import strategy.message.JSONMessage;
 import strategy.message.MessagesNotifier;
 import strategy.message.receiver.MessagesReceiver;
 
-public class MountainMessagesReceiver implements MessagesNotifier<JSONMessage> {
+public class SettlementMessagesNotifier implements MessagesNotifier<JSONMessage> {
 
 	private final OneArgEvent<JSONMessage> messageEvent;
 
-	public MountainMessagesReceiver(MessagesNotifier<JSONMessage> messagesNotifier) {
+	public SettlementMessagesNotifier(MessagesNotifier<JSONMessage> messagesNotifier) {
 		messageEvent = new OneArgEventImpl<>();
 		messagesNotifier.addListener(this);
 	}
@@ -18,7 +18,7 @@ public class MountainMessagesReceiver implements MessagesNotifier<JSONMessage> {
 	@Override
 	public void accept(JSONMessage message) {
 		JSONMessage newMessage = new JSONMessage(message);
-		newMessage.put("sender", "mountain");
+		newMessage.put("sender", "settlement");
 		messageEvent.invoke(newMessage);
 	}
 

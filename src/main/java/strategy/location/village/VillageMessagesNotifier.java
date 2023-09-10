@@ -6,11 +6,11 @@ import strategy.message.JSONMessage;
 import strategy.message.MessagesNotifier;
 import strategy.message.receiver.MessagesReceiver;
 
-public class VillageMessagesReceiver implements MessagesNotifier<JSONMessage> {
+public class VillageMessagesNotifier implements MessagesNotifier<JSONMessage> {
 
     private final OneArgEvent<JSONMessage> messageEvent;
 
-    public VillageMessagesReceiver(MessagesNotifier<JSONMessage> messagesNotifier) {
+    public VillageMessagesNotifier(MessagesNotifier<JSONMessage> messagesNotifier) {
         messageEvent = new OneArgEventImpl<>();
         messagesNotifier.addListener(this);
     }
