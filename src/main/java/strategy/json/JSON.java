@@ -19,6 +19,11 @@ public class JSON {
         jsonObject = new JSONObject(json.jsonObject.toString());
     }
 
+    @Override
+    public String toString() {
+        return jsonObject.toString();
+    }
+
     public void put(String key, int value) {
         jsonObject.put(key, value);
     }
@@ -39,6 +44,7 @@ public class JSON {
     public long getLong(String key) {
         return jsonObject.getLong(key);
     }
+
     public int getInt(String key) {
         return jsonObject.getInt(key);
     }
