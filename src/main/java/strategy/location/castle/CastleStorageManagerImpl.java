@@ -41,6 +41,10 @@ public class CastleStorageManagerImpl implements CastleStorageManager {
     @Override
     public MessagesNotifier<JSONMessage> getStorageMessagesNotifier() {
         CastleMessagesNotifier messagesNotifier = new CastleMessagesNotifier();
+        necklacePresentStorage.addListener(messagesNotifier);
+        ringPresentStorage.addListener(messagesNotifier);
+        adultStorage.addListener(messagesNotifier);
+        happinessStorage.addListener(messagesNotifier);
         return messagesNotifier;
     }
 }

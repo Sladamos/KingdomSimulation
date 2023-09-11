@@ -50,8 +50,7 @@ public class UnlimitedOneItemStorage<T extends Item> implements OneItemStorage<T
             throw new StorageTerminatedException();
         }
         T item = storage.pop();
-        String strMessage = "Item popped from storage: " + item;
-        sendMessage(strMessage, item);
+        sendMessage(item);
         return item;
     }
 
@@ -82,6 +81,13 @@ public class UnlimitedOneItemStorage<T extends Item> implements OneItemStorage<T
 
     private void sendMessage(String strMessage, T item) {
         JSONMessage message = new JSONMessage(strMessage);
+        message.put("size", storage.size());
+        message.put("item", item.toString());
+        messageEvent.invoke(message);
+    }
+
+    private void sendMessage(T item) {
+        JSONMessage message = new JSONMessage();
         message.put("size", storage.size());
         message.put("item", item.toString());
         messageEvent.invoke(message);

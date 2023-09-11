@@ -1,7 +1,6 @@
 package strategy.message;
 
 import lombok.Getter;
-import strategy.error.BasicAppError;
 import strategy.json.JSON;
 
 public class JSONMessage implements Message<JSON> {
@@ -10,7 +9,7 @@ public class JSONMessage implements Message<JSON> {
     private final JSON content;
 
     public JSONMessage(String message) {
-        this.content = new JSON();
+        this();
         content.put("message", message);
     }
 
@@ -22,12 +21,16 @@ public class JSONMessage implements Message<JSON> {
         content = new JSON(message.content);
     }
 
+    public JSONMessage() {
+        this.content = new JSON();
+    }
+
     @Override
     public String toString() {
         try {
             return content.getString("message");
         } catch (Exception err) {
-            throw new BasicAppError("Something went wrong");
+            return content.toString();
         }
     }
 

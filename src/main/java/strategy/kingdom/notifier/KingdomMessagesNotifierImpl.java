@@ -30,6 +30,10 @@ public class KingdomMessagesNotifierImpl implements KingdomMessagesNotifier {
 	@Override
 	public void accept(JSONMessage message) {
 		JSONMessage newMessage = new JSONMessage(message);
+		try {
+			String strMessage = kingdomId + ": " + message.getContent().getString("message");
+			newMessage.put("message", strMessage);
+		} catch (Exception ignored) {}
 		newMessage.put("owner", kingdomId);
 		messageEvent.invoke(newMessage);
 	}

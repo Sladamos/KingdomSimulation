@@ -41,6 +41,10 @@ public class MountainStorageManagerImpl implements MountainStorageManager {
     @Override
     public MessagesNotifier<JSONMessage> getStorageMessagesNotifier() {
         MountainMessagesNotifier messagesNotifier = new MountainMessagesNotifier();
+        saltStorage.addListener(messagesNotifier);
+        ironOreStorage.addListener(messagesNotifier);
+        rubyStorage.addListener(messagesNotifier);
+        sapphireStorage.addListener(messagesNotifier);
         return messagesNotifier;
     }
 }

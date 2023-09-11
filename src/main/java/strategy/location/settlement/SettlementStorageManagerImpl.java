@@ -86,6 +86,19 @@ public class SettlementStorageManagerImpl<T extends HumanInfantryUnit> implement
     @Override
     public MessagesNotifier<JSONMessage> getStorageMessagesNotifier() {
         SettlementMessagesNotifier messagesNotifier = new SettlementMessagesNotifier();
+        ironBarStorage.addListener(messagesNotifier);
+        ironSwordStorage.addListener(messagesNotifier);
+        ironBucketStorage.addListener(messagesNotifier);
+        woodenBucketStorage.addListener(messagesNotifier);
+        waterStorage.addListener(messagesNotifier);
+        goldenCoinStorage.addListener(messagesNotifier);
+        wheatFlourStorage.addListener(messagesNotifier);
+        wheatBreadStorage.addListener(messagesNotifier);
+        sapphireRingStorage.addListener(messagesNotifier);
+        rubyNecklaceStorage.addListener(messagesNotifier);
+        growthElixirStorage.addListener(messagesNotifier);
+        childStorage.addListener(messagesNotifier);
+        infantryUnitStorage.addListener(messagesNotifier);
         return messagesNotifier;
     }
 }
