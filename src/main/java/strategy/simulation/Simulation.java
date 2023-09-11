@@ -11,9 +11,9 @@ import strategy.message.receiver.ConsoleMessagesReceiver;
 
 public class Simulation {
 
-    //TODO: add enum to simulation type and to gui type
-
     //TODO: Kingdoms should have unique id
+
+    //TODO: add enum to simulation type and to gui type
 
     //TODO: error handling layer, when critical app error catched display error and shut down app , when app error display it only
     //  Also handle exception: SafeDisable(); -> then display something and end app

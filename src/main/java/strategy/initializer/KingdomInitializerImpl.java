@@ -6,7 +6,7 @@ import strategy.item.military.infantry.warrior.InitWarriorsConfig;
 import strategy.item.military.infantry.warrior.Warrior;
 import strategy.kingdom.Kingdom;
 import strategy.kingdom.KingdomConfig;
-import strategy.kingdom.KingdomTypes;
+import strategy.kingdom.KingdomType;
 import strategy.kingdom.SarraxKingdom;
 
 import java.util.Collection;
@@ -16,16 +16,16 @@ import java.util.function.Function;
 
 public class KingdomInitializerImpl implements KingdomInitializer {
 
-    private final Map<KingdomTypes, Function<KingdomConfig, Kingdom>> kingdomsCreators;
+    private final Map<KingdomType, Function<KingdomConfig, Kingdom>> kingdomsCreators;
 
     public KingdomInitializerImpl() {
         kingdomsCreators = new HashMap<>();
-        kingdomsCreators.put(KingdomTypes.SARRAX, SarraxKingdom::new);
+        kingdomsCreators.put(KingdomType.SARRAX, SarraxKingdom::new);
     }
 
     @Override
     public Kingdom createKingdom(KingdomConfig kingdomConfig) {
-        KingdomTypes kingdomType = kingdomConfig.getKingdomType();
+        KingdomType kingdomType = kingdomConfig.getKingdomType();
         Kingdom kingdom = kingdomsCreators.get(kingdomType).apply(kingdomConfig);
         InitWarriorsConfig warriorsConfig = kingdomConfig.getWarriorsConfig();
         addWarriorsToKingdom(kingdom, warriorsConfig);

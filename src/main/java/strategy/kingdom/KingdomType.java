@@ -1,5 +1,5 @@
 package strategy.kingdom;
 
-public enum KingdomTypes {
+public enum KingdomType {
 	SARRAX;
 }

@@ -7,7 +7,7 @@ import strategy.error.CriticalAppError;
 import strategy.item.military.infantry.warrior.InitWarriorsConfig;
 import strategy.json.JSON;
 import strategy.kingdom.KingdomConfig;
-import strategy.kingdom.KingdomTypes;
+import strategy.kingdom.KingdomType;
 import strategy.location.castle.CastleConfig;
 import strategy.location.mountain.MountainConfig;
 import strategy.location.settlement.SettlementConfig;
@@ -20,11 +20,11 @@ import java.util.Map;
 
 public class KingdomConfigParser implements ConfigParser<KingdomConfig> {
 
-	private final Map<String, KingdomTypes> kingdomTypes;
+	private final Map<String, KingdomType> kingdomTypes;
 
 	public KingdomConfigParser() {
 		kingdomTypes = new HashMap<>();
-		kingdomTypes.put("Sarrax", KingdomTypes.SARRAX);
+		kingdomTypes.put("Sarrax", KingdomType.SARRAX);
 	}
 
 	@Override
@@ -36,7 +36,7 @@ public class KingdomConfigParser implements ConfigParser<KingdomConfig> {
 			}
 			String kingdomId = json.getString("id");
 			String kingdomTypeStr = json.getString("kingdom_type");
-			KingdomTypes kingdomType = getKingdomType(kingdomTypeStr);
+			KingdomType kingdomType = getKingdomType(kingdomTypeStr);
 			InitWarriorsConfig warriorsConfig = createWarriorsConfig(json.getJSONObject("warriors"));
 			VillageConfig villageConfig = createVillageConfig(json.getJSONObject("village"));
 			MountainConfig mountainConfig = createMountainConfig(json.getJSONObject("mountain"));
@@ -75,7 +75,7 @@ public class KingdomConfigParser implements ConfigParser<KingdomConfig> {
 		return warriorsConfigParser.createConfig(json);
 	}
 
-	private KingdomTypes getKingdomType(String strKingdomType) {
+	private KingdomType getKingdomType(String strKingdomType) {
 		if(!kingdomTypes.containsKey(strKingdomType)) {
 			throw new BasicAppError("Incorrect kingdom type!");
 		}

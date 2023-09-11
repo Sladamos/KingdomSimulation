@@ -17,7 +17,7 @@ public class KingdomConfig implements Config {
 
 	private final Time attackTime;
 
-	private final KingdomTypes kingdomType;
+	private final KingdomType kingdomType;
 
 	private final InitWarriorsConfig warriorsConfig;
 
