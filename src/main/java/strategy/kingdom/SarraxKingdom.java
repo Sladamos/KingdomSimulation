@@ -60,7 +60,7 @@ public class SarraxKingdom implements Kingdom {
 
         castle = new SarraxCastle<>(castleStorageManager, settlementStorageManager, kingdomConfig.getCastleConfig());
 
-        kingdomMessagesNotifier = new KingdomMessagesNotifierImpl();
+        kingdomMessagesNotifier = new KingdomMessagesNotifierImpl(kingdomId);
         kingdomStorageManager.getStorageMessagesNotifier().addListener(kingdomMessagesNotifier);
     }
 

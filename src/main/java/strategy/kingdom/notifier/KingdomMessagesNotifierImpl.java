@@ -10,8 +10,11 @@ public class KingdomMessagesNotifierImpl implements KingdomMessagesNotifier {
 
 	private final OneArgEvent<JSONMessage> messageEvent;
 
-	public KingdomMessagesNotifierImpl() {
+	private final String kingdomId;
+
+	public KingdomMessagesNotifierImpl(String kingdomId) {
 		messageEvent = new OneArgEventImpl<>();
+		this.kingdomId = kingdomId;
 	}
 
 	@Override
@@ -27,7 +30,7 @@ public class KingdomMessagesNotifierImpl implements KingdomMessagesNotifier {
 	@Override
 	public void accept(JSONMessage message) {
 		JSONMessage newMessage = new JSONMessage(message);
-		newMessage.put("sender", "mountain");
+		newMessage.put("owner", kingdomId);
 		messageEvent.invoke(newMessage);
 	}
 
