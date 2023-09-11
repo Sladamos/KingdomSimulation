@@ -4,16 +4,14 @@ import strategy.events.oneargevent.OneArgEvent;
 import strategy.events.oneargevent.OneArgEventImpl;
 import strategy.location.LocationMessagesNotifier;
 import strategy.message.JSONMessage;
-import strategy.message.notifier.MessagesNotifier;
 import strategy.message.receiver.MessagesReceiver;
 
 public class MountainMessagesNotifier implements LocationMessagesNotifier {
 
 	private final OneArgEvent<JSONMessage> messageEvent;
 
-	public MountainMessagesNotifier(MessagesNotifier<JSONMessage> messagesNotifier) {
+	public MountainMessagesNotifier() {
 		messageEvent = new OneArgEventImpl<>();
-		messagesNotifier.addListener(this);
 	}
 
 	@Override
