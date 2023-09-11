@@ -3,6 +3,7 @@ package strategy.battle;
 import strategy.item.military.ArmyDestroyedException;
 import strategy.kingdom.Kingdom;
 import strategy.message.StringMessage;
+import strategy.message.notifier.MessagesNotifier;
 import strategy.message.receiver.MessagesReceiver;
 
 public class SimpleBattle implements Battle {
@@ -11,14 +12,14 @@ public class SimpleBattle implements Battle {
 
     private final Kingdom secondKingdom;
 
-    private final MessagesReceiver<StringMessage> messagesReceiver;
+    private final MessagesNotifier<StringMessage> messagesNotifier;
 
     private boolean areKingdomsFighting;
 
-    public SimpleBattle(Kingdom firstKingdom, Kingdom secondKingdom, MessagesReceiver<StringMessage> messagesReceiver) {
+    public SimpleBattle(Kingdom firstKingdom, Kingdom secondKingdom, MessagesNotifier<StringMessage> messagesNotifier) {
         this.firstKingdom = firstKingdom;
         this.secondKingdom = secondKingdom;
-        this.messagesReceiver = messagesReceiver;
+        this.messagesNotifier = messagesNotifier;
         areKingdomsFighting = false;
     }
 
@@ -38,14 +39,19 @@ public class SimpleBattle implements Battle {
             long attackTime = attacker.getAttackTime().getMiliseconds();
             Thread.sleep(attackTime);
             StringMessage messageAboutAttack = new StringMessage(attacker + " attacked");
-            messagesReceiver.accept(messageAboutAttack);
+            messagesNotifier.accept(messageAboutAttack);
             attacker.attack(defender);
         } catch (ArmyDestroyedException ignored) {
             StringMessage messageAboutWon = new StringMessage(attacker + " won the battle");
-            messagesReceiver.accept(messageAboutWon);
+            messagesNotifier.accept(messageAboutWon);
             areKingdomsFighting = false;
         } catch (Exception ignored) {
             areKingdomsFighting = false;
         }
+    }
+
+    @Override
+    public void addListener(MessagesReceiver<StringMessage> messagesReceiver) {
+        messagesNotifier.addListener(messagesReceiver);
     }
 }
