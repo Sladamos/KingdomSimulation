@@ -1,6 +1,6 @@
 package strategy.kingdom.operator;
 
-import strategy.initializer.KingdomInitializerImpl;
+import strategy.initializer.kingdom.KingdomInitializerImpl;
 import strategy.initializer.kingdom.KingdomInitializer;
 import strategy.kingdom.Kingdom;
 import strategy.kingdom.KingdomConfig;

@@ -1,4 +1,4 @@
-package strategy.initializer;
+package strategy.initializer.simulation;
 
 import strategy.app.AppCommunicator;
 

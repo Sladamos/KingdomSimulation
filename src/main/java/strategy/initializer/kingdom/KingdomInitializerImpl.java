@@ -1,4 +1,4 @@
-package strategy.initializer;
+package strategy.initializer.kingdom;
 
 import strategy.initializer.kingdom.KingdomInitializer;
 import strategy.initializer.military.RandomWarriorsInitializer;

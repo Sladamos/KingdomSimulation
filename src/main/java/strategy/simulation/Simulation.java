@@ -1,13 +1,14 @@
 package strategy.simulation;
 
+import strategy.app.AppCommunicator;
 import strategy.battle.operator.BattleOperatorCreator;
 import strategy.battle.operator.BattleOperatorCreatorImpl;
-import strategy.initializer.SimulationInitializer;
+import strategy.gui.GUI;
 import strategy.initializer.app.AppInitializer;
 import strategy.initializer.app.AppInitializerFromFile;
-import strategy.app.AppCommunicator;
-import strategy.app.AppCommunicatorImpl;
-import strategy.message.receiver.ConsoleMessagesReceiver;
+import strategy.initializer.gui.GUIInitializer;
+import strategy.initializer.gui.GUIInitializerImpl;
+import strategy.initializer.simulation.SimulationInitializer;
 
 public class Simulation {
 
@@ -32,7 +33,6 @@ public class Simulation {
      */
 
     public static void main(String[] args) {
-
         //TODO gui and messengerInitializer (gui / console)
         //TODO:
         //  create error handling layer. it should have method run (runnable), which executes some function
@@ -48,8 +48,9 @@ public class Simulation {
     }
 
     private void start() {
-        AppCommunicator appCommunicator = new AppCommunicatorImpl(new ConsoleMessagesReceiver<>(),
-                new ConsoleMessagesReceiver<>(), new ConsoleMessagesReceiver<>());
+        GUIInitializer guiInitializer = new GUIInitializerImpl();
+        GUI gui = guiInitializer.initializeGUI();
+        AppCommunicator appCommunicator = gui.getAppCommunicator();
         BattleOperatorCreator battleOperatorCreator = new BattleOperatorCreatorImpl();
         AppInitializer appInitializer = new AppInitializerFromFile(battleOperatorCreator);
         SimulationInitializer simulationInitializer = appInitializer.createSimulationInitializer();
