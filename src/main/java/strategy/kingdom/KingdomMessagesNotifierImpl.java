@@ -30,4 +30,9 @@ public class KingdomMessagesNotifierImpl implements KingdomMessagesNotifier {
 		newMessage.put("sender", "mountain");
 		messageEvent.invoke(message);
 	}
+
+	@Override
+	public void removeListeners() {
+		messageEvent.removeAllListeners();
+	}
 }

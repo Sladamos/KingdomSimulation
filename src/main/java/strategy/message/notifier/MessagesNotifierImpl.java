@@ -22,4 +22,9 @@ public class MessagesNotifierImpl<T extends Message<?>> implements MessagesNotif
 	public void accept(T t) {
 		notifyEvent.invoke(t);
 	}
+
+	@Override
+	public void removeListeners() {
+		notifyEvent.removeAllListeners();
+	}
 }

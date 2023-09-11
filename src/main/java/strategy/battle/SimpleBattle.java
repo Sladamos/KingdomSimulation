@@ -32,6 +32,7 @@ public class SimpleBattle implements Battle {
                 simulateAttack(secondKingdom, firstKingdom);
             }
         }
+        messagesNotifier.removeListeners();
     }
 
     private void simulateAttack(Kingdom attacker, Kingdom defender) {

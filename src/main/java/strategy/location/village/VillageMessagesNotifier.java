@@ -27,4 +27,9 @@ public class VillageMessagesNotifier implements LocationMessagesNotifier {
     public void addListener(MessagesReceiver<JSONMessage> listener) {
         messageEvent.addListener(listener);
     }
+
+    @Override
+    public void removeListeners() {
+        messageEvent.removeAllListeners();
+    }
 }
