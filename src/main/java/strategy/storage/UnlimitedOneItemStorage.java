@@ -9,7 +9,6 @@ import strategy.message.receiver.MessagesReceiver;
 import java.util.ArrayDeque;
 import java.util.Collection;
 import java.util.Deque;
-import java.util.function.Consumer;
 
 public class UnlimitedOneItemStorage<T extends Item> implements OneItemStorage<T> {
 
@@ -36,10 +35,12 @@ public class UnlimitedOneItemStorage<T extends Item> implements OneItemStorage<T
 
     @Override
     public synchronized void addItemToStorage(T item) {
-        storage.push(item);
-        String strMessage = "Item pushed to storage: " + item;
-        sendMessage(strMessage, item);
-        notifyAll();
+        if(working) {
+            storage.push(item);
+            String strMessage = "Item pushed to storage: " + item;
+            sendMessage(strMessage, item);
+            notifyAll();
+        }
     }
 
     @Override
