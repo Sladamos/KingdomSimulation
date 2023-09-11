@@ -84,7 +84,6 @@ public class UnlimitedOneItemStorage<T extends Item> implements OneItemStorage<T
         JSONMessage message = new JSONMessage(strMessage);
         message.put("size", storage.size());
         message.put("item", item.toString());
-        System.out.println(strMessage);
         messageEvent.invoke(message);
     }
 }
