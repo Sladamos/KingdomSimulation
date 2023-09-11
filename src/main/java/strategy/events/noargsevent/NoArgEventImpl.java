@@ -36,6 +36,12 @@ public class NoArgEventImpl implements NoArgEvent {
 		clearListeners();
 	}
 
+	@Override
+	public void removeAllListeners() {
+		listeners.clear();
+		listenersToRemove.clear();
+	}
+
 	private void clearListeners() {
 		Iterator<Runnable> iterator = listenersToRemove.iterator();
 		while (iterator.hasNext()) {

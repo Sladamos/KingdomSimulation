@@ -37,6 +37,12 @@ public class OneArgEventImpl<T> implements OneArgEvent<T> {
 		clearListeners();
 	}
 
+	@Override
+	public void removeAllListeners() {
+		listeners.clear();
+		listenersToRemove.clear();
+	}
+
 	private void clearListeners() {
 		Iterator<Consumer<T>> iterator = listenersToRemove.iterator();
 		while (iterator.hasNext()) {
