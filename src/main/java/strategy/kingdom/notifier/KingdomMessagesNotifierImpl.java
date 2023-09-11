@@ -28,7 +28,7 @@ public class KingdomMessagesNotifierImpl implements KingdomMessagesNotifier {
 	public void accept(JSONMessage message) {
 		JSONMessage newMessage = new JSONMessage(message);
 		newMessage.put("sender", "mountain");
-		messageEvent.invoke(message);
+		messageEvent.invoke(newMessage);
 	}
 
 	@Override
