@@ -6,10 +6,13 @@ import strategy.location.castle.CastleStorageManager;
 import strategy.location.mountain.MountainStorageManager;
 import strategy.location.settlement.SettlementStorageManager;
 import strategy.location.village.VillageStorageManager;
+import strategy.message.JSONMessage;
+import strategy.message.notifier.MessagesNotifier;
 
 public interface KingdomStorageManager<T extends InfantryUnit> extends StorageManager {
     VillageStorageManager getVillageStorageManager();
     MountainStorageManager getMountainStorageManager();
     SettlementStorageManager<T> getSettlementStorageManager();
     CastleStorageManager getCastleStorageManager();
+    MessagesNotifier<JSONMessage> getStorageMessagesNotifier();
 }

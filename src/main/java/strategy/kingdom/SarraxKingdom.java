@@ -2,6 +2,8 @@ package strategy.kingdom;
 
 import lombok.Getter;
 import strategy.item.military.infantry.warrior.Warrior;
+import strategy.kingdom.notifier.KingdomMessagesNotifier;
+import strategy.kingdom.notifier.KingdomMessagesNotifierImpl;
 import strategy.location.castle.Castle;
 import strategy.location.castle.CastleStorageManager;
 import strategy.location.castle.SarraxCastle;
@@ -14,11 +16,16 @@ import strategy.location.settlement.SettlementStorageManager;
 import strategy.location.village.SarraxVillage;
 import strategy.location.village.Village;
 import strategy.location.village.VillageStorageManager;
+import strategy.message.JSONMessage;
+import strategy.message.receiver.MessagesReceiver;
 import strategy.util.Time;
 
 import java.util.Collection;
 
 public class SarraxKingdom implements Kingdom {
+
+    @Getter
+    private final Castle<Warrior> castle;
 
     private final Mountain mountain;
 
@@ -26,14 +33,13 @@ public class SarraxKingdom implements Kingdom {
 
     private final Village village;
 
-    private final KingdomStorageManager<Warrior> kingdomStorageManager;
-
-    @Getter
-    private final Castle<Warrior> castle;
-
     private final Time attackTime;
 
     private final String kingdomId;
+
+    private final KingdomStorageManager<Warrior> kingdomStorageManager;
+
+    private final KingdomMessagesNotifier kingdomMessagesNotifier;
 
     public SarraxKingdom(KingdomConfig kingdomConfig) {
         this.kingdomId = kingdomConfig.getKingdomId();
@@ -53,6 +59,9 @@ public class SarraxKingdom implements Kingdom {
                 mountainStorageManager, castleStorageManager.getAdultStorage(), kingdomConfig.getSettlementConfig());
 
         castle = new SarraxCastle<>(castleStorageManager, settlementStorageManager, kingdomConfig.getCastleConfig());
+
+        kingdomMessagesNotifier = new KingdomMessagesNotifierImpl();
+        kingdomStorageManager.getStorageMessagesNotifier().addListener(kingdomMessagesNotifier);
     }
 
     @Override
@@ -66,11 +75,11 @@ public class SarraxKingdom implements Kingdom {
 
     @Override
     public void terminate() {
+        kingdomStorageManager.disableAcceptingItems();
         mountain.terminate();
         settlement.terminate();
         village.terminate();
         castle.terminate();
-        kingdomStorageManager.disableAcceptingItems();
     }
 
     @Override
@@ -91,5 +100,10 @@ public class SarraxKingdom implements Kingdom {
     @Override
     public String toString() {
         return kingdomId + " kingdom";
+    }
+
+    @Override
+    public void addListener(MessagesReceiver<JSONMessage> messagesReceiver) {
+        kingdomMessagesNotifier.addListener(messagesReceiver);
     }
 }

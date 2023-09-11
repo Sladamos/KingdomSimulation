@@ -6,6 +6,8 @@ import strategy.item.mineral.Salt;
 import strategy.item.mineral.gem.Ruby;
 import strategy.item.mineral.gem.Sapphire;
 import strategy.item.mineral.ore.IronOre;
+import strategy.message.JSONMessage;
+import strategy.message.notifier.MessagesNotifier;
 import strategy.storage.OneItemStorage;
 
 @Getter
@@ -34,5 +36,11 @@ public class MountainStorageManagerImpl implements MountainStorageManager {
         ironOreStorage.disableAcceptingItems();
         rubyStorage.disableAcceptingItems();
         sapphireStorage.disableAcceptingItems();
+    }
+
+    @Override
+    public MessagesNotifier<JSONMessage> getStorageMessagesNotifier() {
+        MountainMessagesNotifier messagesNotifier = new MountainMessagesNotifier();
+        return messagesNotifier;
     }
 }

@@ -10,6 +10,9 @@ import strategy.location.settlement.SettlementStorageManager;
 import strategy.location.settlement.SettlementStorageManagerImpl;
 import strategy.location.village.VillageStorageManager;
 import strategy.location.village.VillageStorageManagerImpl;
+import strategy.message.JSONMessage;
+import strategy.message.notifier.MessagesNotifier;
+import strategy.message.notifier.MessagesNotifierImpl;
 import strategy.storage.UnlimitedOneItemStorage;
 
 @Getter
@@ -68,5 +71,15 @@ public class SarraxKingdomStorageManager implements KingdomStorageManager<Warrio
         villageStorageManager.disableAcceptingItems();
         settlementStorageManager.disableAcceptingItems();
         castleStorageManager.disableAcceptingItems();
+    }
+
+    @Override
+    public MessagesNotifier<JSONMessage> getStorageMessagesNotifier() {
+        MessagesNotifier<JSONMessage> notifier = new MessagesNotifierImpl<>();
+        villageStorageManager.getStorageMessagesNotifier().addListener(notifier);
+        mountainStorageManager.getStorageMessagesNotifier().addListener(notifier);
+        settlementStorageManager.getStorageMessagesNotifier().addListener(notifier);
+        castleStorageManager.getStorageMessagesNotifier().addListener(notifier);
+        return notifier;
     }
 }

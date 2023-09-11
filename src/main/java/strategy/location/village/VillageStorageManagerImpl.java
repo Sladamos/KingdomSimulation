@@ -6,6 +6,8 @@ import strategy.item.food.Honey;
 import strategy.item.food.Milk;
 import strategy.item.plant.Wheat;
 import strategy.item.wood.Mahogany;
+import strategy.message.JSONMessage;
+import strategy.message.notifier.MessagesNotifier;
 import strategy.storage.OneItemStorage;
 
 @AllArgsConstructor
@@ -34,5 +36,15 @@ public class VillageStorageManagerImpl implements VillageStorageManager {
         honeyStorage.disableAcceptingItems();
         wheatStorage.disableAcceptingItems();
         mahoganyStorage.disableAcceptingItems();
+    }
+
+    @Override
+    public MessagesNotifier<JSONMessage> getStorageMessagesNotifier() {
+        VillageMessagesNotifier villageMessagesNotifier = new VillageMessagesNotifier();
+        milkStorage.addListener(villageMessagesNotifier);
+        honeyStorage.addListener(villageMessagesNotifier);
+        wheatStorage.addListener(villageMessagesNotifier);
+        mahoganyStorage.addListener(villageMessagesNotifier);
+        return villageMessagesNotifier;
     }
 }

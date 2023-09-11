@@ -15,6 +15,8 @@ import strategy.item.organism.human.Child;
 import strategy.item.tool.bucket.IronBucket;
 import strategy.item.tool.bucket.WoodenBucket;
 import strategy.item.weapon.meele.sword.IronSword;
+import strategy.message.JSONMessage;
+import strategy.message.notifier.MessagesNotifier;
 import strategy.storage.OneItemStorage;
 
 @AllArgsConstructor
@@ -79,5 +81,11 @@ public class SettlementStorageManagerImpl<T extends HumanInfantryUnit> implement
         growthElixirStorage.disableAcceptingItems();
         childStorage.disableAcceptingItems();
         infantryUnitStorage.disableAcceptingItems();
+    }
+
+    @Override
+    public MessagesNotifier<JSONMessage> getStorageMessagesNotifier() {
+        SettlementMessagesNotifier messagesNotifier = new SettlementMessagesNotifier();
+        return messagesNotifier;
     }
 }

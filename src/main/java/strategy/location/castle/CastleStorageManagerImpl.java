@@ -6,6 +6,8 @@ import strategy.item.organism.human.Adult;
 import strategy.item.present.NecklacePresent;
 import strategy.item.present.RingPresent;
 import strategy.item.statistic.Happiness;
+import strategy.message.JSONMessage;
+import strategy.message.notifier.MessagesNotifier;
 import strategy.storage.OneItemStorage;
 
 @AllArgsConstructor
@@ -34,5 +36,11 @@ public class CastleStorageManagerImpl implements CastleStorageManager {
         ringPresentStorage.disableAcceptingItems();
         adultStorage.disableAcceptingItems();
         happinessStorage.disableAcceptingItems();
+    }
+
+    @Override
+    public MessagesNotifier<JSONMessage> getStorageMessagesNotifier() {
+        CastleMessagesNotifier messagesNotifier = new CastleMessagesNotifier();
+        return messagesNotifier;
     }
 }
