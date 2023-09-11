@@ -1,5 +1,6 @@
 package strategy.initializer;
 
+import strategy.initializer.kingdom.KingdomInitializer;
 import strategy.initializer.military.RandomWarriorsInitializer;
 import strategy.item.military.infantry.warrior.InitWarriorsConfig;
 import strategy.item.military.infantry.warrior.Warrior;
@@ -13,25 +14,21 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-public class KingdomInitializer {
+public class KingdomInitializerImpl implements KingdomInitializer {
 
     private final Map<KingdomTypes, Function<KingdomConfig, Kingdom>> kingdomsCreators;
 
-    public KingdomInitializer() {
+    public KingdomInitializerImpl() {
         kingdomsCreators = new HashMap<>();
         kingdomsCreators.put(KingdomTypes.SARRAX, SarraxKingdom::new);
     }
 
-    public Kingdom createKingdom(long sleep, KingdomConfig kingdomConfig) {
+    @Override
+    public Kingdom createKingdom(KingdomConfig kingdomConfig) {
         KingdomTypes kingdomType = kingdomConfig.getKingdomType();
         Kingdom kingdom = kingdomsCreators.get(kingdomType).apply(kingdomConfig);
         InitWarriorsConfig warriorsConfig = kingdomConfig.getWarriorsConfig();
         addWarriorsToKingdom(kingdom, warriorsConfig);
-        kingdom.run();
-        try {
-            Thread.sleep(sleep);
-        } catch (InterruptedException ignored) {
-        }
         return kingdom;
     }
 
