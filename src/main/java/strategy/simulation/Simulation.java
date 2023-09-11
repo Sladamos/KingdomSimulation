@@ -11,9 +11,7 @@ import strategy.message.receiver.ConsoleMessagesReceiver;
 
 public class Simulation {
 
-    //TODO: add logger
-
-    //TODO: add enum to simulation type
+    //TODO: add enum to simulation type and to gui type
 
     //TODO: Kingdoms should have unique id
 
@@ -39,6 +37,17 @@ public class Simulation {
         //TODO:
         //  create error handling layer. it should have method run (runnable), which executes some function
         //  create app communicator from guiInitializer
+        Simulation simulation = new Simulation();
+        simulation.start();
+        //createErrorLayer()
+        //bind console communicator to error layer
+        //errorLayer->execute(() -> gui = createGui());
+        //unbind console communicator
+        //gui.getAppCommunicator().bindErrorsSender(errorLayer);
+        //errorLayer->execute(simulationMethod());
+    }
+
+    private void start() {
         AppCommunicator appCommunicator = new AppCommunicatorImpl(new ConsoleMessagesReceiver<>(),
                 new ConsoleMessagesReceiver<>(), new ConsoleMessagesReceiver<>());
         BattleOperatorCreator battleOperatorCreator = new BattleOperatorCreatorImpl();

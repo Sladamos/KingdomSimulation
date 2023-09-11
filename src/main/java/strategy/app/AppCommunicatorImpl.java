@@ -1,11 +1,11 @@
 package strategy.app;
 
 import strategy.message.JSONMessage;
-import strategy.message.sender.MessagesSender;
 import strategy.message.StringMessage;
-import strategy.message.logging.ConsoleLogger;
+import strategy.message.logging.FileLogger;
 import strategy.message.logging.Logger;
 import strategy.message.receiver.MessagesReceiver;
+import strategy.message.sender.MessagesSender;
 
 public class AppCommunicatorImpl implements AppCommunicator {
 
@@ -23,7 +23,7 @@ public class AppCommunicatorImpl implements AppCommunicator {
         this.battleMessagesReceiver = battleMessagesReceiver;
         this.errorMessagesReceiver = errorMessagesReceiver;
         this.kingdomMessagesReceiver = kingdomMessagesReceiver;
-        this.logger = new ConsoleLogger();
+        this.logger = new FileLogger();
     }
 
     @Override
