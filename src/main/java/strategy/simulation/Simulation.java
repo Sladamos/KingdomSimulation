@@ -10,12 +10,19 @@ import strategy.app.AppCommunicatorImpl;
 import strategy.message.receiver.ConsoleMessagesReceiver;
 
 public class Simulation {
+
+    //TODO: add logger
+
     //TODO: add enum to simulation type
+
+    //TODO: Kingdoms should have unique id
+
+    //TODO: error handling layer, when critical app error catched display error and shut down app , when app error display it only
+    //  Also handle exception: SafeDisable(); -> then display something and end app
+
 
     //TODO: before simulation initialize there should be created all gui (ApplicationMessenger)
     //  for example in battlereceiver create StringProperty, and change it when new messsage will come.
-
-    //TODO: Kingdoms should have unique id
 
     /*TODO gui:
         two panels with names of materials and count of each one (consider it!):
@@ -25,9 +32,6 @@ public class Simulation {
         button to clear panel
         layer for error handling -> both for console and gui
      */
-
-    //TODO: error handling layer, when critical app error catched display error and shut down app , when app error display it only
-    //  Also handle exception: SafeDisable(); -> then display something and end app
 
     public static void main(String[] args) {
 
@@ -40,7 +44,6 @@ public class Simulation {
         BattleOperatorCreator battleOperatorCreator = new BattleOperatorCreatorImpl();
         AppInitializer appInitializer = new AppInitializerFromFile(battleOperatorCreator);
         SimulationInitializer simulationInitializer = appInitializer.createSimulationInitializer();
-        // TODO: how to bind gui to app (auto / manual?)
         simulationInitializer.initializeSimulation(appCommunicator);
     }
 }
