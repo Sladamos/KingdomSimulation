@@ -1,4 +1,4 @@
-package strategy.kingdom;
+package strategy.kingdom.notifier;
 
 import strategy.events.oneargevent.OneArgEvent;
 import strategy.events.oneargevent.OneArgEventImpl;

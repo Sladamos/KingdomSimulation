@@ -1,4 +1,4 @@
-package strategy.kingdom;
+package strategy.kingdom.notifier;
 
 import strategy.location.LocationMessagesNotifier;
 import strategy.message.JSONMessage;
