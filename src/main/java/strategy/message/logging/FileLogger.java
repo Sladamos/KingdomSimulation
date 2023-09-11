@@ -9,6 +9,7 @@ public class FileLogger implements Logger {
 
     public FileLogger() {
          logger = LoggerFactory.getLogger("FILE");
+         logger.debug("Logger created");
     }
 
     @Override
