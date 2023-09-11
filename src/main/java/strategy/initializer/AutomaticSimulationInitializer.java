@@ -1,6 +1,8 @@
 package strategy.initializer;
 
-import strategy.battle.BattleSimulator;
+import strategy.app.AppCommunicator;
+import strategy.battle.Battle;
+import strategy.battle.operator.BattleOperator;
 import strategy.config.simulation.AutomaticSimulationConfigParser;
 import strategy.json.JSON;
 import strategy.json.JsonLoader;
@@ -10,25 +12,27 @@ import strategy.simulation.AutomaticSimulationConfig;
 
 public class AutomaticSimulationInitializer implements SimulationInitializer {
 
-    private final BattleSimulator battleSimulator;
+    private final BattleOperator battleOperator;
 
-    public AutomaticSimulationInitializer(BattleSimulator battleSimulator) {
-        this.battleSimulator = battleSimulator;
+    public AutomaticSimulationInitializer(BattleOperator battleOperator) {
+        this.battleOperator = battleOperator;
     }
 
     @Override
-    public void initializeSimulation() {
+    public void initializeSimulation(AppCommunicator appCommunicator) {
         AutomaticSimulationConfig simulationConfig = createSimulationConfig();
         KingdomInitializer kingdomInitializer = new KingdomInitializer();
         Kingdom firstKingdom = kingdomInitializer.createKingdom(simulationConfig.getFirstKingdomDevelopmentTime().getMiliseconds(),
                 simulationConfig.getFirstKingdomConfig());
-
-        Kingdom weakerKingdom = kingdomInitializer.createKingdom(simulationConfig.getSecondKingdomDevelopmentTime().getMiliseconds(),
+        //appCommunicator.bindKingdomSender();
+        Kingdom secondKingdom = kingdomInitializer.createKingdom(simulationConfig.getSecondKingdomDevelopmentTime().getMiliseconds(),
                 simulationConfig.getSecondKingdomConfig());
 
+        Battle battle = battleOperator.createBattle(firstKingdom, secondKingdom);
+        appCommunicator.bindBattleSender(battle);
         firstKingdom.terminate();
-        weakerKingdom.terminate();
-        battleSimulator.simulateBattle(firstKingdom, weakerKingdom);
+        secondKingdom.terminate();
+        battleOperator.simulateBattle(battle);
     }
 
     private AutomaticSimulationConfig createSimulationConfig() {

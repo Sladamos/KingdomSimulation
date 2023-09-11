@@ -1,7 +1,7 @@
 package strategy.initializer.app;
 
 import strategy.app.AppConfig;
-import strategy.battle.BattleSimulatorCreator;
+import strategy.battle.operator.BattleOperatorCreator;
 import strategy.config.AppConfigParser;
 import strategy.error.CriticalAppError;
 import strategy.initializer.AutomaticSimulationInitializer;
@@ -18,9 +18,9 @@ public class AppInitializerFromFile implements AppInitializer {
     
     private final Map<String, Supplier<SimulationInitializer>> simulationInitializer;
 
-    public AppInitializerFromFile(BattleSimulatorCreator battleSimulatorCreator) {
+    public AppInitializerFromFile(BattleOperatorCreator battleOperatorCreator) {
         simulationInitializer = new HashMap<>();
-        simulationInitializer.put("automatic", () -> new AutomaticSimulationInitializer(battleSimulatorCreator.createBasicBattleSimulator()));
+        simulationInitializer.put("automatic", () -> new AutomaticSimulationInitializer(battleOperatorCreator.createBasicBattleOperator()));
     }
 
     @Override

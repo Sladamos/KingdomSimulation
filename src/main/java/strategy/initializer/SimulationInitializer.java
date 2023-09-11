@@ -1,5 +1,7 @@
 package strategy.initializer;
 
+import strategy.app.AppCommunicator;
+
 public interface SimulationInitializer {
-    void initializeSimulation();
+    void initializeSimulation(AppCommunicator appCommunicator);
 }

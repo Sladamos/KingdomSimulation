@@ -1,7 +1,7 @@
 package strategy.simulation;
 
-import strategy.battle.BattleSimulatorCreator;
-import strategy.battle.BattleSimulatorCreatorImpl;
+import strategy.battle.operator.BattleOperatorCreator;
+import strategy.battle.operator.BattleOperatorCreatorImpl;
 import strategy.initializer.SimulationInitializer;
 import strategy.initializer.app.AppInitializer;
 import strategy.initializer.app.AppInitializerFromFile;
@@ -10,6 +10,8 @@ import strategy.app.AppCommunicatorImpl;
 import strategy.message.receiver.ConsoleMessagesReceiver;
 
 public class Simulation {
+    //TODO: add enum to simulation type
+
     //TODO: before simulation initialize there should be created all gui (ApplicationMessenger)
     //  for example in battlereceiver create StringProperty, and change it when new messsage will come.
 
@@ -35,9 +37,10 @@ public class Simulation {
         //  create app communicator from guiInitializer
         AppCommunicator appCommunicator = new AppCommunicatorImpl(new ConsoleMessagesReceiver<>(),
                 new ConsoleMessagesReceiver<>(), new ConsoleMessagesReceiver<>());
-        BattleSimulatorCreator battleSimulatorCreator = new BattleSimulatorCreatorImpl();
-        AppInitializer appInitializer = new AppInitializerFromFile(battleSimulatorCreator);
+        BattleOperatorCreator battleOperatorCreator = new BattleOperatorCreatorImpl();
+        AppInitializer appInitializer = new AppInitializerFromFile(battleOperatorCreator);
         SimulationInitializer simulationInitializer = appInitializer.createSimulationInitializer();
-        simulationInitializer.initializeSimulation();
+        // TODO: how to bind gui to app (auto / manual?)
+        simulationInitializer.initializeSimulation(appCommunicator);
     }
 }
