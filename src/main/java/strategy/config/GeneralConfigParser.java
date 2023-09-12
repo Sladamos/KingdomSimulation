@@ -3,7 +3,7 @@ package strategy.config;
 import org.json.JSONException;
 import strategy.error.BasicAppError;
 import strategy.error.CriticalAppError;
-import strategy.item.military.GeneralConfig;
+import strategy.item.military.general.GeneralConfig;
 import strategy.json.JSON;
 
 public class GeneralConfigParser implements ConfigParser<GeneralConfig> {
