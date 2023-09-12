@@ -12,14 +12,15 @@ import strategy.initializer.simulation.SimulationInitializer;
 
 public class Simulation {
 
-    //TODO: Kingdoms should have unique id
+    //TODO: IMPORTANT THING! RECEIVE MESSAGES FROM GENERAL -> its easy for current implementation, but what if castle
+    // has different armies etc
 
     //TODO: error handling layer, when critical app error catched display error and shut down app , when app error display it only
     //  Also handle exception: SafeDisable(); -> then display something and end app
 
+    //TODO: write unit tests
 
-    //TODO: before simulation initialize there should be created all gui (ApplicationMessenger)
-    //  for example in battlereceiver create StringProperty, and change it when new messsage will come.
+    // TODO: think about automatic vs manual simulation
 
     /*TODO gui:
         two panels with names of materials and count of each one (consider it!):
@@ -31,24 +32,23 @@ public class Simulation {
      */
 
     public static void main(String[] args) {
-        //TODO gui and messengerInitializer (gui / console)
-        //TODO:
-        //  create error handling layer. it should have method run (runnable), which executes some function
-        //  create app communicator from guiInitializer
-        Simulation simulation = new Simulation();
-        simulation.start();
-        //createErrorLayer()
-        //bind console communicator to error layer
-        //errorLayer->execute(() -> gui = createGui());
-        //unbind console communicator
-        //gui.getAppCommunicator().bindErrorsSender(errorLayer);
-        //errorLayer->execute(simulationMethod());
+        try {
+            Simulation simulation = new Simulation();
+            simulation.start();
+        }
+         catch (Exception err) {
+            System.out.println("UNHANDLED EXCEPTION!");
+            System.out.println(err.getMessage());
+        }
     }
 
     private void start() {
         GUIInitializer guiInitializer = new GUIInitializerImpl();
         GUI gui = guiInitializer.initializeGUI();
         AppCommunicator appCommunicator = gui.getAppCommunicator();
+        //createErrorLayer()
+        //appCommunicator.bindErrorsSender(errorLayer);
+        //errorLayer->execute(simulationMethod());
         BattleOperatorCreator battleOperatorCreator = new BattleOperatorCreatorImpl();
         AppInitializer appInitializer = new AppInitializerFromFile(battleOperatorCreator);
         SimulationInitializer simulationInitializer = appInitializer.createSimulationInitializer();
