@@ -3,6 +3,8 @@ package strategy.simulation;
 import strategy.app.AppCommunicator;
 import strategy.battle.operator.BattleOperatorCreator;
 import strategy.battle.operator.BattleOperatorCreatorImpl;
+import strategy.error.ErrorHandler;
+import strategy.error.ErrorHandlerImpl;
 import strategy.gui.GUI;
 import strategy.initializer.app.AppInitializer;
 import strategy.initializer.app.AppInitializerFromFile;
@@ -14,9 +16,6 @@ public class Simulation {
 
     //TODO: IMPORTANT THING! RECEIVE MESSAGES FROM GENERAL -> its easy for current implementation, but what if castle
     // has different armies etc
-
-    //TODO: error handling layer, when critical app error catched display error and shut down app , when app error display it only
-    //  Also handle exception: SafeDisable(); -> then display something and end app
 
     //TODO: write unit tests
 
@@ -46,9 +45,12 @@ public class Simulation {
         GUIInitializer guiInitializer = new GUIInitializerImpl();
         GUI gui = guiInitializer.initializeGUI();
         AppCommunicator appCommunicator = gui.getAppCommunicator();
-        //createErrorLayer()
-        //appCommunicator.bindErrorsSender(errorLayer);
-        //errorLayer->execute(simulationMethod());
+        ErrorHandler errorHandler = new ErrorHandlerImpl();
+        appCommunicator.bindErrorsSender(errorHandler);
+        errorHandler.runInErrorHandler(() -> simulationMethod(appCommunicator));
+    }
+
+    private void simulationMethod(AppCommunicator appCommunicator) {
         BattleOperatorCreator battleOperatorCreator = new BattleOperatorCreatorImpl();
         AppInitializer appInitializer = new AppInitializerFromFile(battleOperatorCreator);
         SimulationInitializer simulationInitializer = appInitializer.createSimulationInitializer();

@@ -11,14 +11,14 @@ public class AppCommunicatorImpl implements AppCommunicator {
 
     private final MessagesReceiver<StringMessage> battleMessagesReceiver;
 
-    private final MessagesReceiver<StringMessage> errorMessagesReceiver;
+    private final MessagesReceiver<JSONMessage> errorMessagesReceiver;
 
     private final MessagesReceiver<JSONMessage> kingdomMessagesReceiver;
 
     private final Logger logger;
 
     public AppCommunicatorImpl(MessagesReceiver<StringMessage> battleMessagesReceiver,
-                               MessagesReceiver<StringMessage> errorMessagesReceiver,
+                               MessagesReceiver<JSONMessage> errorMessagesReceiver,
                                MessagesReceiver<JSONMessage> kingdomMessagesReceiver) {
         this.battleMessagesReceiver = battleMessagesReceiver;
         this.errorMessagesReceiver = errorMessagesReceiver;
@@ -27,7 +27,7 @@ public class AppCommunicatorImpl implements AppCommunicator {
     }
 
     @Override
-    public void bindErrorsSender(MessagesSender<StringMessage> errorsSender) {
+    public void bindErrorsSender(MessagesSender<JSONMessage> errorsSender) {
         errorsSender.addListener(this::receiveErrorMessage);
     }
 
@@ -42,7 +42,7 @@ public class AppCommunicatorImpl implements AppCommunicator {
     }
 
     @Override
-    public void receiveErrorMessage(StringMessage message) {
+    public void receiveErrorMessage(JSONMessage message) {
         logger.logMessage(message);
         errorMessagesReceiver.accept(message);
     }
