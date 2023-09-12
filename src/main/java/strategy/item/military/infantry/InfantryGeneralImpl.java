@@ -9,13 +9,13 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class InfantryGeneralImpl<T extends InfantryUnit> implements InfantryGeneral<T> {
+public class InfantryGeneralImpl implements InfantryGeneral {
 
-    private final Collection<T> army;
+    private final Collection<InfantryUnit> army;
 
     private final OneItemStorage<Happiness> happinessStorage;
 
-    private final OneItemStorage<T> infantryUnitStorage;
+    private final OneItemStorage<InfantryUnit> infantryUnitStorage;
 
     private int damageModificator;
 
@@ -24,7 +24,7 @@ public class InfantryGeneralImpl<T extends InfantryUnit> implements InfantryGene
     private boolean isConsuming;
 
     public InfantryGeneralImpl(OneItemStorage<Happiness> happinessStorage,
-                               OneItemStorage<T> infantryUnitStorage,
+                               OneItemStorage<InfantryUnit> infantryUnitStorage,
                                GeneralConfig generalConfig) {
         this.happinessStorage = happinessStorage;
         this.infantryUnitStorage = infantryUnitStorage;
@@ -44,7 +44,7 @@ public class InfantryGeneralImpl<T extends InfantryUnit> implements InfantryGene
         isConsuming = true;
         while(isConsuming()) {
             try {
-                T unit = infantryUnitStorage.getItemFromStorage();
+                InfantryUnit unit = infantryUnitStorage.getItemFromStorage();
                 accept(unit);
             } catch (Exception err) {
                 return;
@@ -74,7 +74,7 @@ public class InfantryGeneralImpl<T extends InfantryUnit> implements InfantryGene
     @Override
     public synchronized void receiveDamage(Collection<Integer> damages) {
         var it = army.iterator();
-        T unit = getUnitToHit(it);
+        InfantryUnit unit = getUnitToHit(it);
         for(Integer damage : damages) {
             try {
                 unit.getHit(damage);
@@ -92,7 +92,7 @@ public class InfantryGeneralImpl<T extends InfantryUnit> implements InfantryGene
     }
 
     @Override
-    public synchronized void accept(T infantryUnit) {
+    public synchronized void accept(InfantryUnit infantryUnit) {
         army.add(infantryUnit);
     }
 
@@ -102,11 +102,11 @@ public class InfantryGeneralImpl<T extends InfantryUnit> implements InfantryGene
     }
 
     @Override
-    public synchronized void addInfantryUnits(Collection<T> infantryUnits) {
+    public synchronized void addInfantryUnits(Collection<InfantryUnit> infantryUnits) {
         army.addAll(infantryUnits);
     }
 
-    private synchronized T getUnitToHit(Iterator<T> it) {
+    private synchronized InfantryUnit getUnitToHit(Iterator<InfantryUnit> it) {
         if(!it.hasNext()) {
             throw new ArmyDestroyedException();
         }
@@ -114,7 +114,7 @@ public class InfantryGeneralImpl<T extends InfantryUnit> implements InfantryGene
     }
 
     private synchronized boolean hasArmy() {
-        return army.size() > 0;
+        return !army.isEmpty();
     }
 
     private synchronized boolean isConsuming() {

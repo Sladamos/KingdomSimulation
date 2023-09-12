@@ -11,6 +11,7 @@ import strategy.item.food.baking.bread.WheatBread;
 import strategy.item.jewellery.necklace.RubyNecklace;
 import strategy.item.jewellery.ring.SapphireRing;
 import strategy.item.military.infantry.HumanInfantryUnit;
+import strategy.item.military.infantry.InfantryUnit;
 import strategy.item.organism.human.Child;
 import strategy.item.tool.bucket.IronBucket;
 import strategy.item.tool.bucket.WoodenBucket;
@@ -21,7 +22,7 @@ import strategy.storage.OneItemStorage;
 
 @AllArgsConstructor
 @Getter
-public class SettlementStorageManagerImpl<T extends HumanInfantryUnit> implements SettlementStorageManager<T> {
+public class SettlementStorageManagerImpl implements SettlementStorageManager {
 
     private final OneItemStorage<IronBar> ironBarStorage;
 
@@ -47,7 +48,7 @@ public class SettlementStorageManagerImpl<T extends HumanInfantryUnit> implement
 
     private final OneItemStorage<Child> childStorage;
 
-    private final OneItemStorage<T> infantryUnitStorage;
+    private final OneItemStorage<InfantryUnit> infantryUnitStorage;
 
     @Override
     public void enableAcceptingItems() {

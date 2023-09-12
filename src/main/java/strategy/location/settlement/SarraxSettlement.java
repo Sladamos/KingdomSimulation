@@ -70,7 +70,7 @@ public class SarraxSettlement implements Settlement {
 
 	private final ExecutorService executorService;
 
-	public SarraxSettlement(SettlementStorageManager<Warrior> settlementStorageManager,
+	public SarraxSettlement(SettlementStorageManager settlementStorageManager,
 							VillageStorageManager villageStorageManager,
 							MountainStorageManager mountainStorageManager,
 							OneItemStorage<Adult> adultStorage,
@@ -109,14 +109,14 @@ public class SarraxSettlement implements Settlement {
 		executorService = Executors.newFixedThreadPool(11);
 	}
 
-	private SarraxWell createSarraxWell(SettlementStorageManager<Warrior> settlementStorageManager, SettlementConfig settlementConfig) {
+	private SarraxWell createSarraxWell(SettlementStorageManager settlementStorageManager, SettlementConfig settlementConfig) {
 		WaterWell waterWell = new WaterWell(settlementStorageManager.getIronBucketStorage(), settlementStorageManager.getWaterStorage(), settlementConfig.getWaterWellConfig());
 		GoldenCoinWell goldenCoinWell = new GoldenCoinWell(settlementStorageManager.getWoodenBucketStorage(), settlementStorageManager.getGoldenCoinStorage(), settlementConfig.goldenCoinWellConfig);
 		return new SarraxWell(waterWell, goldenCoinWell);
 	}
 
 	private SarraxJeweller createSarraxJeweller(MountainStorageManager mountainStorageManager,
-												SettlementStorageManager<Warrior> settlementStorageManager, SettlementConfig settlementConfig) {
+												SettlementStorageManager settlementStorageManager, SettlementConfig settlementConfig) {
 		SapphireRingJeweller sapphireRingJeweller = new SapphireRingJeweller(mountainStorageManager.getSapphireStorage(),
 				settlementStorageManager.getSapphireRingStorage(), settlementConfig.getRingJewellerConfig());
 		RubyNecklaceJeweller rubyNecklaceJeweller = new RubyNecklaceJeweller(mountainStorageManager.getRubyStorage(),

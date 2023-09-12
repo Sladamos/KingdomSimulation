@@ -16,7 +16,7 @@ import strategy.item.tool.bucket.WoodenBucket;
 import strategy.item.weapon.meele.sword.IronSword;
 import strategy.storage.OneItemStorage;
 
-public interface SettlementStorageManager<T extends InfantryUnit> extends StorageManager {
+public interface SettlementStorageManager extends StorageManager {
     OneItemStorage<IronBar> getIronBarStorage();
     OneItemStorage<IronSword> getIronSwordStorage();
     OneItemStorage<IronBucket> getIronBucketStorage();
@@ -29,5 +29,5 @@ public interface SettlementStorageManager<T extends InfantryUnit> extends Storag
     OneItemStorage<RubyNecklace> getRubyNecklaceStorage();
     OneItemStorage<GrowthElixir> getGrowthElixirStorage();
     OneItemStorage<Child> getChildStorage();
-    OneItemStorage<T> getInfantryUnitStorage();
+    OneItemStorage<InfantryUnit> getInfantryUnitStorage();
 }

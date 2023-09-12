@@ -1,6 +1,7 @@
 package strategy.kingdom;
 
 import lombok.Getter;
+import strategy.item.military.infantry.InfantryUnit;
 import strategy.item.military.infantry.warrior.Warrior;
 import strategy.kingdom.notifier.KingdomMessagesNotifier;
 import strategy.kingdom.notifier.KingdomMessagesNotifierImpl;
@@ -25,7 +26,7 @@ import java.util.Collection;
 public class SarraxKingdom implements Kingdom {
 
     @Getter
-    private final Castle<Warrior> castle;
+    private final Castle castle;
 
     private final Mountain mountain;
 
@@ -37,7 +38,7 @@ public class SarraxKingdom implements Kingdom {
 
     private final String kingdomId;
 
-    private final KingdomStorageManager<Warrior> kingdomStorageManager;
+    private final KingdomStorageManager kingdomStorageManager;
 
     private final KingdomMessagesNotifier kingdomMessagesNotifier;
 
@@ -46,7 +47,7 @@ public class SarraxKingdom implements Kingdom {
         this.attackTime = kingdomConfig.getAttackTime();
         kingdomStorageManager = new SarraxKingdomStorageManager();
         MountainStorageManager mountainStorageManager = kingdomStorageManager.getMountainStorageManager();
-        SettlementStorageManager<Warrior> settlementStorageManager = kingdomStorageManager.getSettlementStorageManager();
+        SettlementStorageManager settlementStorageManager = kingdomStorageManager.getSettlementStorageManager();
         VillageStorageManager villageStorageManager = kingdomStorageManager.getVillageStorageManager();
         CastleStorageManager castleStorageManager = kingdomStorageManager.getCastleStorageManager();
 
@@ -58,7 +59,7 @@ public class SarraxKingdom implements Kingdom {
         settlement = new SarraxSettlement(settlementStorageManager, villageStorageManager,
                 mountainStorageManager, castleStorageManager.getAdultStorage(), kingdomConfig.getSettlementConfig());
 
-        castle = new SarraxCastle<>(castleStorageManager, settlementStorageManager, kingdomConfig.getCastleConfig());
+        castle = new SarraxCastle(castleStorageManager, settlementStorageManager, kingdomConfig.getCastleConfig());
 
         kingdomMessagesNotifier = new KingdomMessagesNotifierImpl(kingdomId);
         kingdomStorageManager.getStorageMessagesNotifier().addListener(kingdomMessagesNotifier);
@@ -88,7 +89,7 @@ public class SarraxKingdom implements Kingdom {
     }
 
     @Override
-    public void addWarriors(Collection<Warrior> infantryUnits) {
+    public void addInfantryUnits(Collection<InfantryUnit> infantryUnits) {
         castle.addInfantry(infantryUnits);
     }
 

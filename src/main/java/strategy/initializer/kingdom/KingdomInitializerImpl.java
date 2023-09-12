@@ -41,6 +41,6 @@ public class KingdomInitializerImpl implements KingdomInitializer {
     private void addWarriorsToKingdom(Kingdom kingdom, InitWarriorsConfig warriorsConfig) {
         RandomWarriorsInitializer warriorsInitializer = new RandomWarriorsInitializer();
         Collection<Warrior> warriors = warriorsInitializer.createWarriors(warriorsConfig);
-        kingdom.addWarriors(warriors);
+        kingdom.addInfantryUnits(new LinkedList<>(warriors));
     }
 }

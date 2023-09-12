@@ -16,7 +16,7 @@ import strategy.message.notifier.MessagesNotifierImpl;
 import strategy.storage.UnlimitedOneItemStorage;
 
 @Getter
-public class SarraxKingdomStorageManager implements KingdomStorageManager<Warrior> {
+public class SarraxKingdomStorageManager implements KingdomStorageManager {
 
     private final MountainStorageManager mountainStorageManager;
 
@@ -24,7 +24,7 @@ public class SarraxKingdomStorageManager implements KingdomStorageManager<Warrio
 
     private final CastleStorageManager castleStorageManager;
 
-    private final SettlementStorageManager<Warrior> settlementStorageManager;
+    private final SettlementStorageManager settlementStorageManager;
 
     public SarraxKingdomStorageManager() {
         mountainStorageManager = new MountainStorageManagerImpl(new UnlimitedOneItemStorage<>(),
@@ -42,7 +42,7 @@ public class SarraxKingdomStorageManager implements KingdomStorageManager<Warrio
                 new UnlimitedOneItemStorage<>(),
                 new UnlimitedOneItemStorage<>());
 
-        settlementStorageManager = new SettlementStorageManagerImpl<>(new UnlimitedOneItemStorage<>(),
+        settlementStorageManager = new SettlementStorageManagerImpl(new UnlimitedOneItemStorage<>(),
                 new UnlimitedOneItemStorage<>(),
                 new UnlimitedOneItemStorage<>(),
                 new UnlimitedOneItemStorage<>(),
