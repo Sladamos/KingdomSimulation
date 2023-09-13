@@ -1,9 +1,9 @@
-package strategy.item.military.army;
+package strategy.military.army;
 
 import strategy.action.Attack;
 import strategy.events.oneargevent.OneArgEvent;
 import strategy.events.oneargevent.OneArgEventImpl;
-import strategy.item.military.MilitaryUnit;
+import strategy.military.MilitaryUnit;
 import strategy.mechanism.fight.Fightable;
 import strategy.message.JSONMessage;
 import strategy.message.receiver.MessagesReceiver;

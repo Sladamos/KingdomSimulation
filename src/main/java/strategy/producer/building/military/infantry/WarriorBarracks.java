@@ -2,9 +2,9 @@ package strategy.producer.building.military.infantry;
 
 import strategy.initializer.military.RandomWarriorsInitializer;
 import strategy.initializer.military.WarriorsInitializer;
-import strategy.item.military.infantry.InfantryUnit;
-import strategy.item.military.infantry.warrior.Warrior;
-import strategy.item.military.infantry.warrior.WarriorConfig;
+import strategy.military.infantry.InfantryUnit;
+import strategy.military.infantry.warrior.Warrior;
+import strategy.military.infantry.warrior.WarriorConfig;
 import strategy.item.organism.human.Adult;
 import strategy.item.weapon.meele.sword.Sword;
 import strategy.storage.OneItemStorage;

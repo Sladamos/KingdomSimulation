@@ -1,8 +1,8 @@
-package strategy.item.military.infantry.warrior;
+package strategy.military.infantry.warrior;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import strategy.item.military.InitMilitaryConfig;
+import strategy.military.InitMilitaryConfig;
 
 @AllArgsConstructor
 @Getter

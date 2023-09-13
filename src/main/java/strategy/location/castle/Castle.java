@@ -1,7 +1,7 @@
 package strategy.location.castle;
 
 import strategy.location.Location;
-import strategy.item.military.infantry.InfantryUnit;
+import strategy.military.infantry.InfantryUnit;
 
 import java.util.Collection;
 

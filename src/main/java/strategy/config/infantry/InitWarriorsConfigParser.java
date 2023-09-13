@@ -4,8 +4,8 @@ import org.json.JSONException;
 import strategy.config.ConfigParser;
 import strategy.error.BasicAppError;
 import strategy.error.CriticalAppError;
-import strategy.item.military.InitMilitaryConfig;
-import strategy.item.military.infantry.warrior.InitWarriorsConfig;
+import strategy.military.InitMilitaryConfig;
+import strategy.military.infantry.warrior.InitWarriorsConfig;
 import strategy.json.JSON;
 
 public class InitWarriorsConfigParser implements ConfigParser<InitMilitaryConfig> {

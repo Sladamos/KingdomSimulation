@@ -4,7 +4,7 @@ import org.json.JSONException;
 import strategy.error.AppError;
 import strategy.error.CriticalAppError;
 import strategy.config.infantry.WarriorConfigParser;
-import strategy.item.military.infantry.warrior.WarriorConfig;
+import strategy.military.infantry.warrior.WarriorConfig;
 import strategy.json.JSON;
 import strategy.location.settlement.SettlementConfig;
 import strategy.producer.ProducerConfig;

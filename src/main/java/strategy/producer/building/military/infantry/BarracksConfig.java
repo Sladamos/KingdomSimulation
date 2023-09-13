@@ -3,7 +3,7 @@ package strategy.producer.building.military.infantry;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import strategy.Config;
-import strategy.item.military.infantry.InfantryConfig;
+import strategy.military.infantry.InfantryConfig;
 import strategy.producer.ProducerConfig;
 
 @AllArgsConstructor

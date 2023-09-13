@@ -1,7 +1,6 @@
 package strategy.kingdom;
 
-import strategy.item.military.infantry.InfantryUnit;
-import strategy.item.military.infantry.warrior.Warrior;
+import strategy.military.infantry.InfantryUnit;
 import strategy.location.castle.Castle;
 import strategy.message.JSONMessage;
 import strategy.message.sender.MessagesSender;

@@ -1,7 +1,7 @@
 package strategy.config.infantry;
 
 import strategy.error.BasicAppError;
-import strategy.item.military.infantry.warrior.WarriorConfig;
+import strategy.military.infantry.warrior.WarriorConfig;
 import strategy.json.JSON;
 
 public class WarriorConfigParser extends InfantryConfigParser<WarriorConfig> {

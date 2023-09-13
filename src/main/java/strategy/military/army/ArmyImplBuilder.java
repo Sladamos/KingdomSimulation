@@ -1,4 +1,4 @@
-package strategy.item.military.army;
+package strategy.military.army;
 
 public class ArmyImplBuilder {
 	private int damageModifier;

@@ -1,6 +1,6 @@
 package strategy.producer.building.military.infantry;
 
-import strategy.item.military.infantry.InfantryUnit;
+import strategy.military.infantry.InfantryUnit;
 import strategy.item.organism.human.Human;
 import strategy.item.weapon.meele.MeeleWeapon;
 import strategy.producer.ProducerConfig;

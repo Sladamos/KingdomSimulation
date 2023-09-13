@@ -3,7 +3,7 @@ package strategy.location.settlement;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import strategy.Config;
-import strategy.item.military.infantry.warrior.WarriorConfig;
+import strategy.military.infantry.warrior.WarriorConfig;
 import strategy.producer.ProducerConfig;
 import strategy.producer.building.military.infantry.BarracksConfig;
 

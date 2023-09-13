@@ -1,9 +1,9 @@
 package strategy.initializer.military;
 
 import strategy.config.infantry.WarriorConfigParser;
-import strategy.item.military.infantry.warrior.InitWarriorsConfig;
-import strategy.item.military.infantry.warrior.Warrior;
-import strategy.item.military.infantry.warrior.WarriorConfig;
+import strategy.military.infantry.warrior.InitWarriorsConfig;
+import strategy.military.infantry.warrior.Warrior;
+import strategy.military.infantry.warrior.WarriorConfig;
 
 import java.util.Collection;
 import java.util.Random;

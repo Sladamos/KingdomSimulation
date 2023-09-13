@@ -7,7 +7,6 @@ import strategy.item.flour.WheatFlour;
 import strategy.item.food.Honey;
 import strategy.item.food.Milk;
 import strategy.item.food.baking.bread.WheatBread;
-import strategy.item.military.infantry.warrior.Warrior;
 import strategy.item.mineral.Salt;
 import strategy.item.mineral.ore.IronOre;
 import strategy.item.organism.human.Adult;

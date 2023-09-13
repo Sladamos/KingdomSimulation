@@ -1,9 +1,9 @@
-package strategy.item.military.infantry;
+package strategy.military.infantry;
 
-import strategy.item.military.MilitaryUnit;
-import strategy.item.military.army.Army;
-import strategy.item.military.army.ArmyImplBuilder;
-import strategy.item.military.general.GeneralConfig;
+import strategy.military.MilitaryUnit;
+import strategy.military.army.Army;
+import strategy.military.army.ArmyImplBuilder;
+import strategy.military.general.GeneralConfig;
 import strategy.item.statistic.Happiness;
 import strategy.storage.OneItemStorage;
 

@@ -2,8 +2,8 @@ package strategy.initializer.kingdom;
 
 import strategy.error.CriticalAppError;
 import strategy.initializer.military.RandomWarriorsInitializer;
-import strategy.item.military.infantry.warrior.InitWarriorsConfig;
-import strategy.item.military.infantry.warrior.Warrior;
+import strategy.military.infantry.warrior.InitWarriorsConfig;
+import strategy.military.infantry.warrior.Warrior;
 import strategy.kingdom.Kingdom;
 import strategy.kingdom.KingdomConfig;
 import strategy.kingdom.KingdomType;

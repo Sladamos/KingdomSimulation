@@ -2,9 +2,9 @@ package strategy.location.castle;
 
 import strategy.item.jewellery.necklace.RubyNecklace;
 import strategy.item.jewellery.ring.SapphireRing;
-import strategy.item.military.infantry.InfantryGeneral;
-import strategy.item.military.infantry.InfantryGeneralImpl;
-import strategy.item.military.infantry.InfantryUnit;
+import strategy.military.infantry.InfantryGeneral;
+import strategy.military.infantry.InfantryGeneralImpl;
+import strategy.military.infantry.InfantryUnit;
 import strategy.item.present.NecklacePresent;
 import strategy.item.present.RingPresent;
 import strategy.location.settlement.SettlementStorageManager;

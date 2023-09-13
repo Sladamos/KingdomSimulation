@@ -3,7 +3,7 @@ package strategy.location.castle;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import strategy.Config;
-import strategy.item.military.general.GeneralConfig;
+import strategy.military.general.GeneralConfig;
 import strategy.producer.ProducerConfig;
 
 @AllArgsConstructor

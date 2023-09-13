@@ -1,8 +1,7 @@
 package strategy.kingdom;
 
 import lombok.Getter;
-import strategy.item.military.infantry.InfantryUnit;
-import strategy.item.military.infantry.warrior.Warrior;
+import strategy.military.infantry.InfantryUnit;
 import strategy.kingdom.notifier.KingdomMessagesNotifier;
 import strategy.kingdom.notifier.KingdomMessagesNotifierImpl;
 import strategy.location.castle.Castle;

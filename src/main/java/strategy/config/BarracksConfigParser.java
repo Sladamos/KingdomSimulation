@@ -3,7 +3,7 @@ package strategy.config;
 import org.json.JSONException;
 import strategy.error.CriticalAppError;
 import strategy.config.infantry.InfantryConfigParser;
-import strategy.item.military.infantry.InfantryConfig;
+import strategy.military.infantry.InfantryConfig;
 import strategy.json.JSON;
 import strategy.producer.ProducerConfig;
 import strategy.producer.building.military.infantry.BarracksConfig;

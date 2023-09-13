@@ -3,7 +3,7 @@ package strategy.config;
 import org.json.JSONException;
 import strategy.error.AppError;
 import strategy.error.CriticalAppError;
-import strategy.item.military.general.GeneralConfig;
+import strategy.military.general.GeneralConfig;
 import strategy.json.JSON;
 import strategy.location.castle.CastleConfig;
 import strategy.producer.ProducerConfig;

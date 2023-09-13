@@ -1,4 +1,4 @@
-package strategy.item.military.general;
+package strategy.military.general;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

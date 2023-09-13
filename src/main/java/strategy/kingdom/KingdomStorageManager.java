@@ -1,7 +1,6 @@
 package strategy.kingdom;
 
 import strategy.StorageManager;
-import strategy.item.military.infantry.InfantryUnit;
 import strategy.location.castle.CastleStorageManager;
 import strategy.location.mountain.MountainStorageManager;
 import strategy.location.settlement.SettlementStorageManager;

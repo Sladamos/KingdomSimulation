@@ -3,7 +3,7 @@ package strategy.config.infantry;
 import org.json.JSONException;
 import strategy.error.CriticalAppError;
 import strategy.config.ConfigParser;
-import strategy.item.military.infantry.InfantryConfig;
+import strategy.military.infantry.InfantryConfig;
 import strategy.json.JSON;
 
 public abstract class InfantryConfigParser<T extends InfantryConfig> implements ConfigParser<T> {

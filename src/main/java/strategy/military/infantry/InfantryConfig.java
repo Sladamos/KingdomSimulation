@@ -1,4 +1,4 @@
-package strategy.item.military.infantry;
+package strategy.military.infantry;
 
 import strategy.Config;
 

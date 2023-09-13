@@ -1,9 +1,9 @@
-package strategy.item.military.infantry.warrior;
+package strategy.military.infantry.warrior;
 
 import lombok.Setter;
 import strategy.action.Attack;
 import strategy.action.AttackImpl;
-import strategy.item.military.infantry.InfantryUnit;
+import strategy.military.infantry.InfantryUnit;
 import strategy.item.organism.human.Human;
 import strategy.mechanism.fight.Fightable;
 import strategy.mechanism.fight.exceptions.FightActionException;

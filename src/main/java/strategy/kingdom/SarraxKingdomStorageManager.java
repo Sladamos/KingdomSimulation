@@ -1,7 +1,6 @@
 package strategy.kingdom;
 
 import lombok.Getter;
-import strategy.item.military.infantry.warrior.Warrior;
 import strategy.location.castle.CastleStorageManager;
 import strategy.location.castle.CastleStorageManagerImpl;
 import strategy.location.mountain.MountainStorageManager;

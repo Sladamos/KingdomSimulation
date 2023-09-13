@@ -1,8 +1,7 @@
-package strategy.item.military.general;
+package strategy.military.general;
 
-import strategy.item.military.MilitaryUnit;
-import strategy.item.military.army.Army;
-import strategy.item.military.infantry.InfantryUnit;
+import strategy.military.MilitaryUnit;
+import strategy.military.army.Army;
 import strategy.item.statistic.Happiness;
 
 import java.util.Collection;
