@@ -32,7 +32,6 @@ import java.util.Collections;
 
 public class SarraxKingdom implements Kingdom {
 
-    @Getter
     private final Castle castle;
 
     private final Mountain mountain;
