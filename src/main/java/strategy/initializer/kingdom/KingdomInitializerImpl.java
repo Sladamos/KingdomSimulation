@@ -2,6 +2,7 @@ package strategy.initializer.kingdom;
 
 import strategy.error.CriticalAppError;
 import strategy.initializer.military.RandomWarriorsInitializer;
+import strategy.military.army.ArmyType;
 import strategy.military.infantry.warrior.InitWarriorsConfig;
 import strategy.military.infantry.warrior.Warrior;
 import strategy.kingdom.Kingdom;
@@ -41,6 +42,6 @@ public class KingdomInitializerImpl implements KingdomInitializer {
     private void addWarriorsToKingdom(Kingdom kingdom, InitWarriorsConfig warriorsConfig) {
         RandomWarriorsInitializer warriorsInitializer = new RandomWarriorsInitializer();
         Collection<Warrior> warriors = warriorsInitializer.createWarriors(warriorsConfig);
-        kingdom.addInfantryUnits(new LinkedList<>(warriors));
+        kingdom.addMilitaryUnits(ArmyType.WARRIOR, new LinkedList<>(warriors));
     }
 }

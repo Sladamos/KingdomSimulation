@@ -1,5 +1,7 @@
 package strategy.kingdom;
 
+import strategy.military.MilitaryUnit;
+import strategy.military.army.ArmyType;
 import strategy.military.infantry.InfantryUnit;
 import strategy.location.castle.Castle;
 import strategy.message.JSONMessage;
@@ -11,7 +13,6 @@ import java.util.Collection;
 public interface Kingdom extends Runnable, MessagesSender<JSONMessage> {
     void terminate();
     void attack(Kingdom kingdom);
-    Castle getCastle();
-    void addInfantryUnits(Collection<InfantryUnit> infantryUnits);
+    void addMilitaryUnits(ArmyType armyType, Collection<MilitaryUnit> militaryUnits);
 	Time getAttackTime();
 }

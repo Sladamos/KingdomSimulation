@@ -1,6 +1,8 @@
 package strategy.kingdom;
 
 import lombok.Getter;
+import strategy.military.MilitaryUnit;
+import strategy.military.army.ArmyType;
 import strategy.military.general.major.ArmyMajorGeneral;
 import strategy.military.general.major.SarraxArmyMajorGeneral;
 import strategy.military.infantry.InfantryUnit;
@@ -90,8 +92,8 @@ public class SarraxKingdom implements Kingdom {
     }
 
     @Override
-    public void addInfantryUnits(Collection<InfantryUnit> infantryUnits) {
-        //castle.addInfantry(infantryUnits);
+    public void addMilitaryUnits(ArmyType armyType, Collection<MilitaryUnit> militaryUnits) {
+        majorKingdomGeneral.addUnits(armyType, militaryUnits);
     }
 
     @Override

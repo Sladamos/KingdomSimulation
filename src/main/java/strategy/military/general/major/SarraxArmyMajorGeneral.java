@@ -31,7 +31,7 @@ public class SarraxArmyMajorGeneral implements ArmyMajorGeneral {
     @Override
     public void addUnits(ArmyType armyType, Collection<MilitaryUnit> militaryUnits) {
         if(!armiesGenerals.containsKey(armyType)) {
-            throw new BasicAppError("Can't recruit these types of units");
+            throw new BasicAppError("Can't recruit these types of units because general hasn't been recruited.");
         }
         armiesGenerals.get(armyType).addMilitaryUnits(militaryUnits);
     }
