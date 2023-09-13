@@ -1,6 +1,9 @@
 package strategy.mechanism.fight;
 
+import strategy.action.Attack;
+
 public interface Fightable {
-    void getHit(int damage);
-    boolean isDead();
+    void attack(Fightable fightable);
+    void getHit(Attack attack);
+    void setDamageModifier(int damageModifier);
 }
