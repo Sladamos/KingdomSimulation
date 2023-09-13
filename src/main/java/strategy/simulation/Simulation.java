@@ -16,8 +16,6 @@ public class Simulation {
 
     //TODO: write unit tests
 
-    //TODO: handle exceptions from multiple threads
-
     // TODO: think about automatic vs manual simulation
 
     /*TODO gui:

@@ -14,6 +14,7 @@ public class ErrorHandlerImpl implements ErrorHandler {
     public ErrorHandlerImpl() {
         criticalErrorOccured = new OneArgEventImpl<>();
         basicErrorOccured = new OneArgEventImpl<>();
+        Thread.setDefaultUncaughtExceptionHandler((thread, e) -> notifyAboutUnspecifiedException());
     }
 
     @Override
@@ -25,9 +26,12 @@ public class ErrorHandlerImpl implements ErrorHandler {
         } catch (BasicAppError err) {
             basicErrorOccured.invoke(new JSONMessage(err.getMessage()));
         } catch (Exception err) {
-            criticalErrorOccured.invoke(new JSONMessage("Something went very wrong"));
+            notifyAboutUnspecifiedException();
         }
+    }
 
+    private void notifyAboutUnspecifiedException() {
+        criticalErrorOccured.invoke(new JSONMessage("Something went very wrong"));
     }
 
     @Override
