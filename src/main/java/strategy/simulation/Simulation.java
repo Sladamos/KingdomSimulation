@@ -16,7 +16,7 @@ public class Simulation {
 
     //TODO: write unit tests
 
-    // TODO: think about automatic vs manual simulation
+    // TODO: think about automatic vs manual simulation -> how to bind gui to business logic
 
     /*TODO gui:
         two panels with names of materials and count of each one (consider it!):
