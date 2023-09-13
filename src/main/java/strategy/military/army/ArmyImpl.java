@@ -1,6 +1,7 @@
 package strategy.military.army;
 
 import strategy.action.Attack;
+import strategy.action.BasicAttack;
 import strategy.events.oneargevent.OneArgEvent;
 import strategy.events.oneargevent.OneArgEventImpl;
 import strategy.military.MilitaryUnit;
@@ -42,8 +43,15 @@ public class ArmyImpl implements Army {
 	}
 
 	@Override
+	public Attack createAttack() {
+		Collection<Attack> attacks = army.parallelStream().map(Fightable::createAttack).toList();
+		return new BasicAttack(this, attacks);
+	}
+
+	@Override
 	public void attack(Fightable fightable) {
-		army.parallelStream().forEach(e -> e.attack(fightable));
+		Attack attack = createAttack();
+		fightable.getHit(attack);
 	}
 
 	@Override

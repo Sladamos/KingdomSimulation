@@ -65,9 +65,14 @@ public class Warrior implements Human, InfantryUnit {
     }
 
     @Override
-    public void attack(Fightable fightable) {
+    public Attack createAttack() {
         Integer damage = this.damage * this.damageModifier;
-        Attack attack = new AdvancedAttack(this, damage);
+	    return new AdvancedAttack(this, damage);
+    }
+
+    @Override
+    public void attack(Fightable fightable) {
+        Attack attack = createAttack();
         fightable.getHit(attack);
     }
 
