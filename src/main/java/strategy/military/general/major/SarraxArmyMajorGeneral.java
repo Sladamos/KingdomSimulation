@@ -19,7 +19,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class SarraxArmyMajorGeneral implements ArmyMajorGeneral, Fightable {
+public class SarraxArmyMajorGeneral implements ArmyMajorGeneral {
 
     private final Map<ArmyType, ArmyGeneral> armiesGenerals;
 
@@ -59,7 +59,7 @@ public class SarraxArmyMajorGeneral implements ArmyMajorGeneral, Fightable {
     @Override
     public Attack createAttack() {
         Army army = armiesGenerals.get(ArmyType.WARRIOR).getArmy();
-        return new BasicAttack(this, Collections.singleton(army.createAttack()));
+        return new BasicAttack(this, army.createAttack().getCombination());
     }
 
     @Override

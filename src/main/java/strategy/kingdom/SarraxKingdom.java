@@ -1,6 +1,8 @@
 package strategy.kingdom;
 
 import lombok.Getter;
+import strategy.action.Attack;
+import strategy.action.BasicAttack;
 import strategy.military.MilitaryUnit;
 import strategy.military.army.ArmyType;
 import strategy.military.general.major.ArmyMajorGeneral;
@@ -22,6 +24,7 @@ import strategy.location.village.Village;
 import strategy.location.village.VillageStorageManager;
 import strategy.message.JSONMessage;
 import strategy.message.receiver.MessagesReceiver;
+import strategy.military.mechanism.fight.Fightable;
 import strategy.util.Time;
 
 import java.util.Collection;
@@ -87,11 +90,6 @@ public class SarraxKingdom implements Kingdom {
     }
 
     @Override
-    public void attack(Kingdom kingdom) {
-        //castle.attack(kingdom.getCastle());
-    }
-
-    @Override
     public void addMilitaryUnits(ArmyType armyType, Collection<MilitaryUnit> militaryUnits) {
         majorKingdomGeneral.addUnits(armyType, militaryUnits);
     }
@@ -109,5 +107,26 @@ public class SarraxKingdom implements Kingdom {
     @Override
     public void addListener(MessagesReceiver<JSONMessage> messagesReceiver) {
         kingdomMessagesNotifier.addListener(messagesReceiver);
+    }
+
+    @Override
+    public Attack createAttack() {
+        return new BasicAttack(this, majorKingdomGeneral.createAttack().getCombination());
+    }
+
+    @Override
+    public void attack(Fightable fightable) {
+        Attack attack = createAttack();
+        fightable.getHit(attack);
+    }
+
+    @Override
+    public void getHit(Attack attack) {
+        majorKingdomGeneral.getHit(attack);
+    }
+
+    @Override
+    public synchronized boolean isDead() {
+        return majorKingdomGeneral.isDead();
     }
 }
