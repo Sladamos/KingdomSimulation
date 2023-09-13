@@ -1,6 +1,10 @@
 package strategy.military.general;
 
+import strategy.events.oneargevent.OneArgEvent;
+import strategy.events.oneargevent.OneArgEventImpl;
 import strategy.item.statistic.Happiness;
+import strategy.message.JSONMessage;
+import strategy.message.receiver.MessagesReceiver;
 import strategy.military.MilitaryUnit;
 import strategy.military.army.Army;
 import strategy.military.army.ArmyImplBuilder;
@@ -16,6 +20,8 @@ public class ArmyGeneralImpl implements ArmyGeneral {
 
     private final OneItemStorage<MilitaryUnit> militaryUnitStorage;
 
+    private final OneArgEvent<JSONMessage> messageEvent;
+
     private int morale;
 
     private boolean isConsuming;
@@ -25,10 +31,11 @@ public class ArmyGeneralImpl implements ArmyGeneral {
                            GeneralConfig generalConfig) {
         this.happinessStorage = happinessStorage;
         this.militaryUnitStorage = militaryUnitStorage;
+        messageEvent = new OneArgEventImpl<>();
         isConsuming = false;
-        int happinessDamageModifier = generalConfig.getHappinessDamageModifier();
-        morale = happinessDamageModifier;
+        int happinessDamageModifier = morale =  generalConfig.getHappinessDamageModifier();
         army = new ArmyImplBuilder().withDamageModifier(happinessDamageModifier).createNewArmy();
+        army.addListener(this);
     }
 
     @Override
@@ -89,5 +96,20 @@ public class ArmyGeneralImpl implements ArmyGeneral {
 
     private synchronized void enableConsuming() {
         isConsuming = true;
+    }
+
+    @Override
+    public void removeListeners() {
+        messageEvent.removeAllListeners();
+    }
+
+    @Override
+    public void accept(JSONMessage message) {
+        messageEvent.invoke(message);
+    }
+
+    @Override
+    public void addListener(MessagesReceiver<JSONMessage> messagesReceiver) {
+        messageEvent.addListener(messagesReceiver);
     }
 }

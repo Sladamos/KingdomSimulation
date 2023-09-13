@@ -1,4 +1,7 @@
 package strategy.military.general;
 
-public interface ArmyGeneral extends General {
+import strategy.message.JSONMessage;
+import strategy.message.notifier.MessagesNotifier;
+
+public interface ArmyGeneral extends General, MessagesNotifier<JSONMessage> {
 }

@@ -28,6 +28,7 @@ import strategy.military.mechanism.fight.Fightable;
 import strategy.util.Time;
 
 import java.util.Collection;
+import java.util.Collections;
 
 public class SarraxKingdom implements Kingdom {
 
@@ -66,9 +67,11 @@ public class SarraxKingdom implements Kingdom {
 
         castle = new SarraxCastle(castleStorageManager, settlementStorageManager, kingdomConfig.getCastleConfig());
 
+        majorKingdomGeneral = new SarraxArmyMajorGeneral(settlementStorageManager, castleStorageManager, kingdomConfig.getMajorGeneralConfig());
+
         kingdomMessagesNotifier = new KingdomMessagesNotifierImpl(kingdomConfig.getKingdomId());
         kingdomStorageManager.getStorageMessagesNotifier().addListener(kingdomMessagesNotifier);
-        majorKingdomGeneral = new SarraxArmyMajorGeneral(settlementStorageManager, castleStorageManager, kingdomConfig.getMajorGeneralConfig());
+        majorKingdomGeneral.addListener(kingdomMessagesNotifier);
     }
 
     @Override
@@ -111,7 +114,7 @@ public class SarraxKingdom implements Kingdom {
 
     @Override
     public Attack createAttack() {
-        return new BasicAttack(this, majorKingdomGeneral.createAttack().getCombination());
+        return new BasicAttack(this, Collections.singleton(majorKingdomGeneral.createAttack()));
     }
 
     @Override

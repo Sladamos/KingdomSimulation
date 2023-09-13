@@ -3,8 +3,15 @@ package strategy.military.general.major;
 import strategy.action.Attack;
 import strategy.action.BasicAttack;
 import strategy.error.BasicAppError;
+import strategy.events.oneargevent.OneArgEvent;
+import strategy.events.oneargevent.OneArgEventImpl;
+import strategy.json.JSON;
 import strategy.location.castle.CastleStorageManager;
 import strategy.location.settlement.SettlementStorageManager;
+import strategy.message.JSONMessage;
+import strategy.message.notifier.MessagesNotifier;
+import strategy.message.notifier.MessagesNotifierImpl;
+import strategy.message.receiver.MessagesReceiver;
 import strategy.military.MilitaryUnit;
 import strategy.military.army.Army;
 import strategy.military.army.ArmyType;
@@ -25,12 +32,17 @@ public class SarraxArmyMajorGeneral implements ArmyMajorGeneral {
 
     private final ExecutorService executor;
 
+    private final OneArgEvent<JSONMessage> messageEvent;
+
     public SarraxArmyMajorGeneral(SettlementStorageManager settlementStorageManager, CastleStorageManager castleStorageManager, MajorGeneralConfig majorGeneralConfig) {
         executor = Executors.newCachedThreadPool();
         armiesGenerals = new HashMap<>();
+        messageEvent = new OneArgEventImpl<>();
         ArmyGeneral warriorsGeneral = new ArmyGeneralImpl(castleStorageManager.getHappinessStorage(),
                 settlementStorageManager.getWarriorsStorage(), majorGeneralConfig.getWarriorsGeneralConfig());
         armiesGenerals.put(ArmyType.WARRIOR, warriorsGeneral);
+        warriorsGeneral.addListener(this);
+
     }
 
     @Override
@@ -59,7 +71,7 @@ public class SarraxArmyMajorGeneral implements ArmyMajorGeneral {
     @Override
     public Attack createAttack() {
         Army army = armiesGenerals.get(ArmyType.WARRIOR).getArmy();
-        return new BasicAttack(this, army.createAttack().getCombination());
+        return new BasicAttack(this, Collections.singleton(army.createAttack()));
     }
 
     @Override
@@ -80,5 +92,20 @@ public class SarraxArmyMajorGeneral implements ArmyMajorGeneral {
     @Override
     public synchronized boolean isDead() {
         return armiesGenerals.get(ArmyType.WARRIOR).getArmy().isDead();
+    }
+
+    @Override
+    public void removeListeners() {
+        messageEvent.removeAllListeners();
+    }
+
+    @Override
+    public void accept(JSONMessage message) {
+        messageEvent.invoke(message);
+    }
+
+    @Override
+    public void addListener(MessagesReceiver<JSONMessage> messagesReceiver) {
+        messageEvent.addListener(messagesReceiver);
     }
 }
