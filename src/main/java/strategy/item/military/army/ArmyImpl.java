@@ -52,6 +52,11 @@ public class ArmyImpl implements Army {
 		checkArmyStatus();
 	}
 
+	@Override
+	public synchronized boolean isDead() {
+		return army.isEmpty();
+	}
+
 	private void hitUnitWithAttack(Attack attack) {
 		MilitaryUnit unit = army.iterator().next();
 		try {
@@ -64,7 +69,7 @@ public class ArmyImpl implements Army {
 	}
 
 	private void checkArmyStatus() {
-		if (army.isEmpty()) {
+		if (isDead()) {
 			generateMessageAboutArmyDestroyed();
 			throw new ArmyDestroyedException();
 		} else {
