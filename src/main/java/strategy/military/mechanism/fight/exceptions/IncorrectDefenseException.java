@@ -1,4 +1,4 @@
-package strategy.mechanism.fight.exceptions;
+package strategy.military.mechanism.fight.exceptions;
 
 public class IncorrectDefenseException extends RuntimeException {
 

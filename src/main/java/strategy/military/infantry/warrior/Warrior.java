@@ -5,8 +5,8 @@ import strategy.action.Attack;
 import strategy.action.AttackImpl;
 import strategy.military.infantry.InfantryUnit;
 import strategy.item.organism.human.Human;
-import strategy.mechanism.fight.Fightable;
-import strategy.mechanism.fight.exceptions.FightActionException;
+import strategy.military.mechanism.fight.Fightable;
+import strategy.military.mechanism.fight.exceptions.FightActionException;
 
 import java.util.Collection;
 import java.util.Collections;

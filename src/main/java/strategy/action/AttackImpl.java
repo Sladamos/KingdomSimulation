@@ -1,7 +1,7 @@
 package strategy.action;
 
 import lombok.Getter;
-import strategy.mechanism.fight.Fightable;
+import strategy.military.mechanism.fight.Fightable;
 
 import java.util.Collection;
 

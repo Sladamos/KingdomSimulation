@@ -1,4 +1,4 @@
-package strategy.mechanism.fight;
+package strategy.military.mechanism.fight;
 
 import strategy.action.Attack;
 

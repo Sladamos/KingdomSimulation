@@ -1,7 +1,7 @@
 package strategy.military.army;
 
 import strategy.military.MilitaryUnit;
-import strategy.mechanism.fight.Fightable;
+import strategy.military.mechanism.fight.Fightable;
 import strategy.message.JSONMessage;
 import strategy.message.sender.MessagesSender;
 

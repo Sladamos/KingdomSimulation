@@ -4,7 +4,7 @@ import strategy.action.Attack;
 import strategy.events.oneargevent.OneArgEvent;
 import strategy.events.oneargevent.OneArgEventImpl;
 import strategy.military.MilitaryUnit;
-import strategy.mechanism.fight.Fightable;
+import strategy.military.mechanism.fight.Fightable;
 import strategy.message.JSONMessage;
 import strategy.message.receiver.MessagesReceiver;
 
