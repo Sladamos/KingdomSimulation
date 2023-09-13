@@ -41,8 +41,13 @@ public class Warrior implements Human, InfantryUnit {
         }
     }
 
+    @Override
+    public synchronized boolean isDead() {
+        return !isAlive;
+    }
+
     private synchronized void checkIfCanReceiveDamage() {
-        if(!isAlive) {
+        if(isDead()) {
             throw new FightActionException("Can't receive damage when is dead");
         }
     }
@@ -61,7 +66,7 @@ public class Warrior implements Human, InfantryUnit {
     }
 
     private synchronized boolean shouldBeKilled() {
-        return hitPoints == 0;
+        return hitPoints <= 0;
     }
 
     @Override

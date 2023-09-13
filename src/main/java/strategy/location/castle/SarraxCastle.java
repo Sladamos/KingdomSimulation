@@ -2,7 +2,6 @@ package strategy.location.castle;
 
 import strategy.item.jewellery.necklace.RubyNecklace;
 import strategy.item.jewellery.ring.SapphireRing;
-import strategy.item.military.infantry.HumanInfantryUnit;
 import strategy.item.military.infantry.InfantryGeneral;
 import strategy.item.military.infantry.InfantryGeneralImpl;
 import strategy.item.military.infantry.InfantryUnit;
@@ -89,6 +88,6 @@ public class SarraxCastle implements Castle {
 
 	@Override
 	public void addInfantry(Collection<InfantryUnit> infantryUnits) {
-		warriorsGeneral.addInfantryUnits(infantryUnits);
+		warriorsGeneral.addMilitaryUnits(infantryUnits);
 	}
 }

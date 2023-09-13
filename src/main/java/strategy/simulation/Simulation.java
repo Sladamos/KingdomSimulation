@@ -14,6 +14,8 @@ import strategy.initializer.simulation.SimulationInitializer;
 
 public class Simulation {
 
+    //TODO: bind barracks to correct consumer
+
     //TODO: IMPORTANT THING! RECEIVE MESSAGES FROM GENERAL -> its easy for current implementation, but what if castle
     // has different armies etc
 

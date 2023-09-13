@@ -13,6 +13,6 @@ public interface Kingdom extends Runnable, MessagesSender<JSONMessage> {
     void terminate();
     void attack(Kingdom kingdom);
     Castle getCastle();
-    void addInfantryUnits(Collection<InfantryUnit> warriors);
+    void addInfantryUnits(Collection<InfantryUnit> infantryUnits);
 	Time getAttackTime();
 }

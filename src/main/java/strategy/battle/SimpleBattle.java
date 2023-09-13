@@ -1,6 +1,6 @@
 package strategy.battle;
 
-import strategy.item.military.ArmyDestroyedException;
+import strategy.item.military.army.ArmyDestroyedException;
 import strategy.kingdom.Kingdom;
 import strategy.message.StringMessage;
 import strategy.message.notifier.MessagesNotifier;

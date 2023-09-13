@@ -1,4 +1,4 @@
-package strategy.item.military;
+package strategy.item.military.army;
 
 public class ArmyDestroyedException extends RuntimeException {
 

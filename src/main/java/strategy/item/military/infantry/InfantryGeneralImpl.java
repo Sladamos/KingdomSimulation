@@ -71,7 +71,7 @@ public class InfantryGeneralImpl implements InfantryGeneral {
     @Override
     public synchronized void accept(Happiness happiness) {
         morale++;
-        army.setMorale(morale);
+        army.onMoraleChanged(morale);
     }
 
     @Override

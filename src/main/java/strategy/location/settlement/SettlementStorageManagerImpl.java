@@ -10,7 +10,6 @@ import strategy.item.fluid.Water;
 import strategy.item.food.baking.bread.WheatBread;
 import strategy.item.jewellery.necklace.RubyNecklace;
 import strategy.item.jewellery.ring.SapphireRing;
-import strategy.item.military.infantry.HumanInfantryUnit;
 import strategy.item.military.infantry.InfantryUnit;
 import strategy.item.organism.human.Child;
 import strategy.item.tool.bucket.IronBucket;
