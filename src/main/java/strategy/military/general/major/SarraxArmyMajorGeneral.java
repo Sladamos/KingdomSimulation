@@ -20,11 +20,11 @@ public class SarraxArmyMajorGeneral implements ArmyMajorGeneral {
 
     private final ExecutorService executor;
 
-    public SarraxArmyMajorGeneral(SettlementStorageManager settlementStorageManager, CastleStorageManager castleStorageManager) {
+    public SarraxArmyMajorGeneral(SettlementStorageManager settlementStorageManager, CastleStorageManager castleStorageManager, MajorGeneralConfig majorGeneralConfig) {
         executor = Executors.newCachedThreadPool();
         armiesGenerals = new HashMap<>();
         ArmyGeneral warriorsGeneral = new ArmyGeneralImpl(castleStorageManager.getHappinessStorage(),
-                settlementStorageManager.getWarriorsStorage(), castleConfig.getWarriorGeneralConfig());
+                settlementStorageManager.getWarriorsStorage(), majorGeneralConfig.getWarriorsGeneralConfig());
         armiesGenerals.put(ArmyType.WARRIOR, warriorsGeneral);
     }
 

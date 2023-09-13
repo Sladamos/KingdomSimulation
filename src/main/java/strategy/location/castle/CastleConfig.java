@@ -17,6 +17,4 @@ public class CastleConfig implements Config {
     private final ProducerConfig necklacePresentCraftsmanConfig;
 
     private final ProducerConfig ringPresentCraftsmanConfig;
-
-    private final GeneralConfig warriorGeneralConfig;
 }

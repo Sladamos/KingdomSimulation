@@ -63,7 +63,7 @@ public class SarraxKingdom implements Kingdom {
 
         kingdomMessagesNotifier = new KingdomMessagesNotifierImpl(kingdomConfig.getKingdomId());
         kingdomStorageManager.getStorageMessagesNotifier().addListener(kingdomMessagesNotifier);
-        majorKingdomGeneral = new SarraxArmyMajorGeneral(settlementStorageManager, castleStorageManager);
+        majorKingdomGeneral = new SarraxArmyMajorGeneral(settlementStorageManager, castleStorageManager, kingdomConfig.getMajorGeneralConfig());
     }
 
     @Override
@@ -86,12 +86,12 @@ public class SarraxKingdom implements Kingdom {
 
     @Override
     public void attack(Kingdom kingdom) {
-        castle.attack(kingdom.getCastle());
+        //castle.attack(kingdom.getCastle());
     }
 
     @Override
     public void addInfantryUnits(Collection<InfantryUnit> infantryUnits) {
-        castle.addInfantry(infantryUnits);
+        //castle.addInfantry(infantryUnits);
     }
 
     @Override

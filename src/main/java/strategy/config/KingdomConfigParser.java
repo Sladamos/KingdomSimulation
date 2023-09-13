@@ -2,8 +2,10 @@ package strategy.config;
 
 import org.json.JSONException;
 import strategy.config.infantry.InitWarriorsConfigParser;
+import strategy.config.infantry.MajorGeneralConfigParser;
 import strategy.error.BasicAppError;
 import strategy.error.CriticalAppError;
+import strategy.military.general.major.MajorGeneralConfig;
 import strategy.military.infantry.warrior.InitWarriorsConfig;
 import strategy.json.JSON;
 import strategy.kingdom.KingdomConfig;
@@ -42,12 +44,18 @@ public class KingdomConfigParser implements ConfigParser<KingdomConfig> {
 			MountainConfig mountainConfig = createMountainConfig(json.getJSONObject("mountain"));
 			CastleConfig castleConfig = createCastleConfig(json.getJSONObject("castle"));
 			SettlementConfig settlementConfig = createSettlementConfig(json.getJSONObject("settlement"));
+			MajorGeneralConfig majorGeneralConfig = createMajorGeneralConfig(json.getJSONObject("major_general"));
 			return new KingdomConfig(kingdomId, attackTime, kingdomType, warriorsConfig,
-					villageConfig, mountainConfig, castleConfig, settlementConfig);
+					villageConfig, mountainConfig, castleConfig, settlementConfig, majorGeneralConfig);
 		}
 		catch (JSONException | BasicAppError err) {
 			throw new CriticalAppError("Something went wrong on creating kingdom config. " + err.getMessage());
 		}
+	}
+
+	private MajorGeneralConfig createMajorGeneralConfig(JSON json) {
+		MajorGeneralConfigParser majorGeneralConfigParser = new MajorGeneralConfigParser();
+		return majorGeneralConfigParser.createConfig(json);
 	}
 
 	private SettlementConfig createSettlementConfig(JSON settlement) {

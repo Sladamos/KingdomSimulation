@@ -13,6 +13,11 @@
       "max_defense": 5,
       "health": 100
     },
+    "major_general": {
+      "warriors": {
+        "hapiness_damage_modifier": 2
+      }
+    },
     "village": {
       "cow": {
         "items_per_minute": 12
@@ -53,9 +58,6 @@
       },
       "ring_present_craftsman": {
         "items_per_minute": 6
-      },
-      "general": {
-        "hapiness_damage_modifier": 2
       }
     },
     "settlement": {
@@ -117,6 +119,11 @@
       "max_defense": 7,
       "health": 100
     },
+    "major_general": {
+      "warriors": {
+        "hapiness_damage_modifier": 3
+      }
+    },
     "village": {
       "cow": {
         "items_per_minute": 18
@@ -157,9 +164,6 @@
       },
       "ring_present_craftsman": {
         "items_per_minute": 7
-      },
-      "general": {
-        "hapiness_damage_modificator": 3
       }
     },
     "settlement": {
