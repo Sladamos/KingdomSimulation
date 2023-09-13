@@ -11,7 +11,6 @@ public class AdvancedAttack implements Attack {
     @Getter
     private final Fightable attacker;
 
-    @Getter
     private final Collection<Attack> combination;
 
     private final Integer damage;
@@ -20,6 +19,13 @@ public class AdvancedAttack implements Attack {
         this.attacker = attacker;
         this.damage = damage;
         combination = new LinkedList<>();
+    }
+
+    @Override
+    public Collection<Attack> getCombination() {
+        Collection<Attack> newCombination = new LinkedList<>(combination);
+        newCombination.add(new AdvancedAttack(attacker, damage));
+        return newCombination;
     }
 
     @Override

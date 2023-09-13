@@ -48,7 +48,12 @@ public class ArmyImpl implements Army {
 
 	@Override
 	public synchronized void getHit(Attack attack) {
-		hitUnitWithAttack(attack);
+		Collection<Attack> attacks = attack.getCombination();
+		for (Attack att: attacks) {
+			if(!isDead()) {
+				hitUnitWithAttack(att);
+			}
+		}
 		checkArmyStatus();
 	}
 
