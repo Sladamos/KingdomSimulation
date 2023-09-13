@@ -55,7 +55,7 @@
         "items_per_minute": 6
       },
       "general": {
-        "hapiness_damage_modificator": 2
+        "hapiness_damage_modifier": 2
       }
     },
     "settlement": {

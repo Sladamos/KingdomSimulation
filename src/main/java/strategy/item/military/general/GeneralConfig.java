@@ -7,5 +7,5 @@ import strategy.Config;
 @AllArgsConstructor
 @Getter
 public class GeneralConfig implements Config {
-    private final int happinessDamageModificator;
+    private final int happinessDamageModifier;
 }

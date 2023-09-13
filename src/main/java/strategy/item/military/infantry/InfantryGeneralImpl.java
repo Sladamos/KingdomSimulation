@@ -15,21 +15,21 @@ public class InfantryGeneralImpl implements InfantryGeneral {
 
     private final OneItemStorage<Happiness> happinessStorage;
 
-    private final OneItemStorage<InfantryUnit> infantryUnitStorage;
+    private final OneItemStorage<MilitaryUnit> militaryUnitStorage;
 
     private int morale;
 
     private boolean isConsuming;
 
     public InfantryGeneralImpl(OneItemStorage<Happiness> happinessStorage,
-                               OneItemStorage<InfantryUnit> infantryUnitStorage,
+                               OneItemStorage<MilitaryUnit> militaryUnitStorage,
                                GeneralConfig generalConfig) {
         this.happinessStorage = happinessStorage;
-        this.infantryUnitStorage = infantryUnitStorage;
+        this.militaryUnitStorage = militaryUnitStorage;
         isConsuming = false;
-        int happinessDamageModificator = generalConfig.getHappinessDamageModificator();
-        morale = happinessDamageModificator;
-        army = new ArmyImplBuilder().withDamageModifier(happinessDamageModificator).createNewArmy();
+        int happinessDamageModifier = generalConfig.getHappinessDamageModifier();
+        morale = happinessDamageModifier;
+        army = new ArmyImplBuilder().withDamageModifier(happinessDamageModifier).createNewArmy();
     }
 
     @Override
@@ -39,10 +39,10 @@ public class InfantryGeneralImpl implements InfantryGeneral {
 
     @Override
     public void runUnitsConusmer() {
-        isConsuming = true;
+        enableConsuming();
         while(isConsuming()) {
             try {
-                InfantryUnit unit = infantryUnitStorage.getItemFromStorage();
+                MilitaryUnit unit = militaryUnitStorage.getItemFromStorage();
                 accept(unit);
             } catch (Exception err) {
                 return;
@@ -52,7 +52,7 @@ public class InfantryGeneralImpl implements InfantryGeneral {
 
     @Override
     public void runHappinessConusmer() {
-        isConsuming = true;
+        enableConsuming();
         while(isConsuming()) {
             try {
                 Happiness happiness = happinessStorage.getItemFromStorage();
@@ -75,8 +75,8 @@ public class InfantryGeneralImpl implements InfantryGeneral {
     }
 
     @Override
-    public synchronized void addMilitaryUnits(Collection<MilitaryUnit> militaryUnits) {
-        army.addAll(militaryUnits);
+    public void addMilitaryUnits(Collection<MilitaryUnit> militaryUnits) {
+	    militaryUnits.forEach(army);
     }
 
     @Override
@@ -86,5 +86,9 @@ public class InfantryGeneralImpl implements InfantryGeneral {
 
     private synchronized boolean isConsuming() {
         return isConsuming;
+    }
+
+    private synchronized void enableConsuming() {
+        isConsuming = true;
     }
 }
