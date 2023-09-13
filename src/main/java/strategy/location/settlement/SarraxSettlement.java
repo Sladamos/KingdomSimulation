@@ -81,7 +81,7 @@ public class SarraxSettlement implements Settlement {
 				settlementStorageManager.getIronSwordStorage(), settlementConfig.getBlacksmithConfig());
 
 		barracks = new WarriorBarracks<>(adultStorage, settlementStorageManager.getIronSwordStorage(),
-				settlementStorageManager.getInfantryUnitStorage(), settlementConfig.getBarracksConfig());
+				settlementStorageManager.getWarriorsStorage(), settlementConfig.getBarracksConfig());
 
 		ironBucketArtisan = new IronBucketArtisan(settlementStorageManager.getIronBarStorage(),
 				settlementStorageManager.getIronBucketStorage(), settlementConfig.getIronBucketArtisanConfig());

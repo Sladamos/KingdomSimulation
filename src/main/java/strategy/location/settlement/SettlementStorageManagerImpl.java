@@ -10,13 +10,13 @@ import strategy.item.fluid.Water;
 import strategy.item.food.baking.bread.WheatBread;
 import strategy.item.jewellery.necklace.RubyNecklace;
 import strategy.item.jewellery.ring.SapphireRing;
-import strategy.military.infantry.InfantryUnit;
 import strategy.item.organism.human.Child;
 import strategy.item.tool.bucket.IronBucket;
 import strategy.item.tool.bucket.WoodenBucket;
 import strategy.item.weapon.meele.sword.IronSword;
 import strategy.message.JSONMessage;
 import strategy.message.notifier.MessagesNotifier;
+import strategy.military.MilitaryUnit;
 import strategy.storage.OneItemStorage;
 
 @AllArgsConstructor
@@ -47,7 +47,7 @@ public class SettlementStorageManagerImpl implements SettlementStorageManager {
 
     private final OneItemStorage<Child> childStorage;
 
-    private final OneItemStorage<InfantryUnit> infantryUnitStorage;
+    private final OneItemStorage<MilitaryUnit> warriorsStorage;
 
     @Override
     public void enableAcceptingItems() {
@@ -63,7 +63,7 @@ public class SettlementStorageManagerImpl implements SettlementStorageManager {
         rubyNecklaceStorage.enableAcceptingItems();
         growthElixirStorage.enableAcceptingItems();
         childStorage.enableAcceptingItems();
-        infantryUnitStorage.enableAcceptingItems();
+        warriorsStorage.enableAcceptingItems();
     }
 
     @Override
@@ -80,7 +80,7 @@ public class SettlementStorageManagerImpl implements SettlementStorageManager {
         rubyNecklaceStorage.disableAcceptingItems();
         growthElixirStorage.disableAcceptingItems();
         childStorage.disableAcceptingItems();
-        infantryUnitStorage.disableAcceptingItems();
+        warriorsStorage.disableAcceptingItems();
     }
 
     @Override
@@ -98,7 +98,7 @@ public class SettlementStorageManagerImpl implements SettlementStorageManager {
         rubyNecklaceStorage.addListener(messagesNotifier);
         growthElixirStorage.addListener(messagesNotifier);
         childStorage.addListener(messagesNotifier);
-        infantryUnitStorage.addListener(messagesNotifier);
+        warriorsStorage.addListener(messagesNotifier);
         return messagesNotifier;
     }
 }

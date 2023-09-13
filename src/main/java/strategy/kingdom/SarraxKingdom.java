@@ -1,6 +1,8 @@
 package strategy.kingdom;
 
 import lombok.Getter;
+import strategy.military.general.major.ArmyMajorGeneral;
+import strategy.military.general.major.SarraxArmyMajorGeneral;
 import strategy.military.infantry.InfantryUnit;
 import strategy.kingdom.notifier.KingdomMessagesNotifier;
 import strategy.kingdom.notifier.KingdomMessagesNotifierImpl;
@@ -33,17 +35,16 @@ public class SarraxKingdom implements Kingdom {
 
     private final Village village;
 
-    private final Time attackTime;
-
-    private final String kingdomId;
+    private final KingdomConfig kingdomConfig;
 
     private final KingdomStorageManager kingdomStorageManager;
 
     private final KingdomMessagesNotifier kingdomMessagesNotifier;
 
+    private final ArmyMajorGeneral majorKingdomGeneral;
+
     public SarraxKingdom(KingdomConfig kingdomConfig) {
-        this.kingdomId = kingdomConfig.getKingdomId();
-        this.attackTime = kingdomConfig.getAttackTime();
+        this.kingdomConfig = kingdomConfig;
         kingdomStorageManager = new SarraxKingdomStorageManager();
         MountainStorageManager mountainStorageManager = kingdomStorageManager.getMountainStorageManager();
         SettlementStorageManager settlementStorageManager = kingdomStorageManager.getSettlementStorageManager();
@@ -60,8 +61,9 @@ public class SarraxKingdom implements Kingdom {
 
         castle = new SarraxCastle(castleStorageManager, settlementStorageManager, kingdomConfig.getCastleConfig());
 
-        kingdomMessagesNotifier = new KingdomMessagesNotifierImpl(kingdomId);
+        kingdomMessagesNotifier = new KingdomMessagesNotifierImpl(kingdomConfig.getKingdomId());
         kingdomStorageManager.getStorageMessagesNotifier().addListener(kingdomMessagesNotifier);
+        majorKingdomGeneral = new SarraxArmyMajorGeneral(settlementStorageManager, castleStorageManager);
     }
 
     @Override
@@ -94,12 +96,12 @@ public class SarraxKingdom implements Kingdom {
 
     @Override
     public Time getAttackTime() {
-        return attackTime;
+        return kingdomConfig.getAttackTime();
     }
 
     @Override
     public String toString() {
-        return kingdomId + " kingdom";
+        return kingdomConfig.getKingdomId() + " kingdom";
     }
 
     @Override

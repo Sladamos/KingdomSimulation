@@ -6,6 +6,7 @@ import java.util.Collection;
 
 public interface Attack extends Action {
 	Fightable getAttacker();
-	Collection<Integer> getCombination();
-	void addToCombination(Integer attack);
+	Collection<Attack> getCombination();
+	void addToCombination(Attack attack);
+	Integer getAttackDamage();
 }

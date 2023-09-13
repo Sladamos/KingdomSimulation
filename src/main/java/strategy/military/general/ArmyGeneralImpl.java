@@ -1,15 +1,14 @@
-package strategy.military.infantry;
+package strategy.military.general;
 
+import strategy.item.statistic.Happiness;
 import strategy.military.MilitaryUnit;
 import strategy.military.army.Army;
 import strategy.military.army.ArmyImplBuilder;
-import strategy.military.general.GeneralConfig;
-import strategy.item.statistic.Happiness;
 import strategy.storage.OneItemStorage;
 
 import java.util.Collection;
 
-public class InfantryGeneralImpl implements InfantryGeneral {
+public class ArmyGeneralImpl implements ArmyGeneral {
 
     private final Army army;
 
@@ -21,9 +20,9 @@ public class InfantryGeneralImpl implements InfantryGeneral {
 
     private boolean isConsuming;
 
-    public InfantryGeneralImpl(OneItemStorage<Happiness> happinessStorage,
-                               OneItemStorage<MilitaryUnit> militaryUnitStorage,
-                               GeneralConfig generalConfig) {
+    public ArmyGeneralImpl(OneItemStorage<Happiness> happinessStorage,
+                           OneItemStorage<MilitaryUnit> militaryUnitStorage,
+                           GeneralConfig generalConfig) {
         this.happinessStorage = happinessStorage;
         this.militaryUnitStorage = militaryUnitStorage;
         isConsuming = false;

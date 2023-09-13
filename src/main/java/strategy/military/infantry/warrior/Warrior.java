@@ -1,15 +1,12 @@
 package strategy.military.infantry.warrior;
 
 import lombok.Setter;
+import strategy.action.AdvancedAttack;
 import strategy.action.Attack;
-import strategy.action.AttackImpl;
-import strategy.military.infantry.InfantryUnit;
 import strategy.item.organism.human.Human;
+import strategy.military.infantry.InfantryUnit;
 import strategy.military.mechanism.fight.Fightable;
 import strategy.military.mechanism.fight.exceptions.FightActionException;
-
-import java.util.Collection;
-import java.util.Collections;
 
 public class Warrior implements Human, InfantryUnit {
 
@@ -34,11 +31,9 @@ public class Warrior implements Human, InfantryUnit {
 
     @Override
     public void getHit(Attack attack) {
-        Collection<Integer> combination = attack.getCombination();
-        for (Integer damage : combination) {
-            checkIfCanReceiveDamage();
-            receiveDamage(damage);
-        }
+        Integer damage = attack.getAttackDamage();
+        checkIfCanReceiveDamage();
+        receiveDamage(damage);
     }
 
     @Override
@@ -72,7 +67,7 @@ public class Warrior implements Human, InfantryUnit {
     @Override
     public void attack(Fightable fightable) {
         Integer damage = this.damage * this.damageModifier;
-        Attack attack = new AttackImpl(this, Collections.singleton(damage));
+        Attack attack = new AdvancedAttack(this, damage);
         fightable.getHit(attack);
     }
 

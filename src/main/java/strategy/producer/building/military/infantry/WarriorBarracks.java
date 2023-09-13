@@ -2,6 +2,7 @@ package strategy.producer.building.military.infantry;
 
 import strategy.initializer.military.RandomWarriorsInitializer;
 import strategy.initializer.military.WarriorsInitializer;
+import strategy.military.MilitaryUnit;
 import strategy.military.infantry.InfantryUnit;
 import strategy.military.infantry.warrior.Warrior;
 import strategy.military.infantry.warrior.WarriorConfig;
@@ -15,7 +16,7 @@ public class WarriorBarracks<T extends Sword> extends Barracks<Adult, T> {
 	private final WarriorsInitializer warriorsInitializer;
 
 	public WarriorBarracks(OneItemStorage<Adult> firstSourceStorage, OneItemStorage<T> secondSourceStorage,
-	                       OneItemStorage<InfantryUnit> destinationStorage, BarracksConfig<WarriorConfig> barracksConfig) {
+						   OneItemStorage<MilitaryUnit> destinationStorage, BarracksConfig<WarriorConfig> barracksConfig) {
 		super(firstSourceStorage, secondSourceStorage, destinationStorage, barracksConfig.getMilitaryProducerConfig());
 		warriorConfig = barracksConfig.getInfantryConfig();
 		warriorsInitializer = new RandomWarriorsInitializer();

@@ -2,9 +2,6 @@ package strategy.location.castle;
 
 import strategy.item.jewellery.necklace.RubyNecklace;
 import strategy.item.jewellery.ring.SapphireRing;
-import strategy.military.infantry.InfantryGeneral;
-import strategy.military.infantry.InfantryGeneralImpl;
-import strategy.military.infantry.InfantryUnit;
 import strategy.item.present.NecklacePresent;
 import strategy.item.present.RingPresent;
 import strategy.location.settlement.SettlementStorageManager;
@@ -14,7 +11,6 @@ import strategy.producer.royal.king.SarraxKing;
 import strategy.producer.royal.princess.SarraxPrincess;
 import strategy.producer.royal.queen.SarraxQueen;
 
-import java.util.Collection;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -25,8 +21,6 @@ public class SarraxCastle implements Castle {
 	private final SarraxQueen queen;
 
 	private final SarraxPrincess<NecklacePresent, RingPresent> princess;
-
-	private final InfantryGeneral warriorsGeneral;
 
 	private final ExecutorService executorService;
 
@@ -41,10 +35,7 @@ public class SarraxCastle implements Castle {
 				castleStorageManager.getHappinessStorage(),
 				castleConfig.getPrincessConfig());
 
-		warriorsGeneral = new InfantryGeneralImpl(castleStorageManager.getHappinessStorage(),
-				settlementStorageManager.getInfantryUnitStorage(), castleConfig.getWarriorGeneralConfig());
-
-		executorService = Executors.newFixedThreadPool(5);
+		executorService = Executors.newFixedThreadPool(3);
 	}
 
 	private SarraxKing createKing(CastleStorageManager castleStorageManager, SettlementStorageManager settlementStorageManager, CastleConfig castleConfig) {
@@ -62,8 +53,6 @@ public class SarraxCastle implements Castle {
 		executorService.execute(queen);
 		executorService.execute(king);
 		executorService.execute(princess);
-		executorService.execute(warriorsGeneral::runUnitsConusmer);
-		executorService.execute(warriorsGeneral::runHappinessConusmer);
 	}
 
 	@Override
@@ -71,23 +60,6 @@ public class SarraxCastle implements Castle {
 		queen.terminate();
 		king.terminate();
 		princess.terminate();
-		warriorsGeneral.terminate();
 		executorService.shutdownNow();
-	}
-
-	@Override
-	public void attack(Castle castle) {
-		Collection<Integer> totalDamage = warriorsGeneral.getArmyDamage();
-		castle.receiveDamage(totalDamage);
-	}
-
-	@Override
-	public void receiveDamage(Collection<Integer> damage) {
-		warriorsGeneral.receiveDamage(damage);
-	}
-
-	@Override
-	public void addInfantry(Collection<InfantryUnit> infantryUnits) {
-		warriorsGeneral.addMilitaryUnits(infantryUnits);
 	}
 }
