@@ -1,13 +1,7 @@
 package strategy.kingdom;
 
-import lombok.Getter;
 import strategy.action.Attack;
 import strategy.action.BasicAttack;
-import strategy.military.MilitaryUnit;
-import strategy.military.army.ArmyType;
-import strategy.military.general.major.ArmyMajorGeneral;
-import strategy.military.general.major.SarraxArmyMajorGeneral;
-import strategy.military.infantry.InfantryUnit;
 import strategy.kingdom.notifier.KingdomMessagesNotifier;
 import strategy.kingdom.notifier.KingdomMessagesNotifierImpl;
 import strategy.location.castle.Castle;
@@ -24,6 +18,10 @@ import strategy.location.village.Village;
 import strategy.location.village.VillageStorageManager;
 import strategy.message.JSONMessage;
 import strategy.message.receiver.MessagesReceiver;
+import strategy.military.MilitaryUnit;
+import strategy.military.army.ArmyType;
+import strategy.military.general.major.ArmyMajorGeneral;
+import strategy.military.general.major.SarraxArmyMajorGeneral;
 import strategy.military.mechanism.fight.Fightable;
 import strategy.util.Time;
 
@@ -124,7 +122,10 @@ public class SarraxKingdom implements Kingdom {
 
     @Override
     public void getHit(Attack attack) {
-        majorKingdomGeneral.getHit(attack);
+        Collection<Attack> attacks = attack.getCombination();
+        for (Attack att: attacks) {
+            majorKingdomGeneral.getHit(att);
+        }
     }
 
     @Override
