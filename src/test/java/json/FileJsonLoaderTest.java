@@ -21,19 +21,26 @@ public class FileJsonLoaderTest {
 
     @Test
     public void throwCriticalException_when_fileDoesNotExist() {
-        ThrowingCallable executedMethod = () -> loader.loadJsonFromFile("randomFileWhichDoesNotExist");
+        String filePath = createFilePath("randomFileWhichDoesNotExist.json");
+        ThrowingCallable executedMethod = () -> loader.loadJsonFromFile(filePath);
         assertThatThrownBy(executedMethod).isInstanceOf(CriticalAppError.class);
     }
 
     @Test
     public void throwCriticalException_when_errorDuringLoadingJsonFile() {
-        ThrowingCallable executedMethod = () -> loader.loadJsonFromFile("randomFileWithIncorrectBrackets");
+        String filePath = createFilePath("randomFileWithIncorrectBrackets.json");
+        ThrowingCallable executedMethod = () -> loader.loadJsonFromFile(filePath);
         assertThatThrownBy(executedMethod).isInstanceOf(CriticalAppError.class);
     }
 
     @Test
     public void doesNotThrowAnyException_when_fileLoadedProperly() {
-        ThrowingCallable executedMethod = () -> loader.loadJsonFromFile("properJsonFile");
+        String filePath = createFilePath("properJsonFile.json");
+        ThrowingCallable executedMethod = () -> loader.loadJsonFromFile(filePath);
         assertThatCode(executedMethod).doesNotThrowAnyException();
+    }
+
+    private String createFilePath(String fileName) {
+        return "./test/" + fileName;
     }
 }
