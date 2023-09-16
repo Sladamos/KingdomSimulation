@@ -20,10 +20,13 @@ public class GUIInitializerTest {
 
     private JsonLoader jsonLoader;
 
+    private JSON json;
+
     @BeforeEach
     public void createJsonLoaderMock() {
         jsonLoader = Mockito.mock(FileJsonLoader.class);
         guiInitializer = new GUIInitializerImpl();
+        json = Mockito.mock(JSON.class);
     }
 
     @Test
@@ -35,7 +38,6 @@ public class GUIInitializerTest {
 
     @Test
     public void throwCriticalException_when_configFileDoesNotContainAnyType() {
-        JSON json = Mockito.mock(JSON.class);
         Mockito.when(json.getString("type")).thenThrow(CriticalAppError.class);
         Mockito.when(jsonLoader.loadJson()).thenReturn(json);
         ThrowingCallable executedMethod = () -> guiInitializer.initializeGUI(jsonLoader);
@@ -44,7 +46,6 @@ public class GUIInitializerTest {
 
     @Test
     public void throwCriticalException_when_configFileDoesNotContainProperType() {
-        JSON json = Mockito.mock(JSON.class);
         Mockito.when(json.getString("type")).thenReturn("incorrect_test_type");
         Mockito.when(jsonLoader.loadJson()).thenReturn(json);
         ThrowingCallable executedMethod = () -> guiInitializer.initializeGUI(jsonLoader);
@@ -53,7 +54,6 @@ public class GUIInitializerTest {
 
     @Test
     public void doesNotThrowAnyException_when_configFileContainsConsoleType() {
-        JSON json = Mockito.mock(JSON.class);
         Mockito.when(json.getString("type")).thenReturn("console");
         Mockito.when(jsonLoader.loadJson()).thenReturn(json);
         ThrowingCallable executedMethod = () -> guiInitializer.initializeGUI(jsonLoader);
