@@ -30,50 +30,50 @@ public class Warrior implements Human, InfantryUnit {
     }
 
     @Override
-    public void getHit(Attack attack) {
+    public synchronized void getHit(Attack attack) {
         Integer damage = attack.getAttackDamage();
         checkIfCanReceiveDamage();
         receiveDamage(damage);
     }
 
     @Override
-    public synchronized boolean isDead() {
+    public boolean isDead() {
         return !isAlive;
     }
 
-    private synchronized void checkIfCanReceiveDamage() {
+    @Override
+    public synchronized Attack createAttack() {
+        Integer damage = this.damage * this.damageModifier;
+        return new AdvancedAttack(this, damage);
+    }
+
+    @Override
+    public synchronized void attack(Fightable fightable) {
+        Attack attack = createAttack();
+        fightable.getHit(attack);
+    }
+
+    private void checkIfCanReceiveDamage() {
         if(isDead()) {
             throw new FightActionException("Can't receive damage when is dead");
         }
     }
 
-    private synchronized void receiveDamage(Integer damage) {
+    private void receiveDamage(Integer damage) {
         int efficientDamage = Math.max(damage - defense, 0);
         hitPoints -= efficientDamage;
         hitPoints = Math.max(0, hitPoints);
         checkIfShouldBeKilled();
     }
 
-    private synchronized void checkIfShouldBeKilled() {
+    private void checkIfShouldBeKilled() {
         if(shouldBeKilled()) {
             isAlive = false;
         }
     }
 
-    private synchronized boolean shouldBeKilled() {
+    private boolean shouldBeKilled() {
         return hitPoints <= 0;
-    }
-
-    @Override
-    public Attack createAttack() {
-        Integer damage = this.damage * this.damageModifier;
-	    return new AdvancedAttack(this, damage);
-    }
-
-    @Override
-    public void attack(Fightable fightable) {
-        Attack attack = createAttack();
-        fightable.getHit(attack);
     }
 
     @Override

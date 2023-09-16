@@ -110,18 +110,18 @@ public class SarraxKingdom implements Kingdom {
     }
 
     @Override
-    public Attack createAttack() {
+    public synchronized Attack createAttack() {
         return new BasicAttack(this, Collections.singleton(majorKingdomGeneral.createAttack()));
     }
 
     @Override
-    public void attack(Fightable fightable) {
+    public synchronized void attack(Fightable fightable) {
         Attack attack = createAttack();
         fightable.getHit(attack);
     }
 
     @Override
-    public void getHit(Attack attack) {
+    public synchronized void getHit(Attack attack) {
         Collection<Attack> attacks = attack.getCombination();
         for (Attack att: attacks) {
             majorKingdomGeneral.getHit(att);
@@ -129,7 +129,7 @@ public class SarraxKingdom implements Kingdom {
     }
 
     @Override
-    public synchronized boolean isDead() {
+    public boolean isDead() {
         return majorKingdomGeneral.isDead();
     }
 }

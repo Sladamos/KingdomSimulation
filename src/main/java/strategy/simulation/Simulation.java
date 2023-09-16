@@ -17,6 +17,7 @@ public class Simulation {
     //TODO: write unit tests
 
     // TODO: think about automatic vs manual simulation -> on initialize simulation pass some object
+    // TODO: if gui.needToBinded do gui.bind(simulationInitializer) or something like that
 
     // TODO: gui config
 

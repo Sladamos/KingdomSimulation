@@ -5,12 +5,9 @@ import strategy.action.BasicAttack;
 import strategy.error.BasicAppError;
 import strategy.events.oneargevent.OneArgEvent;
 import strategy.events.oneargevent.OneArgEventImpl;
-import strategy.json.JSON;
 import strategy.location.castle.CastleStorageManager;
 import strategy.location.settlement.SettlementStorageManager;
 import strategy.message.JSONMessage;
-import strategy.message.notifier.MessagesNotifier;
-import strategy.message.notifier.MessagesNotifierImpl;
 import strategy.message.receiver.MessagesReceiver;
 import strategy.military.MilitaryUnit;
 import strategy.military.army.Army;
@@ -46,7 +43,7 @@ public class SarraxArmyMajorGeneral implements ArmyMajorGeneral {
     }
 
     @Override
-    public void addUnits(ArmyType armyType, Collection<MilitaryUnit> militaryUnits) {
+    public synchronized void addUnits(ArmyType armyType, Collection<MilitaryUnit> militaryUnits) {
         if(!armiesGenerals.containsKey(armyType)) {
             throw new BasicAppError("Can't recruit these types of units because general hasn't been recruited.");
         }
@@ -69,13 +66,13 @@ public class SarraxArmyMajorGeneral implements ArmyMajorGeneral {
     }
 
     @Override
-    public Attack createAttack() {
+    public synchronized Attack createAttack() {
         Army army = armiesGenerals.get(ArmyType.WARRIOR).getArmy();
         return new BasicAttack(this, Collections.singleton(army.createAttack()));
     }
 
     @Override
-    public void attack(Fightable fightable) {
+    public synchronized void attack(Fightable fightable) {
         Attack attack = createAttack();
         fightable.getHit(attack);
     }
@@ -90,7 +87,7 @@ public class SarraxArmyMajorGeneral implements ArmyMajorGeneral {
     }
 
     @Override
-    public synchronized boolean isDead() {
+    public boolean isDead() {
         return armiesGenerals.get(ArmyType.WARRIOR).getArmy().isDead();
     }
 

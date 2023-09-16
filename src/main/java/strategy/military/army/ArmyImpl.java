@@ -27,13 +27,13 @@ public class ArmyImpl implements Army {
 	}
 
 	@Override
-	public void onMoraleChanged(int morale) {
+	public synchronized void onMoraleChanged(int morale) {
 		int damageModifier = morale / this.damageModifier;
 		army.parallelStream().forEach(el -> el.setDamageModifier(damageModifier));
 	}
 
 	@Override
-	public void accept(MilitaryUnit militaryUnit) {
+	public synchronized void accept(MilitaryUnit militaryUnit) {
 		army.add(militaryUnit);
 	}
 
@@ -43,13 +43,13 @@ public class ArmyImpl implements Army {
 	}
 
 	@Override
-	public Attack createAttack() {
+	public synchronized Attack createAttack() {
 		Collection<Attack> attacks = army.parallelStream().map(Fightable::createAttack).toList();
 		return new BasicAttack(this, attacks);
 	}
 
 	@Override
-	public void attack(Fightable fightable) {
+	public synchronized void attack(Fightable fightable) {
 		Attack attack = createAttack();
 		fightable.getHit(attack);
 	}
