@@ -4,9 +4,13 @@ import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import strategy.action.AdvancedAttack;
+import strategy.action.Attack;
+import strategy.action.BasicAttack;
 import strategy.error.CriticalAppError;
 import strategy.military.mechanism.fight.Fightable;
 
+import java.util.Collection;
+import java.util.LinkedList;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
@@ -45,5 +49,16 @@ public class AdvancedAttackTest {
 		Fightable fightable = Mockito.mock(Fightable.class);
 		AdvancedAttack attack = new AdvancedAttack(fightable, 4);
 		assertThat(attack.getAttacker()).isInstanceOf(Optional.class);
+	}
+
+	@Test
+	public void returnProperAttackDamage_when_getAttackDamageIsCalled() {
+		Attack mockAttack = Mockito.mock(BasicAttack.class);
+		Mockito.when(mockAttack.getAttackDamage()).thenReturn(5);
+		Fightable fightable = Mockito.mock(Fightable.class);
+		AdvancedAttack attack = new AdvancedAttack(fightable, 3);
+		attack.addToCombination(mockAttack);
+		attack.addToCombination(mockAttack);
+		assertThat(attack.getAttackDamage()).isEqualTo(13);
 	}
 }
