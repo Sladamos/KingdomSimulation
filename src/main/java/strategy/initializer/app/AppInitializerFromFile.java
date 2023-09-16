@@ -36,7 +36,8 @@ public class AppInitializerFromFile implements AppInitializer {
     private AppConfig createAppConfig() {
         AppConfigParser configParser = new AppConfigParser();
         FileJsonLoader loader = new FileJsonLoaderImpl();
-        JSON json = loader.loadJsonFromFile("app.json");
+        loader.setFileName("app.json");
+        JSON json = loader.loadJson();
         return configParser.createConfig(json);
     }
 }

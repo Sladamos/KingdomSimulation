@@ -44,7 +44,8 @@ public class AutomaticSimulationInitializer implements SimulationInitializer {
     private AutomaticSimulationConfig createSimulationConfig() {
         AutomaticSimulationConfigParser configParser = new AutomaticSimulationConfigParser();
         FileJsonLoader loader = new FileJsonLoaderImpl();
-        JSON json = loader.loadJsonFromFile("config.json");
+        loader.setFileName("config.json");
+        JSON json = loader.loadJson();
         return configParser.createConfig(json);
     }
 
