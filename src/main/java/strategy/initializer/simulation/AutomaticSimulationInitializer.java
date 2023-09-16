@@ -5,8 +5,8 @@ import strategy.battle.Battle;
 import strategy.battle.operator.BattleOperator;
 import strategy.config.simulation.AutomaticSimulationConfigParser;
 import strategy.json.JSON;
-import strategy.json.JsonLoader;
-import strategy.json.JsonLoaderImpl;
+import strategy.json.FileJsonLoader;
+import strategy.json.FileJsonLoaderImpl;
 import strategy.kingdom.Kingdom;
 import strategy.kingdom.KingdomConfig;
 import strategy.kingdom.operator.KingdomOperator;
@@ -43,7 +43,7 @@ public class AutomaticSimulationInitializer implements SimulationInitializer {
 
     private AutomaticSimulationConfig createSimulationConfig() {
         AutomaticSimulationConfigParser configParser = new AutomaticSimulationConfigParser();
-        JsonLoader loader = new JsonLoaderImpl();
+        FileJsonLoader loader = new FileJsonLoaderImpl();
         JSON json = loader.loadJsonFromFile("config.json");
         return configParser.createConfig(json);
     }

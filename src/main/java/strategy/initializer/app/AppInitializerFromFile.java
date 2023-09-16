@@ -7,8 +7,8 @@ import strategy.error.CriticalAppError;
 import strategy.initializer.simulation.AutomaticSimulationInitializer;
 import strategy.initializer.simulation.SimulationInitializer;
 import strategy.json.JSON;
-import strategy.json.JsonLoader;
-import strategy.json.JsonLoaderImpl;
+import strategy.json.FileJsonLoader;
+import strategy.json.FileJsonLoaderImpl;
 import strategy.simulation.SimulationType;
 
 import java.util.HashMap;
@@ -35,7 +35,7 @@ public class AppInitializerFromFile implements AppInitializer {
 
     private AppConfig createAppConfig() {
         AppConfigParser configParser = new AppConfigParser();
-        JsonLoader loader = new JsonLoaderImpl();
+        FileJsonLoader loader = new FileJsonLoaderImpl();
         JSON json = loader.loadJsonFromFile("app.json");
         return configParser.createConfig(json);
     }

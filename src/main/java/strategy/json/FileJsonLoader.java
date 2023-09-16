@@ -1,5 +1,5 @@
 package strategy.json;
 
-public interface JsonLoader {
+public interface FileJsonLoader {
     JSON loadJsonFromFile(String fileName);
 }
