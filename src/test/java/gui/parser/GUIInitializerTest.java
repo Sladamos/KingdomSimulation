@@ -19,8 +19,6 @@ public class GUIInitializerTest {
 
     private FileJsonLoader fileJsonLoader;
 
-    private String GUIConfigName = "/test/nonexisting_gui.json";
-
     @BeforeEach
     public void createJsonLoaderMock() {
         fileJsonLoader = Mockito.mock(FileJsonLoader.class);
@@ -30,8 +28,7 @@ public class GUIInitializerTest {
     @Test
     public void throwCriticalException_when_configFileDoesNotExist() {
         Mockito.when(fileJsonLoader.loadJsonFromFile(Mockito.anyString())).thenThrow(CriticalAppError.class);
-
-        ThrowingCallable executedMethod = () -> fileJsonLoader.loadJsonFromFile(GUIConfigName);
+        ThrowingCallable executedMethod = () -> guiInitializer.initializeGUI();
         assertThatThrownBy(executedMethod).isInstanceOf(CriticalAppError.class);
     }
 
@@ -40,7 +37,7 @@ public class GUIInitializerTest {
         JSON json = Mockito.mock(JSON.class);
         Mockito.when(json.getString("type")).thenThrow(CriticalAppError.class);
         Mockito.when(fileJsonLoader.loadJsonFromFile(Mockito.anyString())).thenReturn(json);
-        ThrowingCallable executedMethod = () -> fileJsonLoader.loadJsonFromFile(GUIConfigName);
+        ThrowingCallable executedMethod = () -> guiInitializer.initializeGUI();
         assertThatThrownBy(executedMethod).isInstanceOf(CriticalAppError.class);
     }
 
@@ -49,7 +46,7 @@ public class GUIInitializerTest {
         JSON json = Mockito.mock(JSON.class);
         Mockito.when(json.getString("type")).thenReturn("incorrect_test_type");
         Mockito.when(fileJsonLoader.loadJsonFromFile(Mockito.anyString())).thenReturn(json);
-        ThrowingCallable executedMethod = () -> fileJsonLoader.loadJsonFromFile(GUIConfigName);
+        ThrowingCallable executedMethod = () -> guiInitializer.initializeGUI();
         assertThatThrownBy(executedMethod).isInstanceOf(CriticalAppError.class);
     }
 
@@ -57,8 +54,8 @@ public class GUIInitializerTest {
     public void doesNotThrowAnyException_when_configFileContainsConsoleType() {
         JSON json = Mockito.mock(JSON.class);
         Mockito.when(json.getString("type")).thenReturn("console");
-        Mockito.when(fileJsonLoader.loadJsonFromFile(Mockito.anyString())).thenThrow(CriticalAppError.class);
-        ThrowingCallable executedMethod = () -> fileJsonLoader.loadJsonFromFile(GUIConfigName);
+        Mockito.when(fileJsonLoader.loadJsonFromFile(Mockito.anyString())).thenReturn(json);
+        ThrowingCallable executedMethod = () -> guiInitializer.initializeGUI();
         assertThatCode(executedMethod).doesNotThrowAnyException();
     }
 }

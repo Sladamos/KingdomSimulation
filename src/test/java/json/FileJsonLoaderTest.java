@@ -20,23 +20,33 @@ public class FileJsonLoaderTest {
     }
 
     @Test
+    public void throwCriticalException_when_fileNameIsNull() {
+        loader.setFileName(null);
+        ThrowingCallable executedMethod = () -> loader.loadJson();
+        assertThatThrownBy(executedMethod).isInstanceOf(CriticalAppError.class);
+    }
+
+    @Test
     public void throwCriticalException_when_fileDoesNotExist() {
         String filePath = createFilePath("randomFileWhichDoesNotExist.json");
-        ThrowingCallable executedMethod = () -> loader.loadJsonFromFile(filePath);
+        loader.setFileName(filePath);
+        ThrowingCallable executedMethod = () -> loader.loadJson();
         assertThatThrownBy(executedMethod).isInstanceOf(CriticalAppError.class);
     }
 
     @Test
     public void throwCriticalException_when_errorDuringLoadingJsonFile() {
         String filePath = createFilePath("randomFileWithIncorrectBrackets.json");
-        ThrowingCallable executedMethod = () -> loader.loadJsonFromFile(filePath);
+        loader.setFileName(filePath);
+        ThrowingCallable executedMethod = () -> loader.loadJson();
         assertThatThrownBy(executedMethod).isInstanceOf(CriticalAppError.class);
     }
 
     @Test
     public void doesNotThrowAnyException_when_fileLoadedProperly() {
         String filePath = createFilePath("properJsonFile.json");
-        ThrowingCallable executedMethod = () -> loader.loadJsonFromFile(filePath);
+        loader.setFileName(filePath);
+        ThrowingCallable executedMethod = () -> loader.loadJson();
         assertThatCode(executedMethod).doesNotThrowAnyException();
     }
 
