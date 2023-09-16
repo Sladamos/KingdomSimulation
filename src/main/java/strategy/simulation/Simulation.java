@@ -11,6 +11,9 @@ import strategy.initializer.app.AppInitializerFromFile;
 import strategy.initializer.gui.GUIInitializer;
 import strategy.initializer.gui.GUIInitializerImpl;
 import strategy.initializer.simulation.SimulationInitializer;
+import strategy.json.FileJsonLoader;
+import strategy.json.FileJsonLoaderImpl;
+import strategy.json.JsonLoader;
 
 public class Simulation {
 
@@ -43,7 +46,9 @@ public class Simulation {
 
     private void start() {
         GUIInitializer guiInitializer = new GUIInitializerImpl();
-        GUI gui = guiInitializer.initializeGUI();
+        FileJsonLoader guiConfigLoader = new FileJsonLoaderImpl();
+        guiConfigLoader.setFileName("gui.json");
+        GUI gui = guiInitializer.initializeGUI(guiConfigLoader);
         AppCommunicator appCommunicator = gui.getAppCommunicator();
         ErrorHandler errorHandler = new ErrorHandlerImpl();
         appCommunicator.bindErrorsSender(errorHandler);

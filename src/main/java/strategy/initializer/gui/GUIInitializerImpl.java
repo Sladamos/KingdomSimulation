@@ -1,8 +1,12 @@
 package strategy.initializer.gui;
 
+import strategy.config.GUIConfigParser;
 import strategy.gui.ConsoleGui;
 import strategy.gui.GUI;
+import strategy.gui.GUIConfig;
 import strategy.gui.GUIType;
+import strategy.json.JSON;
+import strategy.json.JsonLoader;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,10 +22,15 @@ public class GUIInitializerImpl implements GUIInitializer {
     }
 
     @Override
-    public GUI initializeGUI() {
-        //TODO:
-        //  readGuiConfig
-        //  create gui from config
-        return guiCreators.get(GUIType.CONSOLE).get();
+    public GUI initializeGUI(JsonLoader jsonLoader) {
+        GUIConfig config = createGUIConfig(jsonLoader);
+        GUIType guiType = config.getGuiType();
+        return guiCreators.get(guiType).get();
+    }
+
+    private GUIConfig createGUIConfig(JsonLoader jsonLoader) {
+        JSON config = jsonLoader.loadJson();
+        GUIConfigParser guiConfigParser = new GUIConfigParser();
+        return guiConfigParser.createConfig(config);
     }
 }
