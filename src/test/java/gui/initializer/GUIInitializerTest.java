@@ -1,4 +1,4 @@
-package gui.parser;
+package gui.initializer;
 
 import org.assertj.core.api.ThrowableAssert.*;
 import org.junit.jupiter.api.BeforeEach;
