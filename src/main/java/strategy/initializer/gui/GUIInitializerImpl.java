@@ -1,6 +1,8 @@
 package strategy.initializer.gui;
 
 import strategy.config.GUIConfigParser;
+import strategy.config.creator.ConfigCreator;
+import strategy.config.creator.ConfigCreatorImpl;
 import strategy.gui.ConsoleGui;
 import strategy.gui.GUI;
 import strategy.gui.GUIConfig;
@@ -29,8 +31,7 @@ public class GUIInitializerImpl implements GUIInitializer {
     }
 
     private GUIConfig createGUIConfig(JsonLoader jsonLoader) {
-        JSON config = jsonLoader.loadJson();
-        GUIConfigParser guiConfigParser = new GUIConfigParser();
-        return guiConfigParser.createConfig(config);
+        ConfigCreator<GUIConfig> creator = new ConfigCreatorImpl<>();
+        return creator.createConfigFromJson(jsonLoader, new GUIConfigParser());
     }
 }
