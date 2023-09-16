@@ -1,6 +1,7 @@
 package strategy.action;
 
 import lombok.Getter;
+import strategy.error.CriticalAppError;
 import strategy.military.mechanism.fight.Fightable;
 
 import java.util.Collection;
@@ -15,6 +16,9 @@ public class BasicAttack implements Attack {
 	private final Collection<Attack> combination;
 
 	public BasicAttack(Fightable attacker, Collection<Attack> combination) {
+		if(combination == null) {
+			throw new CriticalAppError("Combination can't be unspecified.");
+		}
 		this.attacker = Optional.ofNullable(attacker);
 		this.combination = combination;
 	}
