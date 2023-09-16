@@ -4,22 +4,23 @@ import lombok.Getter;
 import strategy.military.mechanism.fight.Fightable;
 
 import java.util.Collection;
+import java.util.Optional;
 
 public class BasicAttack implements Attack {
 
 	@Getter
-	private final Fightable attacker;
+	private final Optional<Fightable> attacker;
 
 	@Getter
 	private final Collection<Attack> combination;
 
 	public BasicAttack(Fightable attacker, Collection<Attack> combination) {
-		this.attacker = attacker;
+		this.attacker = Optional.ofNullable(attacker);
 		this.combination = combination;
 	}
 
 	@Override
-	public void addToCombination(Attack attack) {
+	public synchronized void addToCombination(Attack attack) {
 		combination.add(attack);
 	}
 
