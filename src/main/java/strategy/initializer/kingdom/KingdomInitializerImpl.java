@@ -7,7 +7,7 @@ import strategy.military.infantry.warrior.InitWarriorsConfig;
 import strategy.military.infantry.warrior.Warrior;
 import strategy.kingdom.Kingdom;
 import strategy.kingdom.KingdomConfig;
-import strategy.kingdom.KingdomType;
+import strategy.kingdom.type.KingdomType;
 import strategy.kingdom.SarraxKingdom;
 
 import java.util.*;

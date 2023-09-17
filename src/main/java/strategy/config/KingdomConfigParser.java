@@ -5,11 +5,13 @@ import strategy.config.infantry.InitWarriorsConfigParser;
 import strategy.config.infantry.MajorGeneralConfigParser;
 import strategy.error.BasicAppError;
 import strategy.error.CriticalAppError;
+import strategy.kingdom.type.KingdomTypeParser;
+import strategy.kingdom.type.KingdomTypeParserImpl;
 import strategy.military.general.major.MajorGeneralConfig;
 import strategy.military.infantry.warrior.InitWarriorsConfig;
 import strategy.json.JSON;
 import strategy.kingdom.KingdomConfig;
-import strategy.kingdom.KingdomType;
+import strategy.kingdom.type.KingdomType;
 import strategy.location.castle.CastleConfig;
 import strategy.location.mountain.MountainConfig;
 import strategy.location.settlement.SettlementConfig;
@@ -21,13 +23,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class KingdomConfigParser implements ConfigParser<KingdomConfig> {
-
-	private final Map<String, KingdomType> kingdomTypes;
-
-	public KingdomConfigParser() {
-		kingdomTypes = new HashMap<>();
-		kingdomTypes.put("Sarrax", KingdomType.SARRAX);
-	}
 
 	@Override
 	public KingdomConfig createConfig(JSON json) {
@@ -84,9 +79,7 @@ public class KingdomConfigParser implements ConfigParser<KingdomConfig> {
 	}
 
 	private KingdomType getKingdomType(String strKingdomType) {
-		if(!kingdomTypes.containsKey(strKingdomType)) {
-			throw new BasicAppError("Incorrect kingdom type!");
-		}
-		return kingdomTypes.get(strKingdomType);
+		KingdomTypeParser parser = new KingdomTypeParserImpl();
+		return parser.parse(strKingdomType);
 	}
 }
