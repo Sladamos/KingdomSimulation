@@ -17,7 +17,7 @@ public class AppConfigParser implements ConfigParser<AppConfig> {
             String simulationType = json.getString("simulation_type");
             return new AppConfig(getSimulationType(simulationType));
         }
-        catch (JSONException | BasicAppError err) {
+        catch (BasicAppError err) {
             throw new CriticalAppError("Something went wrong on creating app config. " + err.getMessage());
         }
     }

@@ -4,6 +4,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import strategy.error.BasicAppError;
 import strategy.gui.GUIType;
+import strategy.gui.type.GUITypeParser;
+import strategy.gui.type.GUITypeParserImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
