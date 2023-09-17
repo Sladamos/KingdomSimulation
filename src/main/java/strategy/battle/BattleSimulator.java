@@ -1,5 +1,6 @@
 package strategy.battle;
 
 public interface BattleSimulator {
-    void simulateBattle(Battle battle);
+    void addBattleToSimulator(Battle battle);
+    void waitForBattlesEnd();
 }

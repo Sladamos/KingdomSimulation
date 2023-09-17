@@ -28,9 +28,6 @@ public class SimpleBattle implements Battle {
         areKingdomsFighting = true;
         while(areKingdomsFighting) {
             simulateAttack(firstKingdom, secondKingdom);
-            if(areKingdomsFighting) {
-                simulateAttack(secondKingdom, firstKingdom);
-            }
         }
         messagesNotifier.removeListeners();
     }
@@ -39,9 +36,15 @@ public class SimpleBattle implements Battle {
         try {
             long attackTime = attacker.getAttackTime().getMiliseconds();
             Thread.sleep(attackTime);
-            StringMessage messageAboutAttack = new StringMessage(attacker + " attacked");
-            messagesNotifier.accept(messageAboutAttack);
-            attacker.attack(defender);
+            synchronized (attacker) {
+                if(attacker.isDead())
+                {
+                    throw new ArmyDestroyedException();
+                }
+                StringMessage messageAboutAttack = new StringMessage(attacker + " attacked");
+                messagesNotifier.accept(messageAboutAttack);
+                attacker.attack(defender);
+            }
         } catch (ArmyDestroyedException ignored) {
             StringMessage messageAboutWon = new StringMessage(attacker + " won the battle");
             messagesNotifier.accept(messageAboutWon);

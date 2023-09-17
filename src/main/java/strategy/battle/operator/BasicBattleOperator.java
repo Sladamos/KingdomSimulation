@@ -1,34 +1,48 @@
 package strategy.battle.operator;
 
+import lombok.AllArgsConstructor;
 import strategy.battle.Battle;
 import strategy.battle.SimpleBattle;
+import strategy.battle.creator.BattleCreator;
+import strategy.battle.creator.SimpleBattleCreator;
 import strategy.battle.operator.BattleOperator;
 import strategy.kingdom.Kingdom;
 import strategy.message.StringMessage;
 import strategy.message.notifier.MessagesNotifier;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
 public class BasicBattleOperator implements BattleOperator {
-    private final Supplier<MessagesNotifier<StringMessage>> basicMessagesNotifierSupplier;
 
-    public BasicBattleOperator(Supplier<MessagesNotifier<StringMessage>> basicMessagesNotifierSupplier) {
-        this.basicMessagesNotifierSupplier = basicMessagesNotifierSupplier;
+    private final BattleCreator battleCreator;
+
+    private final ExecutorService executorService;
+
+    public BasicBattleOperator() {
+        battleCreator = new SimpleBattleCreator();
+        executorService = Executors.newCachedThreadPool();
     }
 
     @Override
     public Battle createBattle(Kingdom firstKingdom, Kingdom secondKingdom) {
-        return new SimpleBattle(firstKingdom, secondKingdom, basicMessagesNotifierSupplier.get());
+        return battleCreator.createBattle(firstKingdom, secondKingdom);
     }
 
     @Override
-    public void simulateBattle(Battle battle) {
-        Thread thread = new Thread(battle);
-        thread.start();
+    public synchronized void addBattleToSimulator(Battle battle) {
+        executorService.execute(battle);
+    }
+
+    @Override
+    public synchronized void waitForBattlesEnd() {
+        executorService.shutdown();
         try {
-            thread.join();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+            executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+        } catch (Exception ignored) {
         }
     }
 }

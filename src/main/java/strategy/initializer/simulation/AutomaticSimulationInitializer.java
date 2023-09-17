@@ -38,6 +38,9 @@ public class AutomaticSimulationInitializer implements SimulationInitializer {
 
         Battle battle = battleOperator.createBattle(firstKingdom, secondKingdom);
         simulateBattle(battle);
+        Battle secondBattle = battleOperator.createBattle(secondKingdom, firstKingdom);
+        simulateBattle(secondBattle);
+        battleOperator.waitForBattlesEnd();
         this.appCommunicator = null;
     }
 
@@ -57,6 +60,6 @@ public class AutomaticSimulationInitializer implements SimulationInitializer {
 
     private void simulateBattle(Battle battle) {
         appCommunicator.bindBattleSender(battle);
-        battleOperator.simulateBattle(battle);
+        battleOperator.addBattleToSimulator(battle);
     }
 }

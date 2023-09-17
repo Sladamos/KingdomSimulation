@@ -8,14 +8,8 @@ import java.util.function.Supplier;
 
 public class BattleOperatorCreatorImpl implements BattleOperatorCreator {
 
-    private final Supplier<MessagesNotifier<StringMessage>> battleMessagesNotifierSupplier;
-
-    public BattleOperatorCreatorImpl() {
-        battleMessagesNotifierSupplier = MessagesNotifierImpl::new;
-    }
-
     @Override
     public BattleOperator createBasicBattleOperator() {
-        return new BasicBattleOperator(battleMessagesNotifierSupplier);
+        return new BasicBattleOperator();
     }
 }
