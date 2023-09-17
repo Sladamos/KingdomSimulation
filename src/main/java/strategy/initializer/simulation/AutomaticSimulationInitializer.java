@@ -60,6 +60,6 @@ public class AutomaticSimulationInitializer implements SimulationInitializer {
 
     private void simulateBattle(Battle battle) {
         appCommunicator.bindBattleSender(battle);
-        battleOperator.addBattleToSimulator(battle);
+        battleOperator.launchBattle(battle);
     }
 }

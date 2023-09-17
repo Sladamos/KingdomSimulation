@@ -33,7 +33,7 @@ public class BasicBattleOperator implements BattleOperator {
     }
 
     @Override
-    public synchronized void addBattleToSimulator(Battle battle) {
+    public synchronized void launchBattle(Battle battle) {
         executorService.execute(battle);
     }
 
