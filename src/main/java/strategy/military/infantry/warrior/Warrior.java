@@ -31,9 +31,11 @@ public class Warrior implements Human, InfantryUnit {
 
     @Override
     public synchronized void getHit(Attack attack) {
-        Integer damage = attack.getAttackDamage();
-        checkIfCanReceiveDamage();
-        receiveDamage(damage);
+        for(Attack att : attack.getCombination()) {
+            Integer damage = att.getAttackDamage();
+            checkIfCanReceiveDamage();
+            receiveDamage(damage);
+        }
     }
 
     @Override
