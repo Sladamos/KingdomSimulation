@@ -40,7 +40,7 @@ public class KingdomConfigParser implements ConfigParser<KingdomConfig> {
 			return new KingdomConfig(kingdomId, attackTime, kingdomType, warriorsConfig,
 					villageConfig, mountainConfig, castleConfig, settlementConfig, majorGeneralConfig);
 		}
-		catch (JSONException | BasicAppError err) {
+		catch (BasicAppError err) {
 			throw new CriticalAppError("Something went wrong on creating kingdom config. " + err.getMessage());
 		}
 	}

@@ -17,7 +17,7 @@ public class VillageConfigParser implements ConfigParser<VillageConfig> {
             ProducerConfig lumberjackConfig = createProducerConfig(json.getJSONObject("lumberjack"));
             return new VillageConfig(cowConfig, apiaryConfig, farmConfig, lumberjackConfig);
         }
-        catch (JSONException | AppError err) {
+        catch (AppError err) {
             throw new CriticalAppError("Something went wrong on creating village config. " + err.getMessage());
         }
     }

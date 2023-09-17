@@ -17,7 +17,7 @@ public class MountainConfigParser implements ConfigParser<MountainConfig> {
             ProducerConfig rubyMinerConfig = createProducerConfig(json.getJSONObject("ruby"));
             return new MountainConfig(saltMinerConfig, ironOreMinerConfig, rubyMinerConfig, sapphireMinerConfig);
         }
-        catch (JSONException | AppError err) {
+        catch (AppError err) {
             throw new CriticalAppError("Something went wrong on creating mountain config. " + err.getMessage());
         }
     }

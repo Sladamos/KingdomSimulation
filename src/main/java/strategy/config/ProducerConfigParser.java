@@ -17,7 +17,7 @@ public class ProducerConfigParser implements ConfigParser<ProducerConfig> {
             }
             return new ProducerConfig(numberOfItemsPerMinute);
         }
-        catch (JSONException err) {
+        catch (BasicAppError err) {
             throw new CriticalAppError("Something went wrong on creating producer config. " + err.getMessage());
         }
     }
