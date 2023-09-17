@@ -26,7 +26,7 @@ public class Warrior implements Human, InfantryUnit {
         this.defense = config.getDefense();
         this.hitPoints = config.getHealth();
         this.damageModifier = 1;
-        isAlive = true;
+        isAlive = !shouldBeKilled();
     }
 
     @Override
