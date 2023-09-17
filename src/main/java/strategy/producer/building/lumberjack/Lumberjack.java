@@ -1,25 +1,13 @@
 package strategy.producer.building.lumberjack;
 
+import strategy.producer.ProducerConfig;
 import strategy.producer.ZeroToOneProducer;
-import strategy.material.wood.Wood;
+import strategy.item.wood.Wood;
 import strategy.producer.building.Building;
+import strategy.storage.OneItemStorage;
 
 public abstract class Lumberjack<T extends Wood> extends ZeroToOneProducer<T>  implements Building {
-
-    public Lumberjack(int defaultStorageSize, double producingSpeed, int durability) {
-        super(defaultStorageSize, producingSpeed, durability);
-    }
-
-    public synchronized T getWood() {
-        return getItem();
-    }
-
-    public synchronized int getNumberOfWoodsInStorage() {
-        return getNumberOfItemsInStorage();
-    }
-
-    @Override
-    protected int getProducingTime() {
-        return 25000;
+    public Lumberjack(OneItemStorage<T> destinationStorage, ProducerConfig producerConfig) {
+        super(destinationStorage, producerConfig);
     }
 }

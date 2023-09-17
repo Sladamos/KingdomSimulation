@@ -1,34 +1,19 @@
 package strategy.producer.building.house;
 
-import strategy.organism.human.Child;
-import strategy.product.coin.Coin;
-import strategy.product.food.baking.bread.Bread;
-
-import java.util.function.Supplier;
+import strategy.item.coin.Coin;
+import strategy.item.food.baking.bread.Bread;
+import strategy.item.organism.human.Child;
+import strategy.producer.ProducerConfig;
+import strategy.storage.OneItemStorage;
 
 public class ChildHouse<T extends Coin, U extends Bread> extends House<T, U, Child> {
 
-	private static final int CHILD_HOUSE_DURABILITY = 100;
-
-	private static final int CHILD_HOUSE_PRODUCING_SPEED = 4;
-
-	public ChildHouse(Supplier<T> firstProducer, Supplier<U> secondProducer, int defaultStorageSize) {
-		super(firstProducer, secondProducer, defaultStorageSize, CHILD_HOUSE_PRODUCING_SPEED,
-				CHILD_HOUSE_DURABILITY);
+	public ChildHouse(OneItemStorage<T> firstSourceStorage, OneItemStorage<U> secondSourceStorage, OneItemStorage<Child> destinationStorage, ProducerConfig producerConfig) {
+		super(firstSourceStorage, secondSourceStorage, destinationStorage, producerConfig);
 	}
 
 	@Override
-	protected Child produceNewItem(T material, U secondMaterial) {
-		return new Child(0, 100);
-	}
-
-	@Override
-	protected Child produceNewItem() {
-		return new Child(0, 100);
-	}
-
-	@Override
-	protected int getProducingTime() {
-		return 50000;
+	protected Child createNewItem(T material, U secondMaterial) {
+		return new Child();
 	}
 }

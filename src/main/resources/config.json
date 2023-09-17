@@ -1,0 +1,218 @@
+{
+  "automatic_simulation": {
+    "first_kingdom_development": 50,
+    "second_kingdom_development": 25
+  },
+  "first_kingdom": {
+    "id": "Stronger",
+    "kingdom_type": "Sarrax",
+    "attack_time": 10,
+    "warriors": {
+      "number_of_units": 40,
+      "max_damage": 25,
+      "max_defense": 5,
+      "health": 100
+    },
+    "major_general": {
+      "warriors": {
+        "hapiness_damage_modifier": 2
+      }
+    },
+    "village": {
+      "cow": {
+        "items_per_minute": 12
+      },
+      "apiary": {
+        "items_per_minute": 6
+      },
+      "farm": {
+        "items_per_minute": 15
+      },
+      "lumberjack": {
+        "items_per_minute": 8
+      }
+    },
+    "mountain": {
+      "salt": {
+        "items_per_minute": 8
+      },
+      "iron_ore": {
+        "items_per_minute": 20
+      },
+      "ruby": {
+        "items_per_minute": 12
+      },
+      "sapphire": {
+        "items_per_minute": 14
+      }
+    },
+    "castle": {
+      "princess": {
+        "items_per_minute": 3
+      },
+      "queen": {
+        "items_per_minute": 5
+      },
+      "necklace_present_craftsman": {
+        "items_per_minute": 4
+      },
+      "ring_present_craftsman": {
+        "items_per_minute": 6
+      }
+    },
+    "settlement": {
+      "smelter": {
+        "items_per_minute": 15
+      },
+      "blacksmith": {
+        "items_per_minute": 12
+      },
+      "iron_bucket_artisan": {
+        "items_per_minute": 8
+      },
+      "wooden_bucket_artisan": {
+        "items_per_minute": 4
+      },
+      "mill": {
+        "items_per_minute": 15
+      },
+      "bakery": {
+        "items_per_minute": 20
+      },
+      "child_house": {
+        "items_per_minute": 6
+      },
+      "alchemist": {
+        "items_per_minute": 8
+      },
+      "water_well": {
+        "items_per_minute": 18
+      },
+      "golden_coin_well": {
+        "items_per_minute": 22
+      },
+      "ring_jeweller": {
+        "items_per_minute": 8
+      },
+      "necklace_jeweller": {
+        "items_per_minute": 12
+      },
+      "barracks": {
+        "military_producer": {
+          "items_per_minute": 4
+        },
+        "infantry": {
+          "damage": 14,
+          "defense": 7,
+          "health": 45
+        }
+      }
+    }
+  },
+  "second_kingdom": {
+    "id": "Weaker",
+    "kingdom_type": "Sarrax",
+    "attack_time": 7,
+    "warriors": {
+      "number_of_units": 35,
+      "max_damage": 20,
+      "max_defense": 7,
+      "health": 100
+    },
+    "major_general": {
+      "warriors": {
+        "hapiness_damage_modifier": 3
+      }
+    },
+    "village": {
+      "cow": {
+        "items_per_minute": 18
+      },
+      "apiary": {
+        "items_per_minute": 3
+      },
+      "farm": {
+        "items_per_minute": 13
+      },
+      "lumberjack": {
+        "items_per_minute": 6
+      }
+    },
+    "mountain": {
+      "salt": {
+        "items_per_minute": 12
+      },
+      "iron_ore": {
+        "items_per_minute": 14
+      },
+      "ruby": {
+        "items_per_minute": 8
+      },
+      "sapphire": {
+        "items_per_minute": 10
+      }
+    },
+    "castle": {
+      "princess": {
+        "items_per_minute": 4
+      },
+      "queen": {
+        "items_per_minute": 3
+      },
+      "necklace_present_craftsman": {
+        "items_per_minute": 2
+      },
+      "ring_present_craftsman": {
+        "items_per_minute": 7
+      }
+    },
+    "settlement": {
+      "smelter": {
+        "items_per_minute": 18
+      },
+      "blacksmith": {
+        "items_per_minute": 7
+      },
+      "iron_bucket_artisan": {
+        "items_per_minute": 6
+      },
+      "wooden_bucket_artisan": {
+        "items_per_minute": 6
+      },
+      "mill": {
+        "items_per_minute": 14
+      },
+      "bakery": {
+        "items_per_minute": 22
+      },
+      "child_house": {
+        "items_per_minute": 3
+      },
+      "alchemist": {
+        "items_per_minute": 5
+      },
+      "water_well": {
+        "items_per_minute": 14
+      },
+      "golden_coin_well": {
+        "items_per_minute": 25
+      },
+      "ring_jeweller": {
+        "items_per_minute": 12
+      },
+      "necklace_jeweller": {
+        "items_per_minute": 6
+      },
+      "barracks": {
+        "military_producer": {
+          "items_per_minute": 2
+        },
+        "infantry": {
+          "damage": 18,
+          "defense": 5,
+          "health": 65
+        }
+      }
+    }
+  }
+}

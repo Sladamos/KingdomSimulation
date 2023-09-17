@@ -1,19 +1,17 @@
 package strategy.producer.building.livestock;
 
-import strategy.material.food.Honey;
+import strategy.item.food.Honey;
+import strategy.producer.ProducerConfig;
+import strategy.storage.OneItemStorage;
 
 public class Apiary extends LivestockAnimal<Honey> {
 
-	private static final int APIARY_DURABILITY = 40;
-
-	private static final int APIARY_PRODUCING_SPEED = 2;
-
-	public Apiary(int defaultStorageSize) {
-		super(defaultStorageSize, APIARY_PRODUCING_SPEED, APIARY_DURABILITY);
+	public Apiary(OneItemStorage<Honey> destinationStorage, ProducerConfig producerConfig) {
+		super(destinationStorage, producerConfig);
 	}
 
 	@Override
-	protected Honey produceNewItem() {
+	protected Honey createNewItem() {
 		return new Honey();
 	}
 }

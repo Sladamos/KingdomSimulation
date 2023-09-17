@@ -1,6 +1,11 @@
 package strategy.location.village;
 
-import strategy.producer.Producer;
+import strategy.item.fluid.Water;
+import strategy.item.food.Honey;
+import strategy.item.food.Milk;
+import strategy.item.plant.Wheat;
+import strategy.item.wood.Mahogany;
+import strategy.message.JSONMessage;
 import strategy.producer.building.farm.Farm;
 import strategy.producer.building.farm.WheatFarm;
 import strategy.producer.building.livestock.Apiary;
@@ -8,17 +13,10 @@ import strategy.producer.building.livestock.Cow;
 import strategy.producer.building.livestock.LivestockAnimal;
 import strategy.producer.building.lumberjack.Lumberjack;
 import strategy.producer.building.lumberjack.MahoganyLumberjack;
-import strategy.material.food.Honey;
-import strategy.material.food.Milk;
-import strategy.material.plant.Wheat;
-import strategy.material.wood.Mahogany;
-import strategy.product.fluid.Water;
+import strategy.storage.OneItemStorage;
 
-import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-import java.util.function.Supplier;
 
 public class SarraxVillage implements Village {
 
@@ -32,32 +30,13 @@ public class SarraxVillage implements Village {
 
 	private final ExecutorService executorService;
 
-	public SarraxVillage() {
-		cow = new Cow(0);
-		apiary = new Apiary(0);
-		farm = new WheatFarm(null, 0);
-		lumberjack = new MahoganyLumberjack(0);
+	public SarraxVillage(VillageStorageManager villageStorageManager, OneItemStorage<Water> waterStorage,
+						 VillageConfig villageConfig) {
+		cow = new Cow(villageStorageManager.getMilkStorage(), villageConfig.getCowConfig());
+		apiary = new Apiary(villageStorageManager.getHoneyStorage(), villageConfig.getApiaryConfig());
+		farm = new WheatFarm(waterStorage, villageStorageManager.getWheatStorage(), villageConfig.getFarmConfig());
+		lumberjack = new MahoganyLumberjack(villageStorageManager.getMahoganyStorage(), villageConfig.getLumberjackConfig());
 		executorService = Executors.newFixedThreadPool(4);
-	}
-
-	public void setWaterProducer(Supplier<Water> waterProducer) {
-		farm.setProducer(waterProducer);
-	}
-
-	public Wheat getWheat() {
-		return farm.getPlant();
-	}
-
-	public Milk getMilk() {
-		return cow.getFood();
-	}
-
-	public Honey getHoney() {
-		return apiary.getFood();
-	}
-
-	public Mahogany getWood() {
-		return lumberjack.getWood();
 	}
 
 	@Override
@@ -75,5 +54,10 @@ public class SarraxVillage implements Village {
 		farm.terminate();
 		lumberjack.terminate();
 		executorService.shutdownNow();
+	}
+
+	private void onMessageReceived(JSONMessage message) {
+		message.put("sender", "village");
+		//invoke
 	}
 }

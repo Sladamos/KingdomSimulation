@@ -1,19 +1,14 @@
 package strategy.producer.building.artisan.bucket;
 
+import strategy.item.Item;
+import strategy.item.tool.bucket.Bucket;
+import strategy.producer.ProducerConfig;
 import strategy.producer.building.artisan.Artisan;
-import strategy.material.Material;
-import strategy.product.tool.bucket.Bucket;
+import strategy.storage.OneItemStorage;
 
-import java.util.function.Supplier;
+public abstract class BucketArtisan<T extends Item, U extends Bucket> extends Artisan<T, U> {
 
-public abstract class BucketArtisan<T extends Material, U extends Bucket> extends Artisan<T, U> {
-
-    public BucketArtisan(Supplier<T> materialProducer, int defaultStorageSize, double craftingSpeed, int durability) {
-        super(materialProducer, defaultStorageSize, craftingSpeed, durability);
-    }
-
-    @Override
-    protected int getProducingTime() {
-        return 24000;
+    public BucketArtisan(OneItemStorage<T> sourceStorage, OneItemStorage<U> destinationStorage, ProducerConfig producerConfig) {
+        super(sourceStorage, destinationStorage, producerConfig);
     }
 }

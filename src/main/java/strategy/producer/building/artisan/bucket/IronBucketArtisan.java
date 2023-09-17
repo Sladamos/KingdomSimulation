@@ -1,28 +1,18 @@
 package strategy.producer.building.artisan.bucket;
 
-import strategy.material.bar.IronBar;
-import strategy.product.tool.bucket.IronBucket;
-
-import java.util.function.Supplier;
+import strategy.item.bar.IronBar;
+import strategy.item.tool.bucket.IronBucket;
+import strategy.producer.ProducerConfig;
+import strategy.storage.OneItemStorage;
 
 public class IronBucketArtisan extends BucketArtisan<IronBar, IronBucket> {
 
-    private static final int IRON_BUCKET_ARTISAN_DURABILITY = 100;
-
-    private static final int IRON_BUCKET_ARTISAN_CRAFTING_SPEED = 3;
-
-    public IronBucketArtisan(Supplier<IronBar> materialProducer, int defaultStorageSize) {
-        super(materialProducer, defaultStorageSize,
-                IRON_BUCKET_ARTISAN_CRAFTING_SPEED, IRON_BUCKET_ARTISAN_DURABILITY);
+    public IronBucketArtisan(OneItemStorage<IronBar> sourceStorage, OneItemStorage<IronBucket> destinationStorage, ProducerConfig producerConfig) {
+        super(sourceStorage, destinationStorage, producerConfig);
     }
 
     @Override
-    protected IronBucket produceNewItem(IronBar material) {
+    protected IronBucket createNewItem(IronBar material) {
         return new IronBucket(material);
-    }
-
-    @Override
-    protected IronBucket produceNewItem() {
-        return new IronBucket();
     }
 }

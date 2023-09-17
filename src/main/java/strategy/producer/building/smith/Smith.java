@@ -1,20 +1,16 @@
 package strategy.producer.building.smith;
 
+import strategy.item.Item;
+import strategy.item.weapon.Weapon;
 import strategy.producer.OneToOneProducer;
-import strategy.material.Material;
+import strategy.producer.ProducerConfig;
 import strategy.producer.building.Building;
-import strategy.product.weapon.Weapon;
+import strategy.storage.OneItemStorage;
 
-import java.util.function.Supplier;
+public abstract class Smith <T extends Item, U extends Weapon> extends OneToOneProducer<T, U>  implements Building {
 
-public abstract class Smith <T extends Material, U extends Weapon> extends OneToOneProducer<T, U>  implements Building {
-
-    public Smith(Supplier<T> producer, int defaultStorageSize, double producingSpeed, int durability) {
-        super(producer, defaultStorageSize, producingSpeed, durability);
-    }
-
-    public synchronized U getWeapon() {
-        return getItem();
+    public Smith(OneItemStorage<T> sourceStorage, OneItemStorage<U> destinationStorage, ProducerConfig producerConfig) {
+        super(sourceStorage, destinationStorage, producerConfig);
     }
 }
 

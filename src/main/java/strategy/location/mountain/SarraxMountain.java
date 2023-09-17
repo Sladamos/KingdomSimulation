@@ -1,15 +1,12 @@
 package strategy.location.mountain;
 
+import strategy.item.mineral.Salt;
+import strategy.item.mineral.gem.Sapphire;
 import strategy.producer.building.miner.advanced.SarraxMiner;
 import strategy.producer.building.miner.basic.*;
-import strategy.material.mineral.Salt;
-import strategy.material.mineral.gem.Ruby;
-import strategy.material.mineral.gem.Sapphire;
-import strategy.material.mineral.ore.IronOre;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 public class SarraxMountain implements Mountain, Runnable {
 
@@ -21,11 +18,17 @@ public class SarraxMountain implements Mountain, Runnable {
 
     private final ExecutorService executorService;
 
-    public SarraxMountain() {
-        saltMiner = new SaltMiner(0);
-        sapphireMiner = new SapphireMiner(0);
-        sarraxMiner = new SarraxMiner();
+    public SarraxMountain(MountainStorageManager mountainStorageManager, MountainConfig mountainConfig) {
+        saltMiner = new SaltMiner(mountainStorageManager.getSaltStorage(), mountainConfig.getSaltMinerConfig());
+        sapphireMiner = new SapphireMiner(mountainStorageManager.getSapphireStorage(), mountainConfig.getSapphireMinerConfig());
+        sarraxMiner = createSarraxMiner(mountainStorageManager, mountainConfig);
         executorService = Executors.newFixedThreadPool(3);
+    }
+
+    private SarraxMiner createSarraxMiner(MountainStorageManager mountainStorageManager, MountainConfig mountainConfig) {
+        IronMiner ironMiner = new IronMiner(mountainStorageManager.getIronOreStorage(), mountainConfig.getIronOreMinerConfig());
+        RubyMiner rubyMiner = new RubyMiner(mountainStorageManager.getRubyStorage(), mountainConfig.getRubyMinerConfig());
+        return new SarraxMiner(ironMiner, rubyMiner);
     }
 
     @Override
@@ -33,22 +36,6 @@ public class SarraxMountain implements Mountain, Runnable {
         executorService.execute(saltMiner);
         executorService.execute(sarraxMiner);
         executorService.execute(sapphireMiner);
-    }
-
-    public Salt getSalt() {
-        return saltMiner.getMineral();
-    }
-
-    public Sapphire getSapphire() {
-        return sapphireMiner.getMineral();
-    }
-
-    public Ruby getRuby() {
-        return sarraxMiner.getRuby();
-    }
-
-    public IronOre getIronOre() {
-        return sarraxMiner.getIronOre();
     }
 
     @Override

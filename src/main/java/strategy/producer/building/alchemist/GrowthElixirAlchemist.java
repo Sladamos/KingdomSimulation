@@ -1,29 +1,20 @@
 package strategy.producer.building.alchemist;
 
-import strategy.material.food.Honey;
-import strategy.material.food.Milk;
-import strategy.product.elixir.GrowthElixir;
-
-import java.util.function.Supplier;
+import strategy.item.elixir.GrowthElixir;
+import strategy.item.food.Honey;
+import strategy.item.food.Milk;
+import strategy.producer.ProducerConfig;
+import strategy.storage.OneItemStorage;
 
 public class GrowthElixirAlchemist extends Alchemist<Milk, Honey, GrowthElixir> {
 
-	private static final int GROWTH_ELIXIR_ALCHEMIST_DURABILITY = 100;
-
-	private static final int GROWTH_ELIXIR_ALCHEMIST_BREWING_SPEED = 2;
-
-	public GrowthElixirAlchemist(Supplier<Milk> firstProducer, Supplier<Honey> secondProducer, int defaultStorageSize) {
-		super(firstProducer, secondProducer, defaultStorageSize,
-				GROWTH_ELIXIR_ALCHEMIST_BREWING_SPEED, GROWTH_ELIXIR_ALCHEMIST_DURABILITY);
+	public GrowthElixirAlchemist(OneItemStorage<Milk> firstSourceStorage, OneItemStorage<Honey> secondSourceStorage,
+								 OneItemStorage<GrowthElixir> destinationStorage, ProducerConfig producerConfig) {
+		super(firstSourceStorage, secondSourceStorage, destinationStorage, producerConfig);
 	}
 
 	@Override
-	protected GrowthElixir produceNewItem(Milk material, Honey secondMaterial) {
-		return new GrowthElixir();
-	}
-
-	@Override
-	protected GrowthElixir produceNewItem() {
+	protected GrowthElixir createNewItem(Milk firstMaterial, Honey secondMaterial) {
 		return new GrowthElixir();
 	}
 }

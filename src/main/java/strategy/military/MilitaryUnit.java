@@ -1,7 +1,8 @@
 package strategy.military;
 
-import strategy.organism.mechanisms.fight.Fightable;
+import strategy.item.Item;
+import strategy.military.mechanism.fight.Fightable;
 
-public interface MilitaryUnit extends Fightable {
-    Integer getDamage();
+public interface MilitaryUnit extends Fightable, Item {
+	void setDamageModifier(int damageModifier);
 }

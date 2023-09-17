@@ -1,18 +1,18 @@
 package strategy.producer.building.craftsman.present;
 
-import strategy.product.jewellery.ring.Ring;
-import strategy.product.present.RingPresent;
-
-import java.util.function.Supplier;
+import strategy.item.jewellery.ring.Ring;
+import strategy.item.present.RingPresent;
+import strategy.producer.ProducerConfig;
+import strategy.storage.OneItemStorage;
 
 public class RingPresentCraftsman<T extends Ring> extends PresentCraftsman<T, RingPresent> {
 
-	public RingPresentCraftsman(Supplier<T> producer, int defaultStorageSize) {
-		super(producer, defaultStorageSize);
+	public RingPresentCraftsman(OneItemStorage<T> sourceStorage, OneItemStorage<RingPresent> destinationStorage, ProducerConfig producerConfig) {
+		super(sourceStorage, destinationStorage, producerConfig);
 	}
 
 	@Override
-	protected RingPresent produceNewItem() {
+	protected RingPresent createNewItem(T material) {
 		return new RingPresent();
 	}
 }

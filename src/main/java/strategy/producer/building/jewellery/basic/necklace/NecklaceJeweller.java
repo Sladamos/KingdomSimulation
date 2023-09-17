@@ -1,19 +1,14 @@
 package strategy.producer.building.jewellery.basic.necklace;
 
+import strategy.item.Item;
+import strategy.item.jewellery.necklace.Necklace;
+import strategy.producer.ProducerConfig;
 import strategy.producer.building.jewellery.basic.Jeweller;
-import strategy.material.Material;
-import strategy.product.jewellery.necklace.Necklace;
+import strategy.storage.OneItemStorage;
 
-import java.util.function.Supplier;
+public abstract class NecklaceJeweller<T extends Item, U extends Necklace> extends Jeweller<T, U> {
 
-public abstract class NecklaceJeweller<T extends Material, U extends Necklace> extends Jeweller<T, U> {
-
-	public NecklaceJeweller(Supplier<T> materialProducer, int defaultStorageSize, double craftingSpeed, int durability) {
-		super(materialProducer, defaultStorageSize, craftingSpeed, durability);
-	}
-
-	@Override
-	protected int getProducingTime() {
-		return 50000;
+	public NecklaceJeweller(OneItemStorage<T> sourceStorage, OneItemStorage<U> destinationStorage, ProducerConfig producerConfig) {
+		super(sourceStorage, destinationStorage, producerConfig);
 	}
 }

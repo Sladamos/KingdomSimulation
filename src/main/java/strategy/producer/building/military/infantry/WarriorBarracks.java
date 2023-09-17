@@ -1,29 +1,29 @@
 package strategy.producer.building.military.infantry;
 
-import strategy.military.infantry.Warrior;
-import strategy.organism.human.Adult;
-import strategy.product.weapon.meele.sword.Sword;
+import strategy.initializer.military.RandomWarriorsInitializer;
+import strategy.initializer.military.WarriorsInitializer;
+import strategy.military.MilitaryUnit;
+import strategy.military.infantry.InfantryUnit;
+import strategy.military.infantry.warrior.Warrior;
+import strategy.military.infantry.warrior.WarriorConfig;
+import strategy.item.organism.human.Adult;
+import strategy.item.weapon.meele.sword.Sword;
+import strategy.storage.OneItemStorage;
 
-import java.util.function.Supplier;
+public class WarriorBarracks<T extends Sword> extends Barracks<Adult, T> {
 
-public class WarriorBarracks<T extends Sword> extends Barracks<Adult, T, Warrior> {
+	private final WarriorConfig warriorConfig;
+	private final WarriorsInitializer warriorsInitializer;
 
-	private static final int WARRIOR_BARRACKS_DURABILITY = 500;
-
-	private static final int WARRIOR_BARRACKS_TRAINING_SPEED = 5;
-
-	public WarriorBarracks(Supplier<Adult> firstProducer, Supplier<T> secondProducer, int defaultStorageSize) {
-		super(firstProducer, secondProducer, defaultStorageSize, WARRIOR_BARRACKS_TRAINING_SPEED,
-				WARRIOR_BARRACKS_DURABILITY);
+	public WarriorBarracks(OneItemStorage<Adult> firstSourceStorage, OneItemStorage<T> secondSourceStorage,
+						   OneItemStorage<MilitaryUnit> destinationStorage, BarracksConfig<WarriorConfig> barracksConfig) {
+		super(firstSourceStorage, secondSourceStorage, destinationStorage, barracksConfig.getMilitaryProducerConfig());
+		warriorConfig = barracksConfig.getInfantryConfig();
+		warriorsInitializer = new RandomWarriorsInitializer();
 	}
 
 	@Override
-	protected Warrior produceNewItem(Adult material, T secondMaterial) {
-		return new Warrior(10, 5);
-	}
-
-	@Override
-	protected Warrior produceNewItem() {
-		return new Warrior(15, 5);
+	protected Warrior createNewItem(Adult material, T secondMaterial) {
+		return warriorsInitializer.createWarrior(warriorConfig);
 	}
 }

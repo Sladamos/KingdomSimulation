@@ -1,18 +1,18 @@
 package strategy.producer.building.craftsman.present;
 
-import strategy.product.jewellery.necklace.Necklace;
-import strategy.product.present.NecklacePresent;
-
-import java.util.function.Supplier;
+import strategy.item.jewellery.necklace.Necklace;
+import strategy.item.present.NecklacePresent;
+import strategy.producer.ProducerConfig;
+import strategy.storage.OneItemStorage;
 
 public class NecklacePresentCraftsman<T extends Necklace> extends PresentCraftsman<T, NecklacePresent> {
 
-	public NecklacePresentCraftsman(Supplier<T> producer, int defaultStorageSize) {
-		super(producer, defaultStorageSize);
+	public NecklacePresentCraftsman(OneItemStorage<T> sourceStorage, OneItemStorage<NecklacePresent> destinationStorage, ProducerConfig producerConfig) {
+		super(sourceStorage, destinationStorage, producerConfig);
 	}
 
 	@Override
-	protected NecklacePresent produceNewItem() {
+	protected NecklacePresent createNewItem(T material) {
 		return new NecklacePresent();
 	}
 }

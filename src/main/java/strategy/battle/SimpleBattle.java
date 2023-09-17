@@ -1,58 +1,61 @@
 package strategy.battle;
 
 import strategy.kingdom.Kingdom;
-import strategy.military.ArmyDestroyedException;
+import strategy.message.StringMessage;
+import strategy.message.notifier.MessagesNotifier;
+import strategy.message.receiver.MessagesReceiver;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class SimpleBattle implements Battle {
 
-    private final Kingdom firstKingdom;
+	private final Kingdom firstKingdom;
 
-    private final Kingdom secondKingdom;
+	private final Kingdom secondKingdom;
 
-    private boolean areFighting;
+	private final MessagesNotifier<StringMessage> messagesNotifier;
 
-    public SimpleBattle(Kingdom firstKingdom, Kingdom secondKingdom) {
-        this.firstKingdom = firstKingdom;
-        this.secondKingdom = secondKingdom;
-        areFighting = false;
-    }
+	private final ExecutorService executor;
 
-    @Override
-    public void run() {
-        areFighting = true;
-        while(areFighting) {
-            firstAttack();
-            if(areFighting) {
-                secondAttack();
-            }
-        }
-    }
+	public SimpleBattle(Kingdom firstKingdom, Kingdom secondKingdom, MessagesNotifier<StringMessage> messagesNotifier) {
+		this.firstKingdom = firstKingdom;
+		this.secondKingdom = secondKingdom;
+		this.messagesNotifier = messagesNotifier;
+		executor = Executors.newCachedThreadPool();
+	}
 
-    private void firstAttack() {
-        try {
-            Thread.sleep(10000);
-            System.out.println("First kingdom attacked");
-            firstKingdom.attack(secondKingdom);
-        } catch (ArmyDestroyedException ignored) {
-            System.out.println("First kingdom won the battle");
-            areFighting = false;
-        } catch (Exception ignored) {
-            areFighting = false;
-        }
+	@Override
+	public void run() {
+		AttackSimulator firstAttackSimulator = new SimpleAttackSimulator(firstKingdom, secondKingdom, messagesNotifier);
+		AttackSimulator secondAttackSimulator = new SimpleAttackSimulator(secondKingdom, firstKingdom, messagesNotifier);
+		executor.execute(firstAttackSimulator::simulateAttacking);
+		executor.execute(secondAttackSimulator::simulateAttacking);
+		waitForBattleEnd();
+		messagesNotifier.removeListeners();
+	}
 
-    }
+	private void waitForBattleEnd() {
+		executor.shutdown();
+		try {
+			executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+		} catch (Exception ignored) {
+		}
+	}
 
-    private void secondAttack() {
-        try {
-            Thread.sleep(10000);
-            System.out.println("Second kingdom attacked");
-            secondKingdom.attack(firstKingdom);
-        } catch (ArmyDestroyedException ignored) {
-            System.out.println("Second kingdom won the battle");
-            areFighting = false;
-        } catch (Exception ignored) {
-            areFighting = false;
-        }
-    }
+	@Override
+	public void addListener(MessagesReceiver<StringMessage> messagesReceiver) {
+		messagesNotifier.addListener(messagesReceiver);
+	}
 
+	@Override
+	public void removeListeners() {
+		messagesNotifier.removeListeners();
+	}
+
+	@Override
+	public void accept(StringMessage message) {
+		messagesNotifier.accept(message);
+	}
 }

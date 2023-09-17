@@ -1,7 +1,22 @@
 package strategy.location.settlement;
 
-import strategy.military.infantry.Warrior;
-import strategy.organism.human.Child;
+import strategy.item.bar.IronBar;
+import strategy.item.coin.GoldenCoin;
+import strategy.item.elixir.GrowthElixir;
+import strategy.item.flour.WheatFlour;
+import strategy.item.food.Honey;
+import strategy.item.food.Milk;
+import strategy.item.food.baking.bread.WheatBread;
+import strategy.item.mineral.Salt;
+import strategy.item.mineral.ore.IronOre;
+import strategy.item.organism.human.Adult;
+import strategy.item.plant.Wheat;
+import strategy.item.tool.bucket.IronBucket;
+import strategy.item.tool.bucket.WoodenBucket;
+import strategy.item.weapon.meele.sword.IronSword;
+import strategy.item.wood.Mahogany;
+import strategy.location.mountain.MountainStorageManager;
+import strategy.location.village.VillageStorageManager;
 import strategy.producer.building.alchemist.Alchemist;
 import strategy.producer.building.alchemist.GrowthElixirAlchemist;
 import strategy.producer.building.artisan.Artisan;
@@ -11,6 +26,8 @@ import strategy.producer.building.bakery.Bakery;
 import strategy.producer.building.bakery.bread.WheatBreadBakery;
 import strategy.producer.building.house.ChildHouse;
 import strategy.producer.building.jewellery.advanced.SarraxJeweller;
+import strategy.producer.building.jewellery.basic.necklace.RubyNecklaceJeweller;
+import strategy.producer.building.jewellery.basic.ring.SapphireRingJeweller;
 import strategy.producer.building.military.infantry.WarriorBarracks;
 import strategy.producer.building.mill.Mill;
 import strategy.producer.building.mill.WheatMill;
@@ -19,31 +36,12 @@ import strategy.producer.building.smelter.Smelter;
 import strategy.producer.building.smith.meele.Blacksmith;
 import strategy.producer.building.smith.meele.IronSwordBlacksmith;
 import strategy.producer.building.well.advanced.SarraxWell;
-import strategy.location.mountain.SarraxMountain;
-import strategy.location.village.SarraxVillage;
-import strategy.material.bar.IronBar;
-import strategy.material.food.Honey;
-import strategy.material.food.Milk;
-import strategy.material.mineral.Salt;
-import strategy.material.mineral.ore.IronOre;
-import strategy.material.plant.Wheat;
-import strategy.material.wood.Mahogany;
-import strategy.organism.human.Adult;
-import strategy.product.coin.GoldenCoin;
-import strategy.product.elixir.GrowthElixir;
-import strategy.product.flour.WheatFlour;
-import strategy.product.fluid.Water;
-import strategy.product.food.baking.bread.WheatBread;
-import strategy.product.jewellery.necklace.RubyNecklace;
-import strategy.product.jewellery.ring.SapphireRing;
-import strategy.product.tool.bucket.IronBucket;
-import strategy.product.tool.bucket.WoodenBucket;
-import strategy.product.weapon.meele.sword.IronSword;
+import strategy.producer.building.well.basic.GoldenCoinWell;
+import strategy.producer.building.well.basic.WaterWell;
+import strategy.storage.OneItemStorage;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-import java.util.function.Supplier;
 
 public class SarraxSettlement implements Settlement {
 
@@ -71,51 +69,58 @@ public class SarraxSettlement implements Settlement {
 
 	private final ExecutorService executorService;
 
-	public SarraxSettlement(SarraxMountain mountain, SarraxVillage village) {
-		ironBarSmelter = new IronBarSmelter(mountain::getIronOre, 0);
-		blacksmith = new IronSwordBlacksmith(ironBarSmelter::getBar, 0);
-		barracks = new WarriorBarracks<>(null, blacksmith::getWeapon, 0);
+	public SarraxSettlement(SettlementStorageManager settlementStorageManager,
+							VillageStorageManager villageStorageManager,
+							MountainStorageManager mountainStorageManager,
+							OneItemStorage<Adult> adultStorage,
+							SettlementConfig settlementConfig) {
+		ironBarSmelter = new IronBarSmelter(mountainStorageManager.getIronOreStorage(),
+				settlementStorageManager.getIronBarStorage(), settlementConfig.getSmelterConfig());
 
-		ironBucketArtisan = new IronBucketArtisan(ironBarSmelter::getBar, 0);
-		woodenBucketArtisan = new WoodenBucketArtisan(village::getWood, 0);
-		well = new SarraxWell(woodenBucketArtisan::getTool, ironBucketArtisan::getTool);
+		blacksmith = new IronSwordBlacksmith(settlementStorageManager.getIronBarStorage(),
+				settlementStorageManager.getIronSwordStorage(), settlementConfig.getBlacksmithConfig());
 
-		wheatMill = new WheatMill(village::getWheat, 0);
-		bakery = new WheatBreadBakery(wheatMill::getFlour, mountain::getSalt, 0);
-		childHouse = new ChildHouse<>(well::getGoldenCoin, bakery::getBaking, 0);
+		barracks = new WarriorBarracks<>(adultStorage, settlementStorageManager.getIronSwordStorage(),
+				settlementStorageManager.getWarriorsStorage(), settlementConfig.getBarracksConfig());
 
-		jeweller = new SarraxJeweller(mountain::getRuby, mountain::getSapphire);
-		alchemist = new GrowthElixirAlchemist(village::getMilk, village::getHoney, 0);
+		ironBucketArtisan = new IronBucketArtisan(settlementStorageManager.getIronBarStorage(),
+				settlementStorageManager.getIronBucketStorage(), settlementConfig.getIronBucketArtisanConfig());
+
+		woodenBucketArtisan = new WoodenBucketArtisan(villageStorageManager.getMahoganyStorage(),
+				settlementStorageManager.getWoodenBucketStorage(), settlementConfig.getWoodenBucketArtisanConfig());
+
+		well = createSarraxWell(settlementStorageManager, settlementConfig);
+
+		wheatMill = new WheatMill(villageStorageManager.getWheatStorage(),
+				settlementStorageManager.getWheatFlourStorage(), settlementConfig.getMillConfig());
+
+		bakery = new WheatBreadBakery(settlementStorageManager.getWheatFlourStorage(), mountainStorageManager.getSaltStorage(),
+				settlementStorageManager.getWheatBreadStorage(), settlementConfig.getBakeryConfig());
+
+		childHouse = new ChildHouse<>(settlementStorageManager.getGoldenCoinStorage(), settlementStorageManager.getWheatBreadStorage(),
+				settlementStorageManager.getChildStorage(), settlementConfig.getChildHouseConfig());
+
+		jeweller = createSarraxJeweller(mountainStorageManager, settlementStorageManager, settlementConfig);
+
+		alchemist = new GrowthElixirAlchemist(villageStorageManager.getMilkStorage(), villageStorageManager.getHoneyStorage(),
+				settlementStorageManager.getGrowthElixirStorage(), settlementConfig.getAlchemistConfig());
 
 		executorService = Executors.newFixedThreadPool(11);
 	}
 
-	public Water getWater() {
-		return well.getWater();
+	private SarraxWell createSarraxWell(SettlementStorageManager settlementStorageManager, SettlementConfig settlementConfig) {
+		WaterWell waterWell = new WaterWell(settlementStorageManager.getIronBucketStorage(), settlementStorageManager.getWaterStorage(), settlementConfig.getWaterWellConfig());
+		GoldenCoinWell goldenCoinWell = new GoldenCoinWell(settlementStorageManager.getWoodenBucketStorage(), settlementStorageManager.getGoldenCoinStorage(), settlementConfig.goldenCoinWellConfig);
+		return new SarraxWell(waterWell, goldenCoinWell);
 	}
 
-	public GrowthElixir getGrowthElixir() {
-		return alchemist.getElixir();
-	}
-
-	public Child getChild() {
-		return childHouse.getHuman();
-	}
-
-	public Warrior getWarrior() {
-		return barracks.getMilitaryUnit();
-	}
-
-	public RubyNecklace getRubyNecklace() {
-		return jeweller.getRubyNecklace();
-	}
-
-	public SapphireRing getSapphireRing() {
-		return jeweller.getSapphireRing();
-	}
-
-	public void setAdultsProducer(Supplier<Adult> adultsProducer) {
-		barracks.setFirstProducer(adultsProducer);
+	private SarraxJeweller createSarraxJeweller(MountainStorageManager mountainStorageManager,
+												SettlementStorageManager settlementStorageManager, SettlementConfig settlementConfig) {
+		SapphireRingJeweller sapphireRingJeweller = new SapphireRingJeweller(mountainStorageManager.getSapphireStorage(),
+				settlementStorageManager.getSapphireRingStorage(), settlementConfig.getRingJewellerConfig());
+		RubyNecklaceJeweller rubyNecklaceJeweller = new RubyNecklaceJeweller(mountainStorageManager.getRubyStorage(),
+				settlementStorageManager.getRubyNecklaceStorage(), settlementConfig.getNecklaceJewellerConfig());
+		return new SarraxJeweller(sapphireRingJeweller, rubyNecklaceJeweller);
 	}
 
 	@Override

@@ -1,20 +1,16 @@
 package strategy.producer.building.jewellery.basic;
 
+import strategy.item.Item;
+import strategy.item.jewellery.Jewellery;
 import strategy.producer.OneToOneProducer;
-import strategy.material.Material;
+import strategy.producer.ProducerConfig;
 import strategy.producer.building.Building;
-import strategy.product.jewellery.Jewellery;
+import strategy.storage.OneItemStorage;
 
-import java.util.function.Supplier;
+public abstract class Jeweller<T extends Item, U extends Jewellery> extends OneToOneProducer<T, U>  implements Building {
 
-public abstract class Jeweller<T extends Material, U extends Jewellery> extends OneToOneProducer<T, U>  implements Building {
-
-	public Jeweller(Supplier<T> producer, int defaultStorageSize, double producingSpeed, int durability) {
-		super(producer, defaultStorageSize, producingSpeed, durability);
-	}
-
-	public synchronized U getJewellery() {
-		return getItem();
+	public Jeweller(OneItemStorage<T> sourceStorage, OneItemStorage<U> destinationStorage, ProducerConfig producerConfig) {
+		super(sourceStorage, destinationStorage, producerConfig);
 	}
 }
 
