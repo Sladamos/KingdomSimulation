@@ -3,7 +3,7 @@ package strategy.app;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import strategy.Config;
-import strategy.simulation.SimulationType;
+import strategy.simulation.type.SimulationType;
 
 @AllArgsConstructor
 @Getter

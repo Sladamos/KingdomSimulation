@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import strategy.error.BasicAppError;
-import strategy.simulation.SimulationType;
+import strategy.simulation.type.SimulationType;
 import strategy.simulation.type.SimulationTypeParser;
 import strategy.simulation.type.SimulationTypeParserImpl;
 

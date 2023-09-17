@@ -1,11 +1,10 @@
 package strategy.config;
 
-import org.json.JSONException;
 import strategy.app.AppConfig;
 import strategy.error.BasicAppError;
 import strategy.error.CriticalAppError;
 import strategy.json.JSON;
-import strategy.simulation.SimulationType;
+import strategy.simulation.type.SimulationType;
 import strategy.simulation.type.SimulationTypeParser;
 import strategy.simulation.type.SimulationTypeParserImpl;
 

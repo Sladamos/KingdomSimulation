@@ -9,7 +9,7 @@ import strategy.initializer.simulation.SimulationInitializer;
 import strategy.json.JSON;
 import strategy.json.FileJsonLoader;
 import strategy.json.FileJsonLoaderImpl;
-import strategy.simulation.SimulationType;
+import strategy.simulation.type.SimulationType;
 
 import java.util.HashMap;
 import java.util.Map;

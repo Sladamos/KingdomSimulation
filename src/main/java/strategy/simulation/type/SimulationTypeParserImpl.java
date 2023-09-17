@@ -1,7 +1,6 @@
 package strategy.simulation.type;
 
 import strategy.error.BasicAppError;
-import strategy.simulation.SimulationType;
 
 import java.util.HashMap;
 import java.util.Map;
