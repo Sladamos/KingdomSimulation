@@ -19,9 +19,6 @@ import strategy.location.village.VillageConfig;
 import strategy.util.Time;
 import strategy.util.TimeImpl;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class KingdomConfigParser implements ConfigParser<KingdomConfig> {
 
 	@Override

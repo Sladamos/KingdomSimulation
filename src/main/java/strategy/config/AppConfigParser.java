@@ -6,18 +6,10 @@ import strategy.error.BasicAppError;
 import strategy.error.CriticalAppError;
 import strategy.json.JSON;
 import strategy.simulation.SimulationType;
-
-import java.util.HashMap;
-import java.util.Map;
+import strategy.simulation.type.SimulationTypeParser;
+import strategy.simulation.type.SimulationTypeParserImpl;
 
 public class AppConfigParser implements ConfigParser<AppConfig> {
-
-    private final Map<String, SimulationType> simulationTypes;
-
-    public AppConfigParser() {
-        simulationTypes = new HashMap<>();
-        simulationTypes.put("automatic", SimulationType.AUTOMATIC);
-    }
 
     @Override
     public AppConfig createConfig(JSON json) {
@@ -31,9 +23,7 @@ public class AppConfigParser implements ConfigParser<AppConfig> {
     }
 
     private SimulationType getSimulationType(String strSimulationType) {
-        if(!simulationTypes.containsKey(strSimulationType)) {
-            throw new BasicAppError("Incorrect simulation type!");
-        }
-        return simulationTypes.get(strSimulationType);
+        SimulationTypeParser parser = new SimulationTypeParserImpl();
+        return parser.parse(strSimulationType);
     }
 }

@@ -15,10 +15,10 @@ public class KingdomTypeParserImpl implements KingdomTypeParser {
 	}
 
 	@Override
-	public KingdomType parse(String parse) {
-		if(!kingdomTypes.containsKey(parse)) {
+	public KingdomType parse(String parseStr) {
+		if(!kingdomTypes.containsKey(parseStr)) {
 			throw new BasicAppError("Incorrect kingdom type.");
 		}
-		return kingdomTypes.get(parse);
+		return kingdomTypes.get(parseStr);
 	}
 }
