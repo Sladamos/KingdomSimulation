@@ -1,84 +1,61 @@
 package strategy.battle;
 
-import strategy.military.army.ArmyDestroyedException;
 import strategy.kingdom.Kingdom;
 import strategy.message.StringMessage;
 import strategy.message.notifier.MessagesNotifier;
 import strategy.message.receiver.MessagesReceiver;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
 public class SimpleBattle implements Battle {
 
-    private final Kingdom attacker;
+	private final Kingdom firstKingdom;
 
-    private final Kingdom defender;
+	private final Kingdom secondKingdom;
 
-    private final MessagesNotifier<StringMessage> messagesNotifier;
+	private final MessagesNotifier<StringMessage> messagesNotifier;
 
-    private boolean areKingdomsFighting;
+	private final ExecutorService executor;
 
-    public SimpleBattle(Kingdom attacker, Kingdom defender, MessagesNotifier<StringMessage> messagesNotifier) {
-        this.attacker = attacker;
-        this.defender = defender;
-        this.messagesNotifier = messagesNotifier;
-        areKingdomsFighting = false;
-    }
+	public SimpleBattle(Kingdom firstKingdom, Kingdom secondKingdom, MessagesNotifier<StringMessage> messagesNotifier) {
+		this.firstKingdom = firstKingdom;
+		this.secondKingdom = secondKingdom;
+		this.messagesNotifier = messagesNotifier;
+		executor = Executors.newCachedThreadPool();
+	}
 
-    @Override
-    public void run() {
-        areKingdomsFighting = true;
-        while(areKingdomsFighting) {
-            simulateAttack();
-        }
-        messagesNotifier.removeListeners();
-    }
+	@Override
+	public void run() {
+		AttackSimulator firstAttackSimulator = new SimpleAttackSimulator(firstKingdom, secondKingdom, messagesNotifier);
+		AttackSimulator secondAttackSimulator = new SimpleAttackSimulator(secondKingdom, firstKingdom, messagesNotifier);
+		executor.execute(firstAttackSimulator::simulateAttacking);
+		executor.execute(secondAttackSimulator::simulateAttacking);
+		waitForBattleEnd();
+		messagesNotifier.removeListeners();
+	}
 
-    private void simulateAttack() {
-        try {
-            long attackTime = attacker.getAttackTime().getMiliseconds();
-            Thread.sleep(attackTime);
-            executeAttackIfPossible();
-        } catch (Exception ignored) {
-            attackerLostTheBattle();
-        }
-    }
+	private void waitForBattleEnd() {
+		executor.shutdown();
+		try {
+			executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+		} catch (Exception ignored) {
+		}
+	}
 
-    private void executeAttackIfPossible() {
-        synchronized (attacker) {
-            if(attacker.isDead()) {
-                throw new ArmyDestroyedException();
-            }
-            StringMessage messageAboutAttack = new StringMessage(attacker + " attacked");
-            messagesNotifier.accept(messageAboutAttack);
-            executeAttack();
-        }
-    }
+	@Override
+	public void addListener(MessagesReceiver<StringMessage> messagesReceiver) {
+		messagesNotifier.addListener(messagesReceiver);
+	}
 
-    private void executeAttack() {
-        try {
-            attacker.attack(defender);
-        }
-        catch (ArmyDestroyedException ignored) {
-            attackerWonTheBattle();
-        }
-    }
+	@Override
+	public void removeListeners() {
+		messagesNotifier.removeListeners();
+	}
 
-    private void attackerWonTheBattle() {
-        StringMessage messageAboutWon = new StringMessage(attacker + " won the battle");
-        endBattle(messageAboutWon);
-    }
-
-    private void attackerLostTheBattle() {
-        StringMessage messageAboutLost = new StringMessage(attacker + " lost the battle");
-        endBattle(messageAboutLost);
-    }
-
-    private void endBattle(StringMessage endMessage) {
-        messagesNotifier.accept(endMessage);
-        areKingdomsFighting = false;
-    }
-
-    @Override
-    public void addListener(MessagesReceiver<StringMessage> messagesReceiver) {
-        messagesNotifier.addListener(messagesReceiver);
-    }
+	@Override
+	public void accept(StringMessage message) {
+		messagesNotifier.accept(message);
+	}
 }
