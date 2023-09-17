@@ -1,7 +1,9 @@
 package strategy.json;
 
 import lombok.AllArgsConstructor;
+import org.json.JSONException;
 import org.json.JSONObject;
+import strategy.error.CriticalAppError;
 
 @AllArgsConstructor
 public class JSON {
@@ -9,10 +11,6 @@ public class JSON {
 
     public JSON() {
         jsonObject = new JSONObject();
-    }
-
-    public JSON(String jsonStr) {
-        jsonObject = new JSONObject(jsonStr);
     }
 
     public JSON(JSON json) {
@@ -33,19 +31,39 @@ public class JSON {
     }
 
     public JSON getJSONObject(String key) {
-        JSONObject newJsonObject = jsonObject.getJSONObject(key);
-        return new JSON(newJsonObject);
+        try {
+            JSONObject newJsonObject = jsonObject.getJSONObject(key);
+            return new JSON(newJsonObject);
+        }
+        catch (JSONException err) {
+            throw new CriticalAppError("Incorrect key.");
+        }
     }
 
     public String getString(String key) {
-        return jsonObject.getString(key);
+        try {
+            return jsonObject.getString(key);
+        }
+        catch (JSONException err) {
+            throw new CriticalAppError("Incorrect key.");
+        }
     }
 
     public long getLong(String key) {
-        return jsonObject.getLong(key);
+        try {
+            return jsonObject.getLong(key);
+        }
+        catch (JSONException err) {
+            throw new CriticalAppError("Incorrect key.");
+        }
     }
 
     public int getInt(String key) {
-        return jsonObject.getInt(key);
+        try {
+            return jsonObject.getInt(key);
+        }
+        catch (JSONException err) {
+            throw new CriticalAppError("Incorrect key.");
+        }
     }
 }
