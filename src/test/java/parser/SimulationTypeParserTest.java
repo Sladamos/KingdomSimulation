@@ -4,22 +4,20 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import strategy.error.BasicAppError;
-import strategy.kingdom.type.KingdomType;
-import strategy.kingdom.type.KingdomTypeParser;
-import strategy.kingdom.type.KingdomTypeParserImpl;
+import strategy.simulation.SimulationType;
 
-public class KingdomTypeParserTest {
+public class SimulationTypeParserTest {
 
-	private static KingdomTypeParser parser;
+	private static SimulationTypeParser parser;
 
 	@BeforeAll
 	public static void createParser() {
-		parser = new KingdomTypeParserImpl();
+		parser = new SimulationTypeParserImpl();
 	}
 
 	@Test
-	public void returnSarraxType_when_stringSarraxPassed() {
-		assertThat(parser.parse("Sarrax")).isEqualTo(KingdomType.SARRAX);
+	public void returnAutomaticType_when_stringAutomaticPassed() {
+		assertThat(parser.parse("automatic")).isEqualTo(SimulationType.AUTOMATIC);
 	}
 
 	@Test
