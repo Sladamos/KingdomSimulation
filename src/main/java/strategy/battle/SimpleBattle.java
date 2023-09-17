@@ -8,17 +8,17 @@ import strategy.message.receiver.MessagesReceiver;
 
 public class SimpleBattle implements Battle {
 
-    private final Kingdom firstKingdom;
+    private final Kingdom attacker;
 
-    private final Kingdom secondKingdom;
+    private final Kingdom defender;
 
     private final MessagesNotifier<StringMessage> messagesNotifier;
 
     private boolean areKingdomsFighting;
 
-    public SimpleBattle(Kingdom firstKingdom, Kingdom secondKingdom, MessagesNotifier<StringMessage> messagesNotifier) {
-        this.firstKingdom = firstKingdom;
-        this.secondKingdom = secondKingdom;
+    public SimpleBattle(Kingdom attacker, Kingdom defender, MessagesNotifier<StringMessage> messagesNotifier) {
+        this.attacker = attacker;
+        this.defender = defender;
         this.messagesNotifier = messagesNotifier;
         areKingdomsFighting = false;
     }
@@ -27,31 +27,54 @@ public class SimpleBattle implements Battle {
     public void run() {
         areKingdomsFighting = true;
         while(areKingdomsFighting) {
-            simulateAttack(firstKingdom, secondKingdom);
+            simulateAttack();
         }
         messagesNotifier.removeListeners();
     }
 
-    private void simulateAttack(Kingdom attacker, Kingdom defender) {
+    private void simulateAttack() {
         try {
             long attackTime = attacker.getAttackTime().getMiliseconds();
             Thread.sleep(attackTime);
-            synchronized (attacker) {
-                if(attacker.isDead())
-                {
-                    throw new ArmyDestroyedException();
-                }
-                StringMessage messageAboutAttack = new StringMessage(attacker + " attacked");
-                messagesNotifier.accept(messageAboutAttack);
-                attacker.attack(defender);
-            }
-        } catch (ArmyDestroyedException ignored) {
-            StringMessage messageAboutWon = new StringMessage(attacker + " won the battle");
-            messagesNotifier.accept(messageAboutWon);
-            areKingdomsFighting = false;
+            executeAttackIfPossible();
         } catch (Exception ignored) {
-            areKingdomsFighting = false;
+            attackerLostTheBattle();
         }
+    }
+
+    private void executeAttackIfPossible() {
+        synchronized (attacker) {
+            if(attacker.isDead()) {
+                throw new ArmyDestroyedException();
+            }
+            StringMessage messageAboutAttack = new StringMessage(attacker + " attacked");
+            messagesNotifier.accept(messageAboutAttack);
+            executeAttack();
+        }
+    }
+
+    private void executeAttack() {
+        try {
+            attacker.attack(defender);
+        }
+        catch (ArmyDestroyedException ignored) {
+            attackerWonTheBattle();
+        }
+    }
+
+    private void attackerWonTheBattle() {
+        StringMessage messageAboutWon = new StringMessage(attacker + " won the battle");
+        endBattle(messageAboutWon);
+    }
+
+    private void attackerLostTheBattle() {
+        StringMessage messageAboutLost = new StringMessage(attacker + " lost the battle");
+        endBattle(messageAboutLost);
+    }
+
+    private void endBattle(StringMessage endMessage) {
+        messagesNotifier.accept(endMessage);
+        areKingdomsFighting = false;
     }
 
     @Override
