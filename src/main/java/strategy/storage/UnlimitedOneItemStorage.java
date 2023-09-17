@@ -14,7 +14,7 @@ public class UnlimitedOneItemStorage<T extends Item> implements OneItemStorage<T
 
     private final Deque<T> storage;
 
-    private boolean working;
+    private boolean isWorking;
 
     private final OneArgEvent<JSONMessage> messageEvent;
 
@@ -35,7 +35,7 @@ public class UnlimitedOneItemStorage<T extends Item> implements OneItemStorage<T
 
     @Override
     public synchronized void addItemToStorage(T item) {
-        if(working) {
+        if(isWorking) {
             storage.push(item);
             String strMessage = "Item pushed to storage: " + item;
             sendMessage(strMessage, item);
@@ -46,7 +46,7 @@ public class UnlimitedOneItemStorage<T extends Item> implements OneItemStorage<T
     @Override
     public synchronized T getItemFromStorage() {
         waitForItemInStorage();
-        if (!isWorking()) {
+        if (isWorking) {
             throw new StorageTerminatedException();
         }
         T item = storage.pop();
@@ -56,21 +56,17 @@ public class UnlimitedOneItemStorage<T extends Item> implements OneItemStorage<T
 
     @Override
     public synchronized void enableAcceptingItems() {
-        working = true;
+        isWorking = true;
     }
 
     @Override
     public synchronized void disableAcceptingItems() {
-        working = false;
+        isWorking = false;
         notifyAll();
     }
 
-    private synchronized boolean isWorking() {
-        return working;
-    }
-
-    private synchronized void waitForItemInStorage() {
-        while(storage.isEmpty() && isWorking()) {
+    private void waitForItemInStorage() {
+        while(storage.isEmpty() && isWorking) {
             try {
                 wait();
             }
