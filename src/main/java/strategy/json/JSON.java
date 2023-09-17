@@ -3,7 +3,7 @@ package strategy.json;
 import lombok.AllArgsConstructor;
 import org.json.JSONException;
 import org.json.JSONObject;
-import strategy.error.CriticalAppError;
+import strategy.error.BasicAppError;
 
 @AllArgsConstructor
 public class JSON {
@@ -36,7 +36,7 @@ public class JSON {
             return new JSON(newJsonObject);
         }
         catch (JSONException err) {
-            throw new CriticalAppError("Incorrect key.");
+            throw new BasicAppError("Incorrect key.");
         }
     }
 
@@ -45,7 +45,7 @@ public class JSON {
             return jsonObject.getString(key);
         }
         catch (JSONException err) {
-            throw new CriticalAppError("Incorrect key.");
+            throw new BasicAppError("Incorrect key.");
         }
     }
 
@@ -54,7 +54,7 @@ public class JSON {
             return jsonObject.getLong(key);
         }
         catch (JSONException err) {
-            throw new CriticalAppError("Incorrect key.");
+            throw new BasicAppError("Incorrect key.");
         }
     }
 
@@ -63,7 +63,7 @@ public class JSON {
             return jsonObject.getInt(key);
         }
         catch (JSONException err) {
-            throw new CriticalAppError("Incorrect key.");
+            throw new BasicAppError("Incorrect key.");
         }
     }
 }
