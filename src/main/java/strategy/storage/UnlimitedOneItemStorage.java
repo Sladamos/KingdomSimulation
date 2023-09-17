@@ -46,7 +46,7 @@ public class UnlimitedOneItemStorage<T extends Item> implements OneItemStorage<T
     @Override
     public synchronized T getItemFromStorage() {
         waitForItemInStorage();
-        if (isWorking) {
+        if (!isWorking) {
             throw new StorageTerminatedException();
         }
         T item = storage.pop();
