@@ -31,7 +31,7 @@ public class ErrorHandlerImpl implements ErrorHandler {
     }
 
     private void notifyAboutUnspecifiedException() {
-        criticalErrorOccured.invoke(new JSONMessage("Something went very wrong"));
+        criticalErrorOccured.invoke(new JSONMessage("Something went very wrong."));
     }
 
     @Override
