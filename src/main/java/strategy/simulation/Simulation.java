@@ -15,8 +15,6 @@ import strategy.json.FileJsonLoader;
 import strategy.json.FileJsonLoaderImpl;
 
 public class Simulation {
-    //TODO: create an object with api to simulation initializer
-
     // TODO: think about automatic vs manual simulation -> on initialize simulation pass some object
     //  simulationInitializer.initializeSimulation pass app Fasade
     //  in fasade i will have communicator and nullable input handler -> i will bind both of them
