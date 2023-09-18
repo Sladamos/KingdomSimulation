@@ -38,7 +38,7 @@ public class RandomWarriorsInitializer implements WarriorsInitializer {
     }
 
     private WarriorConfig createRandomWarriorConfig(int damage, int defense, int health) {
-        int randomDamage = rand.nextInt(damage);
+        int randomDamage = rand.nextInt(damage - 1) + 1;
         int randomDefense = rand.nextInt(defense);
         return warriorConfigParser.createConfig(randomDamage, randomDefense, health);
     }
