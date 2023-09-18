@@ -13,16 +13,16 @@ import strategy.initializer.gui.GUIInitializerImpl;
 import strategy.initializer.simulation.SimulationInitializer;
 import strategy.json.FileJsonLoader;
 import strategy.json.FileJsonLoaderImpl;
-import strategy.json.JsonLoader;
 
 public class Simulation {
-
-    //TODO: write unit tests
+    //TODO: create an object with api to simulation initializer
 
     // TODO: think about automatic vs manual simulation -> on initialize simulation pass some object
-    // TODO: if gui.needToBinded do gui.bind(simulationInitializer) or something like that
-
-    // TODO: gui config
+    //  simulationInitializer.initializeSimulation pass app Fasade
+    //  in fasade i will have communicator and nullable input handler -> i will bind both of them
+    //  then call method wait for simulation end or something like that -> mechanism wait notify!
+    //  handle input in runnable thread
+    //  if null in manual throw critical exception
 
     /*TODO gui:
         two panels with names of materials and count of each one (consider it!):

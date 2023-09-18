@@ -1,4 +1,4 @@
-package strategy.kingdom;
+package strategy.kingdom.type;
 
 public enum KingdomType {
 	SARRAX;

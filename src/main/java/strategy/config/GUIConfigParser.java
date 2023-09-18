@@ -1,29 +1,28 @@
 package strategy.config;
 
+import strategy.error.BasicAppError;
 import strategy.error.CriticalAppError;
 import strategy.gui.GUIConfig;
 import strategy.gui.GUIType;
+import strategy.gui.type.GUITypeParser;
+import strategy.gui.type.GUITypeParserImpl;
 import strategy.json.JSON;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class GUIConfigParser implements ConfigParser<GUIConfig> {
 
-	private final Map<String, GUIType> guiTypes;
-
-	public GUIConfigParser() {
-		guiTypes = new HashMap<>();
-		guiTypes.put("console", GUIType.CONSOLE);
-	}
-
 	@Override
 	public GUIConfig createConfig(JSON json) {
-		String guiTypeStr = json.getString("type");
-		if (!guiTypes.containsKey(guiTypeStr)) {
-			throw new CriticalAppError("Incorrect GUI type.");
+		try {
+			String guiTypeStr = json.getString("type");
+			GUIType guiType = createGUIType(guiTypeStr);
+			return new GUIConfig(guiType);
+		} catch (BasicAppError error) {
+			throw new CriticalAppError("Something went wrong on creating gui config: " + error.getMessage());
 		}
-		GUIType guiType = guiTypes.get(guiTypeStr);
-		return new GUIConfig(guiType);
+	}
+
+	private GUIType createGUIType(String guiTypeStr) {
+		GUITypeParser parser = new GUITypeParserImpl();
+		return parser.parse(guiTypeStr);
 	}
 }

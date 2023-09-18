@@ -1,4 +1,4 @@
-package strategy.simulation;
+package strategy.simulation.type;
 
 public enum SimulationType {
     AUTOMATIC

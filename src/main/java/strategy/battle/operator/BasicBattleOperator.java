@@ -1,34 +1,35 @@
 package strategy.battle.operator;
 
 import strategy.battle.Battle;
-import strategy.battle.SimpleBattle;
-import strategy.battle.operator.BattleOperator;
+import strategy.battle.creator.BattleCreator;
+import strategy.battle.creator.SimpleBattleCreator;
+import strategy.battle.launcher.BattleLauncher;
+import strategy.battle.launcher.BattleLauncherImpl;
 import strategy.kingdom.Kingdom;
-import strategy.message.StringMessage;
-import strategy.message.notifier.MessagesNotifier;
-
-import java.util.function.Supplier;
 
 public class BasicBattleOperator implements BattleOperator {
-    private final Supplier<MessagesNotifier<StringMessage>> basicMessagesNotifierSupplier;
 
-    public BasicBattleOperator(Supplier<MessagesNotifier<StringMessage>> basicMessagesNotifierSupplier) {
-        this.basicMessagesNotifierSupplier = basicMessagesNotifierSupplier;
+    private final BattleCreator battleCreator;
+
+    private final BattleLauncher battleLauncher;
+
+    public BasicBattleOperator() {
+        battleLauncher = new BattleLauncherImpl();
+        battleCreator = new SimpleBattleCreator();
     }
 
     @Override
     public Battle createBattle(Kingdom firstKingdom, Kingdom secondKingdom) {
-        return new SimpleBattle(firstKingdom, secondKingdom, basicMessagesNotifierSupplier.get());
+        return battleCreator.createBattle(firstKingdom, secondKingdom);
     }
 
     @Override
-    public void simulateBattle(Battle battle) {
-        Thread thread = new Thread(battle);
-        thread.start();
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+    public void launchBattle(Battle battle) {
+        battleLauncher.launchBattle(battle);
+    }
+
+    @Override
+    public void waitForBattlesEnd() {
+        battleLauncher.waitForBattlesEnd();
     }
 }

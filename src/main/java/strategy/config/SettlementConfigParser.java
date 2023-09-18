@@ -30,7 +30,7 @@ public class SettlementConfigParser implements ConfigParser<SettlementConfig> {
             return new SettlementConfig(smelterConfig, blacksmithConfig, barracksConfig, ironBucketArtisan,
                     woodenBucketArtisan, millConfig, bakeryConfig, childHouseConfig, alchemistConfig, waterWellConfig,
                     goldenCoinWellConfig, ringJewellerConfig, necklaceJewellerConfig);
-        } catch (JSONException | AppError err) {
+        } catch (AppError err) {
             throw new CriticalAppError("Something went wrong on creating settlement config. " + err.getMessage());
         }
     }

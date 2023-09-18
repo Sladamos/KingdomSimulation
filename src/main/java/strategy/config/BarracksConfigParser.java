@@ -1,6 +1,7 @@
 package strategy.config;
 
 import org.json.JSONException;
+import strategy.error.BasicAppError;
 import strategy.error.CriticalAppError;
 import strategy.config.infantry.InfantryConfigParser;
 import strategy.military.infantry.InfantryConfig;
@@ -22,7 +23,7 @@ public class BarracksConfigParser<T extends InfantryConfig> implements ConfigPar
             ProducerConfig militaryProducerConfig = createProducerConfig(json.getJSONObject("military_producer"));
             T infantryConfig = infantryConfigParser.createConfig(json.getJSONObject("infantry"));
             return new BarracksConfig<>(militaryProducerConfig, infantryConfig);
-        } catch (JSONException err) {
+        } catch (BasicAppError err) {
             throw new CriticalAppError("Something went wrong on creating barracks config. " + err.getMessage());
         }
     }

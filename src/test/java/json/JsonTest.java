@@ -1,7 +1,7 @@
 package json;
 
 import org.junit.jupiter.api.Test;
-import strategy.error.CriticalAppError;
+import strategy.error.BasicAppError;
 import strategy.json.JSON;
 
 import static org.assertj.core.api.Assertions.*;
@@ -9,27 +9,27 @@ import static org.assertj.core.api.Assertions.*;
 public class JsonTest {
 
     @Test
-    public void throwCriticalAppException_when_keyNotFoundInGetString() {
+    public void throwBasicAppException_when_keyNotFoundInGetString() {
         JSON json = new JSON();
-        assertThatThrownBy(() -> json.getString("random")).isInstanceOf(CriticalAppError.class);
+        assertThatThrownBy(() -> json.getString("random")).isInstanceOf(BasicAppError.class);
     }
 
     @Test
-    public void throwCriticalAppException_when_keyNotFoundInGetInt() {
+    public void throwBasicAppException_when_keyNotFoundInGetInt() {
         JSON json = new JSON();
-        assertThatThrownBy(() -> json.getInt("random")).isInstanceOf(CriticalAppError.class);
+        assertThatThrownBy(() -> json.getInt("random")).isInstanceOf(BasicAppError.class);
     }
 
     @Test
-    public void throwCriticalAppException_when_keyNotFoundInGetLong() {
+    public void throwBasicAppException_when_keyNotFoundInGetLong() {
         JSON json = new JSON();
-        assertThatThrownBy(() -> json.getLong("random")).isInstanceOf(CriticalAppError.class);
+        assertThatThrownBy(() -> json.getLong("random")).isInstanceOf(BasicAppError.class);
     }
 
     @Test
-    public void throwCriticalAppException_when_keyNotFoundInGetJson() {
+    public void throwBasicAppException_when_keyNotFoundInGetJson() {
         JSON json = new JSON();
-        assertThatThrownBy(() -> json.getJSONObject("random")).isInstanceOf(CriticalAppError.class);
+        assertThatThrownBy(() -> json.getJSONObject("random")).isInstanceOf(BasicAppError.class);
     }
 
     @Test

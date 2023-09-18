@@ -90,14 +90,6 @@ public class ArmyGeneralImpl implements ArmyGeneral {
         return army;
     }
 
-    private synchronized boolean isConsuming() {
-        return isConsuming;
-    }
-
-    private synchronized void enableConsuming() {
-        isConsuming = true;
-    }
-
     @Override
     public void removeListeners() {
         messageEvent.removeAllListeners();
@@ -111,5 +103,13 @@ public class ArmyGeneralImpl implements ArmyGeneral {
     @Override
     public void addListener(MessagesReceiver<JSONMessage> messagesReceiver) {
         messageEvent.addListener(messagesReceiver);
+    }
+
+    private synchronized boolean isConsuming() {
+        return isConsuming;
+    }
+
+    private synchronized void enableConsuming() {
+        isConsuming = true;
     }
 }

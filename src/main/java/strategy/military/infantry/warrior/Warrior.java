@@ -26,14 +26,16 @@ public class Warrior implements Human, InfantryUnit {
         this.defense = config.getDefense();
         this.hitPoints = config.getHealth();
         this.damageModifier = 1;
-        isAlive = true;
+        isAlive = !shouldBeKilled();
     }
 
     @Override
     public synchronized void getHit(Attack attack) {
-        Integer damage = attack.getAttackDamage();
-        checkIfCanReceiveDamage();
-        receiveDamage(damage);
+        for(Attack att : attack.getCombination()) {
+            Integer damage = att.getAttackDamage();
+            checkIfCanReceiveDamage();
+            receiveDamage(damage);
+        }
     }
 
     @Override

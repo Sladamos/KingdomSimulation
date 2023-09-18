@@ -17,7 +17,7 @@ public class CastleConfigParser implements ConfigParser<CastleConfig> {
             ProducerConfig ringPresentCraftsmanConfig = createProducerConfig(json.getJSONObject("ring_present_craftsman"));
             return new CastleConfig(queenConfig, princessConfig, necklacePresentCraftsmanConfig, ringPresentCraftsmanConfig);
         }
-        catch (JSONException | AppError err) {
+        catch (AppError err) {
             throw new CriticalAppError("Something went wrong on creating castle config. " + err.getMessage());
         }
     }
