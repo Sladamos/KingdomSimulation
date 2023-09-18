@@ -3,6 +3,7 @@ package strategy.military.infantry.warrior;
 import lombok.Setter;
 import strategy.action.AdvancedAttack;
 import strategy.action.Attack;
+import strategy.error.CriticalAppError;
 import strategy.item.organism.human.Human;
 import strategy.military.infantry.InfantryUnit;
 import strategy.military.mechanism.fight.Fightable;
@@ -23,6 +24,9 @@ public class Warrior implements Human, InfantryUnit {
 
     public Warrior(WarriorConfig config) {
         this.damage = config.getDamage();
+        if(damage <= 0) {
+            throw new CriticalAppError("Damage must be greater than 0");
+        }
         this.defense = config.getDefense();
         this.hitPoints = config.getHealth();
         this.damageModifier = 1;
