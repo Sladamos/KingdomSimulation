@@ -16,7 +16,7 @@ import strategy.json.FileJsonLoaderImpl;
 import strategy.simulation.executioner.SimulationExecutionerImpl;
 
 public class Simulation {
-    // TODO: think about automatic vs manual simulation -> on initialize simulation pass some object
+    // TODO: think about automatic vs manual simulation
     //  simulationInitializer.initializeSimulation pass app Fasade
     //  in fasade i will have communicator and nullable input handler -> i will bind both of them
     //  then call method wait for simulation end or something like that -> mechanism wait notify!
