@@ -13,6 +13,7 @@ import strategy.initializer.gui.GUIInitializerImpl;
 import strategy.initializer.simulation.SimulationInitializer;
 import strategy.json.FileJsonLoader;
 import strategy.json.FileJsonLoaderImpl;
+import strategy.simulation.executioner.SimulationExecutionerImpl;
 
 public class Simulation {
     // TODO: think about automatic vs manual simulation -> on initialize simulation pass some object
@@ -57,6 +58,6 @@ public class Simulation {
         BattleOperatorCreator battleOperatorCreator = new BattleOperatorCreatorImpl();
         AppInitializer appInitializer = new AppInitializerFromFile(battleOperatorCreator);
         SimulationInitializer simulationInitializer = appInitializer.createSimulationInitializer();
-        simulationInitializer.initializeSimulation(appCommunicator);
+        simulationInitializer.initializeSimulation(appCommunicator, new SimulationExecutionerImpl());
     }
 }
