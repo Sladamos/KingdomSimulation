@@ -35,7 +35,6 @@ public class AutomaticSimulationInitializer implements SimulationInitializer {
         kingdomOperator.launchKingdom(firstKingdom, simulationConfig.getFirstKingdomDevelopmentTime().getMiliseconds());
         kingdomOperator.launchKingdom(secondKingdom, simulationConfig.getSecondKingdomDevelopmentTime().getMiliseconds());
         kingdomOperator.waitForDevelopingEnd();
-
         Battle battle = battleOperator.createBattle(firstKingdom, secondKingdom);
         simulateBattle(battle);
         battleOperator.waitForBattlesEnd();

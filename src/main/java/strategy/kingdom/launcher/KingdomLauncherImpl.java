@@ -28,6 +28,11 @@ public class KingdomLauncherImpl implements KingdomLauncher {
         }
     }
 
+    @Override
+    public void stopKingdom(Kingdom kingdom) {
+
+    }
+
     private void simulateKingdomDevelop(Kingdom kingdom, long sleep) {
         kingdom.run();
         try {

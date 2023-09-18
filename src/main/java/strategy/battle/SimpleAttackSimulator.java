@@ -25,11 +25,14 @@ public class SimpleAttackSimulator implements AttackSimulator {
 
     @Override
     public void simulateAttacking() {
-        areKingdomsFighting = true;
-        while(areKingdomsFighting) {
-            simulateAttack();
+        try {
+            areKingdomsFighting = true;
+            while (areKingdomsFighting) {
+                simulateAttack();
+            }
+        } finally {
+            messagesNotifier.removeListeners();
         }
-        messagesNotifier.removeListeners();
     }
 
     private void simulateAttack() {

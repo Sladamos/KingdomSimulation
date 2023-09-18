@@ -32,4 +32,9 @@ public class BasicBattleOperator implements BattleOperator {
     public void waitForBattlesEnd() {
         battleLauncher.waitForBattlesEnd();
     }
+
+    @Override
+    public void stopBattle(Battle battle) {
+        battleLauncher.stopBattle(battle);
+    }
 }
