@@ -83,6 +83,7 @@ public class ManualSimulationInitializer implements SimulationInitializer {
         if (!battleMap.containsKey(battleId)) {
             throw new BasicAppError("Incorrect battle id");
         }
+
         Battle battle = battleMap.get(battleId);
         simulationExecutioner.stopBattle(battle);
     }
