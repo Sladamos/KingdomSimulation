@@ -1,5 +1,6 @@
 package strategy.initializer.simulation;
 
+import strategy.app.App;
 import strategy.app.AppCommunicator;
 import strategy.battle.Battle;
 import strategy.battle.creator.BattleCreator;
@@ -35,8 +36,8 @@ public class AutomaticSimulationInitializer implements SimulationInitializer {
 
 
     @Override
-    public void initializeSimulation(AppCommunicator appCommunicator, SimulationExecutioner simulationExecutioner) {
-        this.appCommunicator = appCommunicator;
+    public void initializeSimulation(App app, SimulationExecutioner simulationExecutioner) {
+        this.appCommunicator = app;
         this.simulationExecutioner = simulationExecutioner;
         runKingdomsDeveloping();
         simulationExecutioner.waitForKingdomsDevelopingEnd();

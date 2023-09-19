@@ -3,11 +3,10 @@ package strategy.initializer.gui;
 import strategy.config.GUIConfigParser;
 import strategy.config.creator.ConfigCreator;
 import strategy.config.creator.ConfigCreatorImpl;
-import strategy.gui.ConsoleGui;
+import strategy.gui.ConsoleGUI;
 import strategy.gui.GUI;
 import strategy.gui.GUIConfig;
 import strategy.gui.GUIType;
-import strategy.json.JSON;
 import strategy.json.JsonLoader;
 
 import java.util.HashMap;
@@ -20,7 +19,7 @@ public class GUIInitializerImpl implements GUIInitializer {
 
     public GUIInitializerImpl() {
         guiCreators = new HashMap<>();
-        guiCreators.put(GUIType.CONSOLE, ConsoleGui::new);
+        guiCreators.put(GUIType.CONSOLE, ConsoleGUI::new);
     }
 
     @Override

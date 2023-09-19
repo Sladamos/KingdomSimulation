@@ -1,6 +1,6 @@
 package strategy.initializer.simulation;
 
-import strategy.app.AppCommunicator;
+import strategy.app.App;
 import strategy.battle.creator.BattleCreator;
 import strategy.config.simulation.ManualSimulationConfigParser;
 import strategy.json.FileJsonLoader;
@@ -29,7 +29,6 @@ public class ManualSimulationInitializer implements SimulationInitializer {
     }
 
     @Override
-    public void initializeSimulation(AppCommunicator appCommunicator, SimulationExecutioner simulationExecutioner) {
-
+    public void initializeSimulation(App app, SimulationExecutioner simulationExecutioner) {
     }
 }

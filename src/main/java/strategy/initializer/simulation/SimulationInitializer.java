@@ -1,8 +1,8 @@
 package strategy.initializer.simulation;
 
-import strategy.app.AppCommunicator;
+import strategy.app.App;
 import strategy.simulation.executioner.SimulationExecutioner;
 
 public interface SimulationInitializer {
-    void initializeSimulation(AppCommunicator appCommunicator, SimulationExecutioner simulationExecutioner);
+    void initializeSimulation(App app, SimulationExecutioner simulationExecutioner);
 }

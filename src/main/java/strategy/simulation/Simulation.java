@@ -1,6 +1,7 @@
 package strategy.simulation;
 
-import strategy.app.AppCommunicator;
+import strategy.app.App;
+import strategy.app.AppImpl;
 import strategy.battle.operator.BattleOperatorCreator;
 import strategy.battle.operator.BattleOperatorCreatorImpl;
 import strategy.error.ErrorHandler;
@@ -48,16 +49,16 @@ public class Simulation {
         FileJsonLoader guiConfigLoader = new FileJsonLoaderImpl();
         guiConfigLoader.setFileName("gui.json");
         GUI gui = guiInitializer.initializeGUI(guiConfigLoader);
-        AppCommunicator appCommunicator = gui.getAppCommunicator();
+        App app = new AppImpl(gui.getAppInputHandler(), gui.getAppCommunicator());
         ErrorHandler errorHandler = new ErrorHandlerImpl();
-        appCommunicator.bindErrorsSender(errorHandler);
-        errorHandler.runInErrorHandler(() -> simulationMethod(appCommunicator));
+        app.bindErrorsSender(errorHandler);
+        errorHandler.runInErrorHandler(() -> simulationMethod(app));
     }
 
-    private void simulationMethod(AppCommunicator appCommunicator) {
+    private void simulationMethod(App app) {
         BattleOperatorCreator battleOperatorCreator = new BattleOperatorCreatorImpl();
         AppInitializer appInitializer = new AppInitializerFromFile(battleOperatorCreator);
         SimulationInitializer simulationInitializer = appInitializer.createSimulationInitializer();
-        simulationInitializer.initializeSimulation(appCommunicator, new SimulationExecutionerImpl());
+        simulationInitializer.initializeSimulation(app, new SimulationExecutionerImpl());
     }
 }
