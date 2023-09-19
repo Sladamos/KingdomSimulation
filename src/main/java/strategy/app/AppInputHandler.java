@@ -11,4 +11,5 @@ public interface AppInputHandler {
     void onBattleLaunched(Consumer<BattleConfig> battleConfigConsumer);
     void onBattleStopped(Consumer<Integer> battleIdConsumer);
     void disableInputHandling();
+    void waitOnAppClose();
 }

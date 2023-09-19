@@ -28,8 +28,6 @@ public class ManualSimulationInitializer implements SimulationInitializer {
 
     private final Map<Integer, Battle> battleMap;
 
-    private App app;
-
     private SimulationExecutioner simulationExecutioner;
 
     public ManualSimulationInitializer(BattleCreator battleCreator) {
@@ -49,7 +47,6 @@ public class ManualSimulationInitializer implements SimulationInitializer {
 
     @Override
     public void initializeSimulation(App app, SimulationExecutioner simulationExecutioner) {
-        this.app = app;
         this.simulationExecutioner = simulationExecutioner;
 
         createKingdom(simulationConfig.getFirstKingdomConfig());
@@ -59,9 +56,9 @@ public class ManualSimulationInitializer implements SimulationInitializer {
         app.onBattleLaunched(this::onBattleLaunched);
         app.onBattleStopped(this::onBattleStopped);
         app.enableInputHandling();
+        app.waitOnAppClose();
         stopSimulation();
 
-        this.app = null;
         this.simulationExecutioner = null;
     }
 

@@ -28,9 +28,9 @@ public class ConsoleGUIInputHandler implements AppInputHandler {
     }
 
     @Override
-    public void enableInputHandling() {
-//        isLaunched = true;
-//        createScanner;
+    public synchronized void enableInputHandling() {
+        isLaunched = true;
+        //launch input handler in new thread
 //        while (isLaunched) {
 //            scan option name;
 //            execute option
@@ -59,8 +59,19 @@ public class ConsoleGUIInputHandler implements AppInputHandler {
     }
 
     @Override
-    public void disableInputHandling() {
+    public synchronized void disableInputHandling() {
+        isLaunched = false;
+        notifyAll();
+    }
 
+    @Override
+    public synchronized void waitOnAppClose() {
+        while(isLaunched) {
+            try {
+                wait();
+            } catch (InterruptedException ignored) {
+            }
+        }
     }
 
 }

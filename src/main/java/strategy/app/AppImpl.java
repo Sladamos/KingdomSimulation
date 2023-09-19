@@ -72,4 +72,9 @@ public class AppImpl implements App {
     public void onBattleStopped(Consumer<Integer> battleIdConsumer) {
         appInputHandler.onBattleStopped(battleIdConsumer);
     }
+
+    @Override
+    public void disableInputHandling() {
+        appInputHandler.disableInputHandling();
+    }
 }
