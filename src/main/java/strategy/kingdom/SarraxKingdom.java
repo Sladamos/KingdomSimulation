@@ -100,6 +100,11 @@ public class SarraxKingdom implements Kingdom {
     }
 
     @Override
+    public String getId() {
+        return kingdomConfig.getKingdomId();
+    }
+
+    @Override
     public String toString() {
         return kingdomConfig.getKingdomId() + " kingdom";
     }

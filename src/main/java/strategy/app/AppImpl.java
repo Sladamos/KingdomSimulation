@@ -4,6 +4,8 @@ import strategy.message.JSONMessage;
 import strategy.message.StringMessage;
 import strategy.message.sender.MessagesSender;
 
+import java.util.function.Consumer;
+
 public class AppImpl implements App {
     
     private final AppCommunicator appCommunicator;
@@ -48,5 +50,25 @@ public class AppImpl implements App {
     @Override
     public void enableInputHandling() {
         appInputHandler.enableInputHandling();
+    }
+
+    @Override
+    public void onKingdomLaunched(Consumer<String> kingdomIdConsumer) {
+        appInputHandler.onKingdomLaunched(kingdomIdConsumer);
+    }
+
+    @Override
+    public void onKingdomStopped(Consumer<String> kingdomIdConsumer) {
+        appInputHandler.onKingdomStopped(kingdomIdConsumer);
+    }
+
+    @Override
+    public void onBattleLaunched(Consumer<Integer> battleIdConsumer) {
+        appInputHandler.onBattleLaunched(battleIdConsumer);
+    }
+
+    @Override
+    public void onBattleStopped(Consumer<Integer> battleIdConsumer) {
+        appInputHandler.onBattleStopped(battleIdConsumer);
     }
 }

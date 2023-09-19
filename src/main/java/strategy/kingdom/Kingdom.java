@@ -13,4 +13,5 @@ public interface Kingdom extends Runnable, MessagesSender<JSONMessage>, Fightabl
     void terminate();
     void addMilitaryUnits(ArmyType armyType, Collection<MilitaryUnit> militaryUnits);
 	Time getAttackTime();
+    String getId();
 }
