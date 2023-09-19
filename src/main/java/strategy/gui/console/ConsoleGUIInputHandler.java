@@ -58,4 +58,9 @@ public class ConsoleGUIInputHandler implements AppInputHandler {
         battleStopped.addListener(battleIdConsumer);
     }
 
+    @Override
+    public void disableInputHandling() {
+
+    }
+
 }

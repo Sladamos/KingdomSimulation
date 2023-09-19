@@ -19,6 +19,7 @@ import strategy.simulation.executioner.SimulationExecutionerImpl;
 public class Simulation {
     //TODO: run input handling in new thread, then join
     // options launcher in input handler -> runs options in errorHandlingLayer (not exit)
+    // on critical error catched disable program
 
     /*TODO gui:
         two panels with names of materials and count of each one (consider it!):

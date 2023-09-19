@@ -22,16 +22,22 @@ public class ErrorHandlerImpl implements ErrorHandler {
         try {
             runnable.run();
         } catch (CriticalAppError err) {
-            criticalErrorOccured.invoke(new JSONMessage(err.getMessage()));
+            JSONMessage message = new JSONMessage(err.getMessage());
+            message.put("type", "critical");
+            criticalErrorOccured.invoke(message);
         } catch (BasicAppError err) {
-            basicErrorOccured.invoke(new JSONMessage(err.getMessage()));
+            JSONMessage message = new JSONMessage(err.getMessage());
+            message.put("type", "basic");
+            basicErrorOccured.invoke(message);
         } catch (Exception err) {
             notifyAboutUnspecifiedException();
         }
     }
 
     private void notifyAboutUnspecifiedException() {
-        criticalErrorOccured.invoke(new JSONMessage("Something went very wrong."));
+        JSONMessage message = new JSONMessage("Something went very wrong.");
+        message.put("type", "critical");
+        criticalErrorOccured.invoke(message);
     }
 
     @Override

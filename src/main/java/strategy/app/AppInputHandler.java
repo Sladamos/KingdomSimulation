@@ -10,4 +10,5 @@ public interface AppInputHandler {
     void onKingdomStopped(Consumer<String> kingdomIdConsumer);
     void onBattleLaunched(Consumer<BattleConfig> battleConfigConsumer);
     void onBattleStopped(Consumer<Integer> battleIdConsumer);
+    void disableInputHandling();
 }

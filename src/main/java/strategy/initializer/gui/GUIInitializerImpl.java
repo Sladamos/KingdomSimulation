@@ -3,7 +3,7 @@ package strategy.initializer.gui;
 import strategy.config.GUIConfigParser;
 import strategy.config.creator.ConfigCreator;
 import strategy.config.creator.ConfigCreatorImpl;
-import strategy.gui.ConsoleGUI;
+import strategy.gui.console.ConsoleGUI;
 import strategy.gui.GUI;
 import strategy.gui.GUIConfig;
 import strategy.gui.GUIType;

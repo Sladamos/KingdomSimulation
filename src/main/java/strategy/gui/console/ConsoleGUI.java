@@ -1,9 +1,9 @@
-package strategy.gui;
+package strategy.gui.console;
 
 import strategy.app.AppCommunicator;
 import strategy.app.AppCommunicatorImpl;
 import strategy.app.AppInputHandler;
-import strategy.gui.console.ConsoleGUIInputHandler;
+import strategy.gui.GUI;
 import strategy.message.receiver.ConsoleMessagesReceiver;
 
 public class ConsoleGUI implements GUI {
@@ -14,7 +14,7 @@ public class ConsoleGUI implements GUI {
 
     public ConsoleGUI() {
         appCommunicator = new AppCommunicatorImpl(new ConsoleMessagesReceiver<>(),
-                new ConsoleMessagesReceiver<>(),
+                new ConsoleErrorMessagesReceiver(this::onGUIDisabled),
                 new ConsoleMessagesReceiver<>());
         appInputHandler = new ConsoleGUIInputHandler();
     }
@@ -27,5 +27,9 @@ public class ConsoleGUI implements GUI {
     @Override
     public AppInputHandler getAppInputHandler() {
         return appInputHandler;
+    }
+
+    private void onGUIDisabled() {
+        appInputHandler.disableInputHandling();
     }
 }
