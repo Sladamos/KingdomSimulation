@@ -5,6 +5,7 @@ import strategy.battle.operator.BattleOperatorCreator;
 import strategy.config.AppConfigParser;
 import strategy.error.CriticalAppError;
 import strategy.initializer.simulation.AutomaticSimulationInitializer;
+import strategy.initializer.simulation.ManualSimulationInitializer;
 import strategy.initializer.simulation.SimulationInitializer;
 import strategy.json.JSON;
 import strategy.json.FileJsonLoader;
