@@ -17,12 +17,8 @@ import strategy.json.FileJsonLoaderImpl;
 import strategy.simulation.executioner.SimulationExecutionerImpl;
 
 public class Simulation {
-    // TODO: think about automatic vs manual simulation
-    //  simulationInitializer.initializeSimulation pass app Fasade
-    //  in fasade i will have communicator and nullable input handler -> i will bind both of them
-    //  then call method wait for simulation end or something like that -> mechanism wait notify!
-    //  handle input in runnable thread
-    //  if null in manual throw critical exception
+    //TODO: run input handling in new thread, then join
+    // options launcher in input handler -> runs options in errorHandlingLayer (not exit)
 
     /*TODO gui:
         two panels with names of materials and count of each one (consider it!):

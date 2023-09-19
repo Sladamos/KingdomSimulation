@@ -59,14 +59,27 @@ public class ManualSimulationInitializer implements SimulationInitializer {
         app.onBattleLaunched(this::onBattleLaunched);
         app.onBattleStopped(this::onBattleStopped);
         app.enableInputHandling();
-        simulationExecutioner.waitForKingdomsDevelopingEnd();
-        simulationExecutioner.waitForBattlesEnd();
+        stopSimulation();
 
         this.app = null;
         this.simulationExecutioner = null;
     }
 
-    private void onBattleStopped(Integer battleId) {
+    private void stopSimulation() {
+        for(var kv: kingdomMap.entrySet()) {
+            Kingdom kingdom = kv.getValue();
+            simulationExecutioner.stopKingdom(kingdom);
+        }
+
+        for(var kv: battleMap.entrySet()) {
+            Battle battle = kv.getValue();
+            simulationExecutioner.stopBattle(battle);
+        }
+        simulationExecutioner.waitForKingdomsDevelopingEnd();
+        simulationExecutioner.waitForBattlesEnd();
+    }
+
+    private synchronized void onBattleStopped(Integer battleId) {
         if (!battleMap.containsKey(battleId)) {
             throw new BasicAppError("Incorrect battle id");
         }
@@ -74,7 +87,7 @@ public class ManualSimulationInitializer implements SimulationInitializer {
         simulationExecutioner.stopBattle(battle);
     }
 
-    private void onBattleLaunched(BattleConfig battleConfig) {
+    private synchronized void onBattleLaunched(BattleConfig battleConfig) {
         Integer battleId = battleConfig.getBattleId();
         String firstKingdomId = battleConfig.getFirstKingdomId();
         String secondKingdomId = battleConfig.getSecondKingdomId();
@@ -97,12 +110,12 @@ public class ManualSimulationInitializer implements SimulationInitializer {
     }
 
 
-    private void onKingdomLaunched(String kingdomId) {
+    private synchronized void onKingdomLaunched(String kingdomId) {
         Kingdom kingdom = kingdomMap.get(kingdomId);
         simulationExecutioner.launchKingdomDeveloping(kingdom, new TimeImpl(Integer.MAX_VALUE));
     }
 
-    private void onKingdomStopped(String kingdomId) {
+    private synchronized void onKingdomStopped(String kingdomId) {
         Kingdom kingdom = kingdomMap.get(kingdomId);
         simulationExecutioner.stopKingdom(kingdom);
     }
