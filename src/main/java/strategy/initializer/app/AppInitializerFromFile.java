@@ -22,6 +22,7 @@ public class AppInitializerFromFile implements AppInitializer {
     public AppInitializerFromFile(BattleOperatorCreator battleOperatorCreator) {
         simulationInitializer = new HashMap<>();
         simulationInitializer.put(SimulationType.AUTOMATIC, () -> new AutomaticSimulationInitializer(battleOperatorCreator.createBasicBattleOperator()));
+        simulationInitializer.put(SimulationType.MANUAL, () -> new ManualSimulationInitializer(battleOperatorCreator.createBasicBattleOperator()));
     }
 
     @Override
