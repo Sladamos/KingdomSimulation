@@ -5,6 +5,7 @@ import strategy.battle.BattleConfig;
 import strategy.events.oneargevent.OneArgEvent;
 import strategy.events.oneargevent.OneArgEventImpl;
 
+import java.util.Scanner;
 import java.util.function.Consumer;
 
 public class ConsoleGUIInputHandler implements AppInputHandler {
@@ -30,12 +31,18 @@ public class ConsoleGUIInputHandler implements AppInputHandler {
     @Override
     public synchronized void enableInputHandling() {
         isLaunched = true;
-        //launch input handler in new thread
-//        while (isLaunched) {
-//            scan option name;
-//            execute option
-//
-//        }
+        //run in another thread
+        Scanner scanner = new Scanner(System.in);
+        while (isLaunched) {
+            //displayOptions -- input handler messages receiver in AppCommunicator should be binded
+            while (isLaunched && !scanner.hasNext()) {
+                Thread.sleep(200);
+            }
+            //read line from scanner
+            //run in error handling layer both:
+                //get option (what if incorrect optionId) -> basic Error (how to catch it?)
+                //optionsExecutioner.executeOption()
+        }
     }
 
     @Override
