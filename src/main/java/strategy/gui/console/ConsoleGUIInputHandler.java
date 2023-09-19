@@ -1,6 +1,7 @@
 package strategy.gui.console;
 
 import strategy.app.AppInputHandler;
+import strategy.battle.BattleConfig;
 import strategy.events.oneargevent.OneArgEvent;
 import strategy.events.oneargevent.OneArgEventImpl;
 
@@ -12,7 +13,7 @@ public class ConsoleGUIInputHandler implements AppInputHandler {
 
     private final OneArgEvent<String> kingdomStopped;
 
-    private final OneArgEvent<Integer> battleLaunched;
+    private final OneArgEvent<BattleConfig> battleLaunched;
 
     private final OneArgEvent<Integer> battleStopped;
 
@@ -48,8 +49,8 @@ public class ConsoleGUIInputHandler implements AppInputHandler {
     }
 
     @Override
-    public void onBattleLaunched(Consumer<Integer> battleIdConsumer) {
-        battleLaunched.addListener(battleIdConsumer);
+    public void onBattleLaunched(Consumer<BattleConfig> battleConfigConsumer) {
+        battleLaunched.addListener(battleConfigConsumer);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package strategy.app;
 
+import strategy.battle.BattleConfig;
 import strategy.message.JSONMessage;
 import strategy.message.StringMessage;
 import strategy.message.sender.MessagesSender;
@@ -63,8 +64,8 @@ public class AppImpl implements App {
     }
 
     @Override
-    public void onBattleLaunched(Consumer<Integer> battleIdConsumer) {
-        appInputHandler.onBattleLaunched(battleIdConsumer);
+    public void onBattleLaunched(Consumer<BattleConfig> battleConfigConsumer) {
+        appInputHandler.onBattleLaunched(battleConfigConsumer);
     }
 
     @Override

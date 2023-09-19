@@ -2,6 +2,7 @@ package strategy.initializer.simulation;
 
 import strategy.app.App;
 import strategy.battle.Battle;
+import strategy.battle.BattleConfig;
 import strategy.battle.creator.BattleCreator;
 import strategy.config.simulation.ManualSimulationConfigParser;
 import strategy.error.BasicAppError;
