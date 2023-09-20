@@ -35,15 +35,11 @@ public class GUIInputHandlerManager implements AppInputHandlerManager {
     public synchronized void enableInputHandling() {
         inputHandler.enableInputHandling();
         isLaunched = true;
-        //run in error handling layer both:
-        //get option (what if incorrect optionId) -> basic Error (how to catch it?)
-        //optionsExecutioner.executeOption()
-
     }
 
     @Override
     public void addInputHandledListener(Consumer<String> listener) {
-
+        inputHandler.addInputHandledListener(listener);
     }
 
     @Override

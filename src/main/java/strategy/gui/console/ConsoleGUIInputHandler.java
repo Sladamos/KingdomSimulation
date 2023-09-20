@@ -11,6 +11,7 @@ import java.util.Scanner;
 import java.util.function.Consumer;
 
 public class ConsoleGUIInputHandler implements Runnable, AppInputHandler {
+
 	private boolean isLaunched;
 
 	private final OneArgEvent<String> inputHandled;
