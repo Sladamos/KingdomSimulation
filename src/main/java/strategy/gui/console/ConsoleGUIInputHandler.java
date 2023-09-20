@@ -2,7 +2,6 @@ package strategy.gui.console;
 
 import strategy.app.AppInputHandler;
 import strategy.error.BasicAppError;
-import strategy.error.ErrorHandler;
 import strategy.events.oneargevent.OneArgEvent;
 import strategy.events.oneargevent.OneArgEventImpl;
 import strategy.util.ProtectedThread;
@@ -26,11 +25,10 @@ public class ConsoleGUIInputHandler implements Runnable, AppInputHandler {
 
 	@Override
 	public void run() {
-		System.out.println("ganczar");
 		Scanner scanner = new Scanner(System.in);
 		while (isLaunched) {
 			waitForInputInScanner();
-			readInputFromScanner(scanner);
+			handleInputFromScanner(scanner);
 		}
 	}
 
@@ -47,7 +45,7 @@ public class ConsoleGUIInputHandler implements Runnable, AppInputHandler {
 		}
 	}
 
-	private void readInputFromScanner(Scanner scanner) {
+	private void handleInputFromScanner(Scanner scanner) {
 		String input = scanner.next();
 		inputHandled.invoke(input);
 	}
