@@ -45,7 +45,9 @@ public class ConsoleGUIInputHandler implements Runnable, AppInputHandler {
 	@Override
 	public synchronized void enableInputHandling() {
 		isLaunched = true;
-		inputHandlerThread.start();
+		if(!inputHandlerThread.isAlive()) {
+			inputHandlerThread.start();
+		}
 	}
 
 	@Override
