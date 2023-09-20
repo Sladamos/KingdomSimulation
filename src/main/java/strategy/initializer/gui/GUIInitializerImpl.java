@@ -3,6 +3,7 @@ package strategy.initializer.gui;
 import strategy.config.GUIConfigParser;
 import strategy.config.creator.ConfigCreator;
 import strategy.config.creator.ConfigCreatorImpl;
+import strategy.error.ErrorHandler;
 import strategy.gui.console.ConsoleGUI;
 import strategy.gui.GUI;
 import strategy.gui.GUIConfig;
@@ -17,9 +18,9 @@ public class GUIInitializerImpl implements GUIInitializer {
 
     private final Map<GUIType, Supplier<GUI>> guiCreators;
 
-    public GUIInitializerImpl() {
+    public GUIInitializerImpl(ErrorHandler errorHandler) {
         guiCreators = new HashMap<>();
-        guiCreators.put(GUIType.CONSOLE, ConsoleGUI::new);
+        guiCreators.put(GUIType.CONSOLE, () -> new ConsoleGUI(errorHandler));
     }
 
     @Override

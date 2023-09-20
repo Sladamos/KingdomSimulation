@@ -2,21 +2,25 @@ package strategy.gui.console;
 
 import strategy.app.AppInputHandler;
 import strategy.error.BasicAppError;
+import strategy.error.ErrorHandler;
 import strategy.events.oneargevent.OneArgEvent;
 import strategy.events.oneargevent.OneArgEventImpl;
 
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.function.Consumer;
 
 public class ConsoleGUIInputHandler implements Runnable, AppInputHandler {
-
 	private boolean isLaunched;
 
 	private final OneArgEvent<String> inputHandled;
 	
 	private final Thread inputHandlerThread;
 
-	public ConsoleGUIInputHandler() {
+	private final ErrorHandler errorHandler;
+
+	public ConsoleGUIInputHandler(ErrorHandler errorHandler) {
+		this.errorHandler = errorHandler;
 		inputHandled = new OneArgEventImpl<>();
 		isLaunched = false;
 		inputHandlerThread = new Thread(this);
@@ -24,19 +28,27 @@ public class ConsoleGUIInputHandler implements Runnable, AppInputHandler {
 
 	@Override
 	public void run() {
+		errorHandler.runInErrorHandler(this::inputHandlingMethod);
+	}
+
+	private void inputHandlingMethod() {
 		Scanner scanner = new Scanner(System.in);
 		while (isLaunched) {
-			waitForInputInScanner(scanner);
+			waitForInputInScanner();
 			readInputFromScanner(scanner);
 		}
 	}
 
-	private void waitForInputInScanner(Scanner scanner) {
-		while (!scanner.hasNext()) {
-			if (!isLaunched) {
-				throw new BasicAppError("Input handler has been terminated.");
+	private void waitForInputInScanner() {
+		try {
+			while (System.in.available() == 0) {
+				if (!isLaunched) {
+					throw new BasicAppError("Input handler has been terminated.");
+				}
+				waitSomeTime();
 			}
-			waitSomeTime();
+		} catch (IOException exception) {
+			throw new BasicAppError("IOException handlein in input handler.");
 		}
 	}
 
@@ -48,6 +60,7 @@ public class ConsoleGUIInputHandler implements Runnable, AppInputHandler {
 	private void waitSomeTime() {
 		try {
 			Thread.sleep(200);
+			throw new BasicAppError("Input handler forced to stop");
 		} catch (InterruptedException e) {
 			throw new BasicAppError("Input handler forced to stop");
 		}

@@ -42,12 +42,12 @@ public class Simulation {
     }
 
     private void start() {
-        GUIInitializer guiInitializer = new GUIInitializerImpl();
+        ErrorHandler errorHandler = new ErrorHandlerImpl();
+        GUIInitializer guiInitializer = new GUIInitializerImpl(errorHandler);
         FileJsonLoader guiConfigLoader = new FileJsonLoaderImpl();
         guiConfigLoader.setFileName("gui.json");
         GUI gui = guiInitializer.initializeGUI(guiConfigLoader);
         App app = new AppImpl(gui.getAppInputHandler(), gui.getAppCommunicator());
-        ErrorHandler errorHandler = new ErrorHandlerImpl();
         app.bindErrorsSender(errorHandler);
         errorHandler.runInErrorHandler(() -> simulationMethod(app));
     }
