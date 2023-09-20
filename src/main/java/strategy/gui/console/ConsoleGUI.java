@@ -13,11 +13,11 @@ public class ConsoleGUI implements GUI {
 
     private final AppInputHandlerManager appInputHandlerManager;
 
-    public ConsoleGUI(ErrorHandler errorHandler) {
+    public ConsoleGUI() {
         appCommunicator = new AppCommunicatorImpl(new ConsoleMessagesReceiver<>(),
                 new ConsoleErrorMessagesReceiver(this::onGUIDisabled),
                 new ConsoleMessagesReceiver<>());
-        appInputHandlerManager = new GUIInputHandlerManager(new ConsoleGUIInputHandler(errorHandler));
+        appInputHandlerManager = new GUIInputHandlerManager(new ConsoleGUIInputHandler());
     }
 
     @Override

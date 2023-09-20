@@ -18,9 +18,9 @@ public class GUIInitializerImpl implements GUIInitializer {
 
     private final Map<GUIType, Supplier<GUI>> guiCreators;
 
-    public GUIInitializerImpl(ErrorHandler errorHandler) {
+    public GUIInitializerImpl() {
         guiCreators = new HashMap<>();
-        guiCreators.put(GUIType.CONSOLE, () -> new ConsoleGUI(errorHandler));
+        guiCreators.put(GUIType.CONSOLE, ConsoleGUI::new);
     }
 
     @Override

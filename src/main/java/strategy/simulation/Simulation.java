@@ -15,6 +15,7 @@ import strategy.initializer.simulation.SimulationInitializer;
 import strategy.json.FileJsonLoader;
 import strategy.json.FileJsonLoaderImpl;
 import strategy.simulation.executioner.SimulationExecutionerImpl;
+import strategy.util.ProtectedThread;
 
 public class Simulation {
     //TODO: run input handling in new thread, then join
@@ -43,7 +44,8 @@ public class Simulation {
 
     private void start() {
         ErrorHandler errorHandler = new ErrorHandlerImpl();
-        GUIInitializer guiInitializer = new GUIInitializerImpl(errorHandler);
+        ProtectedThread.setErrorHandler(errorHandler);
+        GUIInitializer guiInitializer = new GUIInitializerImpl();
         FileJsonLoader guiConfigLoader = new FileJsonLoaderImpl();
         guiConfigLoader.setFileName("gui.json");
         GUI gui = guiInitializer.initializeGUI(guiConfigLoader);

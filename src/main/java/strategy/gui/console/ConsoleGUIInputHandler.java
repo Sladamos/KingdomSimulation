@@ -5,6 +5,7 @@ import strategy.error.BasicAppError;
 import strategy.error.ErrorHandler;
 import strategy.events.oneargevent.OneArgEvent;
 import strategy.events.oneargevent.OneArgEventImpl;
+import strategy.util.ProtectedThread;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -17,21 +18,15 @@ public class ConsoleGUIInputHandler implements Runnable, AppInputHandler {
 	
 	private final Thread inputHandlerThread;
 
-	private final ErrorHandler errorHandler;
-
-	public ConsoleGUIInputHandler(ErrorHandler errorHandler) {
-		this.errorHandler = errorHandler;
+	public ConsoleGUIInputHandler() {
 		inputHandled = new OneArgEventImpl<>();
 		isLaunched = false;
-		inputHandlerThread = new Thread(this);
+		inputHandlerThread = new ProtectedThread(this);
 	}
 
 	@Override
 	public void run() {
-		errorHandler.runInErrorHandler(this::inputHandlingMethod);
-	}
-
-	private void inputHandlingMethod() {
+		System.out.println("ganczar");
 		Scanner scanner = new Scanner(System.in);
 		while (isLaunched) {
 			waitForInputInScanner();
