@@ -60,7 +60,6 @@ public class ConsoleGUIInputHandler implements Runnable, AppInputHandler {
 	private void waitSomeTime() {
 		try {
 			Thread.sleep(200);
-			throw new BasicAppError("Input handler forced to stop");
 		} catch (InterruptedException e) {
 			throw new BasicAppError("Input handler forced to stop");
 		}
