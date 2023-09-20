@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import strategy.error.CriticalAppError;
+import strategy.error.ErrorHandler;
 import strategy.initializer.gui.GUIInitializer;
 import strategy.initializer.gui.GUIInitializerImpl;
 import strategy.json.FileJsonLoader;
@@ -25,7 +26,8 @@ public class GUIInitializerTest {
     @BeforeEach
     public void createJsonLoaderMock() {
         jsonLoader = Mockito.mock(FileJsonLoader.class);
-        guiInitializer = new GUIInitializerImpl();
+        ErrorHandler errorHandler = Mockito.mock(ErrorHandler.class);
+        guiInitializer = new GUIInitializerImpl(errorHandler);
         json = Mockito.mock(JSON.class);
     }
 
