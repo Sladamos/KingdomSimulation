@@ -16,7 +16,7 @@ public class ConsoleGUI implements GUI {
         appCommunicator = new AppCommunicatorImpl(new ConsoleMessagesReceiver<>(),
                 new ConsoleErrorMessagesReceiver(this::onGUIDisabled),
                 new ConsoleMessagesReceiver<>());
-        appInputHandlerManager = new GUIInputHandlerManager();
+        appInputHandlerManager = new GUIInputHandlerManager(new ConsoleGUIInputHandler());
     }
 
     @Override

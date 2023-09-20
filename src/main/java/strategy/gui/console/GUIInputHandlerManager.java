@@ -1,5 +1,6 @@
 package strategy.gui.console;
 
+import strategy.app.AppInputHandler;
 import strategy.app.AppInputHandlerManager;
 import strategy.battle.BattleConfig;
 import strategy.events.oneargevent.OneArgEvent;
@@ -17,9 +18,12 @@ public class GUIInputHandlerManager implements AppInputHandlerManager {
 
     private final OneArgEvent<Integer> battleStopped;
 
+    private final AppInputHandler inputHandler;
+
     private boolean isLaunched;
 
-    public GUIInputHandlerManager() {
+    public GUIInputHandlerManager(AppInputHandler inputHandler) {
+        this.inputHandler = inputHandler;
         isLaunched = false;
         kingdomLaunched = new OneArgEventImpl<>();
         kingdomStopped = new OneArgEventImpl<>();
@@ -29,12 +33,16 @@ public class GUIInputHandlerManager implements AppInputHandlerManager {
 
     @Override
     public synchronized void enableInputHandling() {
+        inputHandler.enableInputHandling();
         isLaunched = true;
-        //run in another thread
-        //read line from scanner
         //run in error handling layer both:
         //get option (what if incorrect optionId) -> basic Error (how to catch it?)
         //optionsExecutioner.executeOption()
+
+    }
+
+    @Override
+    public void addInputHandledListener(Consumer<String> listener) {
 
     }
 
@@ -60,6 +68,7 @@ public class GUIInputHandlerManager implements AppInputHandlerManager {
 
     @Override
     public synchronized void disableInputHandling() {
+        inputHandler.disableInputHandling();
         isLaunched = false;
         notifyAll();
     }

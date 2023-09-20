@@ -1,6 +1,7 @@
 package strategy.gui.console;
 
 import strategy.app.AppInputHandler;
+import strategy.error.BasicAppError;
 import strategy.events.oneargevent.OneArgEvent;
 import strategy.events.oneargevent.OneArgEventImpl;
 
@@ -25,15 +26,30 @@ public class ConsoleGUIInputHandler implements Runnable, AppInputHandler {
 	public void run() {
 		Scanner scanner = new Scanner(System.in);
 		while (isLaunched) {
-			while (!scanner.hasNext()) {
-				if (!isLaunched) {
-					break;
-				}
-				Thread.sleep(200);
-			}
-			String input = scanner.next();
-			inputHandled.invoke(input);
+			waitForInputInScanner(scanner);
+			readInputFromScanner(scanner);
+		}
+	}
 
+	private void waitForInputInScanner(Scanner scanner) {
+		while (!scanner.hasNext()) {
+			if (!isLaunched) {
+				throw new BasicAppError("Input handler has been terminated.");
+			}
+			waitSomeTime();
+		}
+	}
+
+	private void readInputFromScanner(Scanner scanner) {
+		String input = scanner.next();
+		inputHandled.invoke(input);
+	}
+
+	private void waitSomeTime() {
+		try {
+			Thread.sleep(200);
+		} catch (InterruptedException e) {
+			throw new BasicAppError("Input handler forced to stop");
 		}
 	}
 

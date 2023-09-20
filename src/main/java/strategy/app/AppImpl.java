@@ -54,6 +54,11 @@ public class AppImpl implements App {
     }
 
     @Override
+    public void addInputHandledListener(Consumer<String> listener) {
+        appInputHandlerManager.addInputHandledListener(listener);
+    }
+
+    @Override
     public void onKingdomLaunched(Consumer<String> kingdomIdConsumer) {
         appInputHandlerManager.onKingdomLaunched(kingdomIdConsumer);
     }
@@ -71,6 +76,11 @@ public class AppImpl implements App {
     @Override
     public void onBattleStopped(Consumer<Integer> battleIdConsumer) {
         appInputHandlerManager.onBattleStopped(battleIdConsumer);
+    }
+
+    @Override
+    public void waitOnAppClose() {
+        appInputHandlerManager.waitOnAppClose();
     }
 
     @Override
