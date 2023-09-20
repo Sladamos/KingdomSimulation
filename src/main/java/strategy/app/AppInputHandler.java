@@ -1,15 +1,9 @@
 package strategy.app;
 
-import strategy.battle.BattleConfig;
-
 import java.util.function.Consumer;
 
 public interface AppInputHandler {
-    void enableInputHandling();
-    void onKingdomLaunched(Consumer<String> kingdomIdConsumer);
-    void onKingdomStopped(Consumer<String> kingdomIdConsumer);
-    void onBattleLaunched(Consumer<BattleConfig> battleConfigConsumer);
-    void onBattleStopped(Consumer<Integer> battleIdConsumer);
-    void disableInputHandling();
-    void waitOnAppClose();
+	void disableInputHandling();
+	void enableInputHandling();
+	void addInputHandledListener(Consumer<String> listener);
 }

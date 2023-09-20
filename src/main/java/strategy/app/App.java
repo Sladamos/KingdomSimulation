@@ -1,4 +1,4 @@
 package strategy.app;
 
-public interface App extends AppCommunicator, AppInputHandler {
+public interface App extends AppCommunicator, AppInputHandlerManager {
 }

@@ -11,10 +11,10 @@ public class AppImpl implements App {
     
     private final AppCommunicator appCommunicator;
 
-    private final AppInputHandler appInputHandler;
+    private final AppInputHandlerManager appInputHandlerManager;
 
-    public AppImpl(AppInputHandler appInputHandler, AppCommunicator appCommunicator) {
-        this.appInputHandler = appInputHandler;
+    public AppImpl(AppInputHandlerManager appInputHandlerManager, AppCommunicator appCommunicator) {
+        this.appInputHandlerManager = appInputHandlerManager;
         this.appCommunicator = appCommunicator;
     }
 
@@ -50,31 +50,31 @@ public class AppImpl implements App {
 
     @Override
     public void enableInputHandling() {
-        appInputHandler.enableInputHandling();
+        appInputHandlerManager.enableInputHandling();
     }
 
     @Override
     public void onKingdomLaunched(Consumer<String> kingdomIdConsumer) {
-        appInputHandler.onKingdomLaunched(kingdomIdConsumer);
+        appInputHandlerManager.onKingdomLaunched(kingdomIdConsumer);
     }
 
     @Override
     public void onKingdomStopped(Consumer<String> kingdomIdConsumer) {
-        appInputHandler.onKingdomStopped(kingdomIdConsumer);
+        appInputHandlerManager.onKingdomStopped(kingdomIdConsumer);
     }
 
     @Override
     public void onBattleLaunched(Consumer<BattleConfig> battleConfigConsumer) {
-        appInputHandler.onBattleLaunched(battleConfigConsumer);
+        appInputHandlerManager.onBattleLaunched(battleConfigConsumer);
     }
 
     @Override
     public void onBattleStopped(Consumer<Integer> battleIdConsumer) {
-        appInputHandler.onBattleStopped(battleIdConsumer);
+        appInputHandlerManager.onBattleStopped(battleIdConsumer);
     }
 
     @Override
     public void disableInputHandling() {
-        appInputHandler.disableInputHandling();
+        appInputHandlerManager.disableInputHandling();
     }
 }
