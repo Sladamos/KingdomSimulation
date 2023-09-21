@@ -1,6 +1,6 @@
 package strategy.storage;
 
-import strategy.buffor.SwitchableBuffer;
+import strategy.buffer.SwitchableBuffer;
 import strategy.item.Item;
 import strategy.message.JSONMessage;
 import strategy.message.sender.MessagesSender;

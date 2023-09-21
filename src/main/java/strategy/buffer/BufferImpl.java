@@ -1,4 +1,4 @@
-package strategy.buffor;
+package strategy.buffer;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -26,7 +26,7 @@ public class BufferImpl<T> implements SwitchableBuffer<T> {
 	public synchronized T getItem() {
 		waitForItemInStorage();
 		if (!isWorking) {
-			throw new BufforTerminatedException();
+			throw new BufferTerminatedException();
 		}
 		return buffor.pop();
 	}

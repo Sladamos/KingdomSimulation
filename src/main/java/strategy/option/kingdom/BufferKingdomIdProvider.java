@@ -1,6 +1,6 @@
 package strategy.option.kingdom;
 
-import strategy.buffor.Buffer;
+import strategy.buffer.Buffer;
 
 public class BufferKingdomIdProvider implements KingdomIdProvider {
 

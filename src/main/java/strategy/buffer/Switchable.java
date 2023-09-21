@@ -1,4 +1,4 @@
-package strategy.buffor;
+package strategy.buffer;
 
 public interface Switchable {
 	void enableAcceptingItems();
