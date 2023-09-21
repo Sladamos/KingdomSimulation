@@ -29,7 +29,7 @@ public class BattleLauncherImpl implements BattleLauncher {
 		if(registeredBattles.containsKey(battle)) {
 			registeredBattles.get(battle).add(battleFuture);
 		} else {
-			List<Future<?>> battleFutures = Collections.singletonList(battleFuture);
+			List<Future<?>> battleFutures = new ArrayList<>(Collections.singletonList(battleFuture));
 			registeredBattles.put(battle, battleFutures);
 		}
 	}
