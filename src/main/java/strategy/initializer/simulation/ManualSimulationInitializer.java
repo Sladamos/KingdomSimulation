@@ -30,6 +30,8 @@ public class ManualSimulationInitializer implements SimulationInitializer {
 
     private SimulationExecutioner simulationExecutioner;
 
+    private App app;
+
     public ManualSimulationInitializer(BattleCreator battleCreator) {
         this.battleCreator = battleCreator;
         simulationConfig = createSimulationConfig();
@@ -47,6 +49,7 @@ public class ManualSimulationInitializer implements SimulationInitializer {
 
     @Override
     public void initializeSimulation(App app, SimulationExecutioner simulationExecutioner) {
+        this.app = app;
         this.simulationExecutioner = simulationExecutioner;
         createKingdom(simulationConfig.getFirstKingdomConfig());
         createKingdom(simulationConfig.getSecondKingdomConfig());
@@ -59,6 +62,7 @@ public class ManualSimulationInitializer implements SimulationInitializer {
         stopSimulation();
 
         this.simulationExecutioner = null;
+        this.app = null;
     }
 
     private void stopSimulation() {
@@ -103,16 +107,23 @@ public class ManualSimulationInitializer implements SimulationInitializer {
         Kingdom secondKingdom = kingdomMap.get(secondKingdomId);
         Battle battle = battleCreator.createBattle(firstKingdom, secondKingdom);
         simulationExecutioner.launchBattle(battle);
+        app.bindBattleSender(battle);
         battleMap.put(battleId, battle);
     }
 
 
     private synchronized void onKingdomLaunched(String kingdomId) {
+        if(!kingdomMap.containsKey(kingdomId)) {
+            throw new BasicAppError("Incorrect kingdom ID");
+        }
         Kingdom kingdom = kingdomMap.get(kingdomId);
         simulationExecutioner.launchKingdomDeveloping(kingdom, new TimeImpl(Integer.MAX_VALUE));
     }
 
     private synchronized void onKingdomStopped(String kingdomId) {
+        if(!kingdomMap.containsKey(kingdomId)) {
+            throw new BasicAppError("Incorrect kingdom ID");
+        }
         Kingdom kingdom = kingdomMap.get(kingdomId);
         simulationExecutioner.stopKingdom(kingdom);
     }
@@ -120,5 +131,6 @@ public class ManualSimulationInitializer implements SimulationInitializer {
     private void createKingdom(KingdomConfig kingdomConfig) {
         Kingdom kingdom = simulationExecutioner.createKingdom(kingdomConfig);
         kingdomMap.put(kingdom.getId(), kingdom);
+        app.bindKingdomSender(kingdom);
     }
 }

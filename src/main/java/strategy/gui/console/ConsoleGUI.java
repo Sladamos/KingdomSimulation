@@ -37,7 +37,7 @@ public class ConsoleGUI implements GUI {
                 new ConsoleMessagesReceiver<>());
         modificableAppOptionsManager = createOptionsManager(optionsBuffer);
         OptionsExecutioner optionsExecutioner = createOptionsExecutioner(optionsBuffer);
-        appInputHandlerManager = new GUIInputHandlerManager(new ConsoleGUIInputHandler(), optionsExecutioner);
+        appInputHandlerManager = new GUIInputHandlerManager(new ConsoleInputHandler(), optionsExecutioner);
         appInputHandlerManager.addInputHandledListener(optionsBuffer::addItem);
         optionsBuffer.enableAcceptingItems();
     }

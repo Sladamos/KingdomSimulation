@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.function.Consumer;
 
-public class ConsoleGUIInputHandler implements AppInputHandler {
+public class ConsoleInputHandler implements AppInputHandler {
 
 	private boolean isLaunched;
 
@@ -18,7 +18,7 @@ public class ConsoleGUIInputHandler implements AppInputHandler {
 
 	private final Thread inputHandlerThread;
 
-	public ConsoleGUIInputHandler() {
+	public ConsoleInputHandler() {
 		inputHandled = new OneArgEventImpl<>();
 		isLaunched = false;
 		inputHandlerThread = new ProtectedThread(this::run);
@@ -74,7 +74,7 @@ public class ConsoleGUIInputHandler implements AppInputHandler {
 
 	private void handleInputFromScanner(Scanner scanner) {
 		if(isLaunched) {
-			String input = scanner.next();
+			String input = scanner.nextLine();
 			inputHandled.invoke(input);
 		}
 	}
