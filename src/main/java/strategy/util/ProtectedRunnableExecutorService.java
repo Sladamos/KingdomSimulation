@@ -60,22 +60,22 @@ public class ProtectedRunnableExecutorService implements ExecutorService {
 	}
 
 	@Override
-	public <T> List<Future<T>> invokeAll(Collection<? extends Callable<T>> collection) throws InterruptedException {
+	public <T> List<Future<T>> invokeAll(Collection<? extends Callable<T>> collection) {
 		throw new CriticalAppError("Callable is not supported!");
 	}
 
 	@Override
-	public <T> List<Future<T>> invokeAll(Collection<? extends Callable<T>> collection, long l, TimeUnit timeUnit) throws InterruptedException {
+	public <T> List<Future<T>> invokeAll(Collection<? extends Callable<T>> collection, long l, TimeUnit timeUnit) {
 		throw new CriticalAppError("Callable is not supported!");
 	}
 
 	@Override
-	public <T> T invokeAny(Collection<? extends Callable<T>> collection) throws InterruptedException, ExecutionException {
+	public <T> T invokeAny(Collection<? extends Callable<T>> collection) {
 		throw new CriticalAppError("Callable is not supported!");
 	}
 
 	@Override
-	public <T> T invokeAny(Collection<? extends Callable<T>> collection, long l, TimeUnit timeUnit) throws InterruptedException, ExecutionException, TimeoutException {
+	public <T> T invokeAny(Collection<? extends Callable<T>> collection, long l, TimeUnit timeUnit) {
 		throw new CriticalAppError("Callable is not supported!");
 	}
 
