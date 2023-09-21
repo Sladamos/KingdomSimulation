@@ -19,13 +19,11 @@ import strategy.util.ProtectedThread;
 
 public class Simulation {
     //TODO:
-    // option class with execute method
-    // options launcher in input handler manager -> binded to input handler
-    // options launcher listening input handler -> runs options in Protected Threads
+    // remove thread from executioner -> launch it in manager
+    // also create input handler launcher -> in console for example run in new thread
     // 1. find option creator 2. create option 3. execute option 4. display possible options creators
-    // launchKingdomCreator: createOption() -> //get kingdom Id
+    // launchKingdomCreator: createOption(buffer) -> //get kingdom Id
     // for example LaunchKingdomOption -> execute : kingdomLaunched.invoke();
-    // but how to get kingdom Id?
 
     /*TODO gui:
         two panels with names of materials and count of each one (consider it!):
