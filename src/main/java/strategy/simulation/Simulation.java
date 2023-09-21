@@ -20,7 +20,7 @@ import strategy.util.ProtectedThread;
 
 public class Simulation {
     //TODO:
-    // add battle stop and battle launch
+    // add battle stop and battle launch -> battle stop easy | battle launch automatic id creator (if both names are ok)
     // possible options displaying
     // displaying in option (fe. provide kingdom Id)
 
