@@ -15,6 +15,7 @@ import strategy.initializer.simulation.SimulationInitializer;
 import strategy.json.FileJsonLoader;
 import strategy.json.FileJsonLoaderImpl;
 import strategy.simulation.executioner.SimulationExecutionerImpl;
+import strategy.util.ProtectedRunnableExecutorService;
 import strategy.util.ProtectedThread;
 
 public class Simulation {
@@ -49,6 +50,7 @@ public class Simulation {
     private void start() {
         ErrorHandler errorHandler = new ErrorHandlerImpl();
         ProtectedThread.setErrorHandler(errorHandler);
+        ProtectedRunnableExecutorService.setErrorHandler(errorHandler);
         GUIInitializer guiInitializer = new GUIInitializerImpl();
         FileJsonLoader guiConfigLoader = new FileJsonLoaderImpl();
         guiConfigLoader.setFileName("gui.json");

@@ -3,6 +3,9 @@ package strategy.app.controller;
 import strategy.app.inputhandller.AppInputHandler;
 import strategy.buffer.SwitchableBuffer;
 import strategy.option.OptionsExecutioner;
+import strategy.util.ProtectedRunnableExecutorService;
+
+import java.util.concurrent.ExecutorService;
 
 public class AppControllerImpl implements AppController {
 
@@ -12,12 +15,15 @@ public class AppControllerImpl implements AppController {
 
 	private final SwitchableBuffer<String> optionsBuffer;
 
+	private final ExecutorService executorService;
+
 	private boolean isLaunched;
 
 	public AppControllerImpl(AppInputHandler inputHandler, OptionsExecutioner optionsExecutioner, SwitchableBuffer<String> optionsBuffer) {
 		this.inputHandler = inputHandler;
 		this.optionsExecutioner = optionsExecutioner;
 		this.optionsBuffer = optionsBuffer;
+		executorService = new ProtectedRunnableExecutorService();
 		isLaunched = false;
 	}
 
@@ -34,8 +40,8 @@ public class AppControllerImpl implements AppController {
 	@Override
 	public synchronized void enableExecutingOptions() {
         optionsBuffer.enableAcceptingItems();
-        inputHandler.enableInputHandling();
-        optionsExecutioner.enableExecuting();
+		executorService.execute(inputHandler);
+		executorService.execute(optionsExecutioner);
         isLaunched = true;
 	}
 
