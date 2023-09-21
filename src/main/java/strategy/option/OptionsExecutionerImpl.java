@@ -1,6 +1,7 @@
 package strategy.option;
 
-import strategy.buffor.Buffer;
+import strategy.buffer.Buffer;
+import strategy.buffer.BufferTerminatedException;
 import strategy.error.BasicAppError;
 import strategy.util.ProtectedThread;
 
@@ -37,11 +38,15 @@ public class OptionsExecutionerImpl implements OptionsExecutioner {
 	}
 
 	private void run() {
-		while (isExecuting) {
-			String selectedOptionName = optionsBuffer.getItem();
-			Thread optionRunner = new ProtectedThread(() -> executeOptionWithName(selectedOptionName));
-			optionRunner.start();
-			waitForOptionEnd(optionRunner);
+		try {
+			while (isExecuting) {
+				String selectedOptionName = optionsBuffer.getItem();
+				Thread optionRunner = new ProtectedThread(() -> executeOptionWithName(selectedOptionName));
+				optionRunner.start();
+				waitForOptionEnd(optionRunner);
+			}
+		} catch (BufferTerminatedException exception) {
+			disableExecuting();
 		}
 	}
 
