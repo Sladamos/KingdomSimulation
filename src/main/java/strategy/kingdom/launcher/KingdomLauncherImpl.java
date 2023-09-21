@@ -2,10 +2,7 @@ package strategy.kingdom.launcher;
 
 import strategy.kingdom.Kingdom;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -32,7 +29,7 @@ public class KingdomLauncherImpl implements KingdomLauncher {
         if(registeredKingdoms.containsKey(kingdom)) {
             registeredKingdoms.get(kingdom).add(kingdomFuture);
         } else {
-            List<Future<?>> kingdomFutures = Collections.singletonList(kingdomFuture);
+            List<Future<?>> kingdomFutures = new ArrayList<>(Collections.singletonList(kingdomFuture));
             registeredKingdoms.put(kingdom, kingdomFutures);
         }
     }
