@@ -1,19 +1,14 @@
 package strategy.option;
 
-import lombok.Getter;
-import strategy.buffor.BufferImpl;
-import strategy.buffor.SwitchableBuffer;
+import strategy.buffor.Buffer;
 import strategy.error.BasicAppError;
-import strategy.error.CriticalAppError;
 import strategy.util.ProtectedThread;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class OptionsExecutionerImpl implements OptionsExecutioner {
 
-	@Getter
-	private final SwitchableBuffer<String> optionsBuffer;
+	private final Buffer<String> optionsBuffer;
 
 	private final Map<String, Option> options;
 
@@ -21,10 +16,10 @@ public class OptionsExecutionerImpl implements OptionsExecutioner {
 
 	private boolean isExecuting;
 
-	public OptionsExecutionerImpl() {
-		optionsBuffer = new BufferImpl<>();
+	public OptionsExecutionerImpl(Map<String, Option> options, Buffer<String> optionsBuffer) {
+		this.options = options;
+		this.optionsBuffer = optionsBuffer;
 		isExecuting = false;
-		options = new HashMap<>();
 		optionsExecutionerThread = new ProtectedThread(this::run);
 	}
 
@@ -39,14 +34,6 @@ public class OptionsExecutionerImpl implements OptionsExecutioner {
 	@Override
 	public void disableExecuting() {
 		isExecuting = false;
-	}
-
-	@Override
-	public synchronized void addOption(String optionName, Option option) {
-		if(options.containsKey(optionName)) {
-			throw new CriticalAppError("Incorrect option name.");
-		}
-		options.put(optionName, option);
 	}
 
 	private void run() {

@@ -2,7 +2,6 @@ package strategy.option.kingdom;
 
 import strategy.events.oneargevent.OneArgEvent;
 import strategy.events.oneargevent.OneArgEventImpl;
-import strategy.option.Option;
 
 import java.util.function.Consumer;
 
@@ -10,15 +9,17 @@ public class KingdomLaunchedOptionImpl implements KingdomLaunchedOption {
 	
 	private final OneArgEvent<String> kingdomLaunched;
 
-	public KingdomLaunchedOptionImpl() {
+	private final KingdomIdProvider kingdomIdProvider;
+
+	public KingdomLaunchedOptionImpl(KingdomIdProvider kingdomIdProvider) {
+		this.kingdomIdProvider = kingdomIdProvider;
 		kingdomLaunched = new OneArgEventImpl<>();
 	}
 
 	@Override
 	public void execute() {
-		//passIdCreatorInConstructor(fromInputBuffer)
-		//getIdFromCreator
-		kingdomLaunched.invoke("");
+		String kingdomId = kingdomIdProvider.getKingdomId();
+		kingdomLaunched.invoke(kingdomId);
 	}
 
 	@Override

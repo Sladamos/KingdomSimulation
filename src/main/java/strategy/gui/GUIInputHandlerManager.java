@@ -2,11 +2,7 @@ package strategy.gui;
 
 import strategy.app.AppInputHandler;
 import strategy.app.AppInputHandlerManager;
-import strategy.battle.BattleConfig;
-import strategy.events.oneargevent.OneArgEvent;
-import strategy.events.oneargevent.OneArgEventImpl;
 import strategy.option.OptionsExecutioner;
-import strategy.option.OptionsExecutionerImpl;
 
 import java.util.function.Consumer;
 
@@ -18,16 +14,15 @@ public class GUIInputHandlerManager implements AppInputHandlerManager {
 
     private boolean isLaunched;
 
-    public GUIInputHandlerManager(AppInputHandler inputHandler) {
+    public GUIInputHandlerManager(AppInputHandler inputHandler, OptionsExecutioner optionsExecutioner) {
         this.inputHandler = inputHandler;
+        this.optionsExecutioner = optionsExecutioner;
         isLaunched = false;
-        optionsExecutioner = new OptionsExecutionerImpl();
-        inputHandler.addInputHandledListener((input) -> optionsExecutioner.getOptionsBuffer().addItem(input));
     }
 
     @Override
     public synchronized void enableInputHandling() {
-        optionsExecutioner.getOptionsBuffer().enableAcceptingItems();
+        //optionsExecutioner.getOptionsBuffer().enableAcceptingItems();
         inputHandler.enableInputHandling();
         optionsExecutioner.enableExecuting();
         isLaunched = true;
@@ -41,7 +36,7 @@ public class GUIInputHandlerManager implements AppInputHandlerManager {
     @Override
     public synchronized void disableInputHandling() {
         optionsExecutioner.disableExecuting();
-        optionsExecutioner.getOptionsBuffer().disableAcceptingItems();
+        //optionsExecutioner.getOptionsBuffer().disableAcceptingItems();
         inputHandler.disableInputHandling();
         isLaunched = false;
         notifyAll();

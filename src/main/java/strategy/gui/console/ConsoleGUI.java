@@ -8,10 +8,19 @@ import strategy.app.options.AppOptionsManagerImpl;
 import strategy.app.options.ModificableAppOptionsManager;
 import strategy.buffor.Buffer;
 import strategy.buffor.BufferImpl;
+import strategy.buffor.SwitchableBuffer;
 import strategy.gui.GUI;
 import strategy.gui.GUIInputHandlerManager;
 import strategy.message.receiver.ConsoleMessagesReceiver;
+import strategy.option.Option;
+import strategy.option.OptionsExecutioner;
+import strategy.option.OptionsExecutionerImpl;
+import strategy.option.kingdom.BufferKingdomIdProvider;
+import strategy.option.kingdom.KingdomIdProvider;
+import strategy.option.kingdom.KingdomLaunchedOption;
 import strategy.option.kingdom.KingdomLaunchedOptionImpl;
+
+import java.util.Map;
 
 public class ConsoleGUI implements GUI {
 
@@ -19,17 +28,31 @@ public class ConsoleGUI implements GUI {
 
     private final AppInputHandlerManager appInputHandlerManager;
 
-
     private final ModificableAppOptionsManager modificableAppOptionsManager;
 
     public ConsoleGUI() {
-        Buffer<String> optionsBuffer = new BufferImpl<>();
+        SwitchableBuffer<String> optionsBuffer = new BufferImpl<>();
         appCommunicator = new AppCommunicatorImpl(new ConsoleMessagesReceiver<>(),
                 new ConsoleErrorMessagesReceiver(this::onGUIDisabled),
                 new ConsoleMessagesReceiver<>());
-        appInputHandlerManager = new GUIInputHandlerManager(new ConsoleGUIInputHandler(), optionsBuffer);
-        modificableAppOptionsManager = new AppOptionsManagerImpl();
-        modificableAppOptionsManager.setKingdomLaunchedOption(new KingdomLaunchedOptionImpl(new BufferKingdomIdProvider(optionsBuffer)));
+        modificableAppOptionsManager = createOptionsManager(optionsBuffer);
+        OptionsExecutioner optionsExecutioner = createOptionsExecutioner(optionsBuffer);
+        appInputHandlerManager = new GUIInputHandlerManager(new ConsoleGUIInputHandler(), optionsExecutioner);
+        appInputHandlerManager.addInputHandledListener(optionsBuffer::addItem);
+        optionsBuffer.enableAcceptingItems();
+    }
+
+    private OptionsExecutioner createOptionsExecutioner(Buffer<String> optionsBuffer) {
+        Map<String, Option> managedOptions = modificableAppOptionsManager.getManagedOptions();
+        return new OptionsExecutionerImpl(managedOptions, optionsBuffer);
+    }
+
+    private ModificableAppOptionsManager createOptionsManager(Buffer<String> optionsBuffer) {
+        ModificableAppOptionsManager optionsManager = new AppOptionsManagerImpl();
+        KingdomIdProvider kingdomIdProvider = new BufferKingdomIdProvider(optionsBuffer);
+        KingdomLaunchedOption kingdomLaunchedOption = new KingdomLaunchedOptionImpl(kingdomIdProvider);
+        optionsManager.setKingdomLaunchedOption(kingdomLaunchedOption);
+        return optionsManager;
     }
 
     @Override
