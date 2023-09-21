@@ -20,10 +20,7 @@ import strategy.util.ProtectedThread;
 
 public class Simulation {
     //TODO:
-    // AppController
-    // disabling app
     // add battle stop and battle launch
-    // remove thread from executioner and input handler
     // possible options displaying
     // displaying in option (fe. provide kingdom Id)
 
