@@ -3,8 +3,8 @@ package strategy.gui.console;
 import strategy.app.AppCommunicator;
 import strategy.app.AppCommunicatorImpl;
 import strategy.app.AppInputHandlerManager;
-import strategy.error.ErrorHandler;
 import strategy.gui.GUI;
+import strategy.gui.GUIInputHandlerManager;
 import strategy.message.receiver.ConsoleMessagesReceiver;
 
 public class ConsoleGUI implements GUI {

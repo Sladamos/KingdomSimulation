@@ -10,53 +10,18 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.function.Consumer;
 
-public class ConsoleGUIInputHandler implements Runnable, AppInputHandler {
+public class ConsoleGUIInputHandler implements AppInputHandler {
 
 	private boolean isLaunched;
 
 	private final OneArgEvent<String> inputHandled;
-	
+
 	private final Thread inputHandlerThread;
 
 	public ConsoleGUIInputHandler() {
 		inputHandled = new OneArgEventImpl<>();
 		isLaunched = false;
-		inputHandlerThread = new ProtectedThread(this);
-	}
-
-	@Override
-	public void run() {
-		Scanner scanner = new Scanner(System.in);
-		while (isLaunched) {
-			waitForInputInScanner();
-			handleInputFromScanner(scanner);
-		}
-	}
-
-	private void waitForInputInScanner() {
-		try {
-			while (System.in.available() == 0) {
-				if (!isLaunched) {
-					throw new BasicAppError("Input handler has been terminated.");
-				}
-				waitSomeTime();
-			}
-		} catch (IOException exception) {
-			throw new BasicAppError("IOException handlein in input handler.");
-		}
-	}
-
-	private void handleInputFromScanner(Scanner scanner) {
-		String input = scanner.next();
-		inputHandled.invoke(input);
-	}
-
-	private void waitSomeTime() {
-		try {
-			Thread.sleep(200);
-		} catch (InterruptedException e) {
-			throw new BasicAppError("Input handler forced to stop");
-		}
+		inputHandlerThread = new ProtectedThread(this::run);
 	}
 
 	@Override
@@ -75,5 +40,42 @@ public class ConsoleGUIInputHandler implements Runnable, AppInputHandler {
 	@Override
 	public void addInputHandledListener(Consumer<String> listener) {
 		inputHandled.addListener(listener);
+	}
+
+	private void run() {
+		Scanner scanner = new Scanner(System.in);
+		while (isLaunched) {
+			waitForInputInScanner();
+			handleInputFromScanner(scanner);
+		}
+	}
+
+	private void waitForInputInScanner() {
+		try {
+			while (isLaunched && doesNotHaveInput()) {
+				waitSomeTime();
+			}
+		} catch (IOException exception) {
+			throw new BasicAppError("IOException handled in in input handler.");
+		}
+	}
+
+	private boolean doesNotHaveInput() throws IOException {
+		return System.in.available() == 0;
+	}
+
+	private void waitSomeTime() {
+		try {
+			Thread.sleep(200);
+		} catch (InterruptedException e) {
+			throw new BasicAppError("Input handler forced to stop");
+		}
+	}
+
+	private void handleInputFromScanner(Scanner scanner) {
+		if(isLaunched) {
+			String input = scanner.next();
+			inputHandled.invoke(input);
+		}
 	}
 }

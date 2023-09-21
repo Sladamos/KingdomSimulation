@@ -1,4 +1,4 @@
-package strategy.gui.console;
+package strategy.gui;
 
 import strategy.app.AppInputHandler;
 import strategy.app.AppInputHandlerManager;
