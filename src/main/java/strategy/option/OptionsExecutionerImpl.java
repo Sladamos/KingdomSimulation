@@ -25,19 +25,13 @@ public class OptionsExecutionerImpl implements OptionsExecutioner {
 	}
 
 	@Override
-	public void enableExecuting() {
-		isExecuting = true;
-		if(!optionsExecutionerThread.isAlive()) {
-			optionsExecutionerThread.start();
-		}
-	}
-
-	@Override
 	public void disableExecuting() {
 		isExecuting = false;
 	}
 
-	private void run() {
+	@Override
+	public void run() {
+		isExecuting = true;
 		try {
 			while (isExecuting) {
 				String selectedOptionName = optionsBuffer.getItem();

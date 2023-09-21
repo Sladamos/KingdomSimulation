@@ -1,6 +1,5 @@
 package strategy.option;
 
-public interface OptionsExecutioner {
+public interface OptionsExecutioner extends Runnable {
 	void disableExecuting();
-	void enableExecuting();
 }
