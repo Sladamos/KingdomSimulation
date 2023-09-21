@@ -3,13 +3,13 @@ package strategy.buffor;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-public class BufforImpl<T> implements Buffor<T>, SwitchableBuffor {
+public class BufferImpl<T> implements SwitchableBuffer<T> {
 
 	private final Deque<T> buffor;
 
 	private boolean isWorking;
 
-	public BufforImpl() {
+	public BufferImpl() {
 		buffor = new ArrayDeque<>();
 		isWorking = false;
 	}

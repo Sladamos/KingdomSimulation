@@ -1,8 +1,8 @@
 package strategy.option;
 
 import lombok.Getter;
-import strategy.buffor.Buffor;
-import strategy.buffor.BufforImpl;
+import strategy.buffor.BufferImpl;
+import strategy.buffor.SwitchableBuffer;
 import strategy.error.BasicAppError;
 import strategy.error.CriticalAppError;
 import strategy.util.ProtectedThread;
@@ -13,16 +13,27 @@ import java.util.Map;
 public class OptionsExecutionerImpl implements OptionsExecutioner {
 
 	@Getter
-	private final Buffor<String> optionsBuffor;
+	private final SwitchableBuffer<String> optionsBuffer;
 
 	private final Map<String, Option> options;
+
+	private final Thread optionsExecutionerThread;
 
 	private boolean isExecuting;
 
 	public OptionsExecutionerImpl() {
-		optionsBuffor = new BufforImpl<>();
+		optionsBuffer = new BufferImpl<>();
 		isExecuting = false;
 		options = new HashMap<>();
+		optionsExecutionerThread = new ProtectedThread(this::run);
+	}
+
+	@Override
+	public void enableExecuting() {
+		isExecuting = true;
+		if(!optionsExecutionerThread.isAlive()) {
+			optionsExecutionerThread.start();
+		}
 	}
 
 	@Override
@@ -38,11 +49,9 @@ public class OptionsExecutionerImpl implements OptionsExecutioner {
 		options.put(optionName, option);
 	}
 
-	@Override
-	public void run() {
-		isExecuting = true;
+	private void run() {
 		while (isExecuting) {
-			String selectedOptionName = optionsBuffor.getItem();
+			String selectedOptionName = optionsBuffer.getItem();
 			Thread optionRunner = new ProtectedThread(() -> executeOptionWithName(selectedOptionName));
 			optionRunner.start();
 			waitForOptionEnd(optionRunner);

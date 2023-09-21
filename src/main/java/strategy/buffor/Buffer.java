@@ -1,6 +1,6 @@
 package strategy.buffor;
 
-public interface Buffor<T> {
+public interface Buffer<T> {
 	void addItem(T item);
 	T getItem();
 }

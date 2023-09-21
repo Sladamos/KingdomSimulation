@@ -5,6 +5,8 @@ import strategy.app.AppInputHandlerManager;
 import strategy.battle.BattleConfig;
 import strategy.events.oneargevent.OneArgEvent;
 import strategy.events.oneargevent.OneArgEventImpl;
+import strategy.option.OptionsExecutioner;
+import strategy.option.OptionsExecutionerImpl;
 
 import java.util.function.Consumer;
 
@@ -20,6 +22,8 @@ public class GUIInputHandlerManager implements AppInputHandlerManager {
 
     private final AppInputHandler inputHandler;
 
+    private final OptionsExecutioner optionsExecutioner;
+
     private boolean isLaunched;
 
     public GUIInputHandlerManager(AppInputHandler inputHandler) {
@@ -29,11 +33,19 @@ public class GUIInputHandlerManager implements AppInputHandlerManager {
         kingdomStopped = new OneArgEventImpl<>();
         battleLaunched = new OneArgEventImpl<>();
         battleStopped = new OneArgEventImpl<>();
+        optionsExecutioner = new OptionsExecutionerImpl();
+        inputHandler.addInputHandledListener((input) -> optionsExecutioner.getOptionsBuffer().addItem(input));
+        initializeExecutionerWithOptions();
+    }
+
+    private void initializeExecutionerWithOptions() {
     }
 
     @Override
     public synchronized void enableInputHandling() {
+        optionsExecutioner.getOptionsBuffer().enableAcceptingItems();
         inputHandler.enableInputHandling();
+        optionsExecutioner.enableExecuting();
         isLaunched = true;
     }
 
@@ -64,6 +76,8 @@ public class GUIInputHandlerManager implements AppInputHandlerManager {
 
     @Override
     public synchronized void disableInputHandling() {
+        optionsExecutioner.disableExecuting();
+        optionsExecutioner.getOptionsBuffer().disableAcceptingItems();
         inputHandler.disableInputHandling();
         isLaunched = false;
         notifyAll();
