@@ -3,7 +3,6 @@ package strategy.app.inputhandller;
 import strategy.error.BasicAppError;
 import strategy.events.oneargevent.OneArgEvent;
 import strategy.events.oneargevent.OneArgEventImpl;
-import strategy.util.ProtectedThread;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -15,12 +14,9 @@ public class ConsoleInputHandler implements AppInputHandler {
 
 	private final OneArgEvent<String> inputHandled;
 
-	private final Thread inputHandlerThread;
-
 	public ConsoleInputHandler() {
 		inputHandled = new OneArgEventImpl<>();
 		isLaunched = false;
-		inputHandlerThread = new ProtectedThread(this::run);
 	}
 
 	@Override
@@ -29,19 +25,13 @@ public class ConsoleInputHandler implements AppInputHandler {
 	}
 
 	@Override
-	public synchronized void enableInputHandling() {
-		isLaunched = true;
-		if(!inputHandlerThread.isAlive()) {
-			inputHandlerThread.start();
-		}
-	}
-
-	@Override
 	public void addInputHandledListener(Consumer<String> listener) {
 		inputHandled.addListener(listener);
 	}
 
-	private void run() {
+	@Override
+	public void run() {
+		isLaunched = true;
 		Scanner scanner = new Scanner(System.in);
 		while (isLaunched) {
 			waitForInputInScanner();

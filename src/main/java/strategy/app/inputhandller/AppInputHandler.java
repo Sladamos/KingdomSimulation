@@ -2,8 +2,7 @@ package strategy.app.inputhandller;
 
 import java.util.function.Consumer;
 
-public interface AppInputHandler {
+public interface AppInputHandler extends Runnable {
 	void disableInputHandling();
-	void enableInputHandling();
 	void addInputHandledListener(Consumer<String> listener);
 }
