@@ -22,7 +22,7 @@ public class AppControllerImpl implements AppController {
 	}
 
 	@Override
-	public void waitForAppClose() {
+	public synchronized void waitForAppClose() {
         while(isLaunched) {
             try {
                 wait();
@@ -32,7 +32,7 @@ public class AppControllerImpl implements AppController {
 	}
 
 	@Override
-	public void enableExecutingOptions() {
+	public synchronized void enableExecutingOptions() {
         optionsBuffer.enableAcceptingItems();
         inputHandler.enableInputHandling();
         optionsExecutioner.enableExecuting();
@@ -40,7 +40,7 @@ public class AppControllerImpl implements AppController {
 	}
 
 	@Override
-	public void disableExecutingOptions() {
+	public synchronized void disableExecutingOptions() {
 		inputHandler.disableInputHandling();
         optionsExecutioner.disableExecuting();
         optionsBuffer.disableAcceptingItems();
