@@ -63,6 +63,7 @@ public class ConsoleGUI implements GUI {
         KingdomStoppedOption kingdomStoppedOption = new KingdomStoppedOptionImpl(kingdomIdProvider);
         optionsManager.setKingdomLaunchedOption(kingdomLaunchedOption);
         optionsManager.setKingdomStoppedOption(kingdomStoppedOption);
+        optionsManager.setAppDisabledOption(this::onGUIDisabled);
         return optionsManager;
     }
 

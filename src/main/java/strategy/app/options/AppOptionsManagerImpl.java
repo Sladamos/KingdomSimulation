@@ -1,6 +1,8 @@
 package strategy.app.options;
 
 import strategy.battle.BattleConfig;
+import strategy.events.noargsevent.NoArgEvent;
+import strategy.events.noargsevent.NoArgEventImpl;
 import strategy.events.oneargevent.OneArgEvent;
 import strategy.events.oneargevent.OneArgEventImpl;
 import strategy.option.Option;
@@ -21,6 +23,8 @@ public class AppOptionsManagerImpl implements ModificableAppOptionsManager {
 
 	private final OneArgEvent<Integer> battleStopped;
 
+	private final NoArgEvent appDisabled;
+
 	private final Map<String, Option> managedOptions;
 
 	public AppOptionsManagerImpl() {
@@ -28,6 +32,7 @@ public class AppOptionsManagerImpl implements ModificableAppOptionsManager {
 		kingdomStopped = new OneArgEventImpl<>();
 		battleLaunched = new OneArgEventImpl<>();
 		battleStopped = new OneArgEventImpl<>();
+		appDisabled = new NoArgEventImpl();
 		managedOptions = new HashMap<>();
 	}
 
@@ -41,6 +46,11 @@ public class AppOptionsManagerImpl implements ModificableAppOptionsManager {
 	public void setKingdomStoppedOption(KingdomStoppedOption kingdomStoppedOption) {
 		managedOptions.put("Stop kingdom", kingdomStoppedOption);
 		kingdomStoppedOption.addKingdomDisabledListener(kingdomStopped::invoke);
+	}
+
+	@Override
+	public void setAppDisabledOption(Option appDisabledOption) {
+		managedOptions.put("Exit", appDisabledOption);
 	}
 
 	@Override

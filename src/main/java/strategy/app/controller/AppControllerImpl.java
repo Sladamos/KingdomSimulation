@@ -15,7 +15,7 @@ public class AppControllerImpl implements AppController {
 
 	private final SwitchableBuffer<String> optionsBuffer;
 
-	private final ExecutorService executorService;
+	private ExecutorService executorService;
 
 	private boolean isLaunched;
 
@@ -23,7 +23,6 @@ public class AppControllerImpl implements AppController {
 		this.inputHandler = inputHandler;
 		this.optionsExecutioner = optionsExecutioner;
 		this.optionsBuffer = optionsBuffer;
-		executorService = new ProtectedRunnableExecutorService();
 		isLaunched = false;
 	}
 
@@ -39,6 +38,7 @@ public class AppControllerImpl implements AppController {
 
 	@Override
 	public synchronized void enableExecutingOptions() {
+		executorService = new ProtectedRunnableExecutorService();
         optionsBuffer.enableAcceptingItems();
 		executorService.execute(inputHandler);
 		executorService.execute(optionsExecutioner);
@@ -50,6 +50,7 @@ public class AppControllerImpl implements AppController {
 		inputHandler.disableInputHandling();
         optionsExecutioner.disableExecuting();
         optionsBuffer.disableAcceptingItems();
+		executorService.shutdown();
         isLaunched = false;
         notifyAll();
 	}
