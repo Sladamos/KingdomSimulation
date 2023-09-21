@@ -1,7 +1,6 @@
 package strategy.app.options;
 
 import strategy.battle.BattleConfig;
-import strategy.option.kingdom.KingdomLaunchedOption;
 import strategy.option.Option;
 
 import java.util.Map;

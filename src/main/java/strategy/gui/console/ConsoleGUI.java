@@ -15,10 +15,7 @@ import strategy.message.receiver.ConsoleMessagesReceiver;
 import strategy.option.Option;
 import strategy.option.OptionsExecutioner;
 import strategy.option.OptionsExecutionerImpl;
-import strategy.option.kingdom.BufferKingdomIdProvider;
-import strategy.option.kingdom.KingdomIdProvider;
-import strategy.option.kingdom.KingdomLaunchedOption;
-import strategy.option.kingdom.KingdomLaunchedOptionImpl;
+import strategy.option.kingdom.*;
 
 import java.util.Map;
 
@@ -51,7 +48,9 @@ public class ConsoleGUI implements GUI {
         ModificableAppOptionsManager optionsManager = new AppOptionsManagerImpl();
         KingdomIdProvider kingdomIdProvider = new BufferKingdomIdProvider(optionsBuffer);
         KingdomLaunchedOption kingdomLaunchedOption = new KingdomLaunchedOptionImpl(kingdomIdProvider);
+        KingdomDisabledOption kingdomDisabledOption = new KingdomDisabledOptionImpl(kingdomIdProvider);
         optionsManager.setKingdomLaunchedOption(kingdomLaunchedOption);
+        optionsManager.setKingdomDisabledOption(kingdomDisabledOption);
         return optionsManager;
     }
 
@@ -71,6 +70,8 @@ public class ConsoleGUI implements GUI {
     }
 
     private void onGUIDisabled() {
+        //TODO: disable buffor executioner and input handler
+        // change app input handler to app controller
         appInputHandlerManager.disableInputHandling();
     }
 }
