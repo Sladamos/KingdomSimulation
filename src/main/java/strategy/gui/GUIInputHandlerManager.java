@@ -12,14 +12,6 @@ import java.util.function.Consumer;
 
 public class GUIInputHandlerManager implements AppInputHandlerManager {
 
-    private final OneArgEvent<String> kingdomLaunched;
-
-    private final OneArgEvent<String> kingdomStopped;
-
-    private final OneArgEvent<BattleConfig> battleLaunched;
-
-    private final OneArgEvent<Integer> battleStopped;
-
     private final AppInputHandler inputHandler;
 
     private final OptionsExecutioner optionsExecutioner;
@@ -29,10 +21,6 @@ public class GUIInputHandlerManager implements AppInputHandlerManager {
     public GUIInputHandlerManager(AppInputHandler inputHandler) {
         this.inputHandler = inputHandler;
         isLaunched = false;
-        kingdomLaunched = new OneArgEventImpl<>();
-        kingdomStopped = new OneArgEventImpl<>();
-        battleLaunched = new OneArgEventImpl<>();
-        battleStopped = new OneArgEventImpl<>();
         optionsExecutioner = new OptionsExecutionerImpl();
         inputHandler.addInputHandledListener((input) -> optionsExecutioner.getOptionsBuffer().addItem(input));
     }
@@ -48,26 +36,6 @@ public class GUIInputHandlerManager implements AppInputHandlerManager {
     @Override
     public void addInputHandledListener(Consumer<String> listener) {
         inputHandler.addInputHandledListener(listener);
-    }
-
-    @Override
-    public void onKingdomLaunched(Consumer<String> kingdomIdConsumer) {
-        kingdomLaunched.addListener(kingdomIdConsumer);
-    }
-
-    @Override
-    public void onKingdomStopped(Consumer<String> kingdomIdConsumer) {
-        kingdomStopped.addListener(kingdomIdConsumer);
-    }
-
-    @Override
-    public void onBattleLaunched(Consumer<BattleConfig> battleConfigConsumer) {
-        battleLaunched.addListener(battleConfigConsumer);
-    }
-
-    @Override
-    public void onBattleStopped(Consumer<Integer> battleIdConsumer) {
-        battleStopped.addListener(battleIdConsumer);
     }
 
     @Override
