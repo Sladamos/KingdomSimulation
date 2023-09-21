@@ -39,6 +39,7 @@ public class GUIInputHandlerManager implements AppInputHandlerManager {
     }
 
     private void initializeExecutionerWithOptions() {
+        optionsExecutioner.addOption("Exit", this::disableInputHandling);
     }
 
     @Override
