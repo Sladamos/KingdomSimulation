@@ -21,6 +21,10 @@ public class Simulation {
     //TODO:
     // remove thread from executioner -> launch it in manager
     // also create input handler launcher -> in console for example run in new thread
+    // exit option should be specified by APP
+    // options initializer class in gui -> add options to options executioner (or map!)
+    // maybe method add New Options
+    // options displaying
     // 1. find option creator 2. create option 3. execute option 4. display possible options creators
     // launchKingdomCreator: createOption(buffer) -> //get kingdom Id
     // for example LaunchKingdomOption -> execute : kingdomLaunched.invoke();

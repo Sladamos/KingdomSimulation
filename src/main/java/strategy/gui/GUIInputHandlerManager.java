@@ -35,11 +35,6 @@ public class GUIInputHandlerManager implements AppInputHandlerManager {
         battleStopped = new OneArgEventImpl<>();
         optionsExecutioner = new OptionsExecutionerImpl();
         inputHandler.addInputHandledListener((input) -> optionsExecutioner.getOptionsBuffer().addItem(input));
-        initializeExecutionerWithOptions();
-    }
-
-    private void initializeExecutionerWithOptions() {
-        optionsExecutioner.addOption("Exit", this::disableInputHandling);
     }
 
     @Override
