@@ -1,7 +1,7 @@
 package strategy.initializer.simulation;
 
 import strategy.app.App;
-import strategy.app.AppCommunicator;
+import strategy.app.communicator.AppCommunicator;
 import strategy.battle.Battle;
 import strategy.battle.creator.BattleCreator;
 import strategy.config.simulation.AutomaticSimulationConfigParser;

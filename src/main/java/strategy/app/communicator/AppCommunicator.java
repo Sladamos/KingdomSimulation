@@ -1,4 +1,4 @@
-package strategy.app;
+package strategy.app.communicator;
 
 import strategy.message.JSONMessage;
 import strategy.message.sender.MessagesSender;

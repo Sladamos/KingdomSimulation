@@ -1,14 +1,16 @@
 package strategy.gui.console;
 
 import lombok.Getter;
-import strategy.app.AppCommunicator;
-import strategy.app.AppCommunicatorImpl;
-import strategy.app.AppController;
+import strategy.app.communicator.AppCommunicator;
+import strategy.app.communicator.AppCommunicatorImpl;
+import strategy.app.controller.AppController;
+import strategy.app.inputhandller.AppInputHandler;
+import strategy.app.inputhandller.ConsoleInputHandler;
 import strategy.app.options.AppOptionsManagerImpl;
 import strategy.app.options.ModificableAppOptionsManager;
-import strategy.buffer.Buffer;
 import strategy.buffer.BufferImpl;
 import strategy.buffer.SwitchableBuffer;
+import strategy.app.controller.AppControllerImpl;
 import strategy.gui.GUI;
 import strategy.message.receiver.ConsoleMessagesReceiver;
 import strategy.option.Option;
@@ -29,25 +31,32 @@ public class ConsoleGUI implements GUI {
     @Getter
     private final ModificableAppOptionsManager appOptionsManager;
 
+    private final OptionsExecutioner optionsExecutioner;
+
+    private final SwitchableBuffer<String> optionsBuffer;
+
     public ConsoleGUI() {
-        SwitchableBuffer<String> optionsBuffer = new BufferImpl<>();
+        optionsBuffer = new BufferImpl<>();
         appCommunicator = new AppCommunicatorImpl(new ConsoleMessagesReceiver<>(),
                 new ConsoleErrorMessagesReceiver(this::onGUIDisabled),
                 new ConsoleMessagesReceiver<>());
-        appOptionsManager = createOptionsManager(optionsBuffer);
-        OptionsExecutioner optionsExecutioner = createOptionsExecutioner(optionsBuffer);
-        //appInputHandlerManager = new GUIInputHandlerManager(new ConsoleInputHandler(), optionsExecutioner);
-        //appInputHandlerManager.addInputHandledListener(optionsBuffer::addItem);
-        optionsBuffer.enableAcceptingItems();
-        appController = null;
+        appOptionsManager = createOptionsManager();
+        optionsExecutioner = createOptionsExecutioner();
+        appController = createAppController();
     }
 
-    private OptionsExecutioner createOptionsExecutioner(Buffer<String> optionsBuffer) {
+    private AppController createAppController() {
+        AppInputHandler inputHandler = new ConsoleInputHandler();
+        inputHandler.addInputHandledListener(optionsBuffer::addItem);
+        return new AppControllerImpl(inputHandler, optionsExecutioner, optionsBuffer);
+    }
+
+    private OptionsExecutioner createOptionsExecutioner() {
         Map<String, Option> managedOptions = appOptionsManager.getManagedOptions();
         return new OptionsExecutionerImpl(managedOptions, optionsBuffer);
     }
 
-    private ModificableAppOptionsManager createOptionsManager(Buffer<String> optionsBuffer) {
+    private ModificableAppOptionsManager createOptionsManager() {
         ModificableAppOptionsManager optionsManager = new AppOptionsManagerImpl();
         KingdomIdProvider kingdomIdProvider = new BufferKingdomIdProvider(optionsBuffer);
         KingdomLaunchedOption kingdomLaunchedOption = new KingdomLaunchedOptionImpl(kingdomIdProvider);
@@ -58,8 +67,6 @@ public class ConsoleGUI implements GUI {
     }
 
     private void onGUIDisabled() {
-        //TODO: disable buffor executioner and input handler
-        // change app input handler to app controller
-        //appInputHandlerManager.disableInputHandling();
+        appController.disableExecutingOptions();
     }
 }

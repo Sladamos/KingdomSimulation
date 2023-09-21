@@ -1,6 +1,5 @@
-package strategy.gui.console;
+package strategy.app.inputhandller;
 
-import strategy.app.AppInputHandler;
 import strategy.error.BasicAppError;
 import strategy.events.oneargevent.OneArgEvent;
 import strategy.events.oneargevent.OneArgEventImpl;

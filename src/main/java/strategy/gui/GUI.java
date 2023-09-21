@@ -1,7 +1,7 @@
 package strategy.gui;
 
-import strategy.app.AppCommunicator;
-import strategy.app.AppController;
+import strategy.app.communicator.AppCommunicator;
+import strategy.app.controller.AppController;
 import strategy.app.options.AppOptionsManager;
 
 public interface GUI {

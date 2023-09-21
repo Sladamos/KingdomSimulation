@@ -1,4 +1,4 @@
-package strategy.app;
+package strategy.app.inputhandller;
 
 import java.util.function.Consumer;
 
