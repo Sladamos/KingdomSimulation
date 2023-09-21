@@ -1,6 +1,6 @@
-package strategy.storage;
+package strategy.buffor;
 
-public interface SwitchableStorage {
+public interface SwitchableBuffor {
     void enableAcceptingItems();
     void disableAcceptingItems();
 }

@@ -22,7 +22,7 @@ public abstract class ZeroToOneProducer<T extends Item> implements OneItemProduc
 		while(isWorking()) {
 			try {
 				T item = produceNewItem();
-				destinationStorage.addItemToStorage(item);
+				destinationStorage.addItem(item);
 			} catch (Exception err) {
 				return;
 			}

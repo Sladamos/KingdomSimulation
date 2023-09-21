@@ -48,7 +48,7 @@ public class ArmyGeneralImpl implements ArmyGeneral {
         enableConsuming();
         while(isConsuming()) {
             try {
-                MilitaryUnit unit = militaryUnitStorage.getItemFromStorage();
+                MilitaryUnit unit = militaryUnitStorage.getItem();
                 accept(unit);
             } catch (Exception err) {
                 return;
@@ -61,7 +61,7 @@ public class ArmyGeneralImpl implements ArmyGeneral {
         enableConsuming();
         while(isConsuming()) {
             try {
-                Happiness happiness = happinessStorage.getItemFromStorage();
+                Happiness happiness = happinessStorage.getItem();
                 accept(happiness);
             } catch (Exception err) {
                 return;
