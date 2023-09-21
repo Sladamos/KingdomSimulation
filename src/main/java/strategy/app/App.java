@@ -1,4 +1,6 @@
 package strategy.app;
 
-public interface App extends AppCommunicator, AppInputHandlerManager {
+import strategy.app.options.AppOptionsManager;
+
+public interface App extends AppCommunicator, AppInputHandlerManager, AppOptionsManager {
 }

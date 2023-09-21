@@ -1,10 +1,14 @@
 package strategy.app;
 
+import strategy.app.options.AppOptionsManager;
 import strategy.battle.BattleConfig;
 import strategy.message.JSONMessage;
 import strategy.message.StringMessage;
 import strategy.message.sender.MessagesSender;
+import strategy.option.Option;
+import strategy.option.kingdom.KingdomLaunchedOption;
 
+import java.util.Map;
 import java.util.function.Consumer;
 
 public class AppImpl implements App {
@@ -13,9 +17,12 @@ public class AppImpl implements App {
 
     private final AppInputHandlerManager appInputHandlerManager;
 
-    public AppImpl(AppInputHandlerManager appInputHandlerManager, AppCommunicator appCommunicator) {
+    private final AppOptionsManager appOptionsManager;
+
+    public AppImpl(AppInputHandlerManager appInputHandlerManager, AppCommunicator appCommunicator, AppOptionsManager appOptionsManager) {
         this.appInputHandlerManager = appInputHandlerManager;
         this.appCommunicator = appCommunicator;
+        this.appOptionsManager = appOptionsManager;
     }
 
     @Override
@@ -59,26 +66,6 @@ public class AppImpl implements App {
     }
 
     @Override
-    public void onKingdomLaunched(Consumer<String> kingdomIdConsumer) {
-        appInputHandlerManager.onKingdomLaunched(kingdomIdConsumer);
-    }
-
-    @Override
-    public void onKingdomStopped(Consumer<String> kingdomIdConsumer) {
-        appInputHandlerManager.onKingdomStopped(kingdomIdConsumer);
-    }
-
-    @Override
-    public void onBattleLaunched(Consumer<BattleConfig> battleConfigConsumer) {
-        appInputHandlerManager.onBattleLaunched(battleConfigConsumer);
-    }
-
-    @Override
-    public void onBattleStopped(Consumer<Integer> battleIdConsumer) {
-        appInputHandlerManager.onBattleStopped(battleIdConsumer);
-    }
-
-    @Override
     public void waitOnAppClose() {
         appInputHandlerManager.waitOnAppClose();
     }
@@ -86,5 +73,30 @@ public class AppImpl implements App {
     @Override
     public void disableInputHandling() {
         appInputHandlerManager.disableInputHandling();
+    }
+
+    @Override
+    public void addKingdomLaunchedListener(Consumer<String> kingdomIdConsumer) {
+        appOptionsManager.addKingdomLaunchedListener(kingdomIdConsumer);
+    }
+
+    @Override
+    public void addKingdomStoppedListener(Consumer<String> kingdomIdConsumer) {
+        appOptionsManager.addKingdomStoppedListener(kingdomIdConsumer);
+    }
+
+    @Override
+    public void addBattleLaunchedListener(Consumer<BattleConfig> battleConfigConsumer) {
+        appOptionsManager.addBattleLaunchedListener(battleConfigConsumer);
+    }
+
+    @Override
+    public void addBattleStoppedListener(Consumer<Integer> battleIdConsumer) {
+        appOptionsManager.addBattleStoppedListener(battleIdConsumer);
+    }
+
+    @Override
+    public Map<String, Option> getManagedOptions() {
+        return appOptionsManager.getManagedOptions();
     }
 }

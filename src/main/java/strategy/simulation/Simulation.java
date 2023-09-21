@@ -56,7 +56,7 @@ public class Simulation {
         FileJsonLoader guiConfigLoader = new FileJsonLoaderImpl();
         guiConfigLoader.setFileName("gui.json");
         GUI gui = guiInitializer.initializeGUI(guiConfigLoader);
-        App app = new AppImpl(gui.getAppInputHandler(), gui.getAppCommunicator());
+        App app = new AppImpl(gui.getAppInputHandler(), gui.getAppCommunicator(), gui.getAppOptionsManager());
         app.bindErrorsSender(errorHandler);
         errorHandler.runInErrorHandler(() -> simulationMethod(app));
     }

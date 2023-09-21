@@ -4,12 +4,13 @@ import strategy.battle.BattleConfig;
 import strategy.events.oneargevent.OneArgEvent;
 import strategy.events.oneargevent.OneArgEventImpl;
 import strategy.option.Option;
+import strategy.option.kingdom.KingdomLaunchedOption;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
-public class AppOptionsManagerImpl implements AppOptionsManager {
+public class AppOptionsManagerImpl implements ModificableAppOptionsManager {
 
 	private final OneArgEvent<String> kingdomLaunched;
 
@@ -27,6 +28,12 @@ public class AppOptionsManagerImpl implements AppOptionsManager {
 		battleLaunched = new OneArgEventImpl<>();
 		battleStopped = new OneArgEventImpl<>();
 		managedOptions = new HashMap<>();
+	}
+
+	@Override
+	public void setKingdomLaunchedOption(KingdomLaunchedOption kingdomLaunchedOption) {
+		managedOptions.put("Launch kingdom", kingdomLaunchedOption);
+		kingdomLaunchedOption.addKingdomLaunchedListener(kingdomLaunched::invoke);
 	}
 
 	@Override

@@ -48,13 +48,12 @@ public class ManualSimulationInitializer implements SimulationInitializer {
     @Override
     public void initializeSimulation(App app, SimulationExecutioner simulationExecutioner) {
         this.simulationExecutioner = simulationExecutioner;
-
         createKingdom(simulationConfig.getFirstKingdomConfig());
         createKingdom(simulationConfig.getSecondKingdomConfig());
-        app.onKingdomLaunched(this::onKingdomLaunched);
-        app.onKingdomStopped(this::onKingdomStopped);
-        app.onBattleLaunched(this::onBattleLaunched);
-        app.onBattleStopped(this::onBattleStopped);
+        app.addKingdomLaunchedListener(this::onKingdomLaunched);
+        app.addKingdomStoppedListener(this::onKingdomStopped);
+        app.addBattleLaunchedListener(this::onBattleLaunched);
+        app.addBattleStoppedListener(this::onBattleStopped);
         app.enableInputHandling();
         app.waitOnAppClose();
         stopSimulation();
