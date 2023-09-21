@@ -57,8 +57,8 @@ public class ManualSimulationInitializer implements SimulationInitializer {
         app.addKingdomStoppedListener(this::onKingdomStopped);
         app.addBattleLaunchedListener(this::onBattleLaunched);
         app.addBattleStoppedListener(this::onBattleStopped);
-        app.enableInputHandling();
-        app.waitOnAppClose();
+        app.enableExecutingOptions();
+        app.waitForAppClose();
         stopSimulation();
 
         this.simulationExecutioner = null;

@@ -6,7 +6,6 @@ import strategy.message.JSONMessage;
 import strategy.message.StringMessage;
 import strategy.message.sender.MessagesSender;
 import strategy.option.Option;
-import strategy.option.kingdom.KingdomLaunchedOption;
 
 import java.util.Map;
 import java.util.function.Consumer;
@@ -15,12 +14,12 @@ public class AppImpl implements App {
     
     private final AppCommunicator appCommunicator;
 
-    private final AppInputHandlerManager appInputHandlerManager;
+    private final AppController appController;
 
     private final AppOptionsManager appOptionsManager;
 
-    public AppImpl(AppInputHandlerManager appInputHandlerManager, AppCommunicator appCommunicator, AppOptionsManager appOptionsManager) {
-        this.appInputHandlerManager = appInputHandlerManager;
+    public AppImpl(AppController appController, AppCommunicator appCommunicator, AppOptionsManager appOptionsManager) {
+        this.appController = appController;
         this.appCommunicator = appCommunicator;
         this.appOptionsManager = appOptionsManager;
     }
@@ -56,26 +55,6 @@ public class AppImpl implements App {
     }
 
     @Override
-    public void enableInputHandling() {
-        appInputHandlerManager.enableInputHandling();
-    }
-
-    @Override
-    public void addInputHandledListener(Consumer<String> listener) {
-        appInputHandlerManager.addInputHandledListener(listener);
-    }
-
-    @Override
-    public void waitOnAppClose() {
-        appInputHandlerManager.waitOnAppClose();
-    }
-
-    @Override
-    public void disableInputHandling() {
-        appInputHandlerManager.disableInputHandling();
-    }
-
-    @Override
     public void addKingdomLaunchedListener(Consumer<String> kingdomIdConsumer) {
         appOptionsManager.addKingdomLaunchedListener(kingdomIdConsumer);
     }
@@ -98,5 +77,20 @@ public class AppImpl implements App {
     @Override
     public Map<String, Option> getManagedOptions() {
         return appOptionsManager.getManagedOptions();
+    }
+
+    @Override
+    public void waitForAppClose() {
+        appController.waitForAppClose();
+    }
+
+    @Override
+    public void enableExecutingOptions() {
+        appController.enableExecutingOptions();
+    }
+
+    @Override
+    public void disableExecutingOptions() {
+        appController.disableExecutingOptions();
     }
 }
