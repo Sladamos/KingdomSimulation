@@ -48,9 +48,9 @@ public class ConsoleGUI implements GUI {
         ModificableAppOptionsManager optionsManager = new AppOptionsManagerImpl();
         KingdomIdProvider kingdomIdProvider = new BufferKingdomIdProvider(optionsBuffer);
         KingdomLaunchedOption kingdomLaunchedOption = new KingdomLaunchedOptionImpl(kingdomIdProvider);
-        KingdomDisabledOption kingdomDisabledOption = new KingdomDisabledOptionImpl(kingdomIdProvider);
+        KingdomStoppedOption kingdomStoppedOption = new KingdomStoppedOptionImpl(kingdomIdProvider);
         optionsManager.setKingdomLaunchedOption(kingdomLaunchedOption);
-        optionsManager.setKingdomDisabledOption(kingdomDisabledOption);
+        optionsManager.setKingdomStoppedOption(kingdomStoppedOption);
         return optionsManager;
     }
 

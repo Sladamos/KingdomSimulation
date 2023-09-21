@@ -4,7 +4,7 @@ import strategy.battle.BattleConfig;
 import strategy.events.oneargevent.OneArgEvent;
 import strategy.events.oneargevent.OneArgEventImpl;
 import strategy.option.Option;
-import strategy.option.kingdom.KingdomDisabledOption;
+import strategy.option.kingdom.KingdomStoppedOption;
 import strategy.option.kingdom.KingdomLaunchedOption;
 
 import java.util.HashMap;
@@ -15,7 +15,7 @@ public class AppOptionsManagerImpl implements ModificableAppOptionsManager {
 
 	private final OneArgEvent<String> kingdomLaunched;
 
-	private final OneArgEvent<String> kingdomDisabled;
+	private final OneArgEvent<String> kingdomStopped;
 
 	private final OneArgEvent<BattleConfig> battleLaunched;
 
@@ -25,7 +25,7 @@ public class AppOptionsManagerImpl implements ModificableAppOptionsManager {
 
 	public AppOptionsManagerImpl() {
 		kingdomLaunched = new OneArgEventImpl<>();
-		kingdomDisabled = new OneArgEventImpl<>();
+		kingdomStopped = new OneArgEventImpl<>();
 		battleLaunched = new OneArgEventImpl<>();
 		battleStopped = new OneArgEventImpl<>();
 		managedOptions = new HashMap<>();
@@ -38,9 +38,9 @@ public class AppOptionsManagerImpl implements ModificableAppOptionsManager {
 	}
 
 	@Override
-	public void setKingdomDisabledOption(KingdomDisabledOption kingdomDisabledOption) {
-		managedOptions.put("Disable kingdom", kingdomDisabledOption);
-		kingdomDisabledOption.addKingdomDisabledListener(kingdomDisabled::invoke);
+	public void setKingdomStoppedOption(KingdomStoppedOption kingdomStoppedOption) {
+		managedOptions.put("Stop kingdom", kingdomStoppedOption);
+		kingdomStoppedOption.addKingdomDisabledListener(kingdomStopped::invoke);
 	}
 
 	@Override
@@ -50,7 +50,7 @@ public class AppOptionsManagerImpl implements ModificableAppOptionsManager {
 
 	@Override
 	public void addKingdomStoppedListener(Consumer<String> kingdomIdConsumer) {
-		kingdomDisabled.addListener(kingdomIdConsumer);
+		kingdomStopped.addListener(kingdomIdConsumer);
 	}
 
 	@Override

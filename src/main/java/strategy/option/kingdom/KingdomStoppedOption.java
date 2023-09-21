@@ -4,6 +4,6 @@ import strategy.option.Option;
 
 import java.util.function.Consumer;
 
-public interface KingdomDisabledOption extends Option {
+public interface KingdomStoppedOption extends Option {
 	void addKingdomDisabledListener(Consumer<String> kingdomIdConsumer);
 }
