@@ -108,7 +108,6 @@ public class SimulationAPIImpl implements SimulationAPI {
 
     @Override
     public Kingdom createKingdom(KingdomConfig kingdomConfig) {
-        simulationExecutioner.createKingdom(kingdomConfig);
         Kingdom kingdom = simulationExecutioner.createKingdom(kingdomConfig);
         kingdomMap.put(kingdom.getId(), kingdom);
         return kingdom;
