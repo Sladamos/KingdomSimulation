@@ -45,7 +45,7 @@ public class AppOptionsManagerImpl implements ModificableAppOptionsManager {
 	@Override
 	public void setKingdomStoppedOption(KingdomStoppedOption kingdomStoppedOption) {
 		managedOptions.put("Stop kingdom", kingdomStoppedOption);
-		kingdomStoppedOption.addKingdomDisabledListener(kingdomStopped::invoke);
+		kingdomStoppedOption.addKingdomStoppedListener(kingdomStopped::invoke);
 	}
 
 	@Override
