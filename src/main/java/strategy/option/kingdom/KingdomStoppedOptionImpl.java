@@ -7,23 +7,23 @@ import java.util.function.Consumer;
 
 public class KingdomStoppedOptionImpl implements KingdomStoppedOption {
 
-	private final OneArgEvent<String> kingdomDisabled;
+	private final OneArgEvent<String> kingdomStopped;
 
 	private final KingdomIdProvider kingdomIdProvider;
 
 	public KingdomStoppedOptionImpl(KingdomIdProvider kingdomIdProvider) {
 		this.kingdomIdProvider = kingdomIdProvider;
-		kingdomDisabled = new OneArgEventImpl<>();
+		kingdomStopped = new OneArgEventImpl<>();
 	}
 
 	@Override
 	public void execute() {
 		String kingdomId = kingdomIdProvider.getKingdomId();
-		kingdomDisabled.invoke(kingdomId);
+		kingdomStopped.invoke(kingdomId);
 	}
 
 	@Override
-	public void addKingdomDisabledListener(Consumer<String> kingdomIdConsumer) {
-		kingdomDisabled.addListener(kingdomIdConsumer);
+	public void addKingdomStoppedListener(Consumer<String> kingdomIdConsumer) {
+		kingdomStopped.addListener(kingdomIdConsumer);
 	}
 }

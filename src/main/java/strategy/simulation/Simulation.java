@@ -28,11 +28,12 @@ public class Simulation {
     }
 
     //TODO:
-    // create options creator -> here create buffors or bind to events
     // add battle stop and battle launch -> battle stop easy | battle launch automatic id creator (if both names are ok)
+    // create options creator -> here bind to events
     // possible options displaying -> maybe on options executioner beggining optionNeeded();
-    // displaying in option (fe. provide kingdom Id) -> maybe everything with buffers again?
+    // displaying in option (fe. provide kingdom Id)
     // fe. idNeeded.invoke(); -> some
+    // BETTER: CREATE SpeakingProviders!!! ProvidersCreator
 
     /*TODO gui:
         two panels with names of materials and count of each one (consider it!):
