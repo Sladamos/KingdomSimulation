@@ -20,9 +20,12 @@ import strategy.util.ProtectedThread;
 
 public class Simulation {
     //TODO:
+    // create some additional api fe. get launched kingdoms
+    // create options creator -> here create buffors or bind to events
     // add battle stop and battle launch -> battle stop easy | battle launch automatic id creator (if both names are ok)
-    // possible options displaying
-    // displaying in option (fe. provide kingdom Id)
+    // possible options displaying -> maybe on options executioner beggining optionNeeded();
+    // displaying in option (fe. provide kingdom Id) -> maybe everything with buffers again?
+    // fe. idNeeded.invoke(); -> some
 
     /*TODO gui:
         two panels with names of materials and count of each one (consider it!):
