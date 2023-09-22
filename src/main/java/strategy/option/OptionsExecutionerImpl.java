@@ -13,15 +13,12 @@ public class OptionsExecutionerImpl implements OptionsExecutioner {
 
 	private final Map<String, Option> options;
 
-	private final Thread optionsExecutionerThread;
-
 	private boolean isExecuting;
 
 	public OptionsExecutionerImpl(Map<String, Option> options, Buffer<String> optionsBuffer) {
 		this.options = options;
 		this.optionsBuffer = optionsBuffer;
 		isExecuting = false;
-		optionsExecutionerThread = new ProtectedThread(this::run);
 	}
 
 	@Override
