@@ -28,7 +28,6 @@ public class Simulation {
     }
 
     //TODO:
-    // add battle stop and battle launch -> battle stop easy | battle launch automatic id creator (if both names are ok)
     // create options creator -> here bind to events
     // possible options displaying -> maybe on options executioner beggining optionNeeded();
     // displaying in option (fe. provide kingdom Id)

@@ -16,6 +16,7 @@ import strategy.message.receiver.ConsoleMessagesReceiver;
 import strategy.option.Option;
 import strategy.option.OptionsExecutioner;
 import strategy.option.OptionsExecutionerImpl;
+import strategy.option.battle.*;
 import strategy.option.kingdom.*;
 
 import java.util.Map;
@@ -59,10 +60,15 @@ public class ConsoleGUI implements GUI {
     private ModificableAppOptionsManager createOptionsManager() {
         ModificableAppOptionsManager optionsManager = new AppOptionsManagerImpl();
         KingdomIdProvider kingdomIdProvider = new BufferKingdomIdProvider(optionsBuffer);
+        BattleIdProvider battleIdProvider = new BufferBattleIdProvider(optionsBuffer);
         KingdomLaunchedOption kingdomLaunchedOption = new KingdomLaunchedOptionImpl(kingdomIdProvider);
         KingdomStoppedOption kingdomStoppedOption = new KingdomStoppedOptionImpl(kingdomIdProvider);
+        BattleLaunchedOption battleLaunchedOption = new BattleLaunchedOptionImpl(kingdomIdProvider);
+        BattleStoppedOption battleStoppedOption = new BattleStoppedOptionImpl(battleIdProvider);
         optionsManager.setKingdomLaunchedOption(kingdomLaunchedOption);
         optionsManager.setKingdomStoppedOption(kingdomStoppedOption);
+        optionsManager.setBattleLaunchedOption(battleLaunchedOption);
+        optionsManager.setBattleStoppedOption(battleStoppedOption);
         optionsManager.setAppDisabledOption(this::onGUIDisabled);
         return optionsManager;
     }

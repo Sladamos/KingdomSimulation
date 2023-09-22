@@ -6,6 +6,8 @@ import strategy.events.noargsevent.NoArgEventImpl;
 import strategy.events.oneargevent.OneArgEvent;
 import strategy.events.oneargevent.OneArgEventImpl;
 import strategy.option.Option;
+import strategy.option.battle.BattleLaunchedOption;
+import strategy.option.battle.BattleStoppedOption;
 import strategy.option.kingdom.KingdomStoppedOption;
 import strategy.option.kingdom.KingdomLaunchedOption;
 
@@ -46,6 +48,18 @@ public class AppOptionsManagerImpl implements ModificableAppOptionsManager {
 	public void setKingdomStoppedOption(KingdomStoppedOption kingdomStoppedOption) {
 		managedOptions.put("Stop kingdom", kingdomStoppedOption);
 		kingdomStoppedOption.addKingdomStoppedListener(kingdomStopped::invoke);
+	}
+
+	@Override
+	public void setBattleLaunchedOption(BattleLaunchedOption battleLaunchedOption) {
+		managedOptions.put("Launch battle", battleLaunchedOption);
+		battleLaunchedOption.addBattleLaunchedListener(battleLaunched::invoke);
+	}
+
+	@Override
+	public void setBattleStoppedOption(BattleStoppedOption battleStoppedOption) {
+		managedOptions.put("Stop battle", battleStoppedOption);
+		battleStoppedOption.addBattleStoppedListener(battleStopped::invoke);
 	}
 
 	@Override
