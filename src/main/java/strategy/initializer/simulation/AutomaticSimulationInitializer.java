@@ -11,6 +11,7 @@ import strategy.json.JSON;
 import strategy.kingdom.Kingdom;
 import strategy.kingdom.KingdomConfig;
 import strategy.simulation.AutomaticSimulationConfig;
+import strategy.simulation.api.SimulationAPI;
 import strategy.simulation.executioner.SimulationExecutioner;
 
 import java.util.LinkedList;
@@ -36,13 +37,13 @@ public class AutomaticSimulationInitializer implements SimulationInitializer {
 
 
     @Override
-    public void initializeSimulation(App app, SimulationExecutioner simulationExecutioner) {
+    public void initializeSimulation(App app, SimulationAPI simulationAPI) {
         this.appCommunicator = app;
-        this.simulationExecutioner = simulationExecutioner;
+        this.simulationExecutioner = simulationAPI;
         runKingdomsDeveloping();
-        simulationExecutioner.waitForKingdomsDevelopingEnd();
+        simulationAPI.waitForKingdomsDevelopingEnd();
         runBattleSimulation();
-        simulationExecutioner.waitForBattlesEnd();
+        simulationAPI.waitForBattlesEnd();
 
         this.appCommunicator = null;
         this.simulationExecutioner = null;

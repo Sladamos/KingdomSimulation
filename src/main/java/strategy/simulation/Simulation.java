@@ -14,13 +14,13 @@ import strategy.initializer.gui.GUIInitializerImpl;
 import strategy.initializer.simulation.SimulationInitializer;
 import strategy.json.FileJsonLoader;
 import strategy.json.FileJsonLoaderImpl;
-import strategy.simulation.executioner.SimulationExecutionerImpl;
+import strategy.simulation.api.SimulationAPIImpl;
 import strategy.util.ProtectedRunnableExecutorService;
 import strategy.util.ProtectedThread;
 
 public class Simulation {
     //TODO:
-    // create some additional api fe. get launched kingdoms
+    // create some additional api fe. get launched kingdoms -> SimulationAPI class (contains executioner)
     // create options creator -> here create buffors or bind to events
     // add battle stop and battle launch -> battle stop easy | battle launch automatic id creator (if both names are ok)
     // possible options displaying -> maybe on options executioner beggining optionNeeded();
@@ -51,19 +51,23 @@ public class Simulation {
         ErrorHandler errorHandler = new ErrorHandlerImpl();
         ProtectedThread.setErrorHandler(errorHandler);
         ProtectedRunnableExecutorService.setErrorHandler(errorHandler);
-        GUIInitializer guiInitializer = new GUIInitializerImpl();
-        FileJsonLoader guiConfigLoader = new FileJsonLoaderImpl();
-        guiConfigLoader.setFileName("gui.json");
-        GUI gui = guiInitializer.initializeGUI(guiConfigLoader);
+        GUI gui = initializeGUIFromConfig();
         App app = new AppImpl(gui.getAppController(), gui.getAppCommunicator(), gui.getAppOptionsManager());
         app.bindErrorsSender(errorHandler);
         errorHandler.runInErrorHandler(() -> simulationMethod(app));
+    }
+
+    private GUI initializeGUIFromConfig() {
+        GUIInitializer guiInitializer = new GUIInitializerImpl();
+        FileJsonLoader guiConfigLoader = new FileJsonLoaderImpl();
+        guiConfigLoader.setFileName("gui.json");
+        return guiInitializer.initializeGUI(guiConfigLoader);
     }
 
     private void simulationMethod(App app) {
         BattleOperatorCreator battleOperatorCreator = new BattleOperatorCreatorImpl();
         AppInitializer appInitializer = new AppInitializerFromFile(battleOperatorCreator);
         SimulationInitializer simulationInitializer = appInitializer.createSimulationInitializer();
-        simulationInitializer.initializeSimulation(app, new SimulationExecutionerImpl());
+        simulationInitializer.initializeSimulation(app, new SimulationAPIImpl());
     }
 }
