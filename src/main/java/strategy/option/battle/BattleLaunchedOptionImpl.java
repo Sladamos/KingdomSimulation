@@ -1,8 +1,12 @@
 package strategy.option.battle;
 
 import strategy.battle.BattleConfig;
+import strategy.battle.BattleConfigImpl;
+import strategy.battle.id.BattleIdGenerator;
+import strategy.battle.id.BattleIdGeneratorImpl;
 import strategy.events.oneargevent.OneArgEvent;
 import strategy.events.oneargevent.OneArgEventImpl;
+import strategy.option.kingdom.KingdomIdProvider;
 
 import java.util.function.Consumer;
 
@@ -10,16 +14,22 @@ public class BattleLaunchedOptionImpl implements BattleLaunchedOption {
 
     private final OneArgEvent<BattleConfig> battleLaunched;
 
-    private final BattleConfigProvider battleConfigProvider;
+    private final KingdomIdProvider kingdomIdProvider;
 
-    public BattleLaunchedOptionImpl(BattleConfigProvider battleIdProvider) {
-        this.battleConfigProvider = battleIdProvider;
+    private final BattleIdGenerator battleIdGenerator;
+
+    public BattleLaunchedOptionImpl(KingdomIdProvider kingdomIdProvider) {
+        this.kingdomIdProvider = kingdomIdProvider;
         battleLaunched = new OneArgEventImpl<>();
+        battleIdGenerator = new BattleIdGeneratorImpl();
     }
 
     @Override
     public void execute() {
-        BattleConfig battleConfig = battleConfigProvider.getBattleConfig();
+        String firstKingdomId = kingdomIdProvider.getKingdomId();
+        String secondKingdomId = kingdomIdProvider.getKingdomId();
+        Integer battleId = battleIdGenerator.generateId();
+        BattleConfig battleConfig = new BattleConfigImpl(battleId, firstKingdomId, secondKingdomId);
         battleLaunched.invoke(battleConfig);
     }
 
