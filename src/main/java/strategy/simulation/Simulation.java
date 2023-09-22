@@ -14,13 +14,20 @@ import strategy.initializer.gui.GUIInitializerImpl;
 import strategy.initializer.simulation.SimulationInitializer;
 import strategy.json.FileJsonLoader;
 import strategy.json.FileJsonLoaderImpl;
+import strategy.simulation.api.SimulationAPI;
 import strategy.simulation.api.SimulationAPIImpl;
 import strategy.util.ProtectedRunnableExecutorService;
 import strategy.util.ProtectedThread;
 
 public class Simulation {
+
+    private final SimulationAPI simulationAPI;
+
+    public Simulation() {
+        simulationAPI = new SimulationAPIImpl();
+    }
+
     //TODO:
-    // create some additional api fe. get launched kingdoms -> SimulationAPI class (contains executioner)
     // create options creator -> here create buffors or bind to events
     // add battle stop and battle launch -> battle stop easy | battle launch automatic id creator (if both names are ok)
     // possible options displaying -> maybe on options executioner beggining optionNeeded();
@@ -68,6 +75,6 @@ public class Simulation {
         BattleOperatorCreator battleOperatorCreator = new BattleOperatorCreatorImpl();
         AppInitializer appInitializer = new AppInitializerFromFile(battleOperatorCreator);
         SimulationInitializer simulationInitializer = appInitializer.createSimulationInitializer();
-        simulationInitializer.initializeSimulation(app, new SimulationAPIImpl());
+        simulationInitializer.initializeSimulation(app, simulationAPI);
     }
 }
