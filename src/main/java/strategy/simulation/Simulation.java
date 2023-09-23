@@ -28,11 +28,12 @@ public class Simulation {
     }
 
     //TODO:
-    // create options creator -> here bind to events
-    // possible options displaying -> maybe on options executioner beggining optionNeeded();
-    // displaying in option (fe. provide kingdom Id)
-    // fe. idNeeded.invoke(); -> some
-    // BETTER: CREATE SpeakingProviders!!! ProvidersCreator
+    // create options creator -> here bind events for options manager
+    // s
+    // SpeakingProviders (with events) -> ProvidersCreator(may be speaking or not) and also event in options executioner
+    // then bind those events to methods in optionsCommunicator (or not if communicator doesnt care)
+    // OptionsCommunicatorCreator -> it creates OptionsCommunicator() or ConsoleOptionsCommunicator(...., options executioner) (but its not necessary to create it)
+    // optionsCommunicateCreator - use setters in providers creator
 
     /*TODO gui:
         two panels with names of materials and count of each one (consider it!):
