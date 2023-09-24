@@ -1,5 +1,6 @@
 package strategy.app.options;
 
+import lombok.Getter;
 import strategy.battle.BattleConfig;
 import strategy.events.oneargevent.OneArgEvent;
 import strategy.events.oneargevent.OneArgEventImpl;
@@ -23,6 +24,7 @@ public class AppOptionsManagerImpl implements ModificableAppOptionsManager {
 
 	private final OneArgEvent<Integer> battleStopped;
 
+	@Getter
 	private final Map<String, NamedOption> managedOptions;
 
 	public AppOptionsManagerImpl() {
@@ -80,10 +82,5 @@ public class AppOptionsManagerImpl implements ModificableAppOptionsManager {
 	@Override
 	public void addBattleStoppedListener(Consumer<Integer> battleIdConsumer) {
 		battleStopped.addListener(battleIdConsumer);
-	}
-
-	@Override
-	public Map<String, NamedOption> getManagedOptions() {
-		return managedOptions;
 	}
 }
