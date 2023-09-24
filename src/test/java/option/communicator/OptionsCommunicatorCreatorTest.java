@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import strategy.gui.GUIType;
-import strategy.option.communicator.ConsoleOptionsCommunicator;
+import strategy.option.communicator.BufferedConsoleOptionsCommunicator;
 import strategy.option.communicator.OptionsCommunicatorCreator;
 import strategy.option.communicator.OptionsCommunicatorCreatorImpl;
 import strategy.option.message.OptionMessagesCreator;
@@ -23,6 +23,6 @@ class OptionsCommunicatorCreatorTest {
     @Test
     void returnConsoleOptionsCommunicator_when_consoleGuiTypePassed() {
         OptionsCommunicatorCreator creator = new OptionsCommunicatorCreatorImpl(messagesCreator);
-        assertThat(creator.createOptionsCommunicator(GUIType.CONSOLE)).isInstanceOf(ConsoleOptionsCommunicator.class);
+        assertThat(creator.createOptionsCommunicator(GUIType.CONSOLE)).isInstanceOf(BufferedConsoleOptionsCommunicator.class);
     }
 }

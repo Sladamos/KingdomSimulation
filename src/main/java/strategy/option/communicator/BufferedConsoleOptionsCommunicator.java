@@ -2,7 +2,6 @@ package strategy.option.communicator;
 
 import lombok.Getter;
 import strategy.buffer.Buffer;
-import strategy.buffer.BufferImpl;
 import strategy.error.CriticalAppError;
 import strategy.option.NamedOption;
 import strategy.option.OptionsProvider;
@@ -12,7 +11,7 @@ import strategy.provider.kingdom.SpeakingKingdomIdProvider;
 
 import java.util.Map;
 
-public class ConsoleOptionsCommunicator implements OptionsCommunicator {
+public class BufferedConsoleOptionsCommunicator implements OptionsCommunicator {
 
     @Getter
     private final Buffer<String> optionsBuffer;
@@ -27,13 +26,14 @@ public class ConsoleOptionsCommunicator implements OptionsCommunicator {
 
     private Map<String, NamedOption> managedOptions;
 
-    public ConsoleOptionsCommunicator(OptionMessagesCreator optionMessagesCreator, SpeakingBattleIdProvider battleIdProvider, SpeakingKingdomIdProvider kingdomIdProvider) {
+    public BufferedConsoleOptionsCommunicator(OptionMessagesCreator optionMessagesCreator, Buffer<String> optionsBuffer,
+                                              SpeakingBattleIdProvider battleIdProvider, SpeakingKingdomIdProvider kingdomIdProvider) {
         this.optionMessagesCreator = optionMessagesCreator;
         this.battleIdProvider = battleIdProvider;
         this.kingdomIdProvider = kingdomIdProvider;
+        this.optionsBuffer = optionsBuffer;
         battleIdProvider.addListener(this::generateMessageAboutBattlesId);
         kingdomIdProvider.addListener(this::generateMessageAboutKingdomsId);
-        optionsBuffer = new BufferImpl<>();
     }
 
     @Override

@@ -10,7 +10,7 @@ import strategy.initializer.gui.GUIInitializerImpl;
 import strategy.json.FileJsonLoader;
 import strategy.json.JSON;
 import strategy.json.JsonLoader;
-import strategy.option.communicator.ConsoleOptionsCommunicator;
+import strategy.option.communicator.BufferedConsoleOptionsCommunicator;
 import strategy.option.communicator.OptionsCommunicatorCreator;
 
 import static org.assertj.core.api.Assertions.assertThatCode;
@@ -28,7 +28,7 @@ public class GUIInitializerTest {
     public void createJsonLoaderMock() {
         jsonLoader = Mockito.mock(FileJsonLoader.class);
         OptionsCommunicatorCreator optionsCommunicatorCreator = Mockito.mock(OptionsCommunicatorCreator.class);
-        Mockito.when(optionsCommunicatorCreator.createOptionsCommunicator(Mockito.any())).thenReturn(Mockito.mock(ConsoleOptionsCommunicator.class));
+        Mockito.when(optionsCommunicatorCreator.createOptionsCommunicator(Mockito.any())).thenReturn(Mockito.mock(BufferedConsoleOptionsCommunicator.class));
         guiInitializer = new GUIInitializerImpl(optionsCommunicatorCreator);
         json = Mockito.mock(JSON.class);
     }
