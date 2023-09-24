@@ -60,11 +60,11 @@ public class ConsoleGUI implements GUI {
     }
 
     private void bindOptionsCommunicator() {
+        Map<String, NamedOption> managedOptions = appOptionsManager.getManagedOptions();
+        optionsCommunicator.setManagedOptions(managedOptions);
         optionsCommunicator.addBattleIdProvider(battleIdProvider);
         optionsCommunicator.addKingdomIdProvider(kingdomIdProvider);
         optionsCommunicator.addManagedOptionsProvider(optionsExecutioner);
-        Map<String, NamedOption> managedOptions = appOptionsManager.getManagedOptions();
-        optionsCommunicator.setManagedOptions(managedOptions);
     }
 
     private AppController createAppController() {
