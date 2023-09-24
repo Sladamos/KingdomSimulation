@@ -1,15 +1,13 @@
 package strategy.app.options;
 
 import strategy.battle.BattleConfig;
-import strategy.events.noargsevent.NoArgEvent;
-import strategy.events.noargsevent.NoArgEventImpl;
 import strategy.events.oneargevent.OneArgEvent;
 import strategy.events.oneargevent.OneArgEventImpl;
-import strategy.option.Option;
+import strategy.option.NamedOption;
 import strategy.option.battle.BattleLaunchedOption;
 import strategy.option.battle.BattleStoppedOption;
-import strategy.option.kingdom.KingdomStoppedOption;
 import strategy.option.kingdom.KingdomLaunchedOption;
+import strategy.option.kingdom.KingdomStoppedOption;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,46 +23,43 @@ public class AppOptionsManagerImpl implements ModificableAppOptionsManager {
 
 	private final OneArgEvent<Integer> battleStopped;
 
-	private final NoArgEvent appDisabled;
-
-	private final Map<String, Option> managedOptions;
+	private final Map<String, NamedOption> managedOptions;
 
 	public AppOptionsManagerImpl() {
 		kingdomLaunched = new OneArgEventImpl<>();
 		kingdomStopped = new OneArgEventImpl<>();
 		battleLaunched = new OneArgEventImpl<>();
 		battleStopped = new OneArgEventImpl<>();
-		appDisabled = new NoArgEventImpl();
 		managedOptions = new HashMap<>();
 	}
 
 	@Override
 	public void setKingdomLaunchedOption(KingdomLaunchedOption kingdomLaunchedOption) {
-		managedOptions.put("Launch kingdom", kingdomLaunchedOption);
+		managedOptions.put(kingdomLaunchedOption.getName(), kingdomLaunchedOption);
 		kingdomLaunchedOption.addKingdomLaunchedListener(kingdomLaunched::invoke);
 	}
 
 	@Override
 	public void setKingdomStoppedOption(KingdomStoppedOption kingdomStoppedOption) {
-		managedOptions.put("Stop kingdom", kingdomStoppedOption);
+		managedOptions.put(kingdomStoppedOption.getName(), kingdomStoppedOption);
 		kingdomStoppedOption.addKingdomStoppedListener(kingdomStopped::invoke);
 	}
 
 	@Override
 	public void setBattleLaunchedOption(BattleLaunchedOption battleLaunchedOption) {
-		managedOptions.put("Launch battle", battleLaunchedOption);
+		managedOptions.put(battleLaunchedOption.getName(), battleLaunchedOption);
 		battleLaunchedOption.addBattleLaunchedListener(battleLaunched::invoke);
 	}
 
 	@Override
 	public void setBattleStoppedOption(BattleStoppedOption battleStoppedOption) {
-		managedOptions.put("Stop battle", battleStoppedOption);
+		managedOptions.put(battleStoppedOption.getName(), battleStoppedOption);
 		battleStoppedOption.addBattleStoppedListener(battleStopped::invoke);
 	}
 
 	@Override
-	public void setAppDisabledOption(Option appDisabledOption) {
-		managedOptions.put("Exit", appDisabledOption);
+	public void setAppDisabledOption(NamedOption appDisabledOption) {
+		managedOptions.put(appDisabledOption.getName(), appDisabledOption);
 	}
 
 	@Override
@@ -88,7 +83,7 @@ public class AppOptionsManagerImpl implements ModificableAppOptionsManager {
 	}
 
 	@Override
-	public Map<String, Option> getManagedOptions() {
+	public Map<String, NamedOption> getManagedOptions() {
 		return managedOptions;
 	}
 }

@@ -3,15 +3,19 @@ package strategy.option;
 import strategy.buffer.Buffer;
 import strategy.buffer.BufferTerminatedException;
 import strategy.error.BasicAppError;
+import strategy.events.noargsevent.NoArgEvent;
+import strategy.events.noargsevent.NoArgEventImpl;
 import strategy.util.ProtectedThread;
 
 import java.util.Map;
 
-public class OptionsExecutionerImpl implements OptionsExecutioner {
+public class OptionsExecutionerImpl implements OptionsExecutioner, OptionsProvider {
 
 	private final Buffer<String> optionsBuffer;
 
 	private final Map<String, Option> options;
+
+	private final NoArgEvent selectOption;
 
 	private boolean isExecuting;
 
@@ -19,6 +23,7 @@ public class OptionsExecutionerImpl implements OptionsExecutioner {
 		this.options = options;
 		this.optionsBuffer = optionsBuffer;
 		isExecuting = false;
+		selectOption = new NoArgEventImpl();
 	}
 
 	@Override
@@ -31,6 +36,7 @@ public class OptionsExecutionerImpl implements OptionsExecutioner {
 		isExecuting = true;
 		try {
 			while (isExecuting) {
+				selectOption.invoke();
 				String selectedOptionName = optionsBuffer.getItem();
 				Thread optionRunner = new ProtectedThread(() -> executeOptionWithName(selectedOptionName));
 				optionRunner.start();
@@ -59,5 +65,10 @@ public class OptionsExecutionerImpl implements OptionsExecutioner {
 			throw new BasicAppError("Incorrect option name.");
 		}
 		return options.get(optionName);
+	}
+
+	@Override
+	public void addSelectOptionListener(Runnable listener) {
+		selectOption.addListener(listener);
 	}
 }

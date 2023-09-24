@@ -27,4 +27,9 @@ public class BattleStoppedOptionImpl implements BattleStoppedOption {
     public void addBattleStoppedListener(Consumer<Integer> battleIdConsumer) {
         battleStopped.addListener(battleIdConsumer);
     }
+
+    @Override
+    public String getName() {
+        return "Stop battle";
+    }
 }

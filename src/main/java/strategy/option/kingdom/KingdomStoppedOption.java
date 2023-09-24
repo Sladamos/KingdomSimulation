@@ -1,9 +1,9 @@
 package strategy.option.kingdom;
 
-import strategy.option.Option;
+import strategy.option.NamedOption;
 
 import java.util.function.Consumer;
 
-public interface KingdomStoppedOption extends Option {
+public interface KingdomStoppedOption extends NamedOption {
 	void addKingdomStoppedListener(Consumer<String> kingdomIdConsumer);
 }

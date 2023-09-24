@@ -7,7 +7,7 @@ import strategy.battle.BattleConfig;
 import strategy.message.JSONMessage;
 import strategy.message.StringMessage;
 import strategy.message.sender.MessagesSender;
-import strategy.option.Option;
+import strategy.option.NamedOption;
 
 import java.util.Map;
 import java.util.function.Consumer;
@@ -77,7 +77,7 @@ public class AppImpl implements App {
     }
 
     @Override
-    public Map<String, Option> getManagedOptions() {
+    public Map<String, NamedOption> getManagedOptions() {
         return appOptionsManager.getManagedOptions();
     }
 

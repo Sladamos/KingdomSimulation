@@ -37,4 +37,9 @@ public class BattleLaunchedOptionImpl implements BattleLaunchedOption {
     public void addBattleLaunchedListener(Consumer<BattleConfig> battleConfigConsumer) {
         battleLaunched.addListener(battleConfigConsumer);
     }
+
+    @Override
+    public String getName() {
+        return "Launch battle";
+    }
 }

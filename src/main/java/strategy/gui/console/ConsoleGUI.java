@@ -13,9 +13,7 @@ import strategy.buffer.SwitchableBuffer;
 import strategy.app.controller.AppControllerImpl;
 import strategy.gui.GUI;
 import strategy.message.receiver.ConsoleMessagesReceiver;
-import strategy.option.Option;
-import strategy.option.OptionsExecutioner;
-import strategy.option.OptionsExecutionerImpl;
+import strategy.option.*;
 import strategy.option.battle.*;
 import strategy.option.communicator.OptionsCommunicator;
 import strategy.option.kingdom.*;
@@ -24,6 +22,7 @@ import strategy.provider.battle.SpeakingBufferBattleIdProvider;
 import strategy.provider.kingdom.KingdomIdProvider;
 import strategy.provider.kingdom.SpeakingBufferKingdomIdProvider;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class ConsoleGUI implements GUI {
@@ -43,15 +42,29 @@ public class ConsoleGUI implements GUI {
 
     private final OptionsCommunicator optionsCommunicator;
 
+    private final KingdomIdProvider kingdomIdProvider;
+    private final BattleIdProvider battleIdProvider;
+
     public ConsoleGUI(OptionsCommunicator optionsCommunicator) {
         this.optionsCommunicator = optionsCommunicator;
         optionsBuffer = new BufferImpl<>();
+        kingdomIdProvider = new SpeakingBufferKingdomIdProvider(optionsBuffer);
+        battleIdProvider = new SpeakingBufferBattleIdProvider(optionsBuffer);
         appCommunicator = new AppCommunicatorImpl(new ConsoleMessagesReceiver<>(),
                 new ConsoleErrorMessagesReceiver(this::onGUIDisabled),
                 new ConsoleMessagesReceiver<>());
         appOptionsManager = createOptionsManager();
         optionsExecutioner = createOptionsExecutioner();
         appController = createAppController();
+        bindOptionsCommunicator();
+    }
+
+    private void bindOptionsCommunicator() {
+        optionsCommunicator.addBattleIdProvider(battleIdProvider);
+        optionsCommunicator.addKingdomIdProvider(kingdomIdProvider);
+        optionsCommunicator.addManagedOptionsProvider(optionsExecutioner);
+        Map<String, NamedOption> managedOptions = appOptionsManager.getManagedOptions();
+        optionsCommunicator.setManagedOptions(managedOptions);
     }
 
     private AppController createAppController() {
@@ -61,25 +74,22 @@ public class ConsoleGUI implements GUI {
     }
 
     private OptionsExecutioner createOptionsExecutioner() {
-        Map<String, Option> managedOptions = appOptionsManager.getManagedOptions();
+        Map<String, Option> managedOptions = new HashMap<>(appOptionsManager.getManagedOptions());
         return new OptionsExecutionerImpl(managedOptions, optionsBuffer);
     }
 
     private ModificableAppOptionsManager createOptionsManager() {
         ModificableAppOptionsManager optionsManager = new AppOptionsManagerImpl();
-        KingdomIdProvider kingdomIdProvider = new SpeakingBufferKingdomIdProvider(optionsBuffer);
-        BattleIdProvider battleIdProvider = new SpeakingBufferBattleIdProvider(optionsBuffer);
-        optionsCommunicator.addBattleIdProvider(battleIdProvider);
-        optionsCommunicator.addKingdomIdProvider(kingdomIdProvider);
         KingdomLaunchedOption kingdomLaunchedOption = new KingdomLaunchedOptionImpl(kingdomIdProvider);
         KingdomStoppedOption kingdomStoppedOption = new KingdomStoppedOptionImpl(kingdomIdProvider);
         BattleLaunchedOption battleLaunchedOption = new BattleLaunchedOptionImpl(kingdomIdProvider);
         BattleStoppedOption battleStoppedOption = new BattleStoppedOptionImpl(battleIdProvider);
+        AppExitOption exitOption = new AppExitOptionImpl(this::onGUIDisabled);
         optionsManager.setKingdomLaunchedOption(kingdomLaunchedOption);
         optionsManager.setKingdomStoppedOption(kingdomStoppedOption);
         optionsManager.setBattleLaunchedOption(battleLaunchedOption);
         optionsManager.setBattleStoppedOption(battleStoppedOption);
-        optionsManager.setAppDisabledOption(this::onGUIDisabled);
+        optionsManager.setAppDisabledOption(exitOption);
         return optionsManager;
     }
 

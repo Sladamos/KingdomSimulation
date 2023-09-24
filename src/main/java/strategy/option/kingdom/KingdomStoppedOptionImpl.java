@@ -27,4 +27,9 @@ public class KingdomStoppedOptionImpl implements KingdomStoppedOption {
 	public void addKingdomStoppedListener(Consumer<String> kingdomIdConsumer) {
 		kingdomStopped.addListener(kingdomIdConsumer);
 	}
+
+	@Override
+	public String getName() {
+		return "Stop kingdom";
+	}
 }

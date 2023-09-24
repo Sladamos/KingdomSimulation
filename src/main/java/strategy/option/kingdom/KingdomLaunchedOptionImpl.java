@@ -27,4 +27,9 @@ public class KingdomLaunchedOptionImpl implements KingdomLaunchedOption {
 	public void addKingdomLaunchedListener(Consumer<String> kingdomIdConsumer) {
 		kingdomLaunched.addListener(kingdomIdConsumer);
 	}
+
+	@Override
+	public String getName() {
+		return "Launch kingdom";
+	}
 }
