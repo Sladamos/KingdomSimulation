@@ -14,7 +14,11 @@ public class OptionsCommunicatorCreatorImpl implements OptionsCommunicatorCreato
 
     public OptionsCommunicatorCreatorImpl(OptionMessagesCreator messagesCreator) {
         communicatorsMap = new HashMap<>();
-        communicatorsMap.put(GUIType.CONSOLE, () -> new ConsoleOptionsCommunicator(messagesCreator));
+        communicatorsMap.put(GUIType.CONSOLE, () -> createConsoleCommunicator());
+    }
+
+    private OptionsCommunicator createConsoleCommunicator(OptionMessagesCreator messagesCreator) {
+        new ConsoleOptionsCommunicator(messagesCreator, battleIdProvider, kingdomIdProvider);
     }
 
     @Override

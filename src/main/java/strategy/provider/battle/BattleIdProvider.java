@@ -1,7 +1,5 @@
 package strategy.provider.battle;
 
-import strategy.provider.SpeakingProvider;
-
-public interface BattleIdProvider extends SpeakingProvider {
+public interface BattleIdProvider {
     Integer getBattleId();
 }

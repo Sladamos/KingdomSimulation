@@ -5,7 +5,7 @@ import strategy.error.BasicAppError;
 import strategy.events.noargsevent.NoArgEvent;
 import strategy.events.noargsevent.NoArgEventImpl;
 
-public class SpeakingBufferBattleIdProvider implements BattleIdProvider {
+public class SpeakingBufferBattleIdProvider implements SpeakingBattleIdProvider {
 
     private final Buffer<String> optionsBuffer;
 

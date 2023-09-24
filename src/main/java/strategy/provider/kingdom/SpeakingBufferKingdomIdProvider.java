@@ -4,7 +4,7 @@ import strategy.buffer.Buffer;
 import strategy.events.noargsevent.NoArgEvent;
 import strategy.events.noargsevent.NoArgEventImpl;
 
-public class SpeakingBufferKingdomIdProvider implements KingdomIdProvider {
+public class SpeakingBufferKingdomIdProvider implements SpeakingKingdomIdProvider {
 
     private final Buffer<String> optionsBuffer;
 
