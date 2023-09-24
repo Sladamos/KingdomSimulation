@@ -14,6 +14,7 @@ import strategy.initializer.gui.GUIInitializerImpl;
 import strategy.initializer.simulation.SimulationInitializer;
 import strategy.json.FileJsonLoader;
 import strategy.json.FileJsonLoaderImpl;
+import strategy.option.communicator.OptionsCommunicatorCreator;
 import strategy.option.communicator.OptionsCommunicatorCreatorImpl;
 import strategy.option.message.OptionMessagesCreator;
 import strategy.option.message.OptionMessagesCreatorImpl;
@@ -31,8 +32,7 @@ public class Simulation {
     }
 
     //TODO:
-    // create options creator -> here bind events for options manager
-    // bind input logger
+    // create input handler and communicator(setter for disable) out of gui
 
     /*TODO gui:
         two panels with names of materials and count of each one (consider it!):
@@ -66,7 +66,7 @@ public class Simulation {
 
     private GUI initializeGUIFromConfig() {
         OptionMessagesCreator messagesCreator = new OptionMessagesCreatorImpl(simulationAPI);
-        GUIInitializer guiInitializer = new GUIInitializerImpl(new OptionsCommunicatorCreatorImpl(messagesCreator));
+        GUIInitializer guiInitializer = new GUIInitializerImpl(messagesCreator);
         FileJsonLoader guiConfigLoader = new FileJsonLoaderImpl();
         guiConfigLoader.setFileName("gui.json");
         return guiInitializer.initializeGUI(guiConfigLoader);

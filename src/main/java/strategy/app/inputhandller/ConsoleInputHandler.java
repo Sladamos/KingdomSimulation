@@ -3,6 +3,9 @@ package strategy.app.inputhandller;
 import strategy.error.BasicAppError;
 import strategy.events.oneargevent.OneArgEvent;
 import strategy.events.oneargevent.OneArgEventImpl;
+import strategy.message.StringMessage;
+import strategy.message.logging.FileLogger;
+import strategy.message.logging.Logger;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -17,6 +20,12 @@ public class ConsoleInputHandler implements AppInputHandler {
 	public ConsoleInputHandler() {
 		inputHandled = new OneArgEventImpl<>();
 		isLaunched = false;
+		attachLogger();
+	}
+
+	private void attachLogger() {
+		Logger logger = new FileLogger();
+		addInputHandledListener(el -> logger.logMessage(new StringMessage(el)));
 	}
 
 	@Override

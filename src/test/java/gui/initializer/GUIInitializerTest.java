@@ -3,20 +3,14 @@ package gui.initializer;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
-import strategy.buffer.SwitchableBuffer;
 import strategy.error.CriticalAppError;
 import strategy.initializer.gui.GUIInitializer;
 import strategy.initializer.gui.GUIInitializerImpl;
 import strategy.json.FileJsonLoader;
 import strategy.json.JSON;
 import strategy.json.JsonLoader;
-import strategy.option.communicator.OptionsCommunicator;
-import strategy.option.communicator.OptionsCommunicatorCreator;
-import strategy.provider.battle.BattleIdProvider;
-import strategy.provider.kingdom.KingdomIdProvider;
+import strategy.option.message.OptionMessagesCreator;
 
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -30,14 +24,6 @@ public class GUIInitializerTest {
     private JSON json;
 
     @BeforeEach
-    public void createMocks() {
-        MockitoAnnotations.openMocks(this);
-    }
-
-    @Mock
-    private SwitchableBuffer<String> buffer;
-
-    @BeforeEach
     public void createJsonLoaderMock() {
         jsonLoader = Mockito.mock(FileJsonLoader.class);
         json = Mockito.mock(JSON.class);
@@ -45,13 +31,8 @@ public class GUIInitializerTest {
 
     @BeforeEach
     public void createGuiInitializer() {
-        OptionsCommunicatorCreator optionsCommunicatorCreator = Mockito.mock(OptionsCommunicatorCreator.class);
-        OptionsCommunicator optionsCommunicator = Mockito.mock(OptionsCommunicator.class);
-        Mockito.when(optionsCommunicatorCreator.createOptionsCommunicator(Mockito.any())).thenReturn(optionsCommunicator);
-        Mockito.when(optionsCommunicator.getKingdomIdProvider()).thenReturn(Mockito.mock(KingdomIdProvider.class));
-        Mockito.when(optionsCommunicator.getBattleIdProvider()).thenReturn(Mockito.mock(BattleIdProvider.class));
-        Mockito.when(optionsCommunicator.getOptionsBuffer()).thenReturn(buffer);
-        guiInitializer = new GUIInitializerImpl(optionsCommunicatorCreator);
+        OptionMessagesCreator messagesCreator = Mockito.mock(OptionMessagesCreator.class);
+        guiInitializer = new GUIInitializerImpl(messagesCreator);
     }
 
     @Test

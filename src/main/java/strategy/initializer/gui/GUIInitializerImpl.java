@@ -10,6 +10,8 @@ import strategy.gui.console.ConsoleGUI;
 import strategy.json.JsonLoader;
 import strategy.option.communicator.OptionsCommunicator;
 import strategy.option.communicator.OptionsCommunicatorCreator;
+import strategy.option.communicator.OptionsCommunicatorCreatorImpl;
+import strategy.option.message.OptionMessagesCreator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,8 +23,8 @@ public class GUIInitializerImpl implements GUIInitializer {
 
     private final OptionsCommunicatorCreator optionsCommunicatorCreator;
 
-    public GUIInitializerImpl(OptionsCommunicatorCreator optionsCommunicatorCreator) {
-        this.optionsCommunicatorCreator = optionsCommunicatorCreator;
+    public GUIInitializerImpl(OptionMessagesCreator messagesCreator) {
+        optionsCommunicatorCreator = new OptionsCommunicatorCreatorImpl(messagesCreator);
         guiCreators = new HashMap<>();
         guiCreators.put(GUIType.CONSOLE, ConsoleGUI::new);
     }
