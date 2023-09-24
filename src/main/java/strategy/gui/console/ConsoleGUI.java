@@ -17,6 +17,7 @@ import strategy.option.Option;
 import strategy.option.OptionsExecutioner;
 import strategy.option.OptionsExecutionerImpl;
 import strategy.option.battle.*;
+import strategy.option.communicator.OptionsCommunicator;
 import strategy.option.kingdom.*;
 import strategy.provider.battle.BattleIdProvider;
 import strategy.provider.battle.BufferBattleIdProvider;
@@ -40,7 +41,7 @@ public class ConsoleGUI implements GUI {
 
     private final SwitchableBuffer<String> optionsBuffer;
 
-    public ConsoleGUI() {
+    public ConsoleGUI(OptionsCommunicator optionsCommunicator) {
         optionsBuffer = new BufferImpl<>();
         appCommunicator = new AppCommunicatorImpl(new ConsoleMessagesReceiver<>(),
                 new ConsoleErrorMessagesReceiver(this::onGUIDisabled),

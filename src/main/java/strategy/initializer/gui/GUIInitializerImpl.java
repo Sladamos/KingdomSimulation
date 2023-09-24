@@ -3,22 +3,26 @@ package strategy.initializer.gui;
 import strategy.config.GUIConfigParser;
 import strategy.config.creator.ConfigCreator;
 import strategy.config.creator.ConfigCreatorImpl;
-import strategy.error.ErrorHandler;
-import strategy.gui.console.ConsoleGUI;
 import strategy.gui.GUI;
 import strategy.gui.GUIConfig;
 import strategy.gui.GUIType;
+import strategy.gui.console.ConsoleGUI;
 import strategy.json.JsonLoader;
+import strategy.option.communicator.OptionsCommunicator;
+import strategy.option.communicator.OptionsCommunicatorCreator;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Supplier;
+import java.util.function.Function;
 
 public class GUIInitializerImpl implements GUIInitializer {
 
-    private final Map<GUIType, Supplier<GUI>> guiCreators;
+    private final Map<GUIType, Function<OptionsCommunicator, GUI>> guiCreators;
 
-    public GUIInitializerImpl() {
+    private final OptionsCommunicatorCreator optionsCommunicatorCreator;
+
+    public GUIInitializerImpl(OptionsCommunicatorCreator optionsCommunicatorCreator) {
+        this.optionsCommunicatorCreator = optionsCommunicatorCreator;
         guiCreators = new HashMap<>();
         guiCreators.put(GUIType.CONSOLE, ConsoleGUI::new);
     }
@@ -27,7 +31,8 @@ public class GUIInitializerImpl implements GUIInitializer {
     public GUI initializeGUI(JsonLoader jsonLoader) {
         GUIConfig config = createGUIConfig(jsonLoader);
         GUIType guiType = config.getGuiType();
-        return guiCreators.get(guiType).get();
+        OptionsCommunicator communicator = optionsCommunicatorCreator.createOptionsCommunicator(guiType);
+        return guiCreators.get(guiType).apply(communicator);
     }
 
     private GUIConfig createGUIConfig(JsonLoader jsonLoader) {

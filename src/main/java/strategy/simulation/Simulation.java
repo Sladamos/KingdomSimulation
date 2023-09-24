@@ -14,6 +14,9 @@ import strategy.initializer.gui.GUIInitializerImpl;
 import strategy.initializer.simulation.SimulationInitializer;
 import strategy.json.FileJsonLoader;
 import strategy.json.FileJsonLoaderImpl;
+import strategy.option.communicator.OptionsCommunicatorCreatorImpl;
+import strategy.option.message.OptionMessagesCreator;
+import strategy.option.message.OptionMessagesCreatorImpl;
 import strategy.simulation.api.SimulationAPI;
 import strategy.simulation.api.SimulationAPIImpl;
 import strategy.util.ProtectedRunnableExecutorService;
@@ -65,7 +68,8 @@ public class Simulation {
     }
 
     private GUI initializeGUIFromConfig() {
-        GUIInitializer guiInitializer = new GUIInitializerImpl();
+        OptionMessagesCreator messagesCreator = new OptionMessagesCreatorImpl(simulationAPI);
+        GUIInitializer guiInitializer = new GUIInitializerImpl(new OptionsCommunicatorCreatorImpl(messagesCreator));
         FileJsonLoader guiConfigLoader = new FileJsonLoaderImpl();
         guiConfigLoader.setFileName("gui.json");
         return guiInitializer.initializeGUI(guiConfigLoader);
