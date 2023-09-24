@@ -30,7 +30,6 @@ public class Simulation {
     //TODO:
     // create options creator -> here bind events for options manager
     // ProvidersCreator(may be speaking or not) and also event in options executioner
-    // then bind those events to methods in optionsCommunicator (or not if communicator doesnt care)
     // OptionsCommunicatorCreator -> it creates OptionsCommunicator() or ConsoleOptionsCommunicator(...., options executioner) (but its not necessary to create it)
     // optionsCommunicateCreator - use setters in providers creator
 
