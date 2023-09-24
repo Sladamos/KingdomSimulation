@@ -4,9 +4,8 @@ import strategy.buffer.Buffer;
 import strategy.error.BasicAppError;
 import strategy.events.noargsevent.NoArgEvent;
 import strategy.events.noargsevent.NoArgEventImpl;
-import strategy.provider.SpeakingProvider;
 
-public class SpeakingBufferBattleIdProvider implements BattleIdProvider, SpeakingProvider {
+public class SpeakingBufferBattleIdProvider implements BattleIdProvider {
 
     private final Buffer<String> optionsBuffer;
 

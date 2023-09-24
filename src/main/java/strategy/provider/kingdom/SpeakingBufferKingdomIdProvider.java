@@ -3,9 +3,8 @@ package strategy.provider.kingdom;
 import strategy.buffer.Buffer;
 import strategy.events.noargsevent.NoArgEvent;
 import strategy.events.noargsevent.NoArgEventImpl;
-import strategy.provider.SpeakingProvider;
 
-public class SpeakingBufferKingdomIdProvider implements KingdomIdProvider, SpeakingProvider {
+public class SpeakingBufferKingdomIdProvider implements KingdomIdProvider {
 
     private final Buffer<String> optionsBuffer;
 

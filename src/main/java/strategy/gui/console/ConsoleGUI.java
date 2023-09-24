@@ -20,9 +20,9 @@ import strategy.option.battle.*;
 import strategy.option.communicator.OptionsCommunicator;
 import strategy.option.kingdom.*;
 import strategy.provider.battle.BattleIdProvider;
-import strategy.provider.battle.BufferBattleIdProvider;
-import strategy.provider.kingdom.BufferKingdomIdProvider;
+import strategy.provider.battle.SpeakingBufferBattleIdProvider;
 import strategy.provider.kingdom.KingdomIdProvider;
+import strategy.provider.kingdom.SpeakingBufferKingdomIdProvider;
 
 import java.util.Map;
 
@@ -41,7 +41,10 @@ public class ConsoleGUI implements GUI {
 
     private final SwitchableBuffer<String> optionsBuffer;
 
+    private final OptionsCommunicator optionsCommunicator;
+
     public ConsoleGUI(OptionsCommunicator optionsCommunicator) {
+        this.optionsCommunicator = optionsCommunicator;
         optionsBuffer = new BufferImpl<>();
         appCommunicator = new AppCommunicatorImpl(new ConsoleMessagesReceiver<>(),
                 new ConsoleErrorMessagesReceiver(this::onGUIDisabled),
@@ -64,8 +67,10 @@ public class ConsoleGUI implements GUI {
 
     private ModificableAppOptionsManager createOptionsManager() {
         ModificableAppOptionsManager optionsManager = new AppOptionsManagerImpl();
-        KingdomIdProvider kingdomIdProvider = new BufferKingdomIdProvider(optionsBuffer);
-        BattleIdProvider battleIdProvider = new BufferBattleIdProvider(optionsBuffer);
+        KingdomIdProvider kingdomIdProvider = new SpeakingBufferKingdomIdProvider(optionsBuffer);
+        BattleIdProvider battleIdProvider = new SpeakingBufferBattleIdProvider(optionsBuffer);
+        optionsCommunicator.addBattleIdProvider(battleIdProvider);
+        optionsCommunicator.addKingdomIdProvider(kingdomIdProvider);
         KingdomLaunchedOption kingdomLaunchedOption = new KingdomLaunchedOptionImpl(kingdomIdProvider);
         KingdomStoppedOption kingdomStoppedOption = new KingdomStoppedOptionImpl(kingdomIdProvider);
         BattleLaunchedOption battleLaunchedOption = new BattleLaunchedOptionImpl(kingdomIdProvider);

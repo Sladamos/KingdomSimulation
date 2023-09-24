@@ -4,7 +4,8 @@ import strategy.message.JSONMessage;
 import strategy.message.logging.FileLogger;
 import strategy.message.logging.Logger;
 import strategy.option.message.OptionMessagesCreator;
-import strategy.provider.SpeakingProvider;
+import strategy.provider.battle.BattleIdProvider;
+import strategy.provider.kingdom.KingdomIdProvider;
 
 public class LoggingOptionsCommunicator implements OptionsCommunicator {
 
@@ -18,12 +19,12 @@ public class LoggingOptionsCommunicator implements OptionsCommunicator {
     }
 
     @Override
-    public void addKingdomIdProvider(SpeakingProvider speakingProvider) {
+    public void addKingdomIdProvider(KingdomIdProvider speakingProvider) {
         speakingProvider.addListener(this::logMessageAboutKingdomsId);
     }
 
     @Override
-    public void addBattleIdProvider(SpeakingProvider speakingProvider) {
+    public void addBattleIdProvider(BattleIdProvider speakingProvider) {
         speakingProvider.addListener(this::logMessageAboutBattlesId);
     }
 

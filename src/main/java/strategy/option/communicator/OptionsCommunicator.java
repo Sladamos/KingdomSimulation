@@ -1,8 +1,9 @@
 package strategy.option.communicator;
 
-import strategy.provider.SpeakingProvider;
+import strategy.provider.battle.BattleIdProvider;
+import strategy.provider.kingdom.KingdomIdProvider;
 
 public interface OptionsCommunicator {
-    void addKingdomIdProvider(SpeakingProvider speakingProvider);
-    void addBattleIdProvider(SpeakingProvider speakingProvider);
+    void addKingdomIdProvider(KingdomIdProvider speakingProvider);
+    void addBattleIdProvider(BattleIdProvider speakingProvider);
 }

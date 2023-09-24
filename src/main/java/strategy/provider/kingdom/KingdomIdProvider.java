@@ -1,5 +1,7 @@
 package strategy.provider.kingdom;
 
-public interface KingdomIdProvider {
+import strategy.provider.SpeakingProvider;
+
+public interface KingdomIdProvider extends SpeakingProvider {
 	String getKingdomId();
 }
