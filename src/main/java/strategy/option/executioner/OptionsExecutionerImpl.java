@@ -1,10 +1,11 @@
-package strategy.option;
+package strategy.option.executioner;
 
 import strategy.buffer.Buffer;
 import strategy.buffer.BufferTerminatedException;
 import strategy.error.BasicAppError;
 import strategy.events.noargsevent.NoArgEvent;
 import strategy.events.noargsevent.NoArgEventImpl;
+import strategy.option.Option;
 import strategy.util.ProtectedThread;
 
 import java.util.Map;

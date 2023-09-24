@@ -2,7 +2,7 @@ package strategy.option.communicator;
 
 import strategy.buffer.SwitchableBuffer;
 import strategy.option.NamedOption;
-import strategy.option.OptionsProvider;
+import strategy.option.executioner.OptionsProvider;
 import strategy.provider.battle.BattleIdProvider;
 import strategy.provider.kingdom.KingdomIdProvider;
 

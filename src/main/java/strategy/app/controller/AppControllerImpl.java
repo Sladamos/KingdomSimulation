@@ -2,7 +2,7 @@ package strategy.app.controller;
 
 import strategy.app.inputhandller.AppInputHandler;
 import strategy.buffer.SwitchableBuffer;
-import strategy.option.OptionsExecutioner;
+import strategy.option.executioner.OptionsExecutioner;
 import strategy.util.ProtectedRunnableExecutorService;
 
 import java.util.concurrent.ExecutorService;

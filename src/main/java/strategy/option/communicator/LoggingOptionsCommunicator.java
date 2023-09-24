@@ -6,7 +6,7 @@ import strategy.message.JSONMessage;
 import strategy.message.logging.FileLogger;
 import strategy.message.logging.Logger;
 import strategy.option.NamedOption;
-import strategy.option.OptionsProvider;
+import strategy.option.executioner.OptionsProvider;
 import strategy.option.message.OptionMessagesCreator;
 import strategy.provider.battle.SpeakingBattleIdProvider;
 import strategy.provider.kingdom.SpeakingKingdomIdProvider;
