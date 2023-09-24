@@ -1,4 +1,4 @@
-package strategy.option.battle;
+package strategy.provider.battle;
 
 import strategy.buffer.Buffer;
 import strategy.error.BasicAppError;

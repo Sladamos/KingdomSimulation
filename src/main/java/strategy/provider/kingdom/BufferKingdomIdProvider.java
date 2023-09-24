@@ -1,4 +1,4 @@
-package strategy.option.kingdom;
+package strategy.provider.kingdom;
 
 import strategy.buffer.Buffer;
 

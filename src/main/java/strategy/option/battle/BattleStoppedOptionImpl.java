@@ -2,6 +2,7 @@ package strategy.option.battle;
 
 import strategy.events.oneargevent.OneArgEvent;
 import strategy.events.oneargevent.OneArgEventImpl;
+import strategy.provider.battle.BattleIdProvider;
 
 import java.util.function.Consumer;
 

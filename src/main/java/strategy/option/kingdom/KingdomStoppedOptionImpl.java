@@ -2,6 +2,7 @@ package strategy.option.kingdom;
 
 import strategy.events.oneargevent.OneArgEvent;
 import strategy.events.oneargevent.OneArgEventImpl;
+import strategy.provider.kingdom.KingdomIdProvider;
 
 import java.util.function.Consumer;
 

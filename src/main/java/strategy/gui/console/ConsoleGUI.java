@@ -18,6 +18,10 @@ import strategy.option.OptionsExecutioner;
 import strategy.option.OptionsExecutionerImpl;
 import strategy.option.battle.*;
 import strategy.option.kingdom.*;
+import strategy.provider.battle.BattleIdProvider;
+import strategy.provider.battle.BufferBattleIdProvider;
+import strategy.provider.kingdom.BufferKingdomIdProvider;
+import strategy.provider.kingdom.KingdomIdProvider;
 
 import java.util.Map;
 

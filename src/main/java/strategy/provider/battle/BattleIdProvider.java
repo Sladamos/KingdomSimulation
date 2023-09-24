@@ -1,4 +1,4 @@
-package strategy.option.battle;
+package strategy.provider.battle;
 
 public interface BattleIdProvider {
     Integer getBattleId();

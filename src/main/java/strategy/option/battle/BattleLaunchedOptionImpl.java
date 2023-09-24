@@ -6,7 +6,7 @@ import strategy.battle.id.BattleIdGenerator;
 import strategy.battle.id.BattleIdGeneratorImpl;
 import strategy.events.oneargevent.OneArgEvent;
 import strategy.events.oneargevent.OneArgEventImpl;
-import strategy.option.kingdom.KingdomIdProvider;
+import strategy.provider.kingdom.KingdomIdProvider;
 
 import java.util.function.Consumer;
 
