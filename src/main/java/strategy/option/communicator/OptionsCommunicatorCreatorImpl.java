@@ -1,7 +1,7 @@
 package strategy.option.communicator;
 
-import strategy.buffer.Buffer;
 import strategy.buffer.BufferImpl;
+import strategy.buffer.SwitchableBuffer;
 import strategy.error.CriticalAppError;
 import strategy.gui.GUIType;
 import strategy.option.message.OptionMessagesCreator;
@@ -18,7 +18,7 @@ public class OptionsCommunicatorCreatorImpl implements OptionsCommunicatorCreato
 
     private final Map<GUIType, Supplier<OptionsCommunicator>> communicatorsMap;
 
-    private final Buffer<String> communicationBuffer;
+    private final SwitchableBuffer<String> communicationBuffer;
 
     private final ProvidersCreator providersCreator;
 

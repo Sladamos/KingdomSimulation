@@ -4,23 +4,26 @@ import lombok.Getter;
 import strategy.app.communicator.AppCommunicator;
 import strategy.app.communicator.AppCommunicatorImpl;
 import strategy.app.controller.AppController;
+import strategy.app.controller.AppControllerImpl;
 import strategy.app.inputhandller.AppInputHandler;
 import strategy.app.inputhandller.ConsoleInputHandler;
 import strategy.app.options.AppOptionsManagerImpl;
 import strategy.app.options.ModificableAppOptionsManager;
-import strategy.buffer.BufferImpl;
 import strategy.buffer.SwitchableBuffer;
-import strategy.app.controller.AppControllerImpl;
 import strategy.gui.GUI;
 import strategy.message.receiver.ConsoleMessagesReceiver;
 import strategy.option.*;
-import strategy.option.battle.*;
+import strategy.option.battle.BattleLaunchedOption;
+import strategy.option.battle.BattleLaunchedOptionImpl;
+import strategy.option.battle.BattleStoppedOption;
+import strategy.option.battle.BattleStoppedOptionImpl;
 import strategy.option.communicator.OptionsCommunicator;
-import strategy.option.kingdom.*;
+import strategy.option.kingdom.KingdomLaunchedOption;
+import strategy.option.kingdom.KingdomLaunchedOptionImpl;
+import strategy.option.kingdom.KingdomStoppedOption;
+import strategy.option.kingdom.KingdomStoppedOptionImpl;
 import strategy.provider.battle.BattleIdProvider;
-import strategy.provider.battle.SpeakingBufferBattleIdProvider;
 import strategy.provider.kingdom.KingdomIdProvider;
-import strategy.provider.kingdom.SpeakingBufferKingdomIdProvider;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -38,32 +41,25 @@ public class ConsoleGUI implements GUI {
 
     private final OptionsExecutioner optionsExecutioner;
 
-    private final SwitchableBuffer<String> optionsBuffer;
-
     private final OptionsCommunicator optionsCommunicator;
 
-    private final KingdomIdProvider kingdomIdProvider;
-    private final BattleIdProvider battleIdProvider;
+    private final SwitchableBuffer<String> optionsBuffer;
 
     public ConsoleGUI(OptionsCommunicator optionsCommunicator) {
         this.optionsCommunicator = optionsCommunicator;
-        optionsBuffer = new BufferImpl<>();
-        kingdomIdProvider = new SpeakingBufferKingdomIdProvider(optionsBuffer);
-        battleIdProvider = new SpeakingBufferBattleIdProvider(optionsBuffer);
+        optionsBuffer = optionsCommunicator.getOptionsBuffer();
         appCommunicator = new AppCommunicatorImpl(new ConsoleMessagesReceiver<>(),
                 new ConsoleErrorMessagesReceiver(this::onGUIDisabled),
                 new ConsoleMessagesReceiver<>());
         appOptionsManager = createOptionsManager();
         optionsExecutioner = createOptionsExecutioner();
         appController = createAppController();
-        bindOptionsCommunicator();
+        setOptionsCommunicatorOptions();
     }
 
-    private void bindOptionsCommunicator() {
+    private void setOptionsCommunicatorOptions() {
         Map<String, NamedOption> managedOptions = appOptionsManager.getManagedOptions();
         optionsCommunicator.setManagedOptions(managedOptions);
-        optionsCommunicator.addBattleIdProvider(battleIdProvider);
-        optionsCommunicator.addKingdomIdProvider(kingdomIdProvider);
         optionsCommunicator.addManagedOptionsProvider(optionsExecutioner);
     }
 
@@ -79,6 +75,8 @@ public class ConsoleGUI implements GUI {
     }
 
     private ModificableAppOptionsManager createOptionsManager() {
+        KingdomIdProvider kingdomIdProvider = optionsCommunicator.getKingdomIdProvider();
+        BattleIdProvider battleIdProvider = optionsCommunicator.getBattleIdProvider();
         ModificableAppOptionsManager optionsManager = new AppOptionsManagerImpl();
         KingdomLaunchedOption kingdomLaunchedOption = new KingdomLaunchedOptionImpl(kingdomIdProvider);
         KingdomStoppedOption kingdomStoppedOption = new KingdomStoppedOptionImpl(kingdomIdProvider);

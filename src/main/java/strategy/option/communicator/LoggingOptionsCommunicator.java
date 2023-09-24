@@ -1,8 +1,7 @@
 package strategy.option.communicator;
 
 import lombok.Getter;
-import strategy.buffer.Buffer;
-import strategy.buffer.BufferImpl;
+import strategy.buffer.SwitchableBuffer;
 import strategy.message.JSONMessage;
 import strategy.message.logging.FileLogger;
 import strategy.message.logging.Logger;
@@ -17,7 +16,7 @@ import java.util.Map;
 public class LoggingOptionsCommunicator implements OptionsCommunicator {
 
     @Getter
-    private final Buffer<String> optionsBuffer;
+    private final SwitchableBuffer<String> optionsBuffer;
 
     @Getter
     private final SpeakingKingdomIdProvider kingdomIdProvider;
@@ -31,13 +30,13 @@ public class LoggingOptionsCommunicator implements OptionsCommunicator {
 
     private Map<String, NamedOption> managedOptions;
 
-    public LoggingOptionsCommunicator(OptionMessagesCreator optionMessagesCreator, SpeakingBattleIdProvider battleIdProvider, SpeakingKingdomIdProvider kingdomIdProvider) {
+    public LoggingOptionsCommunicator(OptionMessagesCreator optionMessagesCreator, SwitchableBuffer<String> optionsBuffer, SpeakingBattleIdProvider battleIdProvider, SpeakingKingdomIdProvider kingdomIdProvider) {
         this.optionMessagesCreator = optionMessagesCreator;
         this.battleIdProvider = battleIdProvider;
         this.kingdomIdProvider = kingdomIdProvider;
+        this.optionsBuffer = optionsBuffer;
         battleIdProvider.addListener(this::logMessageAboutBattlesId);
         kingdomIdProvider.addListener(this::logMessageAboutKingdomsId);
-        optionsBuffer = new BufferImpl<>();
         logger = new FileLogger();
     }
 
