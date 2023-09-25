@@ -14,8 +14,6 @@ import strategy.initializer.gui.GUIInitializerImpl;
 import strategy.initializer.simulation.SimulationInitializer;
 import strategy.json.FileJsonLoader;
 import strategy.json.FileJsonLoaderImpl;
-import strategy.option.communicator.OptionsCommunicatorCreator;
-import strategy.option.communicator.OptionsCommunicatorCreatorImpl;
 import strategy.option.message.OptionMessagesCreator;
 import strategy.option.message.OptionMessagesCreatorImpl;
 import strategy.simulation.api.SimulationAPI;
@@ -32,7 +30,7 @@ public class Simulation {
     }
 
     //TODO:
-    // create input handler and communicator(setter for disable) out of gui
+    // create input handler and communicator(setter for disable) out of gui (from creator in initializer)
 
     /*TODO gui:
         two panels with names of materials and count of each one (consider it!):

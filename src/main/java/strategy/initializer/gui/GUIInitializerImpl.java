@@ -34,6 +34,7 @@ public class GUIInitializerImpl implements GUIInitializer {
         GUIConfig config = createGUIConfig(jsonLoader);
         GUIType guiType = config.getGuiType();
         OptionsCommunicator communicator = optionsCommunicatorCreator.createOptionsCommunicator(guiType);
+        //TODO: return new GUI(x ,hand, comm) -> without map
         return guiCreators.get(guiType).apply(communicator);
     }
 
