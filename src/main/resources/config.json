@@ -9,8 +9,8 @@
     "attack_time": 10,
     "warriors": {
       "number_of_units": 40,
-      "max_damage": 25,
-      "max_defense": 5,
+      "max_damage": 35,
+      "max_defense": 10,
       "health": 100
     },
     "major_general": {

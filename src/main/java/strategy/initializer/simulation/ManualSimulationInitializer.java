@@ -49,9 +49,6 @@ public class ManualSimulationInitializer implements SimulationInitializer {
         app.enableExecutingOptions();
         app.waitForAppClose();
         simulationAPI.stopSimulation();
-
-        this.simulationAPI = null;
-        this.app = null;
     }
 
     private synchronized void onBattleStopped(Integer battleId) {
