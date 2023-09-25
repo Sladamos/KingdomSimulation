@@ -1,6 +1,5 @@
 package strategy.config;
 
-import org.json.JSONException;
 import strategy.error.BasicAppError;
 import strategy.error.CriticalAppError;
 import strategy.config.infantry.InfantryConfigParser;

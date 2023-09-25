@@ -11,7 +11,7 @@ public abstract class InfantryConfigParser<T extends InfantryConfig> implements 
         try {
             return createInfantryConfig(json);
         } catch (JSONException err) {
-            throw new CriticalAppError("Something went wrong on creating barracks config. " + err.getMessage());
+            throw new CriticalAppError("Something went wrong on creating infantry config. " + err.getMessage());
         }
     }
 
