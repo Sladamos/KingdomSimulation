@@ -2,15 +2,12 @@ package strategy.gui.console;
 
 import lombok.Getter;
 import strategy.app.communicator.AppCommunicator;
-import strategy.app.communicator.AppCommunicatorImpl;
 import strategy.app.controller.AppController;
 import strategy.app.controller.AppControllerImpl;
 import strategy.app.inputhandller.AppInputHandler;
-import strategy.app.inputhandller.ConsoleInputHandler;
 import strategy.app.options.ModificableAppOptionsManager;
 import strategy.buffer.SwitchableBuffer;
 import strategy.gui.GUI;
-import strategy.message.receiver.ConsoleMessagesReceiver;
 import strategy.option.AppExitOption;
 import strategy.option.AppExitOptionImpl;
 import strategy.option.NamedOption;
@@ -26,7 +23,7 @@ import strategy.provider.kingdom.KingdomIdProvider;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ConsoleGUI implements GUI {
+public class GUIImpl implements GUI {
 
     @Getter
     private final AppCommunicator appCommunicator;
@@ -43,15 +40,14 @@ public class ConsoleGUI implements GUI {
 
     private final SwitchableBuffer<String> optionsBuffer;
 
-    public ConsoleGUI(OptionsCommunicator optionsCommunicator) {
+    public GUIImpl(OptionsCommunicator optionsCommunicator, AppInputHandler inputHandler, AppCommunicator appCommunicator) {
         this.optionsCommunicator = optionsCommunicator;
+        this.appCommunicator = appCommunicator;
         optionsBuffer = optionsCommunicator.getOptionsBuffer();
-        appCommunicator = new AppCommunicatorImpl(new ConsoleMessagesReceiver<>(),
-                new ConsoleErrorMessagesReceiver(this::onGUIDisabled),
-                new ConsoleMessagesReceiver<>());
         appOptionsManager = createOptionsManager();
+        setAppExitOption();
         optionsExecutioner = createOptionsExecutioner();
-        appController = createAppController();
+        appController = createAppController(inputHandler);
         setOptionsCommunicatorOptions();
     }
 
@@ -61,8 +57,7 @@ public class ConsoleGUI implements GUI {
         optionsCommunicator.addManagedOptionsProvider(optionsExecutioner);
     }
 
-    private AppController createAppController() {
-        AppInputHandler inputHandler = new ConsoleInputHandler();
+    private AppController createAppController(AppInputHandler inputHandler) {
         inputHandler.addInputHandledListener(optionsBuffer::addItem);
         return new AppControllerImpl(inputHandler, optionsExecutioner, optionsBuffer);
     }
@@ -76,10 +71,13 @@ public class ConsoleGUI implements GUI {
         KingdomIdProvider kingdomIdProvider = optionsCommunicator.getKingdomIdProvider();
         BattleIdProvider battleIdProvider = optionsCommunicator.getBattleIdProvider();
         OptionsManagerCreator optionsManagerCreator = new OptionsManagerCreatorImpl();
-        ModificableAppOptionsManager optionsManager = optionsManagerCreator.createDefaultAppOptionsManager(kingdomIdProvider, battleIdProvider);
+	    return optionsManagerCreator.createDefaultAppOptionsManager(kingdomIdProvider, battleIdProvider);
+    }
+
+    private void setAppExitOption() {
         AppExitOption exitOption = new AppExitOptionImpl(this::onGUIDisabled);
-        optionsManager.setAppDisabledOption(exitOption);
-        return optionsManager;
+        appOptionsManager.setAppExitOption(exitOption);
+        appCommunicator.setAppExitOption(exitOption);
     }
 
     private void onGUIDisabled() {

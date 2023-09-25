@@ -4,6 +4,7 @@ import lombok.Getter;
 import strategy.battle.BattleConfig;
 import strategy.events.oneargevent.OneArgEvent;
 import strategy.events.oneargevent.OneArgEventImpl;
+import strategy.option.AppExitOption;
 import strategy.option.NamedOption;
 import strategy.option.battle.BattleLaunchedOption;
 import strategy.option.battle.BattleStoppedOption;
@@ -60,8 +61,8 @@ public class AppOptionsManagerImpl implements ModificableAppOptionsManager {
 	}
 
 	@Override
-	public void setAppDisabledOption(NamedOption appDisabledOption) {
-		managedOptions.put(appDisabledOption.getName(), appDisabledOption);
+	public void setAppExitOption(AppExitOption appExitOption) {
+		managedOptions.put(appExitOption.getName(), appExitOption);
 	}
 
 	@Override

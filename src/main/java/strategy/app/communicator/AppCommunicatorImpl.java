@@ -1,27 +1,29 @@
 package strategy.app.communicator;
 
+import strategy.error.ErrorsReceiver;
 import strategy.message.JSONMessage;
 import strategy.message.StringMessage;
 import strategy.message.logging.FileLogger;
 import strategy.message.logging.Logger;
 import strategy.message.receiver.MessagesReceiver;
 import strategy.message.sender.MessagesSender;
+import strategy.option.AppExitOption;
 
 public class AppCommunicatorImpl implements AppCommunicator {
 
     private final MessagesReceiver<StringMessage> battleMessagesReceiver;
 
-    private final MessagesReceiver<JSONMessage> errorMessagesReceiver;
+    private final ErrorsReceiver errorsReceiver;
 
     private final MessagesReceiver<JSONMessage> kingdomMessagesReceiver;
 
     private final Logger logger;
 
     public AppCommunicatorImpl(MessagesReceiver<StringMessage> battleMessagesReceiver,
-                               MessagesReceiver<JSONMessage> errorMessagesReceiver,
+                               ErrorsReceiver errorsReceiver,
                                MessagesReceiver<JSONMessage> kingdomMessagesReceiver) {
         this.battleMessagesReceiver = battleMessagesReceiver;
-        this.errorMessagesReceiver = errorMessagesReceiver;
+        this.errorsReceiver = errorsReceiver;
         this.kingdomMessagesReceiver = kingdomMessagesReceiver;
         this.logger = new FileLogger();
     }
@@ -44,7 +46,7 @@ public class AppCommunicatorImpl implements AppCommunicator {
     @Override
     public void receiveErrorMessage(JSONMessage message) {
         logger.logMessage(message);
-        errorMessagesReceiver.accept(message);
+        errorsReceiver.accept(message);
     }
 
     @Override
@@ -57,5 +59,10 @@ public class AppCommunicatorImpl implements AppCommunicator {
     public void receiveMessageFromKingdom(JSONMessage message) {
         logger.logMessage(message);
         kingdomMessagesReceiver.accept(message);
+    }
+
+    @Override
+    public void setAppExitOption(AppExitOption appExitOption) {
+        errorsReceiver.setAppExitOption(appExitOption);
     }
 }
