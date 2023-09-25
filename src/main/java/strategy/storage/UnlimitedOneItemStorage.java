@@ -34,7 +34,7 @@ public class UnlimitedOneItemStorage<T extends Item> implements OneItemStorage<T
     }
 
     @Override
-    public synchronized void addItemToStorage(T item) {
+    public synchronized void addItem(T item) {
         if(isWorking) {
             storage.push(item);
             String strMessage = "Item pushed to storage: " + item;
@@ -44,7 +44,7 @@ public class UnlimitedOneItemStorage<T extends Item> implements OneItemStorage<T
     }
 
     @Override
-    public synchronized T getItemFromStorage() {
+    public synchronized T getItem() {
         waitForItemInStorage();
         if (!isWorking) {
             throw new StorageTerminatedException();

@@ -1,6 +1,6 @@
 package gui.initializer;
 
-import org.assertj.core.api.ThrowableAssert.*;
+import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -10,6 +10,7 @@ import strategy.initializer.gui.GUIInitializerImpl;
 import strategy.json.FileJsonLoader;
 import strategy.json.JSON;
 import strategy.json.JsonLoader;
+import strategy.option.message.OptionMessagesCreator;
 
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -25,8 +26,13 @@ public class GUIInitializerTest {
     @BeforeEach
     public void createJsonLoaderMock() {
         jsonLoader = Mockito.mock(FileJsonLoader.class);
-        guiInitializer = new GUIInitializerImpl();
         json = Mockito.mock(JSON.class);
+    }
+
+    @BeforeEach
+    public void createGuiInitializer() {
+        OptionMessagesCreator messagesCreator = Mockito.mock(OptionMessagesCreator.class);
+        guiInitializer = new GUIInitializerImpl(messagesCreator);
     }
 
     @Test

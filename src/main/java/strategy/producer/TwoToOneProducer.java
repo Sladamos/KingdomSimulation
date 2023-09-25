@@ -27,10 +27,10 @@ public abstract class TwoToOneProducer<T extends Item, U extends Item, V extends
 		isWorking = true;
 		while(isWorking()) {
 			try {
-				T firstMaterial = firstSourceStorage.getItemFromStorage();
-				U secondMaterial = secondSourceStorage.getItemFromStorage();
+				T firstMaterial = firstSourceStorage.getItem();
+				U secondMaterial = secondSourceStorage.getItem();
 				V item = produceNewItem(firstMaterial, secondMaterial);
-				destinationStorage.addItemToStorage(item);
+				destinationStorage.addItem(item);
 			} catch (Exception err) {
 				return;
 			}

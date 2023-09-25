@@ -1,8 +1,8 @@
-package strategy.app;
+package strategy.app.communicator;
 
 import strategy.message.JSONMessage;
-import strategy.message.sender.MessagesSender;
 import strategy.message.StringMessage;
+import strategy.message.sender.MessagesSender;
 
 public interface AppCommunicator {
 	void bindErrorsSender(MessagesSender<JSONMessage> errorsSender);

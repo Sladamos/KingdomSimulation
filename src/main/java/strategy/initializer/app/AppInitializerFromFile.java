@@ -5,6 +5,7 @@ import strategy.battle.operator.BattleOperatorCreator;
 import strategy.config.AppConfigParser;
 import strategy.error.CriticalAppError;
 import strategy.initializer.simulation.AutomaticSimulationInitializer;
+import strategy.initializer.simulation.ManualSimulationInitializer;
 import strategy.initializer.simulation.SimulationInitializer;
 import strategy.json.JSON;
 import strategy.json.FileJsonLoader;
@@ -22,6 +23,7 @@ public class AppInitializerFromFile implements AppInitializer {
     public AppInitializerFromFile(BattleOperatorCreator battleOperatorCreator) {
         simulationInitializer = new HashMap<>();
         simulationInitializer.put(SimulationType.AUTOMATIC, () -> new AutomaticSimulationInitializer(battleOperatorCreator.createBasicBattleOperator()));
+        simulationInitializer.put(SimulationType.MANUAL, () -> new ManualSimulationInitializer(battleOperatorCreator.createBasicBattleOperator()));
     }
 
     @Override

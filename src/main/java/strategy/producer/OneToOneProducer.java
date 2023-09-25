@@ -24,9 +24,9 @@ public abstract class OneToOneProducer<T extends Item, U extends Item> implement
 		isWorking = true;
 		while(isWorking()) {
 			try {
-				T material = sourceStorage.getItemFromStorage();
+				T material = sourceStorage.getItem();
 				U item = produceNewItem(material);
-				destinationStorage.addItemToStorage(item);
+				destinationStorage.addItem(item);
 			} catch (Exception err) {
 				return;
 			}

@@ -12,6 +12,7 @@ public class SimulationTypeParserImpl implements SimulationTypeParser {
 	public SimulationTypeParserImpl() {
 		simulationTypes = new HashMap<>();
 		simulationTypes.put("automatic", SimulationType.AUTOMATIC);
+		simulationTypes.put("manual", SimulationType.MANUAL);
 	}
 
 	@Override

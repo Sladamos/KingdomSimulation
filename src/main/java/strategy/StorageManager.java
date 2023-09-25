@@ -1,9 +1,9 @@
 package strategy;
 
+import strategy.buffer.Switchable;
 import strategy.message.JSONMessage;
 import strategy.message.notifier.MessagesNotifier;
-import strategy.storage.SwitchableStorage;
 
-public interface StorageManager extends SwitchableStorage {
+public interface StorageManager extends Switchable {
     MessagesNotifier<JSONMessage> getStorageMessagesNotifier();
 }

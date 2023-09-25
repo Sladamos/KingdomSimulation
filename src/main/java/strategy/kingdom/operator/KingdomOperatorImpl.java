@@ -32,4 +32,9 @@ public class KingdomOperatorImpl implements KingdomOperator {
     public void waitForDevelopingEnd() {
         kingdomLauncher.waitForDevelopingEnd();
     }
+
+    @Override
+    public void stopKingdom(Kingdom kingdom) {
+        kingdomLauncher.stopKingdom(kingdom);
+    }
 }

@@ -3,6 +3,7 @@ package strategy.battle;
 import strategy.kingdom.Kingdom;
 import strategy.message.StringMessage;
 import strategy.message.notifier.MessagesNotifier;
+import strategy.message.notifier.MessagesNotifierImpl;
 import strategy.message.receiver.MessagesReceiver;
 
 import java.util.concurrent.ExecutorService;
@@ -28,19 +29,27 @@ public class SimpleBattle implements Battle {
 
 	@Override
 	public void run() {
-		AttackSimulator firstAttackSimulator = new SimpleAttackSimulator(firstKingdom, secondKingdom, messagesNotifier);
-		AttackSimulator secondAttackSimulator = new SimpleAttackSimulator(secondKingdom, firstKingdom, messagesNotifier);
-		executor.execute(firstAttackSimulator::simulateAttacking);
-		executor.execute(secondAttackSimulator::simulateAttacking);
-		waitForBattleEnd();
-		messagesNotifier.removeListeners();
+		try {
+			AttackSimulator firstAttackSimulator = new SimpleAttackSimulator(firstKingdom, secondKingdom, new MessagesNotifierImpl<>());
+			firstAttackSimulator.addListener(this);
+			AttackSimulator secondAttackSimulator = new SimpleAttackSimulator(secondKingdom, firstKingdom, new MessagesNotifierImpl<>());
+			secondAttackSimulator.addListener(this);
+			executor.execute(firstAttackSimulator::simulateAttacking);
+			executor.execute(secondAttackSimulator::simulateAttacking);
+			waitForBattleEnd();
+		} catch (Exception ignored) {
+		} finally {
+			executor.shutdownNow();
+			messagesNotifier.removeListeners();
+		}
 	}
 
 	private void waitForBattleEnd() {
 		executor.shutdown();
 		try {
 			executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
-		} catch (Exception ignored) {
+		} catch (InterruptedException e) {
+			throw new RuntimeException(e);
 		}
 	}
 

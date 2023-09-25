@@ -3,9 +3,12 @@ package military;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import strategy.action.Attack;
+import strategy.error.CriticalAppError;
 import strategy.military.infantry.warrior.Warrior;
 import strategy.military.infantry.warrior.WarriorConfig;
 import strategy.military.mechanism.fight.exceptions.FightActionException;
+
+import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -21,12 +24,12 @@ public class WarriorTest {
 	}
 
 	@Test
-	public void doesNotThrowAnyException_when_initializedWithoutDamage() {
+	public void throwCriticalAppError_when_initializedWithoutDamage() {
 		WarriorConfig config = Mockito.mock(WarriorConfig.class);
 		Mockito.when(config.getDamage()).thenReturn(0);
 		Mockito.when(config.getDefense()).thenReturn(5);
 		Mockito.when(config.getHealth()).thenReturn(15);
-		assertThatCode(() -> new Warrior(config)).doesNotThrowAnyException();
+		assertThatThrownBy(() -> new Warrior(config)).isInstanceOf(CriticalAppError.class);
 	}
 
 	@Test
@@ -47,6 +50,7 @@ public class WarriorTest {
 		Mockito.when(config.getHealth()).thenReturn(0);
 		Warrior warrior = new Warrior(config);
 		Attack attack = Mockito.mock(Attack.class);
+		Mockito.when(attack.getCombination()).thenReturn(Collections.singleton(attack));
 		assertThatThrownBy(() -> warrior.getHit(attack)).isInstanceOf(FightActionException.class);
 	}
 
@@ -59,6 +63,7 @@ public class WarriorTest {
 		Warrior warrior = new Warrior(config);
 		Attack attack = Mockito.mock(Attack.class);
 		Mockito.when(attack.getAttackDamage()).thenReturn(50);
+		Mockito.when(attack.getCombination()).thenReturn(Collections.singleton(attack));
 		warrior.getHit(attack);
 		assertThat(warrior.isDead()).isEqualTo(true);
 	}
@@ -72,6 +77,7 @@ public class WarriorTest {
 		Warrior warrior = new Warrior(config);
 		Attack attack = Mockito.mock(Attack.class);
 		Mockito.when(attack.getAttackDamage()).thenReturn(1550);
+		Mockito.when(attack.getCombination()).thenReturn(Collections.singleton(attack));
 		warrior.getHit(attack);
 		assertThat(warrior.isDead()).isEqualTo(true);
 	}
