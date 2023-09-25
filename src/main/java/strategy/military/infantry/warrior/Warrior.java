@@ -66,7 +66,7 @@ public class Warrior implements Human, InfantryUnit {
     }
 
     private void receiveDamage(Integer damage) {
-        int efficientDamage = Math.max(damage - defense, 0);
+        int efficientDamage = Math.max(damage - defense, 1);
         hitPoints -= efficientDamage;
         hitPoints = Math.max(0, hitPoints);
         checkIfShouldBeKilled();

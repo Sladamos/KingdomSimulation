@@ -35,7 +35,6 @@ public class AutomaticSimulationInitializer implements SimulationInitializer {
         kingdoms = new LinkedList<>();
     }
 
-
     @Override
     public void initializeSimulation(App app, SimulationAPI simulationAPI) {
         this.appCommunicator = app;
@@ -44,21 +43,22 @@ public class AutomaticSimulationInitializer implements SimulationInitializer {
         simulationAPI.waitForKingdomsDevelopingEnd();
         runBattleSimulation();
         simulationAPI.waitForBattlesEnd();
-
-        this.appCommunicator = null;
-        this.simulationExecutioner = null;
     }
 
     private void runBattleSimulation() {
-        List<Kingdom> checkedKingdoms = new LinkedList<>();
+        List<Kingdom> bannedKingdoms = new LinkedList<>();
         for(Kingdom kingdom: kingdoms) {
-            if(!checkedKingdoms.contains(kingdom)) {
-                for(Kingdom anotherKingdom: kingdoms) {
-                    Battle battle = battleCreator.createBattle(kingdom, anotherKingdom);
-                    simulateBattle(battle);
-                }
+            simulateBattlesForKingdom(bannedKingdoms, kingdom);
+            bannedKingdoms.add(kingdom);
+        }
+    }
+
+    private void simulateBattlesForKingdom(List<Kingdom> bannedKingdoms, Kingdom kingdom) {
+        for(Kingdom anotherKingdom: kingdoms) {
+            if(anotherKingdom != kingdom && !bannedKingdoms.contains(anotherKingdom)) {
+                Battle battle = battleCreator.createBattle(kingdom, anotherKingdom);
+                simulateBattle(battle);
             }
-            checkedKingdoms.add(kingdom);
         }
     }
 
