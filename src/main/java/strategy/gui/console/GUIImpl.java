@@ -1,7 +1,7 @@
 package strategy.gui.console;
 
 import lombok.Getter;
-import strategy.app.communicator.AppCommunicator;
+import strategy.app.communicator.ExitableAppCommunicator;
 import strategy.app.controller.AppController;
 import strategy.app.controller.AppControllerImpl;
 import strategy.app.inputhandller.AppInputHandler;
@@ -26,7 +26,7 @@ import java.util.Map;
 public class GUIImpl implements GUI {
 
     @Getter
-    private final AppCommunicator appCommunicator;
+    private final ExitableAppCommunicator appCommunicator;
 
     @Getter
     private final AppController appController;
@@ -40,7 +40,7 @@ public class GUIImpl implements GUI {
 
     private final SwitchableBuffer<String> optionsBuffer;
 
-    public GUIImpl(OptionsCommunicator optionsCommunicator, AppInputHandler inputHandler, AppCommunicator appCommunicator) {
+    public GUIImpl(OptionsCommunicator optionsCommunicator, AppInputHandler inputHandler, ExitableAppCommunicator appCommunicator) {
         this.optionsCommunicator = optionsCommunicator;
         this.appCommunicator = appCommunicator;
         optionsBuffer = optionsCommunicator.getOptionsBuffer();

@@ -11,7 +11,7 @@ import java.util.function.Supplier;
 
 public class AppCommunicatorCreatorImpl implements AppCommunicatorCreator {
 
-	private final Map<GUIType, Supplier<AppCommunicator>> appCommunicators;
+	private final Map<GUIType, Supplier<ExitableAppCommunicator>> appCommunicators;
 
 	public AppCommunicatorCreatorImpl() {
 		appCommunicators = new HashMap<>();
@@ -21,7 +21,7 @@ public class AppCommunicatorCreatorImpl implements AppCommunicatorCreator {
 	}
 
 	@Override
-	public AppCommunicator createAppCommunicator(GUIType guiType) {
+	public ExitableAppCommunicator createAppCommunicator(GUIType guiType) {
 		if(!appCommunicators.containsKey(guiType)) {
 			throw new CriticalAppError("Incorrect gui type.");
 		}

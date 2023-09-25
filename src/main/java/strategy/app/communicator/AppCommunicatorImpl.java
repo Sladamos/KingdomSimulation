@@ -9,7 +9,7 @@ import strategy.message.receiver.MessagesReceiver;
 import strategy.message.sender.MessagesSender;
 import strategy.option.AppExitOption;
 
-public class AppCommunicatorImpl implements AppCommunicator {
+public class AppCommunicatorImpl implements ExitableAppCommunicator {
 
     private final MessagesReceiver<StringMessage> battleMessagesReceiver;
 

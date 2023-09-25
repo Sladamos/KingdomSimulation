@@ -3,6 +3,7 @@ package strategy.initializer.gui;
 import strategy.app.communicator.AppCommunicator;
 import strategy.app.communicator.AppCommunicatorCreator;
 import strategy.app.communicator.AppCommunicatorCreatorImpl;
+import strategy.app.communicator.ExitableAppCommunicator;
 import strategy.app.inputhandller.AppInputHandler;
 import strategy.app.inputhandller.AppInputHandlerCreator;
 import strategy.app.inputhandller.AppInputHandlerCreatorImpl;
@@ -39,7 +40,7 @@ public class GUIInitializerImpl implements GUIInitializer {
         GUIType guiType = config.getGuiType();
         OptionsCommunicator optionsCommunicator = optionsCommunicatorCreator.createOptionsCommunicator(guiType);
         AppInputHandler inputHandler = inputHandlerCreator.createAppInputHandler(guiType);
-        AppCommunicator appCommunicator = appCommunicatorCreator.createAppCommunicator(guiType);
+        ExitableAppCommunicator appCommunicator = appCommunicatorCreator.createAppCommunicator(guiType);
         return new GUIImpl(optionsCommunicator, inputHandler, appCommunicator);
     }
 

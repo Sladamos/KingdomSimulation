@@ -23,15 +23,6 @@ import strategy.util.ProtectedThread;
 
 public class Simulation {
 
-    private final SimulationAPI simulationAPI;
-
-    public Simulation() {
-        simulationAPI = new SimulationAPIImpl();
-    }
-
-    //TODO:
-    // create input handler and communicator(setter for disable) out of gui (from creator in initializer)
-
     /*TODO gui:
         two panels with names of materials and count of each one (consider it!):
         three buttons -> Start developing / add infantry  -> new Window (number / maxDamage / maxDefense)/ terminate
@@ -40,6 +31,12 @@ public class Simulation {
         button to clear panel
         layer for error handling -> both for console and gui
      */
+
+    private final SimulationAPI simulationAPI;
+
+    public Simulation() {
+        simulationAPI = new SimulationAPIImpl();
+    }
 
     public static void main(String[] args) {
         try {
